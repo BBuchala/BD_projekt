@@ -1,0 +1,2 @@
+- Pos³anie zg³oszenia siê do konkretnego projektu / Zapisanie siê na projekt.
+- Sprawdzenie ocen (na podstawie indeksu, przedmiotu/projektu)

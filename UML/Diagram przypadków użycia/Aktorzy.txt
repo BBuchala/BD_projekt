@@ -1,0 +1,9 @@
+Temat: System informatyczny wspomagaj¹cy prowadzenie zajêæ projektowych.
+
+...czyli jakie rodzaje u¿ykowników definiujemy.
+
+- Goœæ
+- Student
+- Prowadz¹cy/Wyk³adowca
+- Administrator (???) - w³aœciwie gówno ma to wspólnego z projektem, ale teoretycznie w takich aplikacjach zazwyczaj jest ziomek maj¹ pieczê nad systemem // BB.
+- U¿ytkownik (???) - w sensie klasa bazowa dla studenta i prowdz¹cego, w której zaimplementowa³o by siê czêœæ wspóln¹, np. zarz¹dzanie profilem, komunikacjê (ma byæ student-wyk³adowca, ale chyba nic nie stoi na przeszkodzie, by by³ np. student-student) // BB.

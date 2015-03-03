@@ -1,0 +1,14 @@
+Temat: System informatyczny wspomagaj¹cy prowadzenie zajêæ projektowych.
+
+Diagram ma zostaæ wykonany w notacji Chena (CHEEEEEEEEEEEEEN) lub Martina - jak nie pamiêtacie które to (by³y oba), to Google lub Wiki. Easy.
+
+
+
+KLASY:
+- Przedmiot
+- Projekt
+- Prowadz¹cy
+- Student
+
+- Zg³oszenie (?) // Student chce siê zapisaæ, wyk³adowca z tego przedmiotu sprawdza // BB.
+- Rozmowa (?) // Miêdzy dwoma u¿ytkownikami.

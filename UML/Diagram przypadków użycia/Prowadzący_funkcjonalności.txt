@@ -1,0 +1,5 @@
+- Tworzenie nowych projektów/przedmiotów
+- Wprowadzanie ocen
+- Zapisywanie studentów (akceptacja zg³oszenia studentów?)
+- Dodawanie studentów do bazy
+- Usuwanie studentów z bazy

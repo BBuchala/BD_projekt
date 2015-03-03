@@ -1,0 +1,2 @@
+- Komunikacja (np. wys³anie wiadomoœci).
+- Jakieœ proste zarz¹dzanie profilem, np. zmiana danych osobowych.
