@@ -9,6 +9,7 @@ KLASY:
 - Projekt
 - Prowadz¹cy
 - Student
+- Ocena
 
 - Zg³oszenie (?) // Student chce siê zapisaæ, wyk³adowca z tego przedmiotu sprawdza // BB.
 - Rozmowa (?) // Miêdzy dwoma u¿ytkownikami.
