@@ -7,13 +7,22 @@ Diagram ma zostaæ wykonany w notacji Chena (CHEEEEEEEEEEEEEN) lub Martina - jak 
 KLASY:
 - Przedmiot (obieralny)
 - Projekt
-- Prowadz¹cy
-- Student
-- Ocena
+
+- U¿ytkownik - abstrakcyjna klasa nadrzêdna // MF
+* Prowadz¹cy
+* Student
+* Administrator
+- Goœæ - nie jest u¿ytkownikiem, ale dziwnym anonimowym bytem
+
+
+- Ocena	// Wg mnie takiej klasy nie powinno byæ, za to w fizycznym projekcie powinna byæ statyczna tablica z mo¿liwymi ocenami. // MF
+
 - Raport // do rozwa¿enia jakieœ jego pochodne // BB.
 
 - Zg³oszenie (?) // Student chce siê zapisaæ, wyk³adowca z tego przedmiotu sprawdza // BB.
 - Rozmowa/Korespondencja (?) // Miêdzy dwoma u¿ytkownikami.
+* Rozmowa powinna byæ z³o¿ona z Wiadomoœci, mo¿e je archiwizowaæ.
+
 - Indeks (?) // W³aœciwie to powinno byæ pole w studencie.. / BB.
 
 BB: prowadz¹cy/student te¿ mog¹ byæ pochodnymi klasy typu u¿ytkownik.

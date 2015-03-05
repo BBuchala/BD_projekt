@@ -1,2 +1,4 @@
-- Komunikacja (np. wys³anie wiadomoœci).
-- Jakieœ proste zarz¹dzanie profilem, np. zmiana danych osobowych.
+- Komunikacja z innymi u¿ytkownikami (np. wys³anie wiadomoœci)
+- Jakieœ proste zarz¹dzanie profilem, np. zmiana danych osobowych
+- Zmiana has³a // w przeciwieñstwie do powy¿szego wymaga³aby wprowadzenia starego has³a // MF
+- Ustawienie awatara (??) // MF
