@@ -5,11 +5,16 @@ Diagram ma zostaæ wykonany w notacji Chena (CHEEEEEEEEEEEEEN) lub Martina - jak 
 
 
 KLASY:
-- Przedmiot
+- Przedmiot (obieralny)
 - Projekt
 - Prowadz¹cy
 - Student
 - Ocena
+- Raport // do rozwa¿enia jakieœ jego pochodne // BB.
 
 - Zg³oszenie (?) // Student chce siê zapisaæ, wyk³adowca z tego przedmiotu sprawdza // BB.
-- Rozmowa (?) // Miêdzy dwoma u¿ytkownikami.
+- Rozmowa/Korespondencja (?) // Miêdzy dwoma u¿ytkownikami.
+- Indeks (?) // W³aœciwie to powinno byæ pole w studencie.. / BB.
+
+BB: prowadz¹cy/student te¿ mog¹ byæ pochodnymi klasy typu u¿ytkownik.
+BB: klasy typu profil, identyfikacja wydaj¹ mi siê zbêdne, ale te¿ do rozwa¿enia.
