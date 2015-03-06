@@ -5,25 +5,45 @@ Diagram ma zostaæ wykonany w notacji Chena (CHEEEEEEEEEEEEEN) lub Martina - jak 
 
 
 KLASY:
-- Przedmiot (obieralny)
-- Projekt
+- Przedmiot (zwyk³y lub obieralny): ID, ID_Prowadz¹cego (FK), Nazwa, Opis, Czy_obieralny 
+- Projekt: ID, ID_Przedmiotu (FK), Nazwa, Opis, Limit_miejsc
 
-- U¿ytkownik - abstrakcyjna klasa nadrzêdna // MF
-* Prowadz¹cy
-* Student
+- U¿ytkownik: ID, Imiê, Nazwisko, Pesel, Login, Has³o, Email (?), Data_rejestracji (?) // Abstrakcyjna klasa nadrzêdna // MF
+* Prowadz¹cy: Zarobki (?), Zak³ad (?), Pokój (?)
+* Student: Nr_indeksu (PK?), Grupa (?)
 * Administrator
-- Goœæ - nie jest u¿ytkownikiem, ale dziwnym anonimowym bytem
 
+- Raport: ID, ID_przedmiotu (FK), Treœæ (?)   // do rozwa¿enia jakieœ jego pochodne // BB.
 
-- Ocena	// Wg mnie takiej klasy nie powinno byæ, za to w fizycznym projekcie powinna byæ statyczna tablica z mo¿liwymi ocenami. // MF
+- Zg³oszenie: ID, ID_projektu (FK nullable), ID_przedmiotu (FK nullable), Nr_indeksu (FK) // Student chce siê zapisaæ, wyk³adowca z tego przedmiotu sprawdza // BB.   // Za³o¿y³em, ¿e zarówno zapis na projekt, jak i przedmiot obieralny musi byæ zatwierdzony przez prowadz¹cego / Mot.
 
-- Raport // do rozwa¿enia jakieœ jego pochodne // BB.
+- Ocena: ID, Nr_indeksu (FK), ID_Przedmiotu (FK) (?), Wartoœæ, Data_wpisania    // Wg mnie takiej klasy nie powinno byæ, za to w fizycznym projekcie powinna byæ statyczna tablica z mo¿liwymi ocenami. // MF
 
-- Zg³oszenie (?) // Student chce siê zapisaæ, wyk³adowca z tego przedmiotu sprawdza // BB.
-- Rozmowa/Korespondencja (?) // Miêdzy dwoma u¿ytkownikami.
-* Rozmowa powinna byæ z³o¿ona z Wiadomoœci, mo¿e je archiwizowaæ.
+- Wiadomoœæ: ID, ID_nadawcy (FK), ID_odbiorcy (FK), Data_wys³ania, Treœæ  // Miêdzy dwoma u¿ytkownikami.
+* Rozmowa powinna byæ z³o¿ona z Wiadomoœci, mo¿e je archiwizowaæ.	// Archiwizacja raczej zbêdna, sama rozmowa wystarczy. Nie widzia³em o tym wzmianki w za³o¿eniach. /Mot.
 
-- Indeks (?) // W³aœciwie to powinno byæ pole w studencie.. / BB.
+- Goœæ - nie jest u¿ytkownikiem, ale dziwnym anonimowym bytem   // Goœæ nie ma w zasadzie nic do roboty poza zarejestrowaniem siê i logowaniem, wiêc chyba zbêdne / Mot.
 
-BB: prowadz¹cy/student te¿ mog¹ byæ pochodnymi klasy typu u¿ytkownik.
+--------------------------------------------------------------------------
+
+Relacje:
+- Zapisy: Nr_indeksu (PK), ID_przedmiotu (PK)   // Relacja miêdzy studentami a przedmiotami / Mot.
+- Realizacje: Nr_indeksu (PK), ID_projektu (PK)   // Relacja miêdzy studentami a projektami / Mot.
+
+--------------------------------------------------------------------------
+
+Krotnoœci:
+1 - N: Prowadz¹cy - Przedmiot, Przedmiot - Projekt, Przedmiot - Ocena (?), Przedmiot - Raport, Student -> Ocena, Projekt - Zg³oszenie, Przedmiot - Zg³oszenie, Student - Wiadomoœæ, Prowadz¹cy - Wiadomoœæ
+M - N: Przedmiot - Student, Projekt - Student
+
+--------------------------------------------------------------------------
+
 BB: klasy typu profil, identyfikacja wydaj¹ mi siê zbêdne, ale te¿ do rozwa¿enia.
+
+MM: Ja natomiast myœlê, ¿e klasa Ocena powinna byæ. Powi¹zana relacj¹ 1 -> N z klas¹ Student, przechowuje wszystkie oceny studentów. W projekcie bêdzie to kolekcja obiektów klasy Ocena w obiekcie klasy Student
+
+MM: Co do przedmiotów: nie dam g³owy, ale chyba s¹ zarówno zwyk³e, jak i obieralne, dlatego trzeba by daæ tam pole bool czy_obieralny; (obierki nie ró¿ni¹ siê chyba niczym innym od zwyk³ych)
+
+MM: Indeks zdecydowanie powinien byæ polem studenta
+
+MM: Studentów rozró¿niamy po ID czy nr indeksu?

@@ -1,0 +1,2 @@
+- tworzenie backupu bazy danych oraz jej przywracanie po awarii
+- potwierdzenie za³o¿enia konta (?)   // Gdy goœæ za³o¿y konto, admin musi je wpierw zweryfikowaæ / Mot.

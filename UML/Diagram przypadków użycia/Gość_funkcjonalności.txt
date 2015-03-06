@@ -1,3 +1,3 @@
 - Za³o¿enie nowego konta
 - Logowanie
-- Przegl¹danie listy istniej¹cych projektów
+- Przegl¹danie listy istniej¹cych projektów   // To bym wyci¹³, by projekty widoczne by³y dopiero po weryfikacji konta / Mot.

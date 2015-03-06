@@ -1,4 +1,6 @@
 - Pos³anie zg³oszenia siê do konkretnego projektu / Zapisanie siê na projekt.
+- Zapisanie siê na przedmiot obieralny
 - Sprawdzenie ocen (na podstawie indeksu, przedmiotu/projektu)
 - Sprawdzenie projektów, w których uczestniczy (indeks)
 - Sprawdzenie projektów do których mo¿e do³¹czyæ (tam gdzie s¹ wolne miejsca)
+- Sprawdzenie przedmiotów obieralnych, na które mo¿e siê zapisaæ
