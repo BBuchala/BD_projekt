@@ -5,7 +5,10 @@ Diagram ma zostaæ wykonany w notacji Chena (CHEEEEEEEEEEEEEN) lub Martina - jak 
 
 
 KLASY:
-- Przedmiot (zwyk³y lub obieralny): ID, ID_Prowadz¹cego (FK), Nazwa, Opis, Czy_obieralny 
+- Przedmiot: ID, ID_Prowadz¹cego (FK), Nazwa, Opis, ECTS
+* Przedmiot obowi¹zkowy
+* Przedmiot obieralny: Limit_miejsc
+
 - Projekt: ID, ID_Przedmiotu (FK), Nazwa, Opis, Limit_miejsc
 
 - U¿ytkownik: ID, Imiê, Nazwisko, Pesel, Login, Has³o, Email (?), Data_rejestracji (?) // Abstrakcyjna klasa nadrzêdna // MF
@@ -13,11 +16,11 @@ KLASY:
 * Student: Nr_indeksu (PK?), Grupa (?)
 * Administrator
 
-- Raport: ID, ID_przedmiotu (FK), Treœæ (?)   // do rozwa¿enia jakieœ jego pochodne // BB.
+- Raport: ID, ID_przedmiotu (FK), ID_prowadz¹cego (FK), Treœæ (?)   // do rozwa¿enia jakieœ jego pochodne // BB.
 
 - Zg³oszenie: ID, ID_projektu (FK nullable), ID_przedmiotu (FK nullable), Nr_indeksu (FK) // Student chce siê zapisaæ, wyk³adowca z tego przedmiotu sprawdza // BB.   // Za³o¿y³em, ¿e zarówno zapis na projekt, jak i przedmiot obieralny musi byæ zatwierdzony przez prowadz¹cego / Mot.
 
-- Ocena: ID, Nr_indeksu (FK), ID_Przedmiotu (FK) (?), Wartoœæ, Data_wpisania    // Wg mnie takiej klasy nie powinno byæ, za to w fizycznym projekcie powinna byæ statyczna tablica z mo¿liwymi ocenami. // MF
+- Ocena: ID, Nr_indeksu (FK), ID_Przedmiotu (FK) (?), Wartoœæ, Data_wpisania, Komentarz
 
 - Wiadomoœæ: ID, ID_nadawcy (FK), ID_odbiorcy (FK), Data_wys³ania, Treœæ  // Miêdzy dwoma u¿ytkownikami.
 * Rozmowa powinna byæ z³o¿ona z Wiadomoœci, mo¿e je archiwizowaæ.	// Archiwizacja raczej zbêdna, sama rozmowa wystarczy. Nie widzia³em o tym wzmianki w za³o¿eniach. /Mot.
@@ -33,7 +36,7 @@ Relacje:
 --------------------------------------------------------------------------
 
 Krotnoœci:
-1 - N: Prowadz¹cy - Przedmiot, Przedmiot - Projekt, Przedmiot - Ocena (?), Przedmiot - Raport, Student -> Ocena, Projekt - Zg³oszenie, Przedmiot - Zg³oszenie, Student - Wiadomoœæ, Prowadz¹cy - Wiadomoœæ
+1 - N: Prowadz¹cy - Przedmiot, Przedmiot - Projekt, Przedmiot - Ocena (?), Przedmiot - Raport, Prowadz¹cy - Raport, Student -> Ocena, Projekt - Zg³oszenie, Przedmiot obieralny - Zg³oszenie, Student - Wiadomoœæ, Prowadz¹cy - Wiadomoœæ
 M - N: Przedmiot - Student, Projekt - Student
 
 --------------------------------------------------------------------------
