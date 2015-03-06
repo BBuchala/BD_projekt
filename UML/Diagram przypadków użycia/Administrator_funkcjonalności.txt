@@ -1,2 +1,4 @@
 - tworzenie backupu bazy danych oraz jej przywracanie po awarii
-- potwierdzenie za³o¿enia konta (?)   // Gdy goœæ za³o¿y konto, admin musi je wpierw zweryfikowaæ / Mot.
+- tworzy konta prowadz¹cych
+- mo¿e czasowo wy³¹czyæ bazê danych w celach serwisowych lub konserwacyjnych
+- mo¿liwoœæ zmiany wartoœci ka¿dego modyfikowalnego rekordu w bazie
