@@ -1,6 +1,5 @@
 - Tworzenie nowych projektów / przedmiotów
 - Usuniêcie projektu, który prowadzi
-- Dodanie wspó³prowadz¹cego projektu (??) // Mo¿e zbêdne, ale zawsze coœ. // MF
 - Wprowadzanie ocen
 - Zamiana oceny
 - Zapisywanie studentów (akceptacja zg³oszenia studentów?) // Owszem. // MF
