@@ -1,44 +1,43 @@
-USE test
-;
+use projektBD;
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('FK_Administrator_U¿ytkownik') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
 ALTER TABLE Administrator DROP CONSTRAINT FK_Administrator_U¿ytkownik
 ;
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('Zak³ad') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
-ALTER TABLE nale¿y do DROP CONSTRAINT Zak³ad
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('FK_Zak³ad') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
+ALTER TABLE nale¿y_do DROP CONSTRAINT FK_Zak³ad
 ;
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('Prowadz¹cy') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
-ALTER TABLE nale¿y do DROP CONSTRAINT Prowadz¹cy
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('FK_Prowadz¹cy') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
+ALTER TABLE nale¿y_do DROP CONSTRAINT FK_Prowadz¹cy
 ;
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('ocenia') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
 ALTER TABLE Ocena DROP CONSTRAINT ocenia
 ;
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('jest wystawiana') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
-ALTER TABLE Ocena DROP CONSTRAINT jest wystawiana
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('jest_wystawiana') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
+ALTER TABLE Ocena DROP CONSTRAINT jest_wystawiana
 ;
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('jest realizowany w') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
-ALTER TABLE Projekt DROP CONSTRAINT jest realizowany w
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('jest_realizowany_w') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
+ALTER TABLE Projekt DROP CONSTRAINT jest_realizowany_w
 ;
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('FK_Prowadz¹cy_U¿ytkownik') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
 ALTER TABLE Prowadz¹cy DROP CONSTRAINT FK_Prowadz¹cy_U¿ytkownik
 ;
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('Rozmowa') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
-ALTER TABLE prowadzi DROP CONSTRAINT Rozmowa
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('FK_Rozmowa') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
+ALTER TABLE prowadzi DROP CONSTRAINT FK_Rozmowa
 ;
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('U¿ytkownik') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
-ALTER TABLE prowadzi DROP CONSTRAINT U¿ytkownik
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('FK_U¿ytkownik') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
+ALTER TABLE prowadzi DROP CONSTRAINT FK_U¿ytkownik
 ;
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('prowadzi') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
-ALTER TABLE Przedmiot DROP CONSTRAINT prowadzi
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('kierownik') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
+ALTER TABLE Przedmiot DROP CONSTRAINT kierownik
 ;
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('FK_PrzedmiotObieralny_Przedmiot') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
@@ -49,24 +48,24 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('pisze') AND OBJECT
 ALTER TABLE Raport DROP CONSTRAINT pisze
 ;
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('daje informacje') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
-ALTER TABLE Raport DROP CONSTRAINT daje informacje
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('daje_informacje') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
+ALTER TABLE Raport DROP CONSTRAINT daje_informacje
 ;
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('FK_Student_U¿ytkownik') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
 ALTER TABLE Student DROP CONSTRAINT FK_Student_U¿ytkownik
 ;
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('jest czêœci¹') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
-ALTER TABLE Wiadomoœæ DROP CONSTRAINT jest czêœci¹
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('jest_czêœci¹') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
+ALTER TABLE Wiadomoœæ DROP CONSTRAINT jest_czêœci¹
 ;
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('Przedmiot') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
-ALTER TABLE zapisuje siê na DROP CONSTRAINT Przedmiot
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('FK_Przedmiot') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
+ALTER TABLE zapisuje_siê_na DROP CONSTRAINT FK_Przedmiot
 ;
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('Student') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
-ALTER TABLE zapisuje siê na DROP CONSTRAINT Student
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('FK_Student') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
+ALTER TABLE zapisuje_siê_na DROP CONSTRAINT FK_Student
 ;
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('potwierdza') AND OBJECTPROPERTY(id, 'IsForeignKey') = 1)
@@ -79,8 +78,8 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('Administrator') AN
 DROP TABLE Administrator
 ;
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('nale¿y do') AND  OBJECTPROPERTY(id, 'IsUserTable') = 1)
-DROP TABLE nale¿y do
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('nale¿y_do') AND  OBJECTPROPERTY(id, 'IsUserTable') = 1)
+DROP TABLE nale¿y_do
 ;
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('Ocena') AND  OBJECTPROPERTY(id, 'IsUserTable') = 1)
@@ -131,8 +130,8 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('Zak³ad') AND  OBJE
 DROP TABLE Zak³ad
 ;
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('zapisuje siê na') AND  OBJECTPROPERTY(id, 'IsUserTable') = 1)
-DROP TABLE zapisuje siê na
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('zapisuje_siê_na') AND  OBJECTPROPERTY(id, 'IsUserTable') = 1)
+DROP TABLE zapisuje_siê_na
 ;
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id('Zg³oszenie') AND  OBJECTPROPERTY(id, 'IsUserTable') = 1)
@@ -145,7 +144,7 @@ CREATE TABLE Administrator (
 )
 ;
 
-CREATE TABLE nale¿y do ( 
+CREATE TABLE nale¿y_do ( 
 	zak³adID Integer,
 	prowadz¹cyID Integer
 )
@@ -153,8 +152,8 @@ CREATE TABLE nale¿y do (
 
 CREATE TABLE Ocena ( 
 	dataWpisania Date,
-	idOceny long,
-	komentarz String,
+	idOceny bigint,
+	komentarz nvarchar(500),
 	wartoœæ float,
 	ocenaID Integer NOT NULL,
 	Cel Integer,
@@ -165,15 +164,15 @@ CREATE TABLE Ocena (
 CREATE TABLE Projekt ( 
 	idProjektu int,
 	maxLiczbaStudentów int,
-	nazwa String,
-	opis String,
+	nazwa nvarchar(50) NOT NULL,
+	opis nvarchar(1000) NOT NULL,
 	projektID Integer NOT NULL,
 	Podstawa Integer
 )
 ;
 
 CREATE TABLE Prowadz¹cy ( 
-	zak³ad String,
+	zak³ad nvarchar(50) NOT NULL,
 	prowadz¹cyID Integer NOT NULL
 )
 ;
@@ -187,8 +186,8 @@ CREATE TABLE prowadzi (
 CREATE TABLE Przedmiot ( 
 	idPrzedmiotu int,
 	liczbaStudentów int,
-	nazwa String,
-	opis String,
+	nazwa nvarchar(50) NOT NULL,
+	opis nvarchar(1000) NOT NULL,
 	przedmiotID Integer NOT NULL,
 	Kierownik Integer
 )
@@ -201,11 +200,11 @@ CREATE TABLE PrzedmiotObieralny (
 ;
 
 CREATE TABLE Raport ( 
-	idRaportu short,
-	tresc String,
+	idRaportu smallint,
+	tresc nvarchar(2000) NOT NULL,
 	raportID Integer NOT NULL,
 	Autor Integer,
-	Punkt docelowy Integer
+	Punkt_docelowy Integer
 )
 ;
 
@@ -223,42 +222,42 @@ CREATE TABLE Student (
 ;
 
 CREATE TABLE U¿ytkownik ( 
-	dataUrodzenia String,
-	email String,
-	haslo String,
+	dataUrodzenia Date,
+	email nvarchar(50),
+	haslo nvarchar(50) NOT NULL,
 	idUzytkownika int,
-	login String,
-	miejsceZamieszkania String,
+	login nvarchar(50) NOT NULL,
+	miejsceZamieszkania nvarchar(100) NOT NULL,
 	u¿ytkownikID Integer NOT NULL
 )
 ;
 
 CREATE TABLE Wiadomoœæ ( 
 	dataWys³ania Date,
-	nadawca String,
-	tresc String,
+	nadawca nvarchar(50) NOT NULL,
+	tresc nvarchar(2000) NOT NULL,
 	wiadomoœæID Integer NOT NULL,
 	Zbiór Integer NOT NULL
 )
 ;
 
 CREATE TABLE Zak³ad ( 
-	idZak³adu short,
-	nazwa String,
-	opis String,
+	idZak³adu smallint,
+	nazwa nvarchar(50) NOT NULL,
+	opis nvarchar(1000) NOT NULL,
 	zak³adID Integer NOT NULL
 )
 ;
 
-CREATE TABLE zapisuje siê na ( 
+CREATE TABLE zapisuje_siê_na ( 
 	przedmiotID Integer,
 	studentID Integer
 )
 ;
 
 CREATE TABLE Zg³oszenie ( 
-	idZgloszenia long,
-	jestZaakceptowane boolean DEFAULT false,
+	idZgloszenia bigint,
+	jestZaakceptowane bit DEFAULT 0,
 	zg³oszenieID Integer NOT NULL,
 	Kierownik Integer
 )
@@ -323,11 +322,11 @@ ALTER TABLE Administrator ADD CONSTRAINT FK_Administrator_U¿ytkownik
 	FOREIGN KEY (administratorID) REFERENCES U¿ytkownik (u¿ytkownikID)
 ;
 
-ALTER TABLE nale¿y do ADD CONSTRAINT Zak³ad 
+ALTER TABLE nale¿y_do ADD CONSTRAINT FK_Zak³ad 
 	FOREIGN KEY (zak³adID) REFERENCES Zak³ad (zak³adID)
 ;
 
-ALTER TABLE nale¿y do ADD CONSTRAINT Prowadz¹cy 
+ALTER TABLE nale¿y_do ADD CONSTRAINT FK_Prowadz¹cy 
 	FOREIGN KEY (prowadz¹cyID) REFERENCES Prowadz¹cy (prowadz¹cyID)
 ;
 
@@ -335,11 +334,11 @@ ALTER TABLE Ocena ADD CONSTRAINT ocenia
 	FOREIGN KEY (Cel) REFERENCES Student (studentID)
 ;
 
-ALTER TABLE Ocena ADD CONSTRAINT jest wystawiana 
+ALTER TABLE Ocena ADD CONSTRAINT jest_wystawiana 
 	FOREIGN KEY (Podstawa) REFERENCES Przedmiot (przedmiotID)
 ;
 
-ALTER TABLE Projekt ADD CONSTRAINT jest realizowany w 
+ALTER TABLE Projekt ADD CONSTRAINT jest_realizowany_w 
 	FOREIGN KEY (Podstawa) REFERENCES Przedmiot (przedmiotID)
 ;
 
@@ -347,15 +346,15 @@ ALTER TABLE Prowadz¹cy ADD CONSTRAINT FK_Prowadz¹cy_U¿ytkownik
 	FOREIGN KEY (prowadz¹cyID) REFERENCES U¿ytkownik (u¿ytkownikID)
 ;
 
-ALTER TABLE prowadzi ADD CONSTRAINT Rozmowa 
+ALTER TABLE prowadzi ADD CONSTRAINT FK_Rozmowa 
 	FOREIGN KEY (rozmowaID) REFERENCES Rozmowa (rozmowaID)
 ;
 
-ALTER TABLE prowadzi ADD CONSTRAINT U¿ytkownik 
+ALTER TABLE prowadzi ADD CONSTRAINT FK_U¿ytkownik 
 	FOREIGN KEY (u¿ytkownikID) REFERENCES U¿ytkownik (u¿ytkownikID)
 ;
 
-ALTER TABLE Przedmiot ADD CONSTRAINT prowadzi 
+ALTER TABLE Przedmiot ADD CONSTRAINT kierownik 
 	FOREIGN KEY (Kierownik) REFERENCES Prowadz¹cy (prowadz¹cyID)
 ;
 
@@ -367,23 +366,23 @@ ALTER TABLE Raport ADD CONSTRAINT pisze
 	FOREIGN KEY (Autor) REFERENCES Prowadz¹cy (prowadz¹cyID)
 ;
 
-ALTER TABLE Raport ADD CONSTRAINT daje informacje 
-	FOREIGN KEY (Punkt docelowy) REFERENCES Przedmiot (przedmiotID)
+ALTER TABLE Raport ADD CONSTRAINT daje_informacje 
+	FOREIGN KEY (Punkt_docelowy) REFERENCES Przedmiot (przedmiotID)
 ;
 
 ALTER TABLE Student ADD CONSTRAINT FK_Student_U¿ytkownik 
 	FOREIGN KEY (studentID) REFERENCES U¿ytkownik (u¿ytkownikID)
 ;
 
-ALTER TABLE Wiadomoœæ ADD CONSTRAINT jest czêœci¹ 
+ALTER TABLE Wiadomoœæ ADD CONSTRAINT jest_czêœci¹ 
 	FOREIGN KEY (Zbiór) REFERENCES Rozmowa (rozmowaID)
 ;
 
-ALTER TABLE zapisuje siê na ADD CONSTRAINT Przedmiot 
+ALTER TABLE zapisuje_siê_na ADD CONSTRAINT FK_Przedmiot 
 	FOREIGN KEY (przedmiotID) REFERENCES Przedmiot (przedmiotID)
 ;
 
-ALTER TABLE zapisuje siê na ADD CONSTRAINT Student 
+ALTER TABLE zapisuje_siê_na ADD CONSTRAINT FK_Student 
 	FOREIGN KEY (studentID) REFERENCES Student (studentID)
 ;
 
