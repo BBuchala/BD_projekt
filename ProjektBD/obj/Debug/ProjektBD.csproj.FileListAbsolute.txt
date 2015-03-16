@@ -1,0 +1,9 @@
+C:\Users\Trimack\Desktop\studia\BD\BD_projekt\ProjektBD\bin\Debug\ProjektBD.exe.config
+C:\Users\Trimack\Desktop\studia\BD\BD_projekt\ProjektBD\bin\Debug\ProjektBD.exe
+C:\Users\Trimack\Desktop\studia\BD\BD_projekt\ProjektBD\bin\Debug\ProjektBD.pdb
+C:\Users\Trimack\Desktop\studia\BD\BD_projekt\ProjektBD\obj\Debug\ProjektBD.csprojResolveAssemblyReference.cache
+C:\Users\Trimack\Desktop\studia\BD\BD_projekt\ProjektBD\obj\Debug\ProjektBD.Form1.resources
+C:\Users\Trimack\Desktop\studia\BD\BD_projekt\ProjektBD\obj\Debug\ProjektBD.Properties.Resources.resources
+C:\Users\Trimack\Desktop\studia\BD\BD_projekt\ProjektBD\obj\Debug\ProjektBD.csproj.GenerateResource.Cache
+C:\Users\Trimack\Desktop\studia\BD\BD_projekt\ProjektBD\obj\Debug\ProjektBD.exe
+C:\Users\Trimack\Desktop\studia\BD\BD_projekt\ProjektBD\obj\Debug\ProjektBD.pdb
