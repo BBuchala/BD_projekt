@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace ProjektBD.Model
     class Student : Użytkownik
     {
         [Index(IsUnique = true)]                    // Sprawia, że atrybut będzie unikalny
+        [Required]
         public int nrIndeksu { get; set; }
 
         public virtual ICollection<Ocena> Oceny { get; set; }

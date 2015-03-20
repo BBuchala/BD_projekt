@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,9 @@ namespace ProjektBD.Model
     class Prowadzący : Użytkownik
     {
         public short ZakładID { get; set; }             // Foreign Key
+
+        [MaxLength(50)]
+        [Required]
         public string nazwaZakładu { get; set; }
 
         public virtual Zakład Zakład { get; set; }

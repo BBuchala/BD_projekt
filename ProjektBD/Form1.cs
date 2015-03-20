@@ -30,6 +30,36 @@ namespace ProjektBD
 
                     label1.ForeColor = Color.Green;
                     label1.Text = "Połączenie nawiązane!";
+
+                    Zakład z = new Zakład { nazwa = "ZMiTAC" };
+                    db.Zakłady.Add(z);              // Dodaje zakład do bazy
+                    db.SaveChanges();               // Commit
+
+                    Prowadzący p = new Prowadzący
+                    {
+                        ZakładID = 1,
+                        login = "Drabik",
+                        hasło = "układ cyfrowy",
+                        email = "gabi@polsl.pl",
+                        nazwaZakładu = "ZMiTAC"
+                    };
+                    db.Prowadzący.Add(p);
+                    db.SaveChanges();
+
+                    Student s = new Student
+                    {
+                        nrIndeksu = 219766,
+                        login = "Forczu",
+                        hasło = "kotori1",
+                        email = "SM6969@4chan.org"
+                    };
+                    db.Studenci.Add(s);
+                    db.SaveChanges();
+
+                    Przedmiot przedm = new Przedmiot { ProwadzącyID = 1, nazwa = "TUC", liczbaStudentów = 69 };
+                    przedm.Studenci.Add(s);         // Dodaje studenta do przedmiotu
+                    db.Przedmioty.Add(przedm);
+                    db.SaveChanges();
                 }
                 catch (System.Data.SqlClient.SqlException ex)
                 {

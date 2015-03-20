@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace ProjektBD.Model
         [ForeignKey("Prowadzący")]
         public int ProwadzącyID { get; set; }           // Foreign Key
 
+        [MaxLength(2000)]
+        [Required]
         public string treść { get; set; }
 
         public virtual Przedmiot Przedmiot { get; set; }

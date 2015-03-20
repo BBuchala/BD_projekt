@@ -16,15 +16,19 @@ namespace ProjektBD.DAL
             Database.SetInitializer<ProjektBDContext>(new ProjektBDInitializer());
         }
 
-        public DbSet<Użytkownik>    Użytkownicy     { get; set; }
-        public DbSet<Rozmowa>       Rozmowy         { get; set; }
-        public DbSet<Wiadomość>     Wiadomości      { get; set; }
-        public DbSet<Administrator> Administratorzy { get; set; }
-        public DbSet<Student>       Studenci        { get; set; }
-        public DbSet<Prowadzący>    Prowadzący      { get; set; }
-        public DbSet<Zakład>        Zakłady         { get; set; }
-        public DbSet<Ocena>         Oceny           { get; set; }
-        public DbSet<Przedmiot>     Przedmioty      { get; set; }
+        public DbSet<Użytkownik>            Użytkownicy         { get; set; }
+        public DbSet<Rozmowa>               Rozmowy             { get; set; }
+        public DbSet<Wiadomość>             Wiadomości          { get; set; }
+        public DbSet<Administrator>         Administratorzy     { get; set; }
+        public DbSet<Student>               Studenci            { get; set; }
+        public DbSet<Prowadzący>            Prowadzący          { get; set; }
+        public DbSet<Zakład>                Zakłady             { get; set; }
+        public DbSet<Ocena>                 Oceny               { get; set; }
+        public DbSet<Projekt>               Projekty            { get; set; }
+        public DbSet<Przedmiot>             Przedmioty          { get; set; }
+        public DbSet<PrzedmiotObieralny>    PrzedmiotyObieralne { get; set; }
+        public DbSet<Raport>                Raporty             { get; set; }
+        public DbSet<Zgłoszenie>            Zgłoszenia          { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
