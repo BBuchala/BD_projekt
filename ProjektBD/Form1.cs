@@ -35,7 +35,7 @@ namespace ProjektBD
                     db.Zakłady.Add(z);              // Dodaje zakład do bazy
                     db.SaveChanges();               // Commit
 
-                    Prowadzący p = new Prowadzący
+                    Prowadzący p = new Prowadzący   // ID = 7
                     {
                         ZakładID = 1,
                         login = "Drabik",
@@ -56,7 +56,7 @@ namespace ProjektBD
                     db.Studenci.Add(s);
                     db.SaveChanges();
 
-                    Przedmiot przedm = new Przedmiot { ProwadzącyID = 1, nazwa = "TUC", liczbaStudentów = 69 };
+                    Przedmiot przedm = new Przedmiot { ProwadzącyID = 7, nazwa = "TUC", liczbaStudentów = 69 };
                     przedm.Studenci.Add(s);         // Dodaje studenta do przedmiotu
                     db.Przedmioty.Add(przedm);
                     db.SaveChanges();

@@ -10,8 +10,6 @@ namespace ProjektBD.Model
     class Użytkownik
     {
         public int UżytkownikID { get; set; }               // Primary Key
-        public int RozmowaID { get; set; }                  // Foreign Key
-        // chyba do usunięcia, rozmów może być dużo
 
         [MaxLength(50)]
         [Required]

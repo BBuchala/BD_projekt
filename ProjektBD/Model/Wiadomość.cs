@@ -14,7 +14,7 @@ namespace ProjektBD.Model
 
         [MaxLength(50)]
         [Required]
-        public string nadawca { get; set; }
+        public string nadawca { get; set; }             // zamienić na klucz obcy NadawcaID?
 
         [MaxLength(2000)]
         [Required]

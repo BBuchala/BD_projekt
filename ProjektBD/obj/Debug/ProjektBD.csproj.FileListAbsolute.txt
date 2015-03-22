@@ -10,3 +10,4 @@ C:\Users\Trimack\Desktop\studia\BD\BD_projekt\ProjektBD\bin\Debug\EntityFramewor
 C:\Users\Trimack\Desktop\studia\BD\BD_projekt\ProjektBD\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Trimack\Desktop\studia\BD\BD_projekt\ProjektBD\bin\Debug\EntityFramework.xml
 C:\Users\Trimack\Desktop\studia\BD\BD_projekt\ProjektBD\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Trimack\Desktop\studia\BD\BD_projekt\ProjektBD\obj\Debug\ProjektBD.csprojResolveAssemblyReference.cache

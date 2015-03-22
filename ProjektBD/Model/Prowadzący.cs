@@ -14,8 +14,8 @@ namespace ProjektBD.Model
         public short ZakładID { get; set; }             // Foreign Key
 
         [MaxLength(50)]
-        [Required]
-        public string nazwaZakładu { get; set; }
+        //[Required]
+        public string nazwaZakładu { get; set; }        // wywalić?
 
         public virtual Zakład Zakład { get; set; }
         public virtual ICollection<Przedmiot> Przedmioty { get; set; }
