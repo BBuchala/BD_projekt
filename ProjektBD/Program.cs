@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+
+
 namespace ProjektBD
 {
     static class Program
@@ -16,7 +19,11 @@ namespace ProjektBD
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            
+            //Odpalamy Form1 a nie LoginForm jako pierwsze, żeby było głównym oknem aplikacji
+            
             Application.Run(new Form1());
+            //Application.Run(new LoginForm());
         }
     }
 }

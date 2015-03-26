@@ -18,10 +18,27 @@ namespace ProjektBD
     {
         ProjektBDContext context;
 
+        /**
+         * Wyświetla tą formatkę jako główne okno, chowie je i wymusza LoginForm na front.
+         * Wraca, user się zaloguje, przy okazji bierze sobie nick zalogowanego.
+         * Jak dostaje informację, że user na LoginForm użył X lub [alt]+[f4], to
+         * zamyka aplikację.
+         */ 
         public Form1()
         {
             InitializeComponent();
+
             context = new ProjektBDContext();
+
+            this.Hide();
+            LoginForm loginForm = new LoginForm();
+            loginForm.ShowDialog();
+
+            if (loginForm.getXButtonClose() == true)
+                this.Close();
+
+            label1.Text = "Witaj " + loginForm.getInputLogin() + "!";
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -161,7 +178,7 @@ namespace ProjektBD
             context.SaveChanges();
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             context.Dispose();              // Pozbywa się utworzonego kontekstu przy zamykaniu formularza
         }
