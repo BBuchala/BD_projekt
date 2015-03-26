@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,11 @@ namespace ProjektBD.Model
 {
     class Użytkownik
     {
+        public Użytkownik()
+        {
+            Rozmowy = new HashSet<Rozmowa>();
+        }
+
         public int UżytkownikID { get; set; }               // Primary Key
 
         [MaxLength(50)]
@@ -28,6 +34,7 @@ namespace ProjektBD.Model
 
         public DateTime? dataUrodzenia { get; set; }
 
+        [Browsable(false)]
         public virtual ICollection<Rozmowa> Rozmowy { get; set; }
     }
 }

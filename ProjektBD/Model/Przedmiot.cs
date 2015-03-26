@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -13,6 +14,10 @@ namespace ProjektBD.Model
         public Przedmiot()
         {
             Studenci = new HashSet<Student>();          // By dało się dodać nowego studenta do przedmiotu
+            Oceny = new HashSet<Ocena>();
+            Projekty = new HashSet<Projekt>();
+            Raporty = new HashSet<Raport>();
+            Zgłoszenia = new HashSet<Zgłoszenie>();
         }
 
         public int PrzedmiotID { get; set; }            // Primary Key
@@ -30,10 +35,20 @@ namespace ProjektBD.Model
         public int liczbaStudentów { get; set; }
 
         public virtual Prowadzący Prowadzący { get; set; }
+
+        [Browsable(false)]
         public virtual ICollection<Student> Studenci { get; set; }
+
+        [Browsable(false)]
         public virtual ICollection<Ocena> Oceny { get; set; }
+
+        [Browsable(false)]
         public virtual ICollection<Projekt> Projekty { get; set; }
+
+        [Browsable(false)]
         public virtual ICollection<Raport> Raporty { get; set; }
+
+        [Browsable(false)]
         public virtual ICollection<Zgłoszenie> Zgłoszenia { get; set; }
     }
 }

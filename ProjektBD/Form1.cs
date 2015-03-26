@@ -10,63 +10,160 @@ using System.Windows.Forms;
 
 using ProjektBD.DAL;
 using ProjektBD.Model;
+using System.Data.Entity;
 
 namespace ProjektBD
 {
     public partial class Form1 : Form
     {
+        ProjektBDContext context;
+
         public Form1()
         {
             InitializeComponent();
+            context = new ProjektBDContext();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (var db = new ProjektBDContext())
+            try
             {
-                try
-                {
-                    db.Database.Initialize(false);
+                context.Database.Initialize(false);
 
-                    label1.ForeColor = Color.Green;
-                    label1.Text = "Połączenie nawiązane!";
-
-                    Zakład z = new Zakład { nazwa = "ZMiTAC" };
-                    db.Zakłady.Add(z);              // Dodaje zakład do bazy
-                    db.SaveChanges();               // Commit
-
-                    Prowadzący p = new Prowadzący   // ID = 7
-                    {
-                        ZakładID = 1,
-                        login = "Drabik",
-                        hasło = "układ cyfrowy",
-                        email = "gabi@polsl.pl",
-                        nazwaZakładu = "ZMiTAC"
-                    };
-                    db.Prowadzący.Add(p);
-                    db.SaveChanges();
-
-                    Student s = new Student
-                    {
-                        nrIndeksu = 219766,
-                        login = "Forczu",
-                        hasło = "kotori1",
-                        email = "SM6969@4chan.org"
-                    };
-                    db.Studenci.Add(s);
-                    db.SaveChanges();
-
-                    Przedmiot przedm = new Przedmiot { ProwadzącyID = 7, nazwa = "TUC", liczbaStudentów = 69 };
-                    przedm.Studenci.Add(s);         // Dodaje studenta do przedmiotu
-                    db.Przedmioty.Add(przedm);
-                    db.SaveChanges();
-                }
-                catch (System.Data.SqlClient.SqlException ex)
-                {
-                    label1.ForeColor = Color.Red;
-                    label1.Text = "Połączenie nie powiodło się. Upewnij się, że nie jesteś podłączony z bazą danych z innym miejscu.";
-                }
+                label1.ForeColor = Color.Green;
+                label1.Text = "Połączenie nawiązane!";
             }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                label1.ForeColor = Color.Red;
+                label1.Text = "Połączenie nie powiodło się. Upewnij się, że nie jesteś podłączony z bazą danych z innym miejscu.";
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //--------------------------
+            // SELECT ver. 1
+            // Zalecany przez dokumentację Microsoft'u
+            // Z sortowaniem, yay!
+            //--------------------------
+
+            context.Studenci.Load();
+
+            var query = context.Studenci.Local.ToBindingList();
+            dataGridView1.DataSource = query;
+
+            // bajery
+            dataGridView1.Columns["UżytkownikID"].DisplayIndex = 0;
+
+            dataGridView1.Sort(dataGridView1.Columns["UżytkownikID"], ListSortDirection.Ascending);
+
+            dataGridView1.Columns["email"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridView1.Columns["miejsceZamieszkania"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+            //--------------------------
+            // SELECT ver. 2 - zapytanie LINQ
+            // Najdłuższy, ale mamy pełną władzę nad kolejnością kolumn bez grzebania w atrybutach dataGrid'a
+            //--------------------------
+
+            //var query = from b in context.Studenci
+            //            select new
+            //            {
+            //                UżytkownikID = b.UżytkownikID,
+            //                login = b.login,
+            //                hasło = b.hasło,
+            //                email = b.email,
+            //                nrIndeksu = b.nrIndeksu,
+            //                dataUrodzenia = b.dataUrodzenia,
+            //                miejsceZamieszkania = b.miejsceZamieszkania
+            //            };
+
+            //dataGridView1.DataSource = query.ToList();
+            
+            //--------------------------
+            // SELECT ver. 3
+            // Najkrótszy, ale generuje największe obciążenie dla BD
+            //--------------------------
+
+            //var query = from b in context.Studenci
+            //            select b;
+
+            //dataGridView1.DataSource = query.ToList();
+
+            //--------------------------
+            // SELECT ver. 4
+            // Warunkowy z użyciem wyrażenia lambda
+            //--------------------------
+
+            //var query = context.Studenci.Where(s => s.miejsceZamieszkania.Equals("Mysłowice"));
+
+            //dataGridView1.DataSource = query.ToList();
+
+            //--------------------------
+            // SELECT ver. 5
+            // Dla konserwatystów
+            //--------------------------
+
+            //// Pobiera konkretną kolumnę
+            //var query2 = context.Database.SqlQuery<int>("SELECT UżytkownikID FROM Student").ToList();
+
+            //// Pobiera całą tabelę (z tego co widzę, chyba hejtuje dziedziczenie)
+            //var query3 = context.Przedmioty.SqlQuery("SELECT * FROM Przedmiot").ToList();
+
+            //dataGridView1.DataSource = query3;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Student s = new Student { login = "Korda", hasło = "pedał", email = "Korda@student.projektBD.pl",
+                miejsceZamieszkania = "NekoMikoMikołów", nrIndeksu = 219795};
+
+            //--------------------------
+            // INSERT ver. 1
+            //--------------------------
+
+            Student st = context.Studenci.Where(x => x.nrIndeksu == 219795).FirstOrDefault();
+
+            if (st == null)
+            {
+                context.Studenci.Add(s);
+                context.SaveChanges();
+            }
+
+            //--------------------------
+            // INSERT ver. 2
+            //--------------------------
+
+            //Przedmiot p = context.Przedmioty.Find(4);               // Znajduje przedmiot z kluczem głównym o wartości 4
+            //p.Studenci.Add(s);
+            //context.SaveChanges();
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //--------------------------
+            // UPDATE ver. 1
+            //--------------------------
+
+            Student s = context.Studenci.Where(x => x.login.Equals("Forczu")).FirstOrDefault();
+            s.miejsceZamieszkania = "Rybnik";
+            context.SaveChanges();
+
+            dataGridView1.Refresh();
+
+            //--------------------------
+            // UPDATE ver. 2
+            // @Deprecated, baza rozsynchronizowuje się z kontekstem. Nie stosować, chyba że chcemy coś ukryć
+            //--------------------------
+
+            context.Database.ExecuteSqlCommand("UPDATE Użytkownik SET miejsceZamieszkania = 'Rybnik' where login = 'Forczu'");
+            context.SaveChanges();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            context.Dispose();              // Pozbywa się utworzonego kontekstu przy zamykaniu formularza
         }
     }
 }
