@@ -21,7 +21,7 @@ namespace ProjektBD
         private ProjektBDContext context;
 
         // Pierdołowaty String do wyświetlania prostego powitania
-        String inputLogin;
+        private String inputLogin;
 
         /*
          * Bool i metoda mówiące, czy zamknięto formatkę za pomocą przycisku X (zamknij aplikację),
@@ -51,7 +51,7 @@ namespace ProjektBD
             {
                 context.Database.Initialize(false);
             }
-            catch (System.Data.SqlClient.SqlException ex)
+            catch (System.Data.SqlClient.SqlException)
             {
                 DialogResult connRetry = MessageBox.Show("Nastąpił błąd podczas próby połączenia z bazą danych.\n Upewnij się, czy nie jesteś połączony w innym miejscu. \n Spróbować ponownie?",
                                                        "Błąd połączenia",
@@ -59,7 +59,8 @@ namespace ProjektBD
                                                        MessageBoxIcon.Exclamation);
                 if (connRetry == DialogResult.No)
                     this.Close();
-                else connectToDB();
+                else
+                    connectToDB();
             }
         }
 
@@ -164,7 +165,8 @@ namespace ProjektBD
          */
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            if (e.CloseReason == CloseReason.WindowsShutDown)
+                return;
 
             if (this.DialogResult == DialogResult.Cancel)
             {
@@ -177,14 +179,12 @@ namespace ProjektBD
                         break;
                 }
             }
-          }
+        }
 
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            context.Dispose();              // Pozbywa się utworzonego kontekstu przy zamykaniu formularza - do wywalenia przy większej ilości formatek.
-        
+            if (context != null)
+                context.Dispose();          // Pozbywa się utworzonego kontekstu przy zamykaniu formularza - do wywalenia przy większej ilości formatek.
         }
-
-
     }
 }

@@ -30,15 +30,19 @@ namespace ProjektBD
 
             context = new ProjektBDContext();
 
-            this.Hide();
+            //this.Hide();                      // niepotrzebne, konstruktor i tak czeka z wyświetleniem, dopóki logowanie nie zwróci wyników
             LoginForm loginForm = new LoginForm();
-            loginForm.ShowDialog();
-
-            if (loginForm.getXButtonClose() == true)
-                this.Close();
-
-            label1.Text = "Witaj " + loginForm.getInputLogin() + "!";
             
+            loginForm.ShowDialog();
+            // Gdy nie udało się połaczyć z bazą i wybieramy "nie" (zamknięcie okna), na ułamek sekundy pokazuje się pusta formatka
+            // Przydałoby się to naprawić
+            
+            if (loginForm.getXButtonClose() == true)
+                Load += (s, e) => Close();          // dodaje do zdarzenia Form_Load wywołanie metody this.Close()
+            else
+                label1.Text = "Witaj " + loginForm.getInputLogin() + "!";
+
+            loginForm.Dispose();                    // Wymagane, gdy wywołujemy formatkę przez ShowDialog (wycieki pamięci)
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -50,7 +54,7 @@ namespace ProjektBD
                 label1.ForeColor = Color.Green;
                 label1.Text = "Połączenie nawiązane!";
             }
-            catch (System.Data.SqlClient.SqlException ex)
+            catch (System.Data.SqlClient.SqlException)
             {
                 label1.ForeColor = Color.Red;
                 label1.Text = "Połączenie nie powiodło się. Upewnij się, że nie jesteś podłączony z bazą danych z innym miejscu.";
@@ -174,13 +178,14 @@ namespace ProjektBD
             // @Deprecated, baza rozsynchronizowuje się z kontekstem. Nie stosować, chyba że chcemy coś ukryć
             //--------------------------
 
-            context.Database.ExecuteSqlCommand("UPDATE Użytkownik SET miejsceZamieszkania = 'Rybnik' where login = 'Forczu'");
-            context.SaveChanges();
+            //context.Database.ExecuteSqlCommand("UPDATE Użytkownik SET miejsceZamieszkania = 'Rybnik' where login = 'Forczu'");
+            //context.SaveChanges();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            context.Dispose();              // Pozbywa się utworzonego kontekstu przy zamykaniu formularza
+            if (context != null)
+                context.Dispose();              // Pozbywa się utworzonego kontekstu przy zamykaniu formularza
         }
     }
 }
