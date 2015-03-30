@@ -45,6 +45,18 @@ namespace ProjektBD
             loginForm.Dispose();                    // Wymagane, gdy wywołujemy formatkę przez ShowDialog (wycieki pamięci)
         }
 
+        /* Nowy konstruktor z argumentem dla wersji z LoginForm jako główną formatką */
+        public Form1(string userLogin)
+        {
+            InitializeComponent();
+
+            context = new ProjektBDContext();
+
+            label1.Text = "Witaj " + userLogin + "!";
+
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -186,6 +198,28 @@ namespace ProjektBD
         {
             if (context != null)
                 context.Dispose();              // Pozbywa się utworzonego kontekstu przy zamykaniu formularza
+        }
+
+
+        /*
+         *  Bliźniaczo podobne do zamykania aplikacji, a działa jak należy :>
+         */ 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.WindowsShutDown)
+                return;
+
+            if (this.DialogResult == DialogResult.Cancel)
+            {
+                switch (MessageBox.Show(this, "Jesteś pewien, że chcesz się wylogować?", "Wyloguj się", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    case DialogResult.No:
+                        e.Cancel = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

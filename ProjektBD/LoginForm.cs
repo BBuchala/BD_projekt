@@ -136,7 +136,26 @@ namespace ProjektBD
 
                     case 1:
                         xButtonClose = false;
-                        this.Hide();                     
+                        // Wersja z Form1 jako główną formatką
+                         
+                        // this.Hide();                     
+                         
+                        /* Wersja z LoginForm jako główną formatką 
+                         * Chowamy, wywołujemy Form1 i nie wracamy tu,
+                         * dopóki nie zamknie się Form1. Wtedy zerujemy 
+                         * textboxy (dane z logowania zostają) + pokazujemy.
+                         */
+
+                        this.Hide();
+
+                        Form1 mainForm = new Form1(inputLogin);
+                        mainForm.ShowDialog();
+                        mainForm.Dispose();
+
+                        login.Text = "";
+                        password.Text = "";
+                        this.Show();
+
                         break;
 
                     default:
@@ -168,7 +187,7 @@ namespace ProjektBD
             if (e.CloseReason == CloseReason.WindowsShutDown)
                 return;
 
-            if (this.DialogResult == DialogResult.Cancel)
+            //if (this.DialogResult == DialogResult.Cancel)            Kuźwa, przestało działać (kaj mój MsgBox)?!? W Form1 jest ok...
             {
                 switch (MessageBox.Show(this, "Jesteś pewien, że chcesz zakończyć\npracę z tą aplikacją?", "Zamknij aplikację", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                 {
