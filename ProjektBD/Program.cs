@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjektBD.Forms;
 
 namespace ProjektBD
 {
@@ -24,7 +25,8 @@ namespace ProjektBD
 
             //Inne podejście do sprawy: LoginForm jako formatka główna
 
-            Application.Run(new LoginForm());
+            // Application.Run(new LoginForm());
+            Application.Run(new RegisterForm());
 
         }
     }

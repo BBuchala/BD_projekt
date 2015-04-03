@@ -100,7 +100,7 @@ namespace ProjektBD
         }
 
         /********************************************************************************************/
-        // Tu wyszukujemy (po naciśnięciu pierwszego przycisku.
+        // Tu wyszukujemy (po naciśnięciu pierwszego przycisku).
         // matching - ilość rekordów pasującyh do wyszukiwanego nicku. NIE POWINNA być inna niż 0 lub 1!
         /********************************************************************************************/
         private void loginButton_Click(object sender, EventArgs e)
@@ -173,9 +173,18 @@ namespace ProjektBD
 
         private void signButton_Click(object sender, EventArgs e)
         {
-            // TO DO
-            // Tu będziemy rejestrować, i to pewnie będzie osobna formatka
             MessageBox.Show("To be implemented.", "Lol", MessageBoxButtons.OK);
+
+            // this.Hide();
+
+            //RegisterForm mainForm = new RegisterForm();
+           // mainForm.ShowDialog();
+           // mainForm.Dispose();
+
+            login.Text = "";
+            password.Text = "";
+            this.Show();
+
         }
 
 
@@ -204,6 +213,11 @@ namespace ProjektBD
         {
             if (context != null)
                 context.Dispose();          // Pozbywa się utworzonego kontekstu przy zamykaniu formularza - do wywalenia przy większej ilości formatek.
+        }
+
+        private void password_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -66,6 +66,7 @@
             this.password.PasswordChar = '*';
             this.password.Size = new System.Drawing.Size(261, 20);
             this.password.TabIndex = 2;
+            this.password.TextChanged += new System.EventHandler(this.password_TextChanged);
             // 
             // loginButton
             // 
@@ -131,7 +132,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(407, 281);
+            this.ClientSize = new System.Drawing.Size(409, 281);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
