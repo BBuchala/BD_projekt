@@ -13,6 +13,7 @@ using ProjektBD.DAL;
 using ProjektBD.Model;
 using System.Data.Entity;
 using ProjektBD.Exceptions;
+using ProjektBD.Forms;
 
 namespace ProjektBD
 {
@@ -173,13 +174,12 @@ namespace ProjektBD
 
         private void signButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("To be implemented.", "Lol", MessageBoxButtons.OK);
 
-            // this.Hide();
+            this.Hide();
 
-            //RegisterForm mainForm = new RegisterForm();
-           // mainForm.ShowDialog();
-           // mainForm.Dispose();
+            RegisterForm mainForm = new RegisterForm();
+            mainForm.ShowDialog();
+            mainForm.Dispose();
 
             login.Text = "";
             password.Text = "";

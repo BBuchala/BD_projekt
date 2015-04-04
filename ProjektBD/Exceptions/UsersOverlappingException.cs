@@ -13,13 +13,21 @@ namespace ProjektBD.Exceptions
 {
     public class UsersOverlappingException: Exception
     {
+        // Nasz message. Message z dużej litery jest systemowe!
+        string message;
+
         public UsersOverlappingException()
         {
         }
 
         public UsersOverlappingException(string message)
         {
-            // ???         
+            this.message = message;
+        }
+
+        public string getMessage()
+        {
+            return this.message;
         }
 
     }

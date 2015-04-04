@@ -7,8 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+
 using ProjektBD.DAL;
+using ProjektBD.Model;
+using System.Data.Entity;
 using ProjektBD.Exceptions;
+using ProjektBD;
 
 namespace ProjektBD.Forms
 {
@@ -22,7 +27,6 @@ namespace ProjektBD.Forms
         List<TextBoxBase> textFields = new List<TextBoxBase>();
         List<Label> labels = new List<Label>();
 
-
         public RegisterForm()
         {
             InitializeComponent();
@@ -32,12 +36,14 @@ namespace ProjektBD.Forms
         private void RegisterForm_Load(object sender, EventArgs e)
         {
             connectToDB();
+
+            // Do pola z indeksem można wpisac tylko 6-cyfrowego inta
             index.Mask = "000000";
             index.ValidatingType = typeof(int);
+
             fillLists();
         }
-
-        
+       
         /*
          * Uzupełnia listy z labelami i TextBoxami. Kolejność jest ważna!
          * Labele muszą być dodawane w tej samej kolejności co TextBoxy.
@@ -67,7 +73,6 @@ namespace ProjektBD.Forms
          */
         private void createButton_Click(object sender, EventArgs e)
         {
-            DateTime birth = dateTimePicker1.Value;
 
             // Wszystkie napisy znów na czarno
             foreach (Label lb in labels)
@@ -78,7 +83,7 @@ namespace ProjektBD.Forms
                 // count - 1, bo adres nieobowiązkowy
                 for (int i = 0; i < textFields.Count - 1; i++) 
                 {
-                    if ((textFields[i].Text == "") || (textFields[i].Text == null))
+                    if ((textFields[i].Text.Equals("")) || (textFields[i].Text.Length < 3) || (textFields[i].Text == null))
                         throw new EmptyFieldException(i);
                 }
 
@@ -88,38 +93,62 @@ namespace ProjektBD.Forms
                     displayMsgBox("Sprzeczność", "Podane hasła się nie zgadzają!");
                     labels[1].ForeColor = Color.Red;
                     labels[2].ForeColor = Color.Red;
+                    textFields[1].Text = "";
+                    textFields[2].Text = "";
                     return;
                 }
 
-                // TO DO
-                // Spellcheck emaila + hasła
-                // Sprawdzenie bazy (login, nr indeks, email) pod kątem powtórzeń
+                // Sprawdźmy, czy email jest dobrze podany
+                if (!(SpellCheckUtilities.isValidEmail(textFields[3].Text)))
+                {
+                    displayMsgBox("Zły adres e-mail", "Podany adres e-mail nie jest poprawny!");
+                    labels[3].ForeColor = Color.Red;
+                    textFields[3].Text = "";
+                    return;
+                }
+
+                // Czy wszystkie pola w maskedTextBox indeksu są uzupełnione
+                if (!index.MaskCompleted)
+                {
+                    displayMsgBox("Zły nr indeksu", "Podany numer indeksu jest niepełny!");
+                    labels[4].ForeColor = Color.Red;
+                    textFields[4].Text = "";
+                    return;
+                }
+
+                // Czy login/email/indeks się nie pokrywa z istniejącym użytkownikiem
+                string overlappingAttribute = isOccupied();
+
+                if (!overlappingAttribute.Equals(""))
+                    throw new UsersOverlappingException(overlappingAttribute);
+                else
+                {
+                    MessageBox.Show("Konto zostało poprawnie założone. Możesz się zalogować.", "Koniec", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    createAccount();
+                    this.Close();
+                }
                 
             }
             catch (EmptyFieldException err)
             {
-                displayMsgBox("Brak danych", "Nie wszystkie pola zostały uzupełnione.");
+                displayMsgBox("Brak danych", "Pola muszą zawierać co najmniej 3 znaki.");
                 labels[err.getFieldNumber()].ForeColor = Color.Red;
+                
             }
-            catch (FormatException)
+            catch (UsersOverlappingException err)
             {
-
+                MessageBox.Show("Następujący " + err.getMessage() + " jest już zajęty.", "Złe dane", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                foreach (TextBoxBase txt in textFields)
-                    txt.Text = "";
-            }
+            
         }
 
         /*
-         * Funkcja do wyświetlania MsgBoxa.
+         * Funkcja do wyświetlania MsgBoxa z warningiem.
          */ 
         private void displayMsgBox(string title, string text)
         {
             MessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
-
 
         private void createButton_MouseEnter(object sender, EventArgs e)
         {
@@ -132,7 +161,6 @@ namespace ProjektBD.Forms
             createButton.BackColor = Color.SpringGreen;
             createButton.ForeColor = Color.White;
         }
-
 
         private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -184,6 +212,72 @@ namespace ProjektBD.Forms
             }
         }
 
+        /*
+         * Funkcja do sprawdzania powtórzeń (czy zajęty). Context Loadujemy 2 razy,
+         * bo nick i adres email trzeba sprawdzić też z prowadzącymi, indeks tylko
+         * ze studentami. Metoda zwraca nazwę powtarzającego się atrybutu lub ""
+         * jeżeli jest ok (nic się nie powtarza).
+         */ 
+        private string isOccupied()
+        {            
+            String inputLogin = textFields[0].Text;
+            String inputEmail = textFields[3].Text;
+            int inputIndex = Int32.Parse(index.Text);
+
+            context.Użytkownicy.Load();
+
+            var query = context.Studenci.Where(s => (s.email.Equals(inputEmail)));
+
+            if (query.Count() > 0)
+                return "Email";
+
+            query = context.Studenci.Where(s => (s.login.Equals(inputLogin)));
+
+            if (query.Count() > 0)
+                return "login";
+
+            context.Studenci.Load();
+
+            query = context.Studenci.Where(s => (s.nrIndeksu == inputIndex));
+
+            if (query.Count() > 0)
+                return "nr indeksu";
+
+
+            return "";
+        }
+
+        /*
+         * Uzależniamy dateTimePicker od checkboxa
+         */ 
+        private void birthDate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (birthDate.Checked == true)
+                dateTimePicker1.Enabled = true;
+            else dateTimePicker1.Enabled = false;
+        }
+
+        /**
+         * Metoda bazodanowa - stworzenie studenta i dodanie go do bazy.
+         */
+        private void createAccount()
+        {
+            Student s = new Student
+            {
+                login = textFields[0].Text,
+                hasło = textFields[1].Text,
+                email = textFields[3].Text,
+                miejsceZamieszkania = textFields[5].Text,               
+                nrIndeksu = Int32.Parse(index.Text)
+            };
+
+            if (birthDate.Checked == true)
+                s.dataUrodzenia = dateTimePicker1.Value;
+            else s.dataUrodzenia = null;
+
+            context.Studenci.Add(s);
+            context.SaveChanges();
+        }
 
     }
 }

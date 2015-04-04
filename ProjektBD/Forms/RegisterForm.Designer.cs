@@ -44,6 +44,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.index = new System.Windows.Forms.MaskedTextBox();
+            this.birthDate = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // login
@@ -79,7 +80,7 @@
             this.dateTimePicker1.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(126, 20);
-            this.dateTimePicker1.TabIndex = 4;
+            this.dateTimePicker1.TabIndex = 5;
             this.dateTimePicker1.Value = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
             // 
             // email
@@ -88,7 +89,7 @@
             this.email.MaxLength = 50;
             this.email.Name = "email";
             this.email.Size = new System.Drawing.Size(311, 20);
-            this.email.TabIndex = 5;
+            this.email.TabIndex = 3;
             // 
             // address
             // 
@@ -198,13 +199,26 @@
             this.index.Location = new System.Drawing.Point(11, 289);
             this.index.Name = "index";
             this.index.Size = new System.Drawing.Size(48, 20);
-            this.index.TabIndex = 16;
+            this.index.TabIndex = 4;
+            // 
+            // birthDate
+            // 
+            this.birthDate.AutoSize = true;
+            this.birthDate.Checked = true;
+            this.birthDate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.birthDate.Location = new System.Drawing.Point(172, 272);
+            this.birthDate.Name = "birthDate";
+            this.birthDate.Size = new System.Drawing.Size(15, 14);
+            this.birthDate.TabIndex = 16;
+            this.birthDate.UseVisualStyleBackColor = true;
+            this.birthDate.CheckedChanged += new System.EventHandler(this.birthDate_CheckedChanged);
             // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 461);
+            this.Controls.Add(this.birthDate);
             this.Controls.Add(this.index);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -252,5 +266,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.MaskedTextBox index;
+        private System.Windows.Forms.CheckBox birthDate;
     }
 }
