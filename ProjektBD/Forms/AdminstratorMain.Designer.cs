@@ -34,7 +34,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
@@ -94,22 +93,14 @@
             this.button3.Text = "Przegladaj baze";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
-            "kryt1",
-            "kryt2",
-            "kryt3"});
-            this.checkedListBox1.Location = new System.Drawing.Point(475, 114);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(132, 64);
-            this.checkedListBox1.TabIndex = 6;
-            // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(476, 207);
+            this.listBox1.Items.AddRange(new object[] {
+            "Studenci\t",
+            "Przedmioty",
+            "Projekty"});
+            this.listBox1.Location = new System.Drawing.Point(475, 114);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(130, 82);
             this.listBox1.TabIndex = 7;
@@ -120,7 +111,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 305);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label2);
@@ -142,7 +132,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.ListBox listBox1;
     }
 }

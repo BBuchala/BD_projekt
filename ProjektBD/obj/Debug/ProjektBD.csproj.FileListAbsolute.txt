@@ -13,3 +13,6 @@ D:\BD - projekt\BD_projekt\ProjektBD\obj\Debug\ProjektBD.Properties.Resources.re
 D:\BD - projekt\BD_projekt\ProjektBD\obj\Debug\ProjektBD.csproj.GenerateResource.Cache
 D:\BD - projekt\BD_projekt\ProjektBD\obj\Debug\ProjektBD.exe
 D:\BD - projekt\BD_projekt\ProjektBD\obj\Debug\ProjektBD.pdb
+D:\BD - projekt\BD_projekt\ProjektBD\obj\Debug\ProjektBD.Forms.AdminstratorMain.resources
+D:\BD - projekt\BD_projekt\ProjektBD\obj\Debug\ProjektBD.Forms.ProwadzacyMain.resources
+D:\BD - projekt\BD_projekt\ProjektBD\obj\Debug\ProjektBD.Forms.StudentMain.resources

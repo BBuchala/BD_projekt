@@ -20,7 +20,7 @@ namespace ProjektBD
             
             //Odpalamy Form1 a nie LoginForm jako pierwsze, żeby było głównym oknem aplikacji
             
-            Application.Run(new Form1());
+            Application.Run(new AdminstratorMain());
             // Application.Run(new LoginForm());
 
             //Inne podejście do sprawy: LoginForm jako formatka główna
