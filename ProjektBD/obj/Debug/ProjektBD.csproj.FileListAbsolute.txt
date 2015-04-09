@@ -1,0 +1,15 @@
+D:\BD - projekt\BD_projekt\ProjektBD\bin\Debug\ProjektBD.exe.config
+D:\BD - projekt\BD_projekt\ProjektBD\bin\Debug\ProjektBD.exe
+D:\BD - projekt\BD_projekt\ProjektBD\bin\Debug\ProjektBD.pdb
+D:\BD - projekt\BD_projekt\ProjektBD\bin\Debug\EntityFramework.dll
+D:\BD - projekt\BD_projekt\ProjektBD\bin\Debug\EntityFramework.SqlServer.dll
+D:\BD - projekt\BD_projekt\ProjektBD\bin\Debug\EntityFramework.xml
+D:\BD - projekt\BD_projekt\ProjektBD\bin\Debug\EntityFramework.SqlServer.xml
+D:\BD - projekt\BD_projekt\ProjektBD\obj\Debug\ProjektBD.csprojResolveAssemblyReference.cache
+D:\BD - projekt\BD_projekt\ProjektBD\obj\Debug\ProjektBD.Form1.resources
+D:\BD - projekt\BD_projekt\ProjektBD\obj\Debug\ProjektBD.LoginForm.resources
+D:\BD - projekt\BD_projekt\ProjektBD\obj\Debug\ProjektBD.Forms.RegisterForm.resources
+D:\BD - projekt\BD_projekt\ProjektBD\obj\Debug\ProjektBD.Properties.Resources.resources
+D:\BD - projekt\BD_projekt\ProjektBD\obj\Debug\ProjektBD.csproj.GenerateResource.Cache
+D:\BD - projekt\BD_projekt\ProjektBD\obj\Debug\ProjektBD.exe
+D:\BD - projekt\BD_projekt\ProjektBD\obj\Debug\ProjektBD.pdb
