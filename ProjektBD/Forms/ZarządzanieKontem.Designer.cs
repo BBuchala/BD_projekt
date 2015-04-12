@@ -1,6 +1,6 @@
 ﻿namespace ProjektBD.Forms
 {
-    partial class Zarzadznie_Kontem
+    partial class Zarządzanie_Kontem
     {
         /// <summary>
         /// Required designer variable.
@@ -30,8 +30,6 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label24 = new System.Windows.Forms.Label();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
@@ -44,6 +42,8 @@
             this.button6 = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -80,26 +80,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Dane osobowe";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(716, 321);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Ustawienia konta";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(716, 321);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Usuń konto";
-            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // label24
             // 
@@ -200,6 +180,26 @@
             this.label17.TabIndex = 19;
             this.label17.Text = "Uzupełnij dane";
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(716, 321);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Ustawienia konta";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(716, 321);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Usuń konto";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
             // Zarzadznie_Kontem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -207,7 +207,7 @@
             this.ClientSize = new System.Drawing.Size(724, 344);
             this.Controls.Add(this.tabControl1);
             this.Name = "Zarzadznie_Kontem";
-            this.Text = "Zarzadznie_Kontem";
+            this.Text = "Zarządzanie_Kontem";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

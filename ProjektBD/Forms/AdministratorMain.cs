@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ProjektBD.Forms
 {
-    public partial class AdminstratorMain : Form
+    public partial class AdministratorMain : Form
     {
-        public AdminstratorMain()
+        public AdministratorMain()
         {
             InitializeComponent();
         }
@@ -24,14 +24,7 @@ namespace ProjektBD.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
 
-            ProwadzacyMain mainForm = new ProwadzacyMain();
-            mainForm.ShowDialog();
-            mainForm.Dispose();
-
-
-            this.Show();
         }
 
         private void label2_Click(object sender, EventArgs e)

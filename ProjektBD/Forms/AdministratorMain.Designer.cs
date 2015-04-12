@@ -1,6 +1,6 @@
 ﻿namespace ProjektBD.Forms
 {
-    partial class AdminstratorMain
+    partial class AdministratorMain
     {
         /// <summary>
         /// Required designer variable.
@@ -36,9 +36,9 @@
             this.button3 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,7 +79,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(110, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Podaj imie i nazwisko:";
+            this.label2.Text = "Podaj imię i nazwisko:";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // button2
@@ -88,7 +88,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(130, 49);
             this.button2.TabIndex = 4;
-            this.button2.Text = "Zablokuj baze";
+            this.button2.Text = "Zablokuj bazę";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button3
@@ -97,7 +97,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(144, 33);
             this.button3.TabIndex = 5;
-            this.button3.Text = "Przegladaj baze";
+            this.button3.Text = "Przeglądaj bazę";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // listBox1
@@ -128,15 +128,6 @@
             this.groupBox1.Text = "Dodaj konto";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(552, 327);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(113, 42);
-            this.button4.TabIndex = 17;
-            this.button4.Text = "Zarządzne kontem";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -154,7 +145,16 @@
             this.textBox2.Size = new System.Drawing.Size(136, 24);
             this.textBox2.TabIndex = 4;
             // 
-            // AdminstratorMain
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(552, 327);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(113, 42);
+            this.button4.TabIndex = 17;
+            this.button4.Text = "Zarządzanie kontem";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // AdministratorMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -165,7 +165,7 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
-            this.Name = "AdminstratorMain";
+            this.Name = "AdministratorMain";
             this.Text = "AdminstratorMain";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

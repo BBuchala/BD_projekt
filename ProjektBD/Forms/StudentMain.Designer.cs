@@ -31,32 +31,32 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.listView2 = new System.Windows.Forms.ListView();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listView3 = new System.Windows.Forms.ListView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.listView4 = new System.Windows.Forms.ListView();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.button4 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.listView5 = new System.Windows.Forms.ListView();
-            this.button5 = new System.Windows.Forms.Button();
+            this.listView3 = new System.Windows.Forms.ListView();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.button6 = new System.Windows.Forms.Button();
             this.listView6 = new System.Windows.Forms.ListView();
             this.label7 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.listView5 = new System.Windows.Forms.ListView();
+            this.label6 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.button7 = new System.Windows.Forms.Button();
-            this.listBox3 = new System.Windows.Forms.ListBox();
             this.listView7 = new System.Windows.Forms.ListView();
+            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -103,67 +103,6 @@
             this.tabPage1.Text = "Zgłoszenie";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.listView4);
-            this.tabPage2.Controls.Add(this.listBox2);
-            this.tabPage2.Controls.Add(this.button4);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.listView3);
-            this.tabPage2.Controls.Add(this.listBox1);
-            this.tabPage2.Controls.Add(this.button3);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(686, 283);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Oceny";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.button6);
-            this.tabPage3.Controls.Add(this.listView6);
-            this.tabPage3.Controls.Add(this.label7);
-            this.tabPage3.Controls.Add(this.button5);
-            this.tabPage3.Controls.Add(this.listView5);
-            this.tabPage3.Controls.Add(this.label6);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(686, 283);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Podgląd";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(92, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(164, 53);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Wybierz projekt na który chcesz się zapisać";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // listView1
-            // 
-            this.listView1.Location = new System.Drawing.Point(90, 73);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(165, 153);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(90, 245);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(165, 26);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Zapisz";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(366, 245);
@@ -188,43 +127,53 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(164, 53);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Wybierz przedmiot na który chcesz się zapisać";
+            this.label3.Text = "Wybierz przedmiot. na który chcesz się zapisać";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label4
+            // button1
             // 
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(3, 12);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(164, 55);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Wybierz projekt ";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button1.Location = new System.Drawing.Point(90, 245);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(165, 26);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Zapisz";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // listView1
             // 
-            this.button3.Location = new System.Drawing.Point(173, 6);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(155, 36);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Pokaż oceny";
-            this.button3.UseVisualStyleBackColor = true;
+            this.listView1.Location = new System.Drawing.Point(90, 73);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(165, 153);
+            this.listView1.TabIndex = 1;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
-            // listBox1
+            // label2
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(26, 53);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(126, 186);
-            this.listBox1.TabIndex = 6;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(92, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(164, 53);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Wybierz projekt, na który chcesz się zapisać";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // listView3
+            // tabPage2
             // 
-            this.listView3.Location = new System.Drawing.Point(173, 53);
-            this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(152, 188);
-            this.listView3.TabIndex = 7;
-            this.listView3.UseCompatibleStateImageBehavior = false;
+            this.tabPage2.Controls.Add(this.listView4);
+            this.tabPage2.Controls.Add(this.listBox2);
+            this.tabPage2.Controls.Add(this.button4);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.listView3);
+            this.tabPage2.Controls.Add(this.listBox1);
+            this.tabPage2.Controls.Add(this.button3);
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(686, 283);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Oceny";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // listView4
             // 
@@ -261,32 +210,56 @@
             this.label5.Text = "Wybierz projekt ";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label6
+            // listView3
             // 
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.Location = new System.Drawing.Point(37, 14);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(164, 35);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Pokarz projekty na które jestem zapisany";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.listView3.Location = new System.Drawing.Point(173, 53);
+            this.listView3.Name = "listView3";
+            this.listView3.Size = new System.Drawing.Size(152, 188);
+            this.listView3.TabIndex = 7;
+            this.listView3.UseCompatibleStateImageBehavior = false;
             // 
-            // listView5
+            // listBox1
             // 
-            this.listView5.Location = new System.Drawing.Point(50, 52);
-            this.listView5.Name = "listView5";
-            this.listView5.Size = new System.Drawing.Size(142, 186);
-            this.listView5.TabIndex = 5;
-            this.listView5.UseCompatibleStateImageBehavior = false;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(26, 53);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(126, 186);
+            this.listBox1.TabIndex = 6;
             // 
-            // button5
+            // button3
             // 
-            this.button5.Location = new System.Drawing.Point(50, 244);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(142, 28);
-            this.button5.TabIndex = 6;
-            this.button5.Text = "Pokaż";
-            this.button5.UseVisualStyleBackColor = true;
+            this.button3.Location = new System.Drawing.Point(173, 6);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(155, 36);
+            this.button3.TabIndex = 5;
+            this.button3.Text = "Pokaż oceny";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.Location = new System.Drawing.Point(3, 12);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(164, 55);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Wybierz projekt ";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.button6);
+            this.tabPage3.Controls.Add(this.listView6);
+            this.tabPage3.Controls.Add(this.label7);
+            this.tabPage3.Controls.Add(this.button5);
+            this.tabPage3.Controls.Add(this.listView5);
+            this.tabPage3.Controls.Add(this.label6);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(686, 283);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Podgląd";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
@@ -312,8 +285,35 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(164, 35);
             this.label7.TabIndex = 7;
-            this.label7.Text = "Pokarz przedmioty na które jestem zapisany";
+            this.label7.Text = "Pokaż przedmioty, na które jestem zapisany";
             this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(50, 244);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(142, 28);
+            this.button5.TabIndex = 6;
+            this.button5.Text = "Pokaż";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // listView5
+            // 
+            this.listView5.Location = new System.Drawing.Point(50, 52);
+            this.listView5.Name = "listView5";
+            this.listView5.Size = new System.Drawing.Size(142, 186);
+            this.listView5.TabIndex = 5;
+            this.listView5.UseCompatibleStateImageBehavior = false;
+            // 
+            // label6
+            // 
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label6.Location = new System.Drawing.Point(37, 14);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(164, 35);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Pokaż projekty, na które jestem zapisany";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // tabPage4
             // 
@@ -328,14 +328,13 @@
             this.tabPage4.Text = "Sprawdź projekt";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // listView7
             // 
-            this.button7.Location = new System.Drawing.Point(47, 35);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(124, 28);
-            this.button7.TabIndex = 0;
-            this.button7.Text = "Pokarz informacje";
-            this.button7.UseVisualStyleBackColor = true;
+            this.listView7.Location = new System.Drawing.Point(246, 35);
+            this.listView7.Name = "listView7";
+            this.listView7.Size = new System.Drawing.Size(152, 181);
+            this.listView7.TabIndex = 2;
+            this.listView7.UseCompatibleStateImageBehavior = false;
             // 
             // listBox3
             // 
@@ -345,13 +344,14 @@
             this.listBox3.Size = new System.Drawing.Size(124, 121);
             this.listBox3.TabIndex = 1;
             // 
-            // listView7
+            // button7
             // 
-            this.listView7.Location = new System.Drawing.Point(246, 35);
-            this.listView7.Name = "listView7";
-            this.listView7.Size = new System.Drawing.Size(152, 181);
-            this.listView7.TabIndex = 2;
-            this.listView7.UseCompatibleStateImageBehavior = false;
+            this.button7.Location = new System.Drawing.Point(47, 35);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(124, 28);
+            this.button7.TabIndex = 0;
+            this.button7.Text = "Pokaż informacje";
+            this.button7.UseVisualStyleBackColor = true;
             // 
             // button8
             // 

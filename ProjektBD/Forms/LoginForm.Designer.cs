@@ -57,6 +57,7 @@
             this.login.Name = "login";
             this.login.Size = new System.Drawing.Size(261, 20);
             this.login.TabIndex = 1;
+            this.login.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.login_KeyPress);
             // 
             // password
             // 
@@ -66,7 +67,7 @@
             this.password.PasswordChar = '*';
             this.password.Size = new System.Drawing.Size(261, 20);
             this.password.TabIndex = 2;
-            this.password.TextChanged += new System.EventHandler(this.password_TextChanged);
+            this.password.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.password_KeyPress);
             // 
             // loginButton
             // 

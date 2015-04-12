@@ -51,6 +51,8 @@ namespace ProjektBD
             try
             {
                 context.Database.Initialize(false);
+
+                context.Użytkownicy.Load();                 // Wczytuje do lokalnej kolekcji wszystkich użytkowników (w tym studentów, prowadzących itp.)
             }
             catch (System.Data.SqlClient.SqlException)
             {
@@ -100,81 +102,76 @@ namespace ProjektBD
             signButton.ForeColor = Color.White;
         }
 
+        private void logUser()
+        {
+            inputLogin = login.Text;
+            String inputPass = password.Text;
+
+            // FirstOrDefault zwraca pierwszy wynik zapytania lub null, jeśli użytkownik nie został znaleziony
+            Użytkownik query = context.Użytkownicy.Local.Where(s => (s.login.Equals(inputLogin) && s.hasło.Equals(inputPass))).FirstOrDefault();
+
+            if (query == null)
+            {
+                MessageBox.Show("Podane dane są niepoprawne. Spróbuj ponownie.",
+                                "Błędne dane.",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Exclamation);
+
+                //login.Text = "";               // czasem ktoś wklepie źle tylko hasło, tak będzie przyjaźniej dla użytkownika
+                password.Text = "";
+            }
+            else
+            {
+                xButtonClose = false;
+                // Wersja z Form1 jako główną formatką
+
+                // this.Hide();                     
+
+                /* Wersja z LoginForm jako główną formatką 
+                 * Chowamy, wywołujemy Form1 i nie wracamy tu,
+                 * dopóki nie zamknie się Form1. Wtedy zerujemy 
+                 * textboxy (dane z logowania zostają) + pokazujemy.
+                 */
+
+                this.Hide();
+
+                Form mainForm;
+
+                switch (query.GetType().Name)
+                {
+                    case "Administrator":
+                        mainForm = new AdministratorMain();
+                        break;
+                    case "Prowadzący":
+                        mainForm = new ProwadzacyMain();
+                        break;
+                    case "Student":
+                        mainForm = new StudentMain();
+                        break;
+                    default:
+                        mainForm = new Form();
+                        break;
+                }
+
+                mainForm.ShowDialog();
+                mainForm.Dispose();
+
+                login.Text = "";
+                password.Text = "";
+                this.Show();
+            }
+        }
+
         /********************************************************************************************/
         // Tu wyszukujemy (po naciśnięciu pierwszego przycisku).
-        // matching - ilość rekordów pasującyh do wyszukiwanego nicku. NIE POWINNA być inna niż 0 lub 1!
         /********************************************************************************************/
         private void loginButton_Click(object sender, EventArgs e)
         {
-            int matching;                   
-
-            try
-            {
-                context.Użytkownicy.Load();
-
-                inputLogin = login.Text;
-                String inputPass = password.Text;
-
-                var query = context.Użytkownicy.Where(s => (s.login.Equals(inputLogin) && s.hasło.Equals(inputPass)));
-
-                matching = query.Count();
-
-
-                // Sprawdzamy:
-                // 0 - nie ma usera/ złe dane -> komunikat + czyszczenie pól
-                // 1 - dane się zgadzają, wszystko cacy, idziemy dalej
-                // 2+ - hory shiet, coś nie tak
-                switch (matching)
-                {
-                    case 0:
-                        MessageBox.Show("Podane dane są niepoprawne. Spróbuj ponownie.",
-                                        "Błędne dane.",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Exclamation);
-                        login.Text = "";
-                        password.Text = "";
-                        break;
-
-                    case 1:
-                        xButtonClose = false;
-                        // Wersja z Form1 jako główną formatką
-                         
-                        // this.Hide();                     
-                         
-                        /* Wersja z LoginForm jako główną formatką 
-                         * Chowamy, wywołujemy Form1 i nie wracamy tu,
-                         * dopóki nie zamknie się Form1. Wtedy zerujemy 
-                         * textboxy (dane z logowania zostają) + pokazujemy.
-                         */
-
-                        this.Hide();
-
-                        Form1 mainForm = new Form1(inputLogin);
-                        mainForm.ShowDialog();
-                        mainForm.Dispose();
-
-                        login.Text = "";
-                        password.Text = "";
-                        this.Show();
-
-                        break;
-
-                    default:
-                        throw new UsersOverlappingException();
-                }
-         
-
-            } catch (UsersOverlappingException)
-            {
-                MessageBox.Show("Błąd w rekordach.", "Złapano wyjątek!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
-            }
-
+            logUser();
         }
 
         private void signButton_Click(object sender, EventArgs e)
         {
-
             this.Hide();
 
             RegisterForm mainForm = new RegisterForm();
@@ -184,7 +181,6 @@ namespace ProjektBD
             login.Text = "";
             password.Text = "";
             this.Show();
-
         }
 
 
@@ -215,9 +211,22 @@ namespace ProjektBD
                 context.Dispose();          // Pozbywa się utworzonego kontekstu przy zamykaniu formularza - do wywalenia przy większej ilości formatek.
         }
 
-        private void password_TextChanged(object sender, EventArgs e)
+        private void password_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (e.KeyChar == 13)            // Enter
+            {
+                logUser();
+                e.Handled = true;           // wyłącza beep po powrocie do formularza
+            }
+        }
 
+        private void login_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)            // Enter
+            {
+                logUser();
+                e.Handled = true;           // wyłącza beep po powrocie do formularza
+            }
         }
     }
 }

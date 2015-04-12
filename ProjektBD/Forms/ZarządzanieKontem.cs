@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ProjektBD.Forms
 {
-    public partial class Zarzadznie_Kontem : Form
+    public partial class Zarządzanie_Kontem : Form
     {
-        public Zarzadznie_Kontem()
+        public Zarządzanie_Kontem()
         {
             InitializeComponent();
         }

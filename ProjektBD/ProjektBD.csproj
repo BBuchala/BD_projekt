@@ -55,11 +55,11 @@
     <Compile Include="DAL\ProjektBDInitializer.cs" />
     <Compile Include="Exceptions\EmptyFieldException.cs" />
     <Compile Include="Exceptions\UsersOverlappingException.cs" />
-    <Compile Include="Forms\AdminstratorMain.cs">
+    <Compile Include="Forms\AdministratorMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AdminstratorMain.Designer.cs">
-      <DependentUpon>AdminstratorMain.cs</DependentUpon>
+    <Compile Include="Forms\AdministratorMain.Designer.cs">
+      <DependentUpon>AdministratorMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
@@ -103,11 +103,11 @@
     <Compile Include="Forms\StudentMain.Designer.cs">
       <DependentUpon>StudentMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ZarzadznieKontem.cs">
+    <Compile Include="Forms\ZarządzanieKontem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ZarzadznieKontem.Designer.cs">
-      <DependentUpon>ZarzadznieKontem.cs</DependentUpon>
+    <Compile Include="Forms\ZarządzanieKontem.Designer.cs">
+      <DependentUpon>ZarządzanieKontem.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\SpellCheck.cs" />
     <Compile Include="Model\Administrator.cs" />
@@ -125,8 +125,8 @@
     <Compile Include="Model\Zgłoszenie.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\AdminstratorMain.resx">
-      <DependentUpon>AdminstratorMain.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\AdministratorMain.resx">
+      <DependentUpon>AdministratorMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -149,8 +149,8 @@
     <EmbeddedResource Include="Forms\StudentMain.resx">
       <DependentUpon>StudentMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ZarzadznieKontem.resx">
-      <DependentUpon>ZarzadznieKontem.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ZarządzanieKontem.resx">
+      <DependentUpon>ZarządzanieKontem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

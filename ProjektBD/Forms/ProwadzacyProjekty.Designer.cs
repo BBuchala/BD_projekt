@@ -72,6 +72,8 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.listBox7 = new System.Windows.Forms.ListBox();
+            this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
@@ -85,6 +87,8 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.listBox8 = new System.Windows.Forms.ListBox();
+            this.label26 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
             this.textBox7 = new System.Windows.Forms.TextBox();
@@ -92,10 +96,6 @@
             this.tabPage12 = new System.Windows.Forms.TabPage();
             this.listView3 = new System.Windows.Forms.ListView();
             this.label20 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.listBox7 = new System.Windows.Forms.ListBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.listBox8 = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -569,14 +569,32 @@
             this.tabPage10.Text = "Dodaj";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
+            // listBox7
+            // 
+            this.listBox7.FormattingEnabled = true;
+            this.listBox7.Location = new System.Drawing.Point(356, 61);
+            this.listBox7.Name = "listBox7";
+            this.listBox7.Size = new System.Drawing.Size(165, 160);
+            this.listBox7.TabIndex = 20;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label25.Location = new System.Drawing.Point(367, 22);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(126, 18);
+            this.label25.TabIndex = 19;
+            this.label25.Text = "Wybierz projekt";
+            // 
             // label24
             // 
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(37, 186);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(63, 13);
+            this.label24.Size = new System.Drawing.Size(59, 13);
             this.label24.TabIndex = 18;
-            this.label24.Text = "Mr. telefonu";
+            this.label24.Text = "Nr telefonu";
             // 
             // textBox11
             // 
@@ -590,9 +608,9 @@
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(37, 160);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(31, 13);
+            this.label23.Size = new System.Drawing.Size(35, 13);
             this.label23.TabIndex = 16;
-            this.label23.Text = "email";
+            this.label23.Text = "E-mail";
             // 
             // textBox10
             // 
@@ -684,6 +702,24 @@
             this.tabPage11.Text = "Usuń";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
+            // listBox8
+            // 
+            this.listBox8.FormattingEnabled = true;
+            this.listBox8.Location = new System.Drawing.Point(333, 80);
+            this.listBox8.Name = "listBox8";
+            this.listBox8.Size = new System.Drawing.Size(150, 147);
+            this.listBox8.TabIndex = 13;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label26.Location = new System.Drawing.Point(337, 32);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(126, 18);
+            this.label26.TabIndex = 12;
+            this.label26.Text = "Wybierz projekt";
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -749,42 +785,6 @@
             this.label20.TabIndex = 9;
             this.label20.Text = "Lista studentów";
             // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label25.Location = new System.Drawing.Point(367, 22);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(126, 18);
-            this.label25.TabIndex = 19;
-            this.label25.Text = "Wybierz projekt";
-            // 
-            // listBox7
-            // 
-            this.listBox7.FormattingEnabled = true;
-            this.listBox7.Location = new System.Drawing.Point(356, 61);
-            this.listBox7.Name = "listBox7";
-            this.listBox7.Size = new System.Drawing.Size(165, 160);
-            this.listBox7.TabIndex = 20;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label26.Location = new System.Drawing.Point(337, 32);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(126, 18);
-            this.label26.TabIndex = 12;
-            this.label26.Text = "Wybierz projekt";
-            // 
-            // listBox8
-            // 
-            this.listBox8.FormattingEnabled = true;
-            this.listBox8.Location = new System.Drawing.Point(333, 80);
-            this.listBox8.Name = "listBox8";
-            this.listBox8.Size = new System.Drawing.Size(150, 147);
-            this.listBox8.TabIndex = 13;
-            // 
             // ProwadzacyProjekty
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -793,7 +793,6 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "ProwadzacyProjekty";
             this.Text = "ProwadzacyProjekty";
-            this.Load += new System.EventHandler(this.ProwadzacyProjekty_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

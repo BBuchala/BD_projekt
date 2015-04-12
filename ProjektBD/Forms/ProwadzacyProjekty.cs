@@ -16,10 +16,5 @@ namespace ProjektBD.Forms
         {
             InitializeComponent();
         }
-
-        private void ProwadzacyProjekty_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
