@@ -19,15 +19,42 @@ namespace ProjektBD.Forms
 
         private void label1_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.Hide();
 
+            ProwadzacyMain mainForm = new ProwadzacyMain();
+            mainForm.ShowDialog();
+            mainForm.Dispose();
+
+
+            this.Show();
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }

@@ -21,5 +21,10 @@ namespace ProjektBD.Forms
         {
 
         }
+
+        private void StudentMain_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

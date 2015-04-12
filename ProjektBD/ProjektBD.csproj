@@ -79,6 +79,18 @@
     <Compile Include="Forms\ProwadzacyMain.Designer.cs">
       <DependentUpon>ProwadzacyMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ProwadzacyProjekty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProwadzacyProjekty.Designer.cs">
+      <DependentUpon>ProwadzacyProjekty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProwadzacyPrzedmioty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProwadzacyPrzedmioty.Designer.cs">
+      <DependentUpon>ProwadzacyPrzedmioty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\RegisterForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +102,12 @@
     </Compile>
     <Compile Include="Forms\StudentMain.Designer.cs">
       <DependentUpon>StudentMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ZarzadznieKontem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ZarzadznieKontem.Designer.cs">
+      <DependentUpon>ZarzadznieKontem.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\SpellCheck.cs" />
     <Compile Include="Model\Administrator.cs" />
@@ -119,11 +137,20 @@
     <EmbeddedResource Include="Forms\ProwadzacyMain.resx">
       <DependentUpon>ProwadzacyMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProwadzacyProjekty.resx">
+      <DependentUpon>ProwadzacyProjekty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProwadzacyPrzedmioty.resx">
+      <DependentUpon>ProwadzacyPrzedmioty.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StudentMain.resx">
       <DependentUpon>StudentMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ZarzadznieKontem.resx">
+      <DependentUpon>ZarzadznieKontem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

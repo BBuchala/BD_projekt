@@ -19,7 +19,14 @@ namespace ProjektBD.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.Hide();
 
+            ProwadzacyPrzedmioty mainForm = new ProwadzacyPrzedmioty();
+            mainForm.ShowDialog();
+            mainForm.Dispose();
+
+
+            this.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
