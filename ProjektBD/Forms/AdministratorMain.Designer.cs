@@ -166,6 +166,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
             this.Name = "AdministratorMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdminstratorMain";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -750,6 +750,7 @@
             this.ClientSize = new System.Drawing.Size(708, 355);
             this.Controls.Add(this.tabControl1);
             this.Name = "ProwadzacyPrzedmioty";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProwadzacyPrzedmioty";
             this.Load += new System.EventHandler(this.ProwadzacyPrzedmioty_Load);
             this.tabControl1.ResumeLayout(false);

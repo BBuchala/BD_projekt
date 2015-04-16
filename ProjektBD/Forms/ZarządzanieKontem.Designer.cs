@@ -200,13 +200,14 @@
             this.tabPage3.Text = "Usuń konto";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // Zarzadznie_Kontem
+            // Zarządzanie_Kontem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(724, 344);
             this.Controls.Add(this.tabControl1);
-            this.Name = "Zarzadznie_Kontem";
+            this.Name = "Zarządzanie_Kontem";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Zarządzanie_Kontem";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

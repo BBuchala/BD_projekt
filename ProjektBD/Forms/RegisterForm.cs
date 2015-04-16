@@ -19,7 +19,6 @@ namespace ProjektBD.Forms
 {
     public partial class RegisterForm : Form
     {
-
         private ProjektBDContext context;
 
         // Listy, odpowiednio z textBoxami i labelami, do łatwiejszego operowania

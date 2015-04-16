@@ -371,6 +371,7 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label1);
             this.Name = "StudentMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "StudentMain";
             this.Load += new System.EventHandler(this.StudentMain_Load);
             this.tabControl1.ResumeLayout(false);

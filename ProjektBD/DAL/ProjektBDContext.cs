@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
@@ -14,10 +15,11 @@ namespace ProjektBD.DAL
         public ProjektBDContext()                   // Connection String. Określa nazwę serwera, bazę, do której się podpinamy i passy do podłączenia
         //    : base(@"Data Source=89.70.47.247;Initial Catalog=ProjektBD;User ID=Jan Sebastian;Password=Bach")
 
-        // : base(@"Data Source=PC;Initial Catalog=ProjektBD;Integrated Security=True")     // Od strony hosta łączy się inaczej, don't bother
+        // : base(@"Data Source=PC; Initial Catalog=ProjektBD; Integrated Security=True")     // Od strony hosta łączy się inaczej, don't bother
          : base("ProjektBD")                      // Stary, lokalny CS, na wypadek gdyby ligocki serwer spał
         {
             Database.SetInitializer<ProjektBDContext>(new ProjektBDInitializer());
+            
         }
 
         public DbSet<Użytkownik>            Użytkownicy         { get; set; }
