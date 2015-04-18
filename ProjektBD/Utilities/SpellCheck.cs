@@ -2,10 +2,9 @@
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-    /*
-     * Klasa do sprawdzania poprawności wprowadzanego maila.
-     * Wzięte ze strony MSDN.
-     */ 
+    /// <summary>
+    /// Klasa do sprawdzania poprawności wprowadzanego maila. Wzięte ze strony MSDN.
+    /// </summary>
     public static class SpellCheckUtilities
     {
         static bool invalid;

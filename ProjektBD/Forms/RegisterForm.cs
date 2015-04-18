@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 using ProjektBD.DAL;
 using ProjektBD.Model;
 using System.Data.Entity;
@@ -17,14 +16,31 @@ using ProjektBD;
 
 namespace ProjektBD.Forms
 {
+    /// <summary>
+    /// Formatka służąca do stworzenia nowego konta. Konto studenta jest tworzone automatycznie, prowadzący musi być zaakceptowany przez admina.
+    /// </summary>
     public partial class RegisterForm : Form
     {
+        #region Fields
+
+        /// <summary>
+        /// Kontekst bazy danych
+        /// </summary>
         private ProjektBDContext context;
 
-        // Listy, odpowiednio z textBoxami i labelami, do łatwiejszego operowania
-        // TextBoxBase - nadrzędna dla textBoxa i maskedTextBoxa, więc oba idą do tej samej listy.
+        /// <summary>
+        /// Lsta z textBoxami, aby łatwiej je edytować (np. forEachem).
+        /// </summary>
         List<TextBoxBase> textFields = new List<TextBoxBase>();
+
+        /// <summary>
+        /// Lsta z labelami, aby łatwiej je edytować (np. forEachem).
+        /// </summary>
         List<Label> labels = new List<Label>();
+
+        #endregion
+
+        #region Constructors
 
         public RegisterForm()
         {
@@ -32,25 +48,15 @@ namespace ProjektBD.Forms
             context = new ProjektBDContext();
         }
 
-        private void RegisterForm_Load(object sender, EventArgs e)
-        {
-            connectToDB();
+        #endregion
 
-            // Do pola z indeksem można wpisac tylko 6-cyfrowego inta
-            index.Mask = "000000";
-            index.ValidatingType = typeof(int);
+        #region Methods
 
-            comboBox1.SelectedIndex = 1;
-            index.Enabled = false;
-
-            fillLists();
-        }
-
-        /*
-         * Uzupełnia listy z labelami i TextBoxami. Kolejność jest ważna!
-         * Labele muszą być dodawane w tej samej kolejności co TextBoxy.
-         * Dlaczego - patrz Button_Click.
-         */
+        /// <summary>
+        /// Uzupełnia listy z labelami i TextBoxami. Kolejność jest ważna!
+        /// Labele muszą być dodawane w tej samej kolejności co TextBoxy.
+        /// Dlaczego - patrz Button_Click.
+        /// </summary>
         private void fillLists()
         {
             textFields.Add(login);
@@ -70,9 +76,194 @@ namespace ProjektBD.Forms
 
         }
 
-        /*
-         * Najważniejsza funkcja - sprawdza szereg warunków przed dodaniem studenta do bazy. 
-         */
+        /// <summary>
+        /// Funkcja do wyświetlania MsgBoxa z warningiem.
+        /// </summary>
+        /// <param name="title">Tytuł okienka MessageBoxa.</param>
+        /// <param name="text">Treść MessageBoxa.</param>
+        private void displayMsgBox(string title, string text)
+        {
+            MessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+    
+        /// <summary> 
+        /// Funkcja tylko do łączenia się z bazą i dająca wybór: spróbuj ponownie
+        /// lub zamknij formatkę. Utworzona, ponieważ wywoływanie rekurencyjne
+        /// Form_Load to zły pomysł.
+        /// To samo co w przypadku LoginForm. Rozważam utworzenie jakiegoś pliku ze
+        /// wspólnymi funkcjami, nie tylko dla tych dwóch formatek.
+        /// </summary>      
+        private void connectToDB()
+        {
+            try
+            {
+                context.Database.Initialize(false);
+            }
+            catch (System.Data.SqlClient.SqlException)
+            {
+                DialogResult connRetry = MessageBox.Show("Nastąpił błąd podczas próby połączenia z bazą danych.\n Upewnij się, czy nie jesteś połączony w innym miejscu. \n Spróbować ponownie?",
+                                                       "Błąd połączenia",
+                                                       MessageBoxButtons.YesNo,
+                                                       MessageBoxIcon.Exclamation);
+                if (connRetry == DialogResult.No)
+                    this.Close();
+                else
+                    connectToDB();
+            }
+        }
+
+        /// <summary>
+        /// Funkcja do sprawdzania powtórzeń (czy zajęty). Context Loadujemy 2 razy, bo nick
+        /// i adres email trzeba sprawdzić ze wszytskimi userami, indeks tylko ze studentami.
+        /// </summary>
+        /// <param name="student">Jeżeli user jest studentem, dodatkowo sprawdzamy indeks.</param>
+        /// <returns>Zwraca nazwę powtarzającego się atrybutu lub "" jeżeli jest ok (nic się nie powtarza).</returns>
+        private string isOccupied(bool student)
+        {
+            String inputLogin = textFields[0].Text;
+            String inputEmail = textFields[3].Text;
+
+            context.Użytkownicy.Load();
+
+            var query = context.Użytkownicy.Where(s => (s.email.Equals(inputEmail)));
+
+            if (query.Count() > 0)
+                return "Email";
+
+            query = context.Użytkownicy.Where(s => (s.login.Equals(inputLogin)));
+
+            if (query.Count() > 0)
+                return "login";
+
+            if (student)
+            {
+                context.Studenci.Load();
+
+                query = context.Studenci.Where(s => (s.nrIndeksu == Int32.Parse(index.Text)));
+
+                if (query.Count() > 0)
+                    return "nr indeksu";
+            }
+
+            return "";
+        }
+
+        /// <summary>
+        /// Metoda bazodanowa - stworzenie studenta i dodanie go do bazy.
+        /// </summary>
+        private void createAccountStudent()
+        {
+            Student s = new Student
+            {
+                login = textFields[0].Text,
+                hasło = textFields[1].Text,
+                email = textFields[3].Text,
+                miejsceZamieszkania = textFields[5].Text,
+                nrIndeksu = Int32.Parse(index.Text)
+            };
+
+            if (birthDate.Checked == true)
+                s.dataUrodzenia = dateTimePicker1.Value;
+            else s.dataUrodzenia = null;
+
+            context.Studenci.Add(s);
+            context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Posłanie wiadomości do admina. On akceptuje - stworzony zostaje prowadzący.
+        /// </summary>
+        private void notifyAdmin()
+        {
+            Prowadzący p = new Prowadzący
+            {
+                login = textFields[0].Text,
+                hasło = textFields[1].Text,
+                email = textFields[3].Text,
+                miejsceZamieszkania = textFields[5].Text
+            };
+
+            if (birthDate.Checked == true)
+                p.dataUrodzenia = dateTimePicker1.Value;
+            else p.dataUrodzenia = null;
+
+
+            //TO DO: posłać wiadomość do admina.
+        }
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        /// Metoda ładująca formatkę. Ustawiamy sposób maskowania MaskedBoxa oraz domyślny item w comboBoxie.
+        /// </summary>
+        private void RegisterForm_Load(object sender, EventArgs e)
+        {
+            connectToDB();
+
+            // Do pola z indeksem można wpisac tylko 6-cyfrowego inta
+            index.Mask = "000000";
+            index.ValidatingType = typeof(int);
+
+            comboBox1.SelectedIndex = 1;
+            index.Enabled = false;
+
+            fillLists();
+        }
+
+        /// <summary>
+        /// Uzależniamy dateTimePicker od checkBoxa.
+        /// </summary>
+        private void birthDate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (birthDate.Checked == true)
+                dateTimePicker1.Enabled = true;
+            else dateTimePicker1.Enabled = false;
+        }
+
+        /// <summary>
+        /// Metoda chowająca i disable'ująca nr indeksu (na wszelki wypadek) przy wyborze "Prowadzącego".
+        /// </summary>
+        private void comboBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == 1)
+            {
+                index.Visible = false;
+                index.Enabled = false;
+                label6.Visible = false;
+                this.Height -= 50;
+            }
+            else
+            {
+                index.Visible = true;
+                index.Enabled = true;
+                label6.Visible = true;
+                this.Height += 50;
+            }
+        }
+
+        /// <summary>
+        /// Metoda kolorująca button.
+        /// </summary>
+        private void createButton_MouseEnter(object sender, EventArgs e)
+        {
+            createButton.BackColor = Color.PaleTurquoise;
+            createButton.ForeColor = Color.Black;
+        }
+
+        /// <summary>
+        /// Metoda kolorująca button.
+        /// </summary>
+        private void createButton_MouseLeave(object sender, EventArgs e)
+        {
+            createButton.BackColor = Color.SpringGreen;
+            createButton.ForeColor = Color.White;
+        }
+
+        /// <summary>
+        /// Najważniejsza funkcja - sprawdza szereg warunków przed dodaniem studenta do bazy. 
+        /// </summary>
         private void createButton_Click(object sender, EventArgs e)
         {
 
@@ -157,26 +348,9 @@ namespace ProjektBD.Forms
 
         }
 
-        /*
-         * Funkcja do wyświetlania MsgBoxa z warningiem.
-         */
-        private void displayMsgBox(string title, string text)
-        {
-            MessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
-
-        private void createButton_MouseEnter(object sender, EventArgs e)
-        {
-            createButton.BackColor = Color.PaleTurquoise;
-            createButton.ForeColor = Color.Black;
-        }
-
-        private void createButton_MouseLeave(object sender, EventArgs e)
-        {
-            createButton.BackColor = Color.SpringGreen;
-            createButton.ForeColor = Color.White;
-        }
-
+        /// <summary>
+        /// Zamykanie formatki - messageBox z zapytaniem.
+        /// </summary>
         private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.WindowsShutDown)
@@ -195,148 +369,17 @@ namespace ProjektBD.Forms
             }
         }
 
+        /// <summary>
+        /// Zaknięcie formatki - Pozbywa się utworzonego kontekstu przy zamykaniu formularza
+        /// </summary>
         private void RegisterForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (context != null)
-                context.Dispose();              // Pozbywa się utworzonego kontekstu przy zamykaniu formularza
+                context.Dispose();              
         }
 
-        //***********************************************************************
-        // Funkcja tylko do łączenia się z bazą i dająca wybór: spróbuj ponownie
-        // lub zamknij formatkę. Utworzona, ponieważ wywoływanie rekurencyjne
-        // Form_Load to zły pomysł.
-        // To samo co w przypadku LoginForm. Rozważam utworzenie jakiegoś pliku ze
-        // wspólnymi funkcjami, nie tylko dla tych dwóch formatek.
-        //***********************************************************************
-        private void connectToDB()
-        {
-            try
-            {
-                context.Database.Initialize(false);
-            }
-            catch (System.Data.SqlClient.SqlException)
-            {
-                DialogResult connRetry = MessageBox.Show("Nastąpił błąd podczas próby połączenia z bazą danych.\n Upewnij się, czy nie jesteś połączony w innym miejscu. \n Spróbować ponownie?",
-                                                       "Błąd połączenia",
-                                                       MessageBoxButtons.YesNo,
-                                                       MessageBoxIcon.Exclamation);
-                if (connRetry == DialogResult.No)
-                    this.Close();
-                else
-                    connectToDB();
-            }
-        }
+        #endregion
 
-        /*
-         * Funkcja do sprawdzania powtórzeń (czy zajęty). Context Loadujemy 2 razy,
-         * bo nick i adres email trzeba sprawdzić też z prowadzącymi, indeks tylko
-         * ze studentami. Metoda zwraca nazwę powtarzającego się atrybutu lub ""
-         * jeżeli jest ok (nic się nie powtarza).
-         * bool student - jeżeli user nie jest studentem, nie sprawdzamy indeksu
-         */
-        private string isOccupied(bool student)
-        {
-            String inputLogin = textFields[0].Text;
-            String inputEmail = textFields[3].Text;
-
-            context.Użytkownicy.Load();
-
-            var query = context.Użytkownicy.Where(s => (s.email.Equals(inputEmail)));
-
-            if (query.Count() > 0)
-                return "Email";
-
-            query = context.Użytkownicy.Where(s => (s.login.Equals(inputLogin)));
-
-            if (query.Count() > 0)
-                return "login";
-
-            if (student)
-            {
-                context.Studenci.Load();
-
-                query = context.Studenci.Where(s => (s.nrIndeksu == Int32.Parse(index.Text)));
-
-                if (query.Count() > 0)
-                    return "nr indeksu";
-            }
-
-            return "";
-        }
-
-        /*
-         * Uzależniamy dateTimePicker od checkboxa
-         */
-        private void birthDate_CheckedChanged(object sender, EventArgs e)
-        {
-            if (birthDate.Checked == true)
-                dateTimePicker1.Enabled = true;
-            else dateTimePicker1.Enabled = false;
-        }
-
-        /*
-         * Metoda bazodanowa - stworzenie studenta i dodanie go do bazy.
-         */
-        private void createAccountStudent()
-        {
-            Student s = new Student
-            {
-                login = textFields[0].Text,
-                hasło = textFields[1].Text,
-                email = textFields[3].Text,
-                miejsceZamieszkania = textFields[5].Text,
-                nrIndeksu = Int32.Parse(index.Text)
-            };
-
-            if (birthDate.Checked == true)
-                s.dataUrodzenia = dateTimePicker1.Value;
-            else s.dataUrodzenia = null;
-
-            context.Studenci.Add(s);
-            context.SaveChanges();
-        }
-
-        /*
-         * Posłanie wiadomości do admina. On akceptuje - stworzony zostaje 
-         */
-        private void notifyAdmin()
-        {
-            Prowadzący p = new Prowadzący
-            {
-                login = textFields[0].Text,
-                hasło = textFields[1].Text,
-                email = textFields[3].Text,
-                miejsceZamieszkania = textFields[5].Text
-            };
-
-            if (birthDate.Checked == true)
-                p.dataUrodzenia = dateTimePicker1.Value;
-            else p.dataUrodzenia = null;
-
-            
-            //TO DO: posłać wiadomość do admina.
-        }
-
-        /**
-         * Metoda chowająca i disable'ująca nr indeksu (na wszelki wypadek) przy wyborze "Prowadzącego"
-         */
-        private void comboBox1_TextChanged(object sender, EventArgs e)
-        {
-            if (comboBox1.SelectedIndex == 1)
-            {
-                index.Visible = false;
-                index.Enabled = false;
-                label6.Visible = false;
-                this.Height -= 50;
-            }
-            else
-            {
-                index.Visible = true;
-                index.Enabled = true;
-                label6.Visible = true;
-                this.Height += 50;
-            }
-        }
 
     }
 

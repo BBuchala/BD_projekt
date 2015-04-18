@@ -17,9 +17,12 @@ using ProjektBD.Forms;
 
 namespace ProjektBD
 {
+    /// <summary>
+    /// Formatka służąca do logowania. Pozwala się zalogować, wyjść z programu lub przejść do utworzenia nowego konta.
+    /// </summary>
     public partial class LoginForm : Form
     {
-        #region Pola
+        #region Fields
 
         /// <summary>
         /// Kontekst bazy danych
@@ -43,12 +46,13 @@ namespace ProjektBD
 
         /// <summary>
         /// Określa, czy zamknięto formatkę za pomocą przycisku X (zamknij aplikację),
-        /// czy za pomocą poprawnych danych (przejdź do głównej formatki). Działa też na [alt]+[f4]
+        /// czy za pomocą poprawnych danych (przejdź do głównej formatki). Działa też na [alt]+[f4].
         /// </summary>
         private bool xButtonClose = true;
 
         #endregion
-        #region Metody i konstruktor
+
+        #region Constructor and methods
 
         /// <summary>
         /// Określa, czy zamknięto formatkę za pomocą przycisku X (zamknij aplikację), czy
@@ -171,7 +175,8 @@ namespace ProjektBD
         }
 
         #endregion
-        #region Eventy
+
+        #region Events
 
         private void Form2_Load(object sender, EventArgs e)
         {
