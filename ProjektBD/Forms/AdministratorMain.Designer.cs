@@ -56,9 +56,9 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.button1.Location = new System.Drawing.Point(147, 111);
+            this.button1.Location = new System.Drawing.Point(147, 101);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 44);
+            this.button1.Size = new System.Drawing.Size(136, 44);
             this.button1.TabIndex = 1;
             this.button1.Text = "Stwórz konto ";
             this.button1.UseVisualStyleBackColor = false;
@@ -84,7 +84,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(475, 227);
+            this.button2.Location = new System.Drawing.Point(475, 218);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(130, 49);
             this.button2.TabIndex = 4;
@@ -95,7 +95,7 @@
             // 
             this.button3.Location = new System.Drawing.Point(475, 67);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(144, 33);
+            this.button3.Size = new System.Drawing.Size(130, 33);
             this.button3.TabIndex = 5;
             this.button3.Text = "Przeglądaj bazę";
             this.button3.UseVisualStyleBackColor = true;
@@ -140,7 +140,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(147, 71);
+            this.textBox2.Location = new System.Drawing.Point(147, 74);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(136, 24);
             this.textBox2.TabIndex = 4;
@@ -165,7 +165,10 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "AdministratorMain";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdminstratorMain";
             this.groupBox1.ResumeLayout(false);
