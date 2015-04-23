@@ -29,12 +29,12 @@ namespace ProjektBD.Forms
         private ProjektBDContext context;
 
         /// <summary>
-        /// Lsta z textBoxami, aby łatwiej je edytować (np. forEachem).
+        /// Lista z textBoxami, aby łatwiej je edytować (np. forEachem).
         /// </summary>
         List<TextBoxBase> textFields = new List<TextBoxBase>();
 
         /// <summary>
-        /// Lsta z labelami, aby łatwiej je edytować (np. forEachem).
+        /// Lista z labelami, aby łatwiej je edytować (np. forEachem).
         /// </summary>
         List<Label> labels = new List<Label>();
 
@@ -137,7 +137,7 @@ namespace ProjektBD.Forms
 
             if (student)
             {
-                context.Studenci.Load();
+                context.Studenci.Load();                // sprawdzić - załadowanie uzytkowników powinno załadować też studentów
 
                 query = context.Studenci.Where(s => (s.nrIndeksu == Int32.Parse(index.Text)));
 

@@ -196,9 +196,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label2.Location = new System.Drawing.Point(396, 27);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 18);
+            this.label2.Size = new System.Drawing.Size(104, 18);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Usuń Projekt";
+            this.label2.Text = "Usuń projekt";
             // 
             // label1
             // 
@@ -206,9 +206,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.Location = new System.Drawing.Point(114, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 18);
+            this.label1.Size = new System.Drawing.Size(109, 18);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Dodaj Projekt";
+            this.label1.Text = "Dodaj projekt";
             // 
             // tabPage2
             // 
@@ -264,9 +264,9 @@
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label15.Location = new System.Drawing.Point(499, 110);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(89, 18);
+            this.label15.Size = new System.Drawing.Size(137, 18);
             this.label15.TabIndex = 7;
-            this.label15.Text = "Dodaj opis";
+            this.label15.Text = "Dodaj komentarz";
             // 
             // button3
             // 
@@ -292,9 +292,9 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label7.Location = new System.Drawing.Point(499, 21);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(109, 18);
+            this.label7.Size = new System.Drawing.Size(106, 18);
             this.label7.TabIndex = 4;
-            this.label7.Text = "Wpisz Ocenę";
+            this.label7.Text = "Wpisz ocenę";
             // 
             // listBox2
             // 
@@ -310,9 +310,9 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label6.Location = new System.Drawing.Point(259, 20);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(140, 18);
+            this.label6.Size = new System.Drawing.Size(138, 18);
             this.label6.TabIndex = 2;
-            this.label6.Text = "Wybierz Studenta";
+            this.label6.Text = "Wybierz studenta";
             // 
             // listBox1
             // 
@@ -374,9 +374,9 @@
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label10.Location = new System.Drawing.Point(431, 27);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(231, 18);
+            this.label10.Size = new System.Drawing.Size(225, 18);
             this.label10.TabIndex = 8;
-            this.label10.Text = "Wybierz Ocenę do Usunięcia ";
+            this.label10.Text = "Wybierz ocenę do usunięcia ";
             // 
             // listBox3
             // 
@@ -392,9 +392,9 @@
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label8.Location = new System.Drawing.Point(225, 27);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(140, 18);
+            this.label8.Size = new System.Drawing.Size(138, 18);
             this.label8.TabIndex = 6;
-            this.label8.Text = "Wybierz Studenta";
+            this.label8.Text = "Wybierz studenta";
             // 
             // listBox4
             // 
@@ -475,7 +475,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(154, 36);
             this.label11.TabIndex = 15;
-            this.label11.Text = "Wybierz Ocenę do Zmiany";
+            this.label11.Text = "Wybierz ocenę do zmiany";
             // 
             // listBox5
             // 
@@ -491,9 +491,9 @@
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label12.Location = new System.Drawing.Point(187, 12);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(140, 18);
+            this.label12.Size = new System.Drawing.Size(138, 18);
             this.label12.TabIndex = 13;
-            this.label12.Text = "Wybierz Studenta";
+            this.label12.Text = "Wybierz studenta";
             // 
             // listBox6
             // 
@@ -682,9 +682,9 @@
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label17.Location = new System.Drawing.Point(122, 22);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(123, 18);
+            this.label17.Size = new System.Drawing.Size(121, 18);
             this.label17.TabIndex = 7;
-            this.label17.Text = "Dodaj Studenta";
+            this.label17.Text = "Dodaj studenta";
             // 
             // tabPage11
             // 

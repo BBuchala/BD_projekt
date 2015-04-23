@@ -12,7 +12,6 @@ using System.Media;
 using ProjektBD.DAL;
 using ProjektBD.Model;
 using System.Data.Entity;
-using ProjektBD.Exceptions;
 using ProjektBD.Forms;
 
 namespace ProjektBD
@@ -84,6 +83,7 @@ namespace ProjektBD
                 context.Database.Initialize(false);
                 context.Użytkownicy.Load();                 // Wczytuje do lokalnej kolekcji wszystkich użytkowników (w tym studentów, prowadzących itp.)
             }
+
             catch (System.Data.SqlClient.SqlException)
             {
                 DialogResult connRetry = MessageBox.Show("Nastąpił błąd podczas próby połączenia z bazą danych.\n Upewnij się, czy nie jesteś połączony w innym miejscu. \n Spróbować ponownie?",
@@ -94,6 +94,15 @@ namespace ProjektBD
                     this.Close();
                 else
                     connectToDB();
+            }
+
+            catch (System.Data.DataException)
+            {
+                MessageBox.Show("Baza danych jest obecnie wyłączona. Proszę spróbować później", "Prace konserwacyjne",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //this.Close();                     // nie działa podczas debugowania o_o 
+                this.backgroundWorker1.RunWorkerCompleted += (s, e) => Close();
             }
         }
 
@@ -117,21 +126,11 @@ namespace ProjektBD
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Exclamation);
 
-                    //login.Text = "";               // czasem ktoś wklepie źle tylko hasło, tak będzie przyjaźniej dla użytkownika
                     password.Text = "";
                 }
                 else
                 {
                     xButtonClose = false;
-                    // Wersja z Form1 jako główną formatką
-
-                    // this.Hide();                     
-
-                    /* Wersja z LoginForm jako główną formatką 
-                        * Chowamy, wywołujemy Form1 i nie wracamy tu,
-                        * dopóki nie zamknie się Form1. Wtedy zerujemy 
-                        * textboxy (dane z logowania zostają) + pokazujemy.
-                        */
 
                     this.Hide();
 

@@ -25,6 +25,16 @@ namespace ProjektBD.Forms
             mainForm.ShowDialog();
             mainForm.Dispose();
 
+            this.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            ProwadzacyProjekty mainForm = new ProwadzacyProjekty();
+            mainForm.ShowDialog();
+            mainForm.Dispose();
 
             this.Show();
         }
