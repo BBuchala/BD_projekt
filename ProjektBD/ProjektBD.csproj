@@ -177,6 +177,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\bach.ico" />
     <Content Include="Images\OK.png" />
   </ItemGroup>
   <ItemGroup>

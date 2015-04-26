@@ -125,21 +125,19 @@ namespace ProjektBD.Forms
 
             context.Użytkownicy.Load();
 
-            var query = context.Użytkownicy.Where(s => (s.email.Equals(inputEmail)));
+            var query = context.Użytkownicy.Local.Where(s => (s.email.Equals(inputEmail)));
 
             if (query.Count() > 0)
                 return "Email";
 
-            query = context.Użytkownicy.Where(s => (s.login.Equals(inputLogin)));
+            query = context.Użytkownicy.Local.Where(s => (s.login.Equals(inputLogin)));
 
             if (query.Count() > 0)
                 return "login";
 
             if (student)
             {
-                context.Studenci.Load();                // sprawdzić - załadowanie uzytkowników powinno załadować też studentów
-
-                query = context.Studenci.Where(s => (s.nrIndeksu == Int32.Parse(index.Text)));
+                query = context.Studenci.Local.Where(s => (s.nrIndeksu == Int32.Parse(index.Text)));
 
                 if (query.Count() > 0)
                     return "nr indeksu";
@@ -175,7 +173,7 @@ namespace ProjektBD.Forms
         /// </summary>
         private void notifyAdmin()
         {
-            Prowadzący p = new Prowadzący
+            Użytkownik u = new Użytkownik
             {
                 login = textFields[0].Text,
                 hasło = textFields[1].Text,
@@ -184,11 +182,11 @@ namespace ProjektBD.Forms
             };
 
             if (birthDate.Checked == true)
-                p.dataUrodzenia = dateTimePicker1.Value;
-            else p.dataUrodzenia = null;
+                u.dataUrodzenia = dateTimePicker1.Value;
+            else u.dataUrodzenia = null;
 
-
-            //TO DO: posłać wiadomość do admina.
+            context.Użytkownicy.Add(u);
+            context.SaveChanges();
         }
 
         #endregion
@@ -323,13 +321,13 @@ namespace ProjektBD.Forms
                 {
                     if (index.Enabled)
                     {
-                        MessageBox.Show("Konto zostało poprawnie założone. Możesz się zalogować.", "Koniec", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         createAccountStudent();
+                        MessageBox.Show("Konto zostało poprawnie założone. Możesz się zalogować.", "Koniec", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show("Konto zostało poprawnie założone. Należy zaczekać na akceptację administratora.", "Koniec", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         notifyAdmin();
+                        MessageBox.Show("Konto zostało poprawnie założone. Należy zaczekać na akceptację administratora.", "Koniec", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     this.Close();
                 }

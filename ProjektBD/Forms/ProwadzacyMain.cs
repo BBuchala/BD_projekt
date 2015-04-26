@@ -17,51 +17,31 @@ namespace ProjektBD.Forms
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    this.Hide();
+
+        //    ProwadzacyPrzedmioty mainForm = new ProwadzacyPrzedmioty();
+        //    mainForm.ShowDialog();
+        //    mainForm.Dispose();
+
+        //    this.Show();
+        //}
+
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+        //    this.Hide();
+
+        //    ProwadzacyProjekty mainForm = new ProwadzacyProjekty();
+        //    mainForm.ShowDialog();
+        //    mainForm.Dispose();
+
+        //    this.Show();
+        //}
+
+        private void comboBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            this.Hide();
-
-            ProwadzacyPrzedmioty mainForm = new ProwadzacyPrzedmioty();
-            mainForm.ShowDialog();
-            mainForm.Dispose();
-
-            this.Show();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-
-            ProwadzacyProjekty mainForm = new ProwadzacyProjekty();
-            mainForm.ShowDialog();
-            mainForm.Dispose();
-
-            this.Show();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ProwadzacyMain_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
+            e.SuppressKeyPress = true;              // Zabezpiecza przed wpisywaniem własnych wartości
         }
     }
 }
