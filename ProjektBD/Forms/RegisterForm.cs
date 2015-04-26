@@ -38,6 +38,11 @@ namespace ProjektBD.Forms
         /// </summary>
         List<Label> labels = new List<Label>();
 
+        /// <summary>
+        /// Bool pozwalający pominąć msgBoxa, jeżeli uda się nam poprawnie założyć konto.
+        /// </summary>
+        private bool registeredSuccessfully = false;
+
         #endregion
 
         #region Constructors
@@ -329,6 +334,7 @@ namespace ProjektBD.Forms
                         notifyAdmin();
                         MessageBox.Show("Konto zostało poprawnie założone. Należy zaczekać na akceptację administratora.", "Koniec", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    this.registeredSuccessfully = true;
                     this.Close();
                 }
 
@@ -354,7 +360,7 @@ namespace ProjektBD.Forms
             if (e.CloseReason == CloseReason.WindowsShutDown)
                 return;
 
-            if (this.DialogResult == DialogResult.Cancel)
+            if (!this.registeredSuccessfully && this.DialogResult == DialogResult.Cancel)
             {
                 switch (MessageBox.Show(this, "Jesteś pewien, że chcesz opuścić okno rejestracji?", "Wyjdź", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                 {
