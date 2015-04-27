@@ -10,8 +10,8 @@ namespace ProjektBD.Model
 {
     class Raport
     {
-        public short RaportID { get; set; }           // Primary Key
-        public int PrzedmiotID { get; set; }        // Foreign Key
+        public short RaportID { get; set; }             // Primary Key
+        public int PrzedmiotID { get; set; }            // Foreign Key
 
         [ForeignKey("Prowadzący")]
         public int ProwadzącyID { get; set; }           // Foreign Key

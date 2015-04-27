@@ -16,32 +16,5 @@ namespace ProjektBD.Forms
         {
             InitializeComponent();
         }
-
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    this.Hide();
-
-        //    ProwadzacyPrzedmioty mainForm = new ProwadzacyPrzedmioty();
-        //    mainForm.ShowDialog();
-        //    mainForm.Dispose();
-
-        //    this.Show();
-        //}
-
-        //private void button2_Click(object sender, EventArgs e)
-        //{
-        //    this.Hide();
-
-        //    ProwadzacyProjekty mainForm = new ProwadzacyProjekty();
-        //    mainForm.ShowDialog();
-        //    mainForm.Dispose();
-
-        //    this.Show();
-        //}
-
-        private void comboBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            e.SuppressKeyPress = true;              // Zabezpiecza przed wpisywaniem własnych wartości
-        }
     }
 }

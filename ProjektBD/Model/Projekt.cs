@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,11 @@ namespace ProjektBD.Model
 {
     class Projekt
     {
+        public Projekt()
+        {
+            Oceny = new HashSet<Ocena>();
+        }
+
         public int ProjektID { get; set; }          // Primary Key
         public int PrzedmiotID { get; set; }        // Foreign Key
 
@@ -22,5 +28,8 @@ namespace ProjektBD.Model
         public int maxLiczbaStudentów { get; set; }
 
         public virtual Przedmiot Przedmiot { get; set; }
+
+        [Browsable(false)]
+        public virtual ICollection<Ocena> Oceny { get; set; }
     }
 }

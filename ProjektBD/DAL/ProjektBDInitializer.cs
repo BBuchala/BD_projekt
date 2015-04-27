@@ -55,7 +55,11 @@ namespace ProjektBD.DAL
                 new Student { login = "Ervelan", hasło = "oraoraora...ora!", email = "Ervelan@student.projektBD.pl",
                     dataUrodzenia = DateTime.Parse("1993-04-13"), miejsceZamieszkania = "Mysłowice", nrIndeksu = 219741 },      // ID = 7
 
-                new Student { login = "Forczu", hasło = "kotori1", email = "SM6969@4chan.org", nrIndeksu = 219766 }             // ID = 8
+                new Student { login = "Forczu", hasło = "kotori1", email = "SM6969@4chan.org", nrIndeksu = 219766,              // ID = 8
+                    miejsceZamieszkania = "Rybnik" },
+
+                new Student { login = "Korda", hasło = "pedał", email = "Korda@student.projektBD.pl", nrIndeksu = 219795,
+                    miejsceZamieszkania = "NekoMikoMikołów" }
             };
             studenci.ForEach ( s => context.Studenci.Add(s) );
             context.SaveChanges();

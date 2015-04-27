@@ -260,7 +260,7 @@ namespace ProjektBD
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (context != null)
-                context.Dispose();          // Pozbywa się utworzonego kontekstu przy zamykaniu formularza - do wywalenia przy większej ilości formatek.
+                context.Dispose();          // Pozbywa się utworzonego kontekstu przy zamykaniu formularza
         }
 
         private void password_KeyPress(object sender, KeyPressEventArgs e)

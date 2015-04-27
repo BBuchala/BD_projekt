@@ -383,8 +383,6 @@ namespace ProjektBD.Forms
         }
 
         #endregion
-
-
     }
 
 }

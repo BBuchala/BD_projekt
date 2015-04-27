@@ -14,13 +14,14 @@ namespace ProjektBD.Model
 
         [MaxLength(50)]
         [Required]
-        public string nadawca { get; set; }             // zamienić na klucz obcy NadawcaID?
+        public string nadawca { get; set; }
 
         [MaxLength(2000)]
         [Required]
         public string treść { get; set; }
 
         public DateTime dataWysłania { get; set; }
+        public bool przeczytana { get; set; }
 
         public virtual Rozmowa Rozmowa { get; set; }  
     }

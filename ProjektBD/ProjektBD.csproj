@@ -179,6 +179,8 @@
   <ItemGroup>
     <Content Include="Images\bach.ico" />
     <Content Include="Images\OK.png" />
+    <Content Include="Images\pressed.png" />
+    <Content Include="Images\unpressed.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\loading.gif" />

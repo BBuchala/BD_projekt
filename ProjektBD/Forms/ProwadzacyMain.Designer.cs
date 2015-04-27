@@ -36,43 +36,34 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPage11 = new System.Windows.Forms.TabPage();
-            this.label20 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.button10 = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this.button10 = new System.Windows.Forms.Button();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
-            this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.button7 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.listView7 = new System.Windows.Forms.ListView();
-            this.label9 = new System.Windows.Forms.Label();
-            this.listView8 = new System.Windows.Forms.ListView();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.listView4 = new System.Windows.Forms.ListView();
-            this.listView5 = new System.Windows.Forms.ListView();
-            this.listView6 = new System.Windows.Forms.ListView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.listView6 = new System.Windows.Forms.ListView();
+            this.listView5 = new System.Windows.Forms.ListView();
+            this.listView4 = new System.Windows.Forms.ListView();
+            this.label27 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.listView8 = new System.Windows.Forms.ListView();
+            this.label9 = new System.Windows.Forms.Label();
+            this.listView7 = new System.Windows.Forms.ListView();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.button7 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.listView2 = new System.Windows.Forms.ListView();
             this.listView9 = new System.Windows.Forms.ListView();
@@ -84,8 +75,17 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label17 = new System.Windows.Forms.Label();
             this.listView3 = new System.Windows.Forms.ListView();
             this.listView11 = new System.Windows.Forms.ListView();
             this.listView12 = new System.Windows.Forms.ListView();
@@ -98,9 +98,9 @@
             this.tabPage11.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabControl3.SuspendLayout();
-            this.tabPage9.SuspendLayout();
-            this.tabPage8.SuspendLayout();
             this.tabPage7.SuspendLayout();
+            this.tabPage8.SuspendLayout();
+            this.tabPage9.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -179,22 +179,23 @@
             this.tabPage11.Text = "Usuń";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
-            // label20
+            // label17
             // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label20.Location = new System.Drawing.Point(258, 53);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(118, 18);
-            this.label20.TabIndex = 8;
-            this.label20.Text = "Usuń Studenta";
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(562, 133);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(174, 13);
+            this.label17.TabIndex = 12;
+            this.label17.Text = "Najpewniej zakładka do wywalenia";
             // 
-            // textBox7
+            // label19
             // 
-            this.textBox7.Location = new System.Drawing.Point(286, 114);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(101, 20);
-            this.textBox7.TabIndex = 9;
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(180, 117);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(78, 13);
+            this.label19.TabIndex = 11;
+            this.label19.Text = "Imię i nazwisko";
             // 
             // button10
             // 
@@ -205,14 +206,22 @@
             this.button10.Text = "Usuń";
             this.button10.UseVisualStyleBackColor = true;
             // 
-            // label19
+            // textBox7
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(180, 117);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(78, 13);
-            this.label19.TabIndex = 11;
-            this.label19.Text = "Imię i nazwisko";
+            this.textBox7.Location = new System.Drawing.Point(286, 114);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(101, 20);
+            this.textBox7.TabIndex = 9;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label20.Location = new System.Drawing.Point(258, 53);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(118, 18);
+            this.label20.TabIndex = 8;
+            this.label20.Text = "Usuń Studenta";
             // 
             // tabPage2
             // 
@@ -236,109 +245,6 @@
             this.tabControl3.Size = new System.Drawing.Size(1137, 517);
             this.tabControl3.TabIndex = 0;
             // 
-            // tabPage9
-            // 
-            this.tabPage9.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage9.Controls.Add(this.comboBox2);
-            this.tabPage9.Controls.Add(this.listView2);
-            this.tabPage9.Controls.Add(this.listView9);
-            this.tabPage9.Controls.Add(this.listView10);
-            this.tabPage9.Controls.Add(this.label12);
-            this.tabPage9.Controls.Add(this.textBox3);
-            this.tabPage9.Controls.Add(this.label13);
-            this.tabPage9.Controls.Add(this.button1);
-            this.tabPage9.Controls.Add(this.label14);
-            this.tabPage9.Controls.Add(this.label16);
-            this.tabPage9.Controls.Add(this.label28);
-            this.tabPage9.Location = new System.Drawing.Point(4, 22);
-            this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(1129, 491);
-            this.tabPage9.TabIndex = 2;
-            this.tabPage9.Text = "Modyfikuj";
-            // 
-            // tabPage8
-            // 
-            this.tabPage8.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage8.Controls.Add(this.listView8);
-            this.tabPage8.Controls.Add(this.label9);
-            this.tabPage8.Controls.Add(this.listView7);
-            this.tabPage8.Controls.Add(this.listView1);
-            this.tabPage8.Controls.Add(this.button7);
-            this.tabPage8.Controls.Add(this.label10);
-            this.tabPage8.Controls.Add(this.label11);
-            this.tabPage8.Location = new System.Drawing.Point(4, 22);
-            this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(1129, 491);
-            this.tabPage8.TabIndex = 1;
-            this.tabPage8.Text = "Usuń";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label11.Location = new System.Drawing.Point(115, 20);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(149, 18);
-            this.label11.TabIndex = 4;
-            this.label11.Text = "Wybierz przedmiot";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label10.Location = new System.Drawing.Point(799, 80);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(225, 18);
-            this.label10.TabIndex = 8;
-            this.label10.Text = "Wybierz ocenę do usunięcia ";
-            // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.Color.Red;
-            this.button7.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button7.Location = new System.Drawing.Point(839, 391);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(135, 21);
-            this.button7.TabIndex = 9;
-            this.button7.Text = "Usuń";
-            this.button7.UseVisualStyleBackColor = false;
-            // 
-            // listView1
-            // 
-            this.listView1.Location = new System.Drawing.Point(736, 113);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(337, 263);
-            this.listView1.TabIndex = 10;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // listView7
-            // 
-            this.listView7.Location = new System.Drawing.Point(47, 53);
-            this.listView7.Name = "listView7";
-            this.listView7.Size = new System.Drawing.Size(286, 394);
-            this.listView7.TabIndex = 11;
-            this.listView7.UseCompatibleStateImageBehavior = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label9.Location = new System.Drawing.Point(466, 20);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(138, 18);
-            this.label9.TabIndex = 12;
-            this.label9.Text = "Wybierz studenta";
-            // 
-            // listView8
-            // 
-            this.listView8.Location = new System.Drawing.Point(390, 53);
-            this.listView8.Name = "listView8";
-            this.listView8.Size = new System.Drawing.Size(286, 394);
-            this.listView8.TabIndex = 13;
-            this.listView8.UseCompatibleStateImageBehavior = false;
-            // 
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.SystemColors.Control;
@@ -360,101 +266,9 @@
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "Dodaj";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label8.Location = new System.Drawing.Point(87, 20);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(149, 18);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Wybierz przedmiot";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.Location = new System.Drawing.Point(402, 20);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(138, 18);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Wybierz studenta";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(957, 52);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(120, 18);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "Wybierz ocenę";
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.Color.Lime;
-            this.button6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button6.Location = new System.Drawing.Point(939, 425);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(158, 21);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "Dodaj";
-            this.button6.UseVisualStyleBackColor = false;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label15.Location = new System.Drawing.Point(972, 127);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(89, 18);
-            this.label15.TabIndex = 7;
-            this.label15.Text = "Dodaj opis";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(939, 155);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(158, 254);
-            this.textBox5.TabIndex = 8;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label27.Location = new System.Drawing.Point(715, 20);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(126, 18);
-            this.label27.TabIndex = 9;
-            this.label27.Text = "Wybierz projekt";
-            // 
-            // listView4
-            // 
-            this.listView4.Location = new System.Drawing.Point(640, 51);
-            this.listView4.Name = "listView4";
-            this.listView4.Size = new System.Drawing.Size(275, 394);
-            this.listView4.TabIndex = 10;
-            this.listView4.UseCompatibleStateImageBehavior = false;
-            // 
-            // listView5
-            // 
-            this.listView5.Location = new System.Drawing.Point(333, 51);
-            this.listView5.Name = "listView5";
-            this.listView5.Size = new System.Drawing.Size(275, 394);
-            this.listView5.TabIndex = 11;
-            this.listView5.UseCompatibleStateImageBehavior = false;
-            // 
-            // listView6
-            // 
-            this.listView6.Location = new System.Drawing.Point(27, 51);
-            this.listView6.Name = "listView6";
-            this.listView6.Size = new System.Drawing.Size(275, 394);
-            this.listView6.TabIndex = 12;
-            this.listView6.UseCompatibleStateImageBehavior = false;
-            // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "5",
@@ -467,107 +281,202 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(158, 21);
             this.comboBox1.TabIndex = 13;
-            this.comboBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyDown);
             // 
-            // tabPage1
+            // listView6
             // 
-            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.button4);
-            this.tabPage1.Controls.Add(this.button5);
-            this.tabPage1.Controls.Add(this.textBox2);
-            this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1133, 514);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Moje przedmioty i projekty";
+            this.listView6.Location = new System.Drawing.Point(27, 51);
+            this.listView6.Name = "listView6";
+            this.listView6.Size = new System.Drawing.Size(275, 394);
+            this.listView6.TabIndex = 12;
+            this.listView6.UseCompatibleStateImageBehavior = false;
             // 
-            // label5
+            // listView5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(114, 27);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(134, 18);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Dodaj Przedmiot";
+            this.listView5.Location = new System.Drawing.Point(333, 51);
+            this.listView5.Name = "listView5";
+            this.listView5.Size = new System.Drawing.Size(275, 394);
+            this.listView5.TabIndex = 11;
+            this.listView5.UseCompatibleStateImageBehavior = false;
             // 
-            // label2
+            // listView4
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(396, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 18);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Usuń Przedmiot";
+            this.listView4.Location = new System.Drawing.Point(640, 51);
+            this.listView4.Name = "listView4";
+            this.listView4.Size = new System.Drawing.Size(275, 394);
+            this.listView4.TabIndex = 10;
+            this.listView4.UseCompatibleStateImageBehavior = false;
             // 
-            // textBox1
+            // label27
             // 
-            this.textBox1.Location = new System.Drawing.Point(134, 87);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(92, 20);
-            this.textBox1.TabIndex = 2;
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label27.Location = new System.Drawing.Point(715, 20);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(126, 18);
+            this.label27.TabIndex = 9;
+            this.label27.Text = "Wybierz projekt";
             // 
-            // textBox2
+            // textBox5
             // 
-            this.textBox2.Location = new System.Drawing.Point(424, 88);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(101, 20);
-            this.textBox2.TabIndex = 3;
+            this.textBox5.Location = new System.Drawing.Point(939, 155);
+            this.textBox5.Multiline = true;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(158, 254);
+            this.textBox5.TabIndex = 8;
             // 
-            // button5
+            // label15
             // 
-            this.button5.Location = new System.Drawing.Point(134, 134);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(92, 31);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Stwórz";
-            this.button5.UseVisualStyleBackColor = true;
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label15.Location = new System.Drawing.Point(972, 127);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(89, 18);
+            this.label15.TabIndex = 7;
+            this.label15.Text = "Dodaj opis";
             // 
-            // button4
+            // button6
             // 
-            this.button4.Location = new System.Drawing.Point(424, 134);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 32);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "Usuń";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button6.BackColor = System.Drawing.Color.Lime;
+            this.button6.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.button6.Location = new System.Drawing.Point(939, 425);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(158, 21);
+            this.button6.TabIndex = 6;
+            this.button6.Text = "Dodaj";
+            this.button6.UseVisualStyleBackColor = false;
             // 
-            // label3
+            // label7
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 90);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Wpisz nazwę";
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label7.Location = new System.Drawing.Point(957, 52);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(120, 18);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Wybierz ocenę";
             // 
-            // label4
+            // label6
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(318, 91);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Wpisz nazwę";
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label6.Location = new System.Drawing.Point(402, 20);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(138, 18);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Wybierz studenta";
             // 
-            // tabControl1
+            // label8
             // 
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(12, 53);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1141, 540);
-            this.tabControl1.TabIndex = 14;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label8.Location = new System.Drawing.Point(87, 20);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(149, 18);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Wybierz przedmiot";
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage8.Controls.Add(this.listView8);
+            this.tabPage8.Controls.Add(this.label9);
+            this.tabPage8.Controls.Add(this.listView7);
+            this.tabPage8.Controls.Add(this.listView1);
+            this.tabPage8.Controls.Add(this.button7);
+            this.tabPage8.Controls.Add(this.label10);
+            this.tabPage8.Controls.Add(this.label11);
+            this.tabPage8.Location = new System.Drawing.Point(4, 22);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(1129, 491);
+            this.tabPage8.TabIndex = 1;
+            this.tabPage8.Text = "Usuń";
+            // 
+            // listView8
+            // 
+            this.listView8.Location = new System.Drawing.Point(390, 53);
+            this.listView8.Name = "listView8";
+            this.listView8.Size = new System.Drawing.Size(286, 394);
+            this.listView8.TabIndex = 13;
+            this.listView8.UseCompatibleStateImageBehavior = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label9.Location = new System.Drawing.Point(466, 20);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(138, 18);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "Wybierz studenta";
+            // 
+            // listView7
+            // 
+            this.listView7.Location = new System.Drawing.Point(47, 53);
+            this.listView7.Name = "listView7";
+            this.listView7.Size = new System.Drawing.Size(286, 394);
+            this.listView7.TabIndex = 11;
+            this.listView7.UseCompatibleStateImageBehavior = false;
+            // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(736, 113);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(337, 263);
+            this.listView1.TabIndex = 10;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.Red;
+            this.button7.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button7.Location = new System.Drawing.Point(839, 391);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(135, 21);
+            this.button7.TabIndex = 9;
+            this.button7.Text = "Usuń";
+            this.button7.UseVisualStyleBackColor = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label10.Location = new System.Drawing.Point(799, 80);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(225, 18);
+            this.label10.TabIndex = 8;
+            this.label10.Text = "Wybierz ocenę do usunięcia ";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label11.Location = new System.Drawing.Point(115, 20);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(149, 18);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "Wybierz przedmiot";
+            // 
+            // tabPage9
+            // 
+            this.tabPage9.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage9.Controls.Add(this.comboBox2);
+            this.tabPage9.Controls.Add(this.listView2);
+            this.tabPage9.Controls.Add(this.listView9);
+            this.tabPage9.Controls.Add(this.listView10);
+            this.tabPage9.Controls.Add(this.label12);
+            this.tabPage9.Controls.Add(this.textBox3);
+            this.tabPage9.Controls.Add(this.label13);
+            this.tabPage9.Controls.Add(this.button1);
+            this.tabPage9.Controls.Add(this.label14);
+            this.tabPage9.Controls.Add(this.label16);
+            this.tabPage9.Controls.Add(this.label28);
+            this.tabPage9.Location = new System.Drawing.Point(4, 22);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(1129, 491);
+            this.tabPage9.TabIndex = 2;
+            this.tabPage9.Text = "Modyfikuj";
             // 
             // comboBox2
             // 
@@ -677,6 +586,106 @@
             this.label28.TabIndex = 14;
             this.label28.Text = "Wybierz przedmiot";
             // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.button4);
+            this.tabPage1.Controls.Add(this.button5);
+            this.tabPage1.Controls.Add(this.textBox2);
+            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1133, 514);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Moje przedmioty i projekty";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(318, 91);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(70, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Wpisz nazwę";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(28, 90);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(70, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Wpisz nazwę";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(424, 134);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(100, 32);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "Usuń";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(134, 134);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(92, 31);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "Stwórz";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(424, 88);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(101, 20);
+            this.textBox2.TabIndex = 3;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(134, 87);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(92, 20);
+            this.textBox1.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(396, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(129, 18);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Usuń Przedmiot";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label5.Location = new System.Drawing.Point(114, 27);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(134, 18);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Dodaj Przedmiot";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Location = new System.Drawing.Point(12, 53);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1141, 540);
+            this.tabControl1.TabIndex = 14;
+            // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
@@ -691,15 +700,6 @@
             this.tabPage3.Size = new System.Drawing.Size(1133, 514);
             this.tabPage3.TabIndex = 4;
             this.tabPage3.Text = "Podgląd przedmiotów";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(562, 133);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(174, 13);
-            this.label17.TabIndex = 12;
-            this.label17.Text = "Najpewniej zakładka do wywalenia";
             // 
             // listView3
             // 
@@ -776,12 +776,12 @@
             this.tabPage11.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
-            this.tabPage9.ResumeLayout(false);
-            this.tabPage9.PerformLayout();
-            this.tabPage8.ResumeLayout(false);
-            this.tabPage8.PerformLayout();
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage8.PerformLayout();
+            this.tabPage9.ResumeLayout(false);
+            this.tabPage9.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
