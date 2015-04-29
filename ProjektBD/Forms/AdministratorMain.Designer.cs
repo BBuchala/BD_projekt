@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministratorMain));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label26 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -40,10 +39,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.notificationCount = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.notificationImage = new System.Windows.Forms.PictureBox();
+            this.messageImage = new System.Windows.Forms.PictureBox();
+            this.messageCount = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -51,23 +54,21 @@
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.messageImage)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label26);
+            this.panel1.Controls.Add(this.messageCount);
+            this.panel1.Controls.Add(this.messageImage);
+            this.panel1.Controls.Add(this.notificationCount);
+            this.panel1.Controls.Add(this.notificationImage);
             this.panel1.Location = new System.Drawing.Point(898, 11);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(248, 42);
+            this.panel1.Size = new System.Drawing.Size(248, 50);
             this.panel1.TabIndex = 18;
-            // 
-            // label26
-            // 
-            this.label26.Location = new System.Drawing.Point(29, 7);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(193, 32);
-            this.label26.TabIndex = 0;
-            this.label26.Text = "TODO: Facebookowe kontrolki na wiadomości i zgłoszenia prowadzących";
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // button3
             // 
@@ -77,6 +78,7 @@
             this.button3.TabIndex = 17;
             this.button3.Text = "Zarządzanie kontem";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label1
             // 
@@ -101,6 +103,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1141, 540);
             this.tabControl1.TabIndex = 19;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -165,17 +168,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Zmiana stanu bazy danych";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::ProjektBD.Properties.Resources.unpressed;
-            this.pictureBox1.Location = new System.Drawing.Point(112, 66);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(118, 118);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
-            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -207,6 +199,63 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Zarządzanie prowadzącymi";
             // 
+            // notificationCount
+            // 
+            this.notificationCount.AutoSize = true;
+            this.notificationCount.BackColor = System.Drawing.Color.Transparent;
+            this.notificationCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.notificationCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.notificationCount.ForeColor = System.Drawing.Color.Red;
+            this.notificationCount.Location = new System.Drawing.Point(207, 19);
+            this.notificationCount.Name = "notificationCount";
+            this.notificationCount.Size = new System.Drawing.Size(19, 20);
+            this.notificationCount.TabIndex = 0;
+            this.notificationCount.Text = "0";
+            this.notificationCount.Visible = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::ProjektBD.Properties.Resources.unpressed;
+            this.pictureBox1.Location = new System.Drawing.Point(112, 66);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(118, 118);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            // 
+            // notificationImage
+            // 
+            this.notificationImage.Image = global::ProjektBD.Properties.Resources.znak2;
+            this.notificationImage.Location = new System.Drawing.Point(173, 0);
+            this.notificationImage.Name = "notificationImage";
+            this.notificationImage.Size = new System.Drawing.Size(40, 40);
+            this.notificationImage.TabIndex = 20;
+            this.notificationImage.TabStop = false;
+            // 
+            // messageImage
+            // 
+            this.messageImage.Image = global::ProjektBD.Properties.Resources.mail2;
+            this.messageImage.Location = new System.Drawing.Point(100, 0);
+            this.messageImage.Name = "messageImage";
+            this.messageImage.Size = new System.Drawing.Size(40, 40);
+            this.messageImage.TabIndex = 20;
+            this.messageImage.TabStop = false;
+            // 
+            // messageCount
+            // 
+            this.messageCount.AutoSize = true;
+            this.messageCount.BackColor = System.Drawing.Color.White;
+            this.messageCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.messageCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.messageCount.ForeColor = System.Drawing.Color.Red;
+            this.messageCount.Location = new System.Drawing.Point(134, 20);
+            this.messageCount.Name = "messageCount";
+            this.messageCount.Size = new System.Drawing.Size(19, 20);
+            this.messageCount.TabIndex = 21;
+            this.messageCount.Text = "0";
+            this.messageCount.Visible = false;
+            // 
             // AdministratorMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,6 +275,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AdministratorMain_FormClosed);
             this.Load += new System.EventHandler(this.AdministratorMain_Load);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -234,6 +284,8 @@
             this.tabPage2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.messageImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,7 +294,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabControl1;
@@ -256,5 +307,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label notificationCount;
+        private System.Windows.Forms.PictureBox notificationImage;
+        private System.Windows.Forms.Label messageCount;
+        private System.Windows.Forms.PictureBox messageImage;
     }
 }

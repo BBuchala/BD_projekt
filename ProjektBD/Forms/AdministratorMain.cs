@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using ProjektBD.DAL;
 using System.Data.Entity;
+using ProjektBD.Model;
 
 namespace ProjektBD.Forms
 {
@@ -95,6 +96,7 @@ namespace ProjektBD.Forms
         private void AdministratorMain_Load(object sender, EventArgs e)
         {
             connectToDB();
+            lookForNewTeachers();
         }
 
         /// <summary>
@@ -104,7 +106,7 @@ namespace ProjektBD.Forms
         {
             if (e.CloseReason == CloseReason.WindowsShutDown)
                 return;
-
+            
             if (this.DialogResult == DialogResult.Cancel)
             {
                 switch (MessageBox.Show(this, "Jesteś pewien, że chcesz opuścić okno rejestracji?", "Wyjdź", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
@@ -125,6 +127,48 @@ namespace ProjektBD.Forms
         {
             if (context != null)
                 context.Dispose();          // Pozbywa się utworzonego kontekstu przy zamykaniu formularza
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void lookForNewTeachers()
+        {
+            int newUsers = 0;
+
+            context.Użytkownicy.Load();
+
+
+            // Sprawdzanie userów
+
+            if (newUsers != 0)
+            {
+                notificationImage.Image = global::ProjektBD.Properties.Resources.znak;
+                notificationCount.Visible = true;
+                notificationCount.Text = newUsers.ToString();
+            }
         }
     }
 }
