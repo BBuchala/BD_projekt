@@ -37,10 +37,10 @@ namespace ProjektBD
             // Gdy nie udało się połaczyć z bazą i wybieramy "nie" (zamknięcie okna), na ułamek sekundy pokazuje się pusta formatka
             // Przydałoby się to naprawić
             
-            if (loginForm.getXButtonClose() == true)
-                Load += (s, e) => Close();          // dodaje do zdarzenia Form_Load wywołanie metody this.Close()
-            else
-                label1.Text = "Witaj " + loginForm.getInputLogin() + "!";
+            //if (loginForm.getXButtonClose() == true)
+            //    Load += (s, e) => Close();          // dodaje do zdarzenia Form_Load wywołanie metody this.Close()
+            //else
+            //    label1.Text = "Witaj " + loginForm.getInputLogin() + "!";
 
             loginForm.Dispose();                    // Wymagane, gdy wywołujemy formatkę przez ShowDialog (wycieki pamięci)
         }

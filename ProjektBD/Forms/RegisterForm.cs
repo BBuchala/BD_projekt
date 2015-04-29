@@ -8,11 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Data.Entity;
 using ProjektBD.DAL;
 using ProjektBD.Model;
-using System.Data.Entity;
 using ProjektBD.Exceptions;
 using ProjektBD;
+using ProjektBD.Utilities;
 
 namespace ProjektBD.Forms
 {
@@ -22,11 +23,6 @@ namespace ProjektBD.Forms
     public partial class RegisterForm : Form
     {
         #region Fields
-
-        /// <summary>
-        /// Kontekst bazy danych
-        /// </summary>
-        private ProjektBDContext context;
 
         /// <summary>
         /// Lista z textBoxami, aby łatwiej je edytować (np. forEachem).
@@ -43,6 +39,11 @@ namespace ProjektBD.Forms
         /// </summary>
         private bool registeredSuccessfully = false;
 
+        /// <summary>
+        /// Zarządza operacjami przeprowadzanymi na bazie danych
+        /// </summary>
+        private DatabaseUtils database;
+
         #endregion
 
         #region Constructors
@@ -50,7 +51,7 @@ namespace ProjektBD.Forms
         public RegisterForm()
         {
             InitializeComponent();
-            context = new ProjektBDContext();
+            database = new DatabaseUtils();
         }
 
         #endregion
@@ -90,109 +91,6 @@ namespace ProjektBD.Forms
         {
             MessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
-    
-        /// <summary> 
-        /// Funkcja tylko do łączenia się z bazą i dająca wybór: spróbuj ponownie
-        /// lub zamknij formatkę. Utworzona, ponieważ wywoływanie rekurencyjne
-        /// Form_Load to zły pomysł.
-        /// To samo co w przypadku LoginForm. Rozważam utworzenie jakiegoś pliku ze
-        /// wspólnymi funkcjami, nie tylko dla tych dwóch formatek.
-        /// </summary>      
-        private void connectToDB()
-        {
-            try
-            {
-                context.Database.Initialize(false);
-            }
-            catch (System.Data.SqlClient.SqlException)
-            {
-                DialogResult connRetry = MessageBox.Show("Nastąpił błąd podczas próby połączenia z bazą danych.\n Upewnij się, czy nie jesteś połączony w innym miejscu. \n Spróbować ponownie?",
-                                                       "Błąd połączenia",
-                                                       MessageBoxButtons.YesNo,
-                                                       MessageBoxIcon.Exclamation);
-                if (connRetry == DialogResult.No)
-                    this.Close();
-                else
-                    connectToDB();
-            }
-        }
-
-        /// <summary>
-        /// Funkcja do sprawdzania powtórzeń (czy zajęty). Context Loadujemy 2 razy, bo nick
-        /// i adres email trzeba sprawdzić ze wszytskimi userami, indeks tylko ze studentami.
-        /// </summary>
-        /// <param name="student">Jeżeli user jest studentem, dodatkowo sprawdzamy indeks.</param>
-        /// <returns>Zwraca nazwę powtarzającego się atrybutu lub "" jeżeli jest ok (nic się nie powtarza).</returns>
-        private string isOccupied(bool student)
-        {
-            String inputLogin = textFields[0].Text;
-            String inputEmail = textFields[3].Text;
-
-            context.Użytkownicy.Load();
-
-            var query = context.Użytkownicy.Local.Where(s => (s.email.Equals(inputEmail)));
-
-            if (query.Count() > 0)
-                return "Email";
-
-            query = context.Użytkownicy.Local.Where(s => (s.login.Equals(inputLogin)));
-
-            if (query.Count() > 0)
-                return "login";
-
-            if (student)
-            {
-                query = context.Studenci.Local.Where(s => (s.nrIndeksu == Int32.Parse(index.Text)));
-
-                if (query.Count() > 0)
-                    return "nr indeksu";
-            }
-
-            return "";
-        }
-
-        /// <summary>
-        /// Metoda bazodanowa - stworzenie studenta i dodanie go do bazy.
-        /// </summary>
-        private void createAccountStudent()
-        {
-            Student s = new Student
-            {
-                login = textFields[0].Text,
-                hasło = textFields[1].Text,
-                email = textFields[3].Text,
-                miejsceZamieszkania = textFields[5].Text,
-                nrIndeksu = Int32.Parse(index.Text)
-            };
-
-            if (birthDate.Checked == true)
-                s.dataUrodzenia = dateTimePicker1.Value;
-            else s.dataUrodzenia = null;
-
-            context.Studenci.Add(s);
-            context.SaveChanges();
-        }
-
-        /// <summary>
-        /// Posłanie wiadomości do admina. On akceptuje - stworzony zostaje prowadzący.
-        /// </summary>
-        private void notifyAdmin()
-        {
-            Użytkownik u = new Użytkownik
-            {
-                login = textFields[0].Text,
-                hasło = textFields[1].Text,
-                email = textFields[3].Text,
-                miejsceZamieszkania = textFields[5].Text
-            };
-
-            if (birthDate.Checked == true)
-                u.dataUrodzenia = dateTimePicker1.Value;
-            else u.dataUrodzenia = null;
-
-            context.Użytkownicy.Add(u);
-            context.SaveChanges();
-        }
 
         #endregion
 
@@ -203,7 +101,9 @@ namespace ProjektBD.Forms
         /// </summary>
         private void RegisterForm_Load(object sender, EventArgs e)
         {
-            connectToDB();
+            //connectToDB();
+            if (database.connectToDB())
+                this.Close();                               // Nie jestem pewny, czy będzie działać, ale powinno
 
             // Do pola z indeksem można wpisac tylko 6-cyfrowego inta
             index.Mask = "000000";
@@ -318,7 +218,16 @@ namespace ProjektBD.Forms
                 }
 
                 // Czy login/email/indeks się nie pokrywa z istniejącym użytkownikiem
-                string overlappingAttribute = isOccupied(index.Enabled);
+                //string overlappingAttribute = isOccupied(index.Enabled);
+
+                int nrIndeksu;
+
+                if ( index.Text.Equals("") )
+                    nrIndeksu = 0;
+                else
+                    nrIndeksu = Int32.Parse(index.Text);
+
+                string overlappingAttribute = database.isOccupied(index.Enabled, textFields[0].Text, textFields[3].Text, nrIndeksu);
 
                 if (!overlappingAttribute.Equals(""))
                     throw new UsersOverlappingException(overlappingAttribute);
@@ -326,12 +235,12 @@ namespace ProjektBD.Forms
                 {
                     if (index.Enabled)
                     {
-                        createAccountStudent();
+                        database.createStudentAccount(textFields, nrIndeksu, birthDate.Checked, dateTimePicker1.Value);
                         MessageBox.Show("Konto zostało poprawnie założone. Możesz się zalogować.", "Koniec", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        notifyAdmin();
+                        database.notifyAdmin(textFields, birthDate.Checked, dateTimePicker1.Value);
                         MessageBox.Show("Konto zostało poprawnie założone. Należy zaczekać na akceptację administratora.", "Koniec", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     this.registeredSuccessfully = true;
@@ -377,9 +286,8 @@ namespace ProjektBD.Forms
         /// Zaknięcie formatki - Pozbywa się utworzonego kontekstu przy zamykaniu formularza
         /// </summary>
         private void RegisterForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (context != null)
-                context.Dispose();              
+        {            
+            database.disposeContext();
         }
 
         #endregion

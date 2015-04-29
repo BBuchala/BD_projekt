@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using ProjektBD.DAL;
 using System.Data.Entity;
+using ProjektBD.DAL;
+using ProjektBD.Utilities;
 using ProjektBD.Model;
 
 namespace ProjektBD.Forms
@@ -17,47 +18,29 @@ namespace ProjektBD.Forms
     public partial class AdministratorMain : Form
     {
         /// <summary>
-        /// Kontekst bazy danych
+        /// Zarządza operacjami przeprowadzanymi na bazie danych
         /// </summary>
-        private ProjektBDContext context;
+        private DatabaseUtils database;
 
         public AdministratorMain()
         {
             InitializeComponent();
-            context = new ProjektBDContext();
+            database = new DatabaseUtils();
         }
 
-        /// <summary>
-        /// Funkcja tylko do łączenia się z bazą i dająca wybór: spróbuj ponownie
-        /// lub zamknij formatkę. Utworzona, ponieważ wywoływanie rekurencyjne
-        /// Form_Load to zły pomysł.
-        /// </summary>
-        private void connectToDB()
+        private void lookForNewTeachers()
         {
-            try
-            {
-                context.Database.Initialize(false);
-                context.Użytkownicy.Load();                 // Wczytuje do lokalnej kolekcji wszystkich użytkowników (w tym studentów, prowadzących itp.)
-            }
+            int newUsers = 0;
 
-            catch (System.Data.SqlClient.SqlException)
-            {
-                DialogResult connRetry = MessageBox.Show("Nastąpił błąd podczas próby połączenia z bazą danych.\n Upewnij się, czy nie jesteś połączony w innym miejscu. \n Spróbować ponownie?",
-                                                       "Błąd połączenia",
-                                                       MessageBoxButtons.YesNo,
-                                                       MessageBoxIcon.Exclamation);
-                if (connRetry == DialogResult.No)
-                    this.Close();
-                else
-                    connectToDB();
-            }
+            //context.Użytkownicy.Load();
 
-            catch (System.Data.DataException)
-            {
-                MessageBox.Show("Baza danych jest obecnie wyłączona. Proszę spróbować później", "Prace konserwacyjne",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // Sprawdzanie userów
 
-                this.Close();
+            if (newUsers != 0)
+            {
+                notificationImage.Image = global::ProjektBD.Properties.Resources.znak;
+                notificationCount.Visible = true;
+                notificationCount.Text = newUsers.ToString();
             }
         }
 
@@ -70,33 +53,50 @@ namespace ProjektBD.Forms
         {
             pictureBox1.Image = ProjektBD.Properties.Resources.unpressed;
 
-            if (label4.ForeColor.Equals(Color.Chartreuse))
+            if (!EmergencyMode.isEmergency)
             {
-                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, 
-                    @"ALTER DATABASE ProjektBD
-                        SET EMERGENCY WITH ROLLBACK IMMEDIATE"          // Przełącza bazę w tryb naprawczy. Dostęp mają tylko najwyżsi admini,
-                    );                                                  // w dodatku mogą oni jedynie SELECT'ować.
-                                                                        // Dodatkowo rozłącza wszystkich userów i cofa niezacommitowane transakcje
+                label4.ForeColor = Color.Crimson;
+                label4.Text = "wyłączona";
+            }
+            else
+            {
+                label4.ForeColor = Color.Chartreuse;
+                label4.Text = "włączona";
+            }
+
+            database.changeEmergencyMode();
+        }
+
+        private void AdministratorMain_Load(object sender, EventArgs e)
+        {
+            if (database.connectToDB())
+                this.Close();
+
+            if (EmergencyMode.isEmergency)
+            {
                 label4.ForeColor = Color.Crimson;
                 label4.Text = "wyłączona";
             }
 
             else
             {
-                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
-                    @"ALTER DATABASE ProjektBD
-                        SET ONLINE"
-                    );
-
                 label4.ForeColor = Color.Chartreuse;
                 label4.Text = "włączona";
             }
+
+            lookForNewTeachers();
         }
 
-        private void AdministratorMain_Load(object sender, EventArgs e)
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            connectToDB();
-            lookForNewTeachers();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace ProjektBD.Forms
         {
             if (e.CloseReason == CloseReason.WindowsShutDown)
                 return;
-            
+
             if (this.DialogResult == DialogResult.Cancel)
             {
                 switch (MessageBox.Show(this, "Jesteś pewien, że chcesz opuścić okno rejestracji?", "Wyjdź", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
@@ -125,50 +125,7 @@ namespace ProjektBD.Forms
         /// </summary>
         private void AdministratorMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (context != null)
-                context.Dispose();          // Pozbywa się utworzonego kontekstu przy zamykaniu formularza
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void lookForNewTeachers()
-        {
-            int newUsers = 0;
-
-            context.Użytkownicy.Load();
-
-
-            // Sprawdzanie userów
-
-            if (newUsers != 0)
-            {
-                notificationImage.Image = global::ProjektBD.Properties.Resources.znak;
-                notificationCount.Visible = true;
-                notificationCount.Text = newUsers.ToString();
-            }
+            database.disposeContext();
         }
     }
 }

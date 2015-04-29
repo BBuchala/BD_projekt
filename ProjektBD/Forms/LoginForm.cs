@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
 
+using System.Data.Entity;
 using ProjektBD.DAL;
 using ProjektBD.Model;
-using System.Data.Entity;
 using ProjektBD.Forms;
+using ProjektBD.Utilities;
 
 namespace ProjektBD
 {
@@ -22,11 +23,6 @@ namespace ProjektBD
     public partial class LoginForm : Form
     {
         #region Fields
-
-        /// <summary>
-        /// Kontekst bazy danych
-        /// </summary>
-        private ProjektBDContext context;
 
         /// <summary>
         /// Ile razy nastąpi zmiana koloru migotającego label'a
@@ -44,24 +40,13 @@ namespace ProjektBD
         private String inputLogin;
 
         /// <summary>
-        /// Określa, czy zamknięto formatkę za pomocą przycisku X (zamknij aplikację),
-        /// czy za pomocą poprawnych danych (przejdź do głównej formatki). Działa też na [alt]+[f4].
+        /// Zarządza operacjami przeprowadzanymi na bazie danych
         /// </summary>
-        private bool xButtonClose = true;
+        private DatabaseUtils database;
 
         #endregion
 
         #region Constructor and methods
-
-        /// <summary>
-        /// Określa, czy zamknięto formatkę za pomocą przycisku X (zamknij aplikację), czy
-        /// za pomocą poprawnych danych (przejdź do głównej formatki). Działa też na [alt]+[f4]
-        /// Na chwilę obecną @Deprecated
-        /// </summary>
-        public bool getXButtonClose()
-        {
-            return xButtonClose;
-        }
 
         /// <summary>
         /// Pobiera login, za którego pomocą zalogowano się do systemu. Na chwilę obecną @Deprecated
@@ -69,41 +54,6 @@ namespace ProjektBD
         public String getInputLogin()
         {
             return inputLogin;
-        }
-
-        /// <summary>
-        /// Funkcja tylko do łączenia się z bazą i dająca wybór: spróbuj ponownie
-        /// lub zamknij formatkę. Utworzona, ponieważ wywoływanie rekurencyjne
-        /// Form_Load to zły pomysł.
-        /// </summary>
-        private void connectToDB()
-        {
-            try
-            {
-                context.Database.Initialize(false);
-                context.Użytkownicy.Load();                 // Wczytuje do lokalnej kolekcji wszystkich użytkowników (w tym studentów, prowadzących itp.)
-            }
-
-            catch (System.Data.SqlClient.SqlException)
-            {
-                DialogResult connRetry = MessageBox.Show("Nastąpił błąd podczas próby połączenia z bazą danych.\n Upewnij się, czy nie jesteś połączony w innym miejscu. \n Spróbować ponownie?",
-                                                       "Błąd połączenia",
-                                                       MessageBoxButtons.YesNo,
-                                                       MessageBoxIcon.Exclamation);
-                if (connRetry == DialogResult.No)
-                    this.Close();
-                else
-                    connectToDB();
-            }
-
-            catch (System.Data.DataException)
-            {
-                MessageBox.Show("Baza danych jest obecnie wyłączona. Proszę spróbować później", "Prace konserwacyjne",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                //this.Close();                     // nie działa podczas debugowania o_o 
-                this.backgroundWorker1.RunWorkerCompleted += (s, e) => Close();
-            }
         }
 
         /// <summary>
@@ -116,8 +66,7 @@ namespace ProjektBD
                 inputLogin = login.Text;
                 String inputPass = password.Text;
 
-                // FirstOrDefault zwraca pierwszy wynik zapytania lub null, jeśli użytkownik nie został znaleziony
-                Użytkownik query = context.Użytkownicy.Local.Where(s => (s.login.Equals(inputLogin) && s.hasło.Equals(inputPass))).FirstOrDefault();
+                Użytkownik query = database.loginQuery(inputLogin, inputPass);
 
                 if (query == null)
                 {
@@ -130,31 +79,38 @@ namespace ProjektBD
                 }
                 else
                 {
-                    xButtonClose = false;
-
                     this.Hide();
 
-                    Form mainForm;
+                    string userType = query.GetType().Name;
 
-                    switch (query.GetType().Name)
+                    EmergencyMode.checkEmergencyMode();
+
+                    if ( EmergencyMode.isEmergency && !userType.Equals("Administrator") )
+                        EmergencyMode.notifyAboutEmergencyMode();
+                    else
                     {
-                        case "Administrator":
-                            mainForm = new AdministratorMain();
-                            break;
-                        case "Prowadzący":
-                            mainForm = new ProwadzacyMain();
-                            break;
-                        case "Student":
-                            mainForm = new StudentMain();
-                            break;
-                        default:
-                            mainForm = new Form();
-                            MessageBox.Show(this, "Błąd w metodzie logUser(). Nieprawidłowy typ encji", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                    }
+                        Form mainForm;
 
-                    mainForm.ShowDialog();
-                    mainForm.Dispose();
+                        switch (userType)
+                        {
+                            case "Administrator":
+                                mainForm = new AdministratorMain();
+                                break;
+                            case "Prowadzący":
+                                mainForm = new ProwadzacyMain();
+                                break;
+                            case "Student":
+                                mainForm = new StudentMain();
+                                break;
+                            default:
+                                mainForm = new Form();                      // Zabezpieczyć. Nieautoryzowany prowadzący może zbugować
+                                MessageBox.Show(this, "Błąd w metodzie logUser(). Nieprawidłowy typ encji", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                        }
+
+                        mainForm.ShowDialog();
+                        mainForm.Dispose();
+                    }
 
                     login.Text = "";
                     password.Text = "";
@@ -170,7 +126,7 @@ namespace ProjektBD
         public LoginForm()
         {
             InitializeComponent();
-            context = new ProjektBDContext();
+            database = new DatabaseUtils();
         }
 
         #endregion
@@ -221,46 +177,27 @@ namespace ProjektBD
         {
             if (!backgroundWorker1.IsBusy)
             {
-                this.Hide();
+                EmergencyMode.checkEmergencyMode();
 
-                RegisterForm mainForm = new RegisterForm();
-                mainForm.ShowDialog();
-                mainForm.Dispose();
+                if (!EmergencyMode.isEmergency)
+                {
+                    this.Hide();
 
-                login.Text = "";
-                password.Text = "";
-                this.Show();
+                    RegisterForm mainForm = new RegisterForm();
+                    mainForm.ShowDialog();
+                    mainForm.Dispose();
+
+                    login.Text = "";
+                    password.Text = "";
+                    this.Show();
+                }
+
+                else
+                    EmergencyMode.notifyAboutEmergencyMode();
             }
 
             else
                 timer1.Start();
-        }
-
-        /// <summary>
-        /// Wyświetla msgBox z pytaniem o pozostanie w aplikacji
-        /// </summary>
-        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.WindowsShutDown)
-                return;
-
-            //if (this.DialogResult == DialogResult.Cancel)            Kuźwa, przestało działać (kaj mój MsgBox)?!? W Form1 jest ok...
-            {
-                switch (MessageBox.Show(this, "Jesteś pewien, że chcesz zakończyć\npracę z tą aplikacją?", "Zamknij aplikację", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-                {
-                    case DialogResult.No:
-                        e.Cancel = true;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (context != null)
-                context.Dispose();          // Pozbywa się utworzonego kontekstu przy zamykaniu formularza
         }
 
         private void password_KeyPress(object sender, KeyPressEventArgs e)
@@ -298,7 +235,6 @@ namespace ProjektBD
 
                 flashCounter++;
             }
-
             else
             {
                 flashCounter = 0;
@@ -311,7 +247,8 @@ namespace ProjektBD
         /// </summary>
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            connectToDB();
+            if ( database.connectToDB() )
+                backgroundWorker1.RunWorkerCompleted += (s, ev) => Close();
         }
 
         /// <summary>
@@ -319,10 +256,45 @@ namespace ProjektBD
         /// </summary>
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            label6.Text = "Połączenie zostało nawiązane!";
-            label6.ForeColor = Color.Green;
+            if ( database.connectionSuccessful )
+            {
+                label6.Text = "Połączenie zostało nawiązane!";
+                label6.ForeColor = Color.Green;
 
-            pictureBox1.Image = ProjektBD.Properties.Resources.OK;
+                pictureBox1.Image = ProjektBD.Properties.Resources.OK;
+            }
+            else
+            {
+                label6.Text = "Połączenie nie zostało nawiązane!";
+                label6.ForeColor = Color.Red;
+
+                //pictureBox1.Image = ProjektBD.Properties.Resources.nieOK;
+            }
+        }
+
+        /// <summary>
+        /// Wyświetla msgBox z pytaniem o pozostanie w aplikacji
+        /// </summary>
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.WindowsShutDown)
+                return;
+
+            switch (MessageBox.Show(this, "Jesteś pewien, że chcesz zakończyć\npracę z tą aplikacją?", "Zamknij aplikację",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            {
+                case DialogResult.No:
+                    e.Cancel = true;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            database.disposeContext();
         }
 
         //-------------------------------------------
