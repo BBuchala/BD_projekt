@@ -26,6 +26,7 @@ namespace ProjektBD.DAL
 
             var zakłady = new List<Zakład>
             {
+                new Zakład { nazwa = "*nieznany*" },
                 new Zakład { nazwa = "Astrofiz" },
                 new Zakład { nazwa = "Gastrofiz" },
                 new Zakład { nazwa = "ZMiTAC" }

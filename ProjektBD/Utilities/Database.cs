@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Data.Entity;
 using ProjektBD.DAL;
 using ProjektBD.Model;
+using System.Data.SqlClient;
 
 namespace ProjektBD.Utilities
 {
@@ -194,6 +195,73 @@ namespace ProjektBD.Utilities
 
                 EmergencyMode.isEmergency = false;
             }
+        }
+
+        /// <summary>
+        /// Wyszukuje listę użytkowników, którzy nie są ani Studentami ani Prowadzącymi
+        /// (czyli Ci starający się o Prowadzącego)
+        /// </summary>
+        /// <returns>Zwraca listę userów (nie będących studentami ani prowadzącymi)</returns>
+        internal List<Użytkownik> findUsers()
+        {
+            var query = context.Database.SqlQuery<Użytkownik>("SELECT * " +
+                                                            "FROM UŻYTKOWNIK u FULL OUTER JOIN STUDENT s " +
+                                                            "ON u.UżytkownikID = s.UżytkownikID " +
+                                                            "FULL OUTER JOIN PROWADZĄCY p " +
+                                                            "ON u.UżytkownikID = p.UżytkownikID " +
+                                                            "WHERE s.nrIndeksu IS NULL AND p.ZakładID IS NULL AND u.UżytkownikID >	1").ToList();
+
+            return query;
+        }
+
+        /// <summary>
+        /// Wywala z bazy podanego usera.
+        /// </summary>
+        /// <param name="u">Użytkownik usuwany z bazy</param>
+        internal void deleteUser(Użytkownik u)
+        {
+            var command = @"DELETE FROM UŻYTKOWNIK WHERE UżytkownikID = @param";
+
+            context.Database.ExecuteSqlCommand(command, new SqlParameter("param", u.UżytkownikID));
+            context.SaveChanges();
+        }
+
+        /// <summary>
+        /// "Zmienia" użytkownika w prowadzącego - usuwa użytkownika i dodaje go jako prowadzącego.
+        /// Nadaje początkowy zakład: *nieznany*.
+        /// </summary>
+        /// <param name="u">Upgrade'owanmy użytkownik</param>
+        internal void addTeacher(Użytkownik u)
+        {
+            if (context.Zakłady.Where(z => (z.nazwa.Equals("*nieznany*"))).ToList().Count < 1)
+            {
+                Zakład z = new Zakład { nazwa = "*nieznany*" };
+
+                context.Zakłady.Add(z);
+                context.SaveChanges();
+            }
+
+            Prowadzący p = new Prowadzący
+            {
+                login = u.login,
+                hasło = u.hasło,
+                email = u.email,
+                miejsceZamieszkania = u.miejsceZamieszkania,
+                ZakładID = 4
+            };
+
+            if (u.dataUrodzenia != null)
+                p.dataUrodzenia = u.dataUrodzenia;
+            else p.dataUrodzenia = null;
+
+            Prowadzący pr = context.Prowadzący.Where(x => x.UżytkownikID == p.UżytkownikID).FirstOrDefault();
+
+            if (pr == null)
+            {
+                context.Prowadzący.Add(p);
+                context.SaveChanges();
+            }
+
         }
 
         #endregion

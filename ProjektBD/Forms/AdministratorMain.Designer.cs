@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministratorMain));
             this.panel1 = new System.Windows.Forms.Panel();
             this.messageCount = new System.Windows.Forms.Label();
             this.messageImage = new System.Windows.Forms.PictureBox();
             this.notificationCount = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.nowyUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notificationImage = new System.Windows.Forms.PictureBox();
             this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,6 +57,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.messageImage)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notificationImage)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -104,6 +108,7 @@
             this.notificationCount.AutoSize = true;
             this.notificationCount.BackColor = System.Drawing.Color.Transparent;
             this.notificationCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.notificationCount.ContextMenuStrip = this.contextMenuStrip1;
             this.notificationCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.notificationCount.ForeColor = System.Drawing.Color.Red;
             this.notificationCount.Location = new System.Drawing.Point(207, 19);
@@ -112,15 +117,35 @@
             this.notificationCount.TabIndex = 0;
             this.notificationCount.Text = "0";
             this.notificationCount.Visible = false;
+            this.notificationCount.Click += new System.EventHandler(this.notificationCount_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nowyUserToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(176, 48);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // nowyUserToolStripMenuItem
+            // 
+            this.nowyUserToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.nowyUserToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
+            this.nowyUserToolStripMenuItem.Name = "nowyUserToolStripMenuItem";
+            this.nowyUserToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.nowyUserToolStripMenuItem.Text = "Nowy Prowadzący";
+            this.nowyUserToolStripMenuItem.Click += new System.EventHandler(this.nowyUserToolStripMenuItem_Click);
             // 
             // notificationImage
             // 
+            this.notificationImage.ContextMenuStrip = this.contextMenuStrip1;
             this.notificationImage.Image = global::ProjektBD.Properties.Resources.znak2;
             this.notificationImage.Location = new System.Drawing.Point(173, 0);
             this.notificationImage.Name = "notificationImage";
             this.notificationImage.Size = new System.Drawing.Size(40, 40);
             this.notificationImage.TabIndex = 20;
             this.notificationImage.TabStop = false;
+            this.notificationImage.Click += new System.EventHandler(this.notificationImage_Click);
             // 
             // button3
             // 
@@ -334,6 +359,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.messageImage)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.notificationImage)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -375,5 +401,7 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem nowyUserToolStripMenuItem;
     }
 }
