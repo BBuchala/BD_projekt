@@ -19,7 +19,7 @@ namespace ProjektBD.Model
             Zgłoszenia = new HashSet<Zgłoszenie>();
         }
 
-        public short ZakładID { get; set; }             // Foreign Key
+        public short? ZakładID { get; set; }             // Foreign Key
 
         public virtual Zakład Zakład { get; set; }
 

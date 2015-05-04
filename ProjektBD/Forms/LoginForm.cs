@@ -14,6 +14,7 @@ using ProjektBD.DAL;
 using ProjektBD.Model;
 using ProjektBD.Forms;
 using ProjektBD.Utilities;
+using ProjektBD.Controllers;
 
 namespace ProjektBD
 {
@@ -42,7 +43,9 @@ namespace ProjektBD
         /// <summary>
         /// Zarządza operacjami przeprowadzanymi na bazie danych
         /// </summary>
-        private DatabaseUtils database;
+        //private DatabaseUtils database;
+
+        private AccountController formController;
 
         #endregion
 
@@ -64,69 +67,53 @@ namespace ProjektBD
             if (!backgroundWorker1.IsBusy)
             {
                 inputLogin = login.Text;
-                String inputPass = password.Text;
 
-                Użytkownik query = database.loginQuery(inputLogin, inputPass);
+                string userType = formController.validateUser(login.Text, password.Text);
 
-                if (query == null)
+                if ( userType.Equals("") )
                 {
-                    MessageBox.Show("Podane dane są niepoprawne. Spróbuj ponownie.",
-                                    "Błędne dane.",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Exclamation);
-
-                    password.Text = "";
+                    MessageBox.Show("Podane dane są niepoprawne. Spróbuj ponownie.", "Błędne dane",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
+
+                else if ( userType.Equals("Użytkownik") )
+                {
+                    MessageBox.Show("Poczekaj na zatwierdzenie konta przez administratora", "Cierpliwości",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+
                 else
                 {
-                    this.Hide();
+                    Form mainForm = formController.openUserForm(userType);
 
-                    string userType = query.GetType().Name;
-
-                    EmergencyMode.checkEmergencyMode();
-
-                    if ( EmergencyMode.isEmergency && !userType.Equals("Administrator") )
+                    if ( Object.ReferenceEquals(mainForm, null) )         // jeśli baza jest w stanie naprawczym
+                    {
                         EmergencyMode.notifyAboutEmergencyMode();
+                    }
                     else
                     {
-                        Form mainForm;
-
-                        switch (userType)
-                        {
-                            case "Administrator":
-                                mainForm = new AdministratorMain();
-                                break;
-                            case "Prowadzący":
-                                mainForm = new ProwadzacyMain();
-                                break;
-                            case "Student":
-                                mainForm = new StudentMain();
-                                break;
-                            default:
-                                mainForm = new Form();                      // Zabezpieczyć. Nieautoryzowany prowadzący może zbugować
-                                MessageBox.Show(this, "Błąd w metodzie logUser(). Nieprawidłowy typ encji", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                break;
-                        }
+                        this.Hide();
 
                         mainForm.ShowDialog();
                         mainForm.Dispose();
-                    }
 
-                    login.Text = "";
-                    password.Text = "";
-                    this.Show();
+                        login.Text = "";
+
+                        this.Show();
+                    }
                 }
+
+                password.Text = "";
             }
 
             else
                 timer1.Start();                 // Uruchamia zdarzenie timera - migotanie tekstu
-
         }
 
         public LoginForm()
         {
             InitializeComponent();
-            database = new DatabaseUtils();
+            formController = new AccountController();
         }
 
         #endregion
@@ -218,9 +205,6 @@ namespace ProjektBD
             }
         }
 
-        // TODO: Przerobić wszystko na pojedynczą kontrolkę dodawaną do każdego formularza
-        //-------------------------------------------
-
         /// <summary>
         /// Zmienia kolor label'a informującego o połączeniu z bazą. Ilość mignięć definiowana zmienną flashLimit
         /// </summary>
@@ -247,7 +231,7 @@ namespace ProjektBD
         /// </summary>
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            if ( database.connectToDB() )
+            if ( formController.connectToDatabase() )
                 backgroundWorker1.RunWorkerCompleted += (s, ev) => Close();
         }
 
@@ -256,7 +240,7 @@ namespace ProjektBD
         /// </summary>
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if ( database.connectionSuccessful )
+            if ( formController.connectionSuccessful() )
             {
                 label6.Text = "Połączenie zostało nawiązane!";
                 label6.ForeColor = Color.Green;
@@ -268,7 +252,7 @@ namespace ProjektBD
                 label6.Text = "Połączenie nie zostało nawiązane!";
                 label6.ForeColor = Color.Red;
 
-                //pictureBox1.Image = ProjektBD.Properties.Resources.nieOK;
+                pictureBox1.Image = ProjektBD.Properties.Resources.error;
             }
         }
 
@@ -294,10 +278,9 @@ namespace ProjektBD
 
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            database.disposeContext();
+            formController.disposeContext();
         }
 
-        //-------------------------------------------
         #endregion
     }
 }

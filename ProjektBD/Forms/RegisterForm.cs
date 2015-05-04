@@ -167,7 +167,7 @@ namespace ProjektBD.Forms
         /// <summary>
         /// Najważniejsza funkcja - sprawdza szereg warunków przed dodaniem studenta do bazy. 
         /// </summary>
-        private void createButton_Click(object sender, EventArgs e)
+        private void createButton_Click(object sender, EventArgs e)         // skontrolerować
         {
 
             // Wszystkie napisy znów na czarno

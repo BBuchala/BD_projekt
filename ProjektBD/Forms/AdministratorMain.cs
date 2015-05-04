@@ -47,8 +47,9 @@ namespace ProjektBD.Forms
 
             if (newUsersCount != 0)
             {
-                notificationImage.Image = global::ProjektBD.Properties.Resources.znak;
+                notificationImage.Image = ProjektBD.Properties.Resources.znak;
                 notificationCount.Visible = true;
+
                 if (newUsersCount <= 100)
                     notificationCount.Text = newUsersCount.ToString();
                 else
@@ -56,7 +57,7 @@ namespace ProjektBD.Forms
             }
             else
             {
-                notificationImage.Image = global::ProjektBD.Properties.Resources.znak2;
+                notificationImage.Image = ProjektBD.Properties.Resources.znak2;
                 notificationCount.Visible = false;
             }
         }
@@ -73,7 +74,6 @@ namespace ProjektBD.Forms
             {
                 case DialogResult.Yes:
                     database.addTeacher(u);
-                    database.deleteUser(u);
                     break;
 
                 case DialogResult.No:
@@ -166,7 +166,7 @@ namespace ProjektBD.Forms
         }
 
         /// <summary>
-        /// Zaknięcie formatki - Pozbywa się utworzonego kontekstu przy zamykaniu formularza
+        /// Zamknięcie formatki - Pozbywa się utworzonego kontekstu przy zamykaniu formularza
         /// </summary>
         private void AdministratorMain_FormClosed(object sender, FormClosedEventArgs e)
         {

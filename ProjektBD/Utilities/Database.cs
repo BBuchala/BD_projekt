@@ -39,7 +39,8 @@ namespace ProjektBD.Utilities
         #endregion
 
         /// <summary>
-        /// Łączy się z bazą danych i dokonuje jej rekonstrukcji, jeśli modele nie są zgodne
+        /// Łączy się z bazą danych i dokonuje jej rekonstrukcji, jeśli modele nie są zgodne.
+        /// Zwraca true, jeśli nastąpił błąd podczas połączenia.
         /// </summary>
         public bool connectToDB()
         {
@@ -220,10 +221,19 @@ namespace ProjektBD.Utilities
         /// <param name="u">Użytkownik usuwany z bazy</param>
         internal void deleteUser(Użytkownik u)
         {
-            var command = @"DELETE FROM UŻYTKOWNIK WHERE UżytkownikID = @param";
+            // Korzystamy z narzędzia ORM, dlatego jeśli zapytanie jest w miarę proste, lepiej starajmy się
+            // korzystać z obiektowych mechanizmów
 
-            context.Database.ExecuteSqlCommand(command, new SqlParameter("param", u.UżytkownikID));
-            context.SaveChanges();
+            //var command = @"DELETE FROM UŻYTKOWNIK WHERE UżytkownikID = @param";
+            //context.Database.ExecuteSqlCommand(command, new SqlParameter("param", u.UżytkownikID));
+
+            Użytkownik userToDelete = context.Użytkownicy.Where( s => s.UżytkownikID == u.UżytkownikID ).FirstOrDefault();
+
+            if (userToDelete != null)
+            {
+                context.Użytkownicy.Remove(userToDelete);
+                context.SaveChanges();
+            }
         }
 
         /// <summary>
@@ -250,17 +260,18 @@ namespace ProjektBD.Utilities
                 ZakładID = 4
             };
 
-            if (u.dataUrodzenia != null)
+            if (u.dataUrodzenia != null)                // data urodzenia domyślnie jest null, dlatego else zbędny
                 p.dataUrodzenia = u.dataUrodzenia;
-            else p.dataUrodzenia = null;
 
-            Prowadzący pr = context.Prowadzący.Where(x => x.UżytkownikID == p.UżytkownikID).FirstOrDefault();
+            deleteUser(u);                              // usuwamy użytkownika już teraz, by zrobił miejsce prowadzącemu
 
-            if (pr == null)
-            {
-                context.Prowadzący.Add(p);
-                context.SaveChanges();
-            }
+            // Modyfikuje licznik autoinkrementacji klucza głównego UżytkownikID
+            // Dzięki temu świeżo dodanemu użytkownikowi zostanie przydzielony ID tego, który przed chwilą usunęliśmy
+            // W zasadzie niepotrzebne, ale za to tabela ładniej wygląda :3
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('Użytkownik', RESEED, " + (u.UżytkownikID - 1) + ");");
+
+            context.Prowadzący.Add(p);
+            context.SaveChanges();
 
         }
 
