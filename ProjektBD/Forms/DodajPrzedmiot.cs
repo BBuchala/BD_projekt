@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ProjektBD.Forms
 {
-    public partial class ProwadzacyProjekty : Form
+    public partial class DodajPrzedmiot : Form
     {
-        public ProwadzacyProjekty()
+        public DodajPrzedmiot()
         {
             InitializeComponent();
         }

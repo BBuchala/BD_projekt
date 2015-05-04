@@ -61,11 +61,29 @@
     <Compile Include="Forms\AdministratorMain.Designer.cs">
       <DependentUpon>AdministratorMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DodajPrzedmiot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DodajPrzedmiot.Designer.cs">
+      <DependentUpon>DodajPrzedmiot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EdytujPrzedmioty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EdytujPrzedmioty.Designer.cs">
+      <DependentUpon>EdytujPrzedmioty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DodajEdytujProjekt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DodajEdytujProjekt.Designer.cs">
+      <DependentUpon>DodajEdytujProjekt.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
@@ -78,18 +96,6 @@
     </Compile>
     <Compile Include="Forms\ProwadzacyMain.Designer.cs">
       <DependentUpon>ProwadzacyMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ProwadzacyProjekty.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ProwadzacyProjekty.Designer.cs">
-      <DependentUpon>ProwadzacyProjekty.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ProwadzacyPrzedmioty.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ProwadzacyPrzedmioty.Designer.cs">
-      <DependentUpon>ProwadzacyPrzedmioty.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\RegisterForm.cs">
       <SubType>Form</SubType>
@@ -130,6 +136,15 @@
     <EmbeddedResource Include="Forms\AdministratorMain.resx">
       <DependentUpon>AdministratorMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DodajEdytujProjekt.resx">
+      <DependentUpon>DodajEdytujProjekt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DodajPrzedmiot.resx">
+      <DependentUpon>DodajPrzedmiot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EdytujPrzedmioty.resx">
+      <DependentUpon>EdytujPrzedmioty.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,12 +153,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProwadzacyMain.resx">
       <DependentUpon>ProwadzacyMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProwadzacyProjekty.resx">
-      <DependentUpon>ProwadzacyProjekty.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProwadzacyPrzedmioty.resx">
-      <DependentUpon>ProwadzacyPrzedmioty.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>

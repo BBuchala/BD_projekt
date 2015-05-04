@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace ProjektBD.Forms
 {
-    public partial class ProwadzacyMain : Form
+    public partial class EdytujPrzedmioty : Form
     {
-        public ProwadzacyMain()
+        public EdytujPrzedmioty()
         {
             InitializeComponent();
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }
