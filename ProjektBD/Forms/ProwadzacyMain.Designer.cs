@@ -76,6 +76,18 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.listView15 = new System.Windows.Forms.ListView();
+            this.listView14 = new System.Windows.Forms.ListView();
+            this.listView13 = new System.Windows.Forms.ListView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.listView3 = new System.Windows.Forms.ListView();
@@ -84,18 +96,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.listView13 = new System.Windows.Forms.ListView();
-            this.listView14 = new System.Windows.Forms.ListView();
-            this.listView15 = new System.Windows.Forms.ListView();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabControl4.SuspendLayout();
@@ -613,6 +613,114 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Moje przedmioty i projekty";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.Location = new System.Drawing.Point(870, 12);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(126, 18);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Lista studentów";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Location = new System.Drawing.Point(494, 12);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(123, 18);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Lista projektów";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(118, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(146, 18);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Lista przedmiotów";
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(842, 375);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(168, 36);
+            this.button12.TabIndex = 10;
+            this.button12.Text = "Usuń studenta";
+            this.button12.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(478, 417);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(168, 36);
+            this.button11.TabIndex = 8;
+            this.button11.Text = "Usuń projekt";
+            this.button11.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(478, 375);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(168, 36);
+            this.button8.TabIndex = 6;
+            this.button8.Text = "Dodaj/Edytuj projekt";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(109, 459);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(168, 36);
+            this.button5.TabIndex = 5;
+            this.button5.Text = "Usuń przedmiot";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(109, 417);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(168, 36);
+            this.button4.TabIndex = 4;
+            this.button4.Text = "Edytuj przedmiot";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(109, 375);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(168, 36);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Dodaj przedmiot";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // listView15
+            // 
+            this.listView15.Location = new System.Drawing.Point(44, 52);
+            this.listView15.Name = "listView15";
+            this.listView15.Size = new System.Drawing.Size(307, 317);
+            this.listView15.TabIndex = 2;
+            this.listView15.UseCompatibleStateImageBehavior = false;
+            // 
+            // listView14
+            // 
+            this.listView14.Location = new System.Drawing.Point(773, 52);
+            this.listView14.Name = "listView14";
+            this.listView14.Size = new System.Drawing.Size(307, 317);
+            this.listView14.TabIndex = 1;
+            this.listView14.UseCompatibleStateImageBehavior = false;
+            // 
+            // listView13
+            // 
+            this.listView13.Location = new System.Drawing.Point(411, 52);
+            this.listView13.Name = "listView13";
+            this.listView13.Size = new System.Drawing.Size(307, 317);
+            this.listView13.TabIndex = 0;
+            this.listView13.UseCompatibleStateImageBehavior = false;
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage3);
@@ -693,114 +801,6 @@
             this.label22.Size = new System.Drawing.Size(149, 18);
             this.label22.TabIndex = 13;
             this.label22.Text = "Wybierz przedmiot";
-            // 
-            // listView13
-            // 
-            this.listView13.Location = new System.Drawing.Point(53, 43);
-            this.listView13.Name = "listView13";
-            this.listView13.Size = new System.Drawing.Size(169, 223);
-            this.listView13.TabIndex = 0;
-            this.listView13.UseCompatibleStateImageBehavior = false;
-            // 
-            // listView14
-            // 
-            this.listView14.Location = new System.Drawing.Point(282, 43);
-            this.listView14.Name = "listView14";
-            this.listView14.Size = new System.Drawing.Size(169, 223);
-            this.listView14.TabIndex = 1;
-            this.listView14.UseCompatibleStateImageBehavior = false;
-            // 
-            // listView15
-            // 
-            this.listView15.Location = new System.Drawing.Point(507, 43);
-            this.listView15.Name = "listView15";
-            this.listView15.Size = new System.Drawing.Size(169, 223);
-            this.listView15.TabIndex = 2;
-            this.listView15.UseCompatibleStateImageBehavior = false;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(53, 293);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(168, 36);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Dodaj przedmiot";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(53, 335);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(168, 36);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Edytuj przedmiot";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(53, 377);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(168, 36);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "Usuń przedmiot";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(282, 293);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(168, 36);
-            this.button8.TabIndex = 6;
-            this.button8.Text = "Dodaj/Edytuj projekt";
-            this.button8.UseVisualStyleBackColor = true;
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(282, 335);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(168, 36);
-            this.button11.TabIndex = 8;
-            this.button11.Text = "Usuń projekt";
-            this.button11.UseVisualStyleBackColor = true;
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(507, 293);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(168, 36);
-            this.button12.TabIndex = 10;
-            this.button12.Text = "Usuń studenta";
-            this.button12.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(73, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(115, 16);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Lista przedmiotów";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(305, 12);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(97, 16);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Lista projektów";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(532, 12);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(99, 16);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Lista studentów";
             // 
             // ProwadzacyMain
             // 

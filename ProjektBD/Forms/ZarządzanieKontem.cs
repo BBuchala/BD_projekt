@@ -16,5 +16,16 @@ namespace ProjektBD.Forms
         {
             InitializeComponent();
         }
+
+        private void button1_MouseEnter(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.Red;
+            button1.ForeColor = Color.White;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
