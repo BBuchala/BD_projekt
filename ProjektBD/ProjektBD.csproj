@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Controller.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="DAL\ProjektBDContext.cs" />
     <Compile Include="DAL\ProjektBDInitializer.cs" />
     <Compile Include="Exceptions\EmptyFieldException.cs" />

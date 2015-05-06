@@ -11,41 +11,11 @@ using ProjektBD.Utilities;
 
 namespace ProjektBD.Controllers
 {
-    class AccountController
+    /// <summary>
+    /// Kontroler dla formularza logowania
+    /// </summary>
+    class AccountController : Controller
     {
-        /// <summary>
-        /// Zarządza operacjami przeprowadzanymi na bazie danych
-        /// </summary>
-        private DatabaseUtils database;
-
-        public AccountController()
-        {
-            database = new DatabaseUtils();
-        }
-        /// <summary>
-        /// Inicjalizuje połączenie z bazą danych
-        /// </summary>
-        public bool connectToDatabase()
-        {
-            return database.connectToDB();
-        }
-
-        /// <summary>
-        /// Pozbywa się utworzonego kontekstu
-        /// </summary>
-        public void disposeContext()
-        {
-            database.disposeContext();
-        }
-
-        /// <summary>
-        /// Zwraca wartość określającą, czy połączenie z bazą przebiegło pomyślnie
-        /// </summary>
-        public bool connectionSuccessful()
-        {
-            return database.connectionSuccessful;
-        }
-
         /// <summary>
         /// Sprawdza, czy w bazie istnieje użytkownik o podanym loginie i haśle.
         /// Zwraca rodzaj użytkownika lub null w przypadku niepowodzenia

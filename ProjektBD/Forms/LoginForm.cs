@@ -45,6 +45,9 @@ namespace ProjektBD
         /// </summary>
         //private DatabaseUtils database;
 
+        /// <summary>
+        /// Warstwa pośrednicząca między widokiem a modelem (bazą danych). Przetwarza i oblicza
+        /// </summary>
         private AccountController formController;
 
         #endregion

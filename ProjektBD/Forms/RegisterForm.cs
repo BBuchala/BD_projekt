@@ -14,6 +14,7 @@ using ProjektBD.Model;
 using ProjektBD.Exceptions;
 using ProjektBD;
 using ProjektBD.Utilities;
+using ProjektBD.Controllers;
 
 namespace ProjektBD.Forms
 {
@@ -39,10 +40,15 @@ namespace ProjektBD.Forms
         /// </summary>
         private bool registeredSuccessfully = false;
 
+        ///// <summary>
+        ///// Zarządza operacjami przeprowadzanymi na bazie danych
+        ///// </summary>
+        //private DatabaseUtils database;
+
         /// <summary>
-        /// Zarządza operacjami przeprowadzanymi na bazie danych
+        /// Warstwa pośrednicząca między widokiem a modelem (bazą danych). Przetwarza i oblicza
         /// </summary>
-        private DatabaseUtils database;
+        private RegistrationController formController;
 
         #endregion
 
@@ -51,7 +57,8 @@ namespace ProjektBD.Forms
         public RegisterForm()
         {
             InitializeComponent();
-            database = new DatabaseUtils();
+            //database = new DatabaseUtils();
+            formController = new RegistrationController(textFields, labels, index, birthDate, dateTimePicker1);
         }
 
         #endregion
@@ -87,9 +94,19 @@ namespace ProjektBD.Forms
         /// </summary>
         /// <param name="title">Tytuł okienka MessageBoxa.</param>
         /// <param name="text">Treść MessageBoxa.</param>
-        private void displayMsgBox(string title, string text)
+        private void displayWarningMsgBox(string title, string text)
         {
             MessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        /// <summary>
+        /// Funkcja do wyświetlania MsgBoxa z informacją.
+        /// </summary>
+        /// <param name="title">Tytuł okienka MessageBoxa.</param>
+        /// <param name="text">Treść MessageBoxa.</param>
+        private void displayInformationMsgBox(string title, string text)
+        {
+            MessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         #endregion
@@ -101,8 +118,8 @@ namespace ProjektBD.Forms
         /// </summary>
         private void RegisterForm_Load(object sender, EventArgs e)
         {
-            //connectToDB();
-            if (database.connectToDB())
+            //if (database.connectToDB())
+            if ( formController.connectToDatabase() )
                 this.Close();                               // Nie jestem pewny, czy będzie działać, ale powinno
 
             // Do pola z indeksem można wpisac tylko 6-cyfrowego inta
@@ -122,7 +139,8 @@ namespace ProjektBD.Forms
         {
             if (birthDate.Checked == true)
                 dateTimePicker1.Enabled = true;
-            else dateTimePicker1.Enabled = false;
+            else
+                dateTimePicker1.Enabled = false;
         }
 
         /// <summary>
@@ -167,90 +185,55 @@ namespace ProjektBD.Forms
         /// <summary>
         /// Najważniejsza funkcja - sprawdza szereg warunków przed dodaniem studenta do bazy. 
         /// </summary>
-        private void createButton_Click(object sender, EventArgs e)         // skontrolerować
+        private void createButton_Click(object sender, EventArgs e)
         {
-
             // Wszystkie napisy znów na czarno
             foreach (Label lb in labels)
                 lb.ForeColor = Color.Black;
 
             try
             {
-                // count - 2, bo adres nieobowiązkowy, indeks sprawdzamy osobno
-                for (int i = 0; i < textFields.Count - 2; i++)
-                {
-                    if ((textFields[i].Text.Equals("")) || (textFields[i].Text.Length < 3) || (textFields[i].Text == null))
-                        throw new EmptyFieldException(i);
-                }
+                string czyPoprawneDane = formController.validateInput();
 
-                // Indeks sprawdzamy osobno, bo tylko w niektórych przypadkach
-                if (index.Enabled)
+                switch (czyPoprawneDane)
                 {
-                    if ((index.Text.Equals("")) || (index.Text.Length < 3) || (index.Text == null))
-                        throw new EmptyFieldException(4);
+                    case "Numer indeksu niekompletny":
+                        displayWarningMsgBox("Zły nr indeksu", "Podany numer indeksu jest niepełny!");
 
-                    // Czy wszystkie pola w maskedTextBox indeksu są uzupełnione
-                    if (!index.MaskCompleted)
-                    {
-                        displayMsgBox("Zły nr indeksu", "Podany numer indeksu jest niepełny!");
                         labels[4].ForeColor = Color.Red;
                         return;
-                    }
+
+                    case "Różne hasła":
+                        displayWarningMsgBox("Sprzeczność", "Podane hasła się nie zgadzają!");
+
+                        labels[1].ForeColor = Color.Red;
+                        labels[2].ForeColor = Color.Red;
+
+                        textFields[1].Text = "";
+                        textFields[2].Text = "";
+                        return;
+
+                    case "Niepoprawny email":
+                        displayWarningMsgBox("Zły adres e-mail", "Podany adres e-mail nie jest poprawny!");
+
+                        labels[3].ForeColor = Color.Red;
+                        return;
+
+                    case "Utworzono konto studenta":
+                        displayInformationMsgBox("Koniec", "Konto zostało poprawnie założone. Możesz się zalogować.");
+                        break;
+
+                    case "Utworzono konto prowadzącego":
+                        displayInformationMsgBox("Koniec", "Konto zostało poprawnie założone. Należy zaczekać na akceptację administratora.");
+                        break;
                 }
 
-                // jeżeli hasła są różne
-                if (textFields[1].Text != textFields[2].Text)
-                {
-                    displayMsgBox("Sprzeczność", "Podane hasła się nie zgadzają!");
-                    labels[1].ForeColor = Color.Red;
-                    labels[2].ForeColor = Color.Red;
-                    textFields[1].Text = "";
-                    textFields[2].Text = "";
-                    return;
-                }
-
-                // Sprawdźmy, czy email jest dobrze podany
-                if (!(SpellCheckUtilities.isValidEmail(textFields[3].Text)))
-                {
-                    displayMsgBox("Zły adres e-mail", "Podany adres e-mail nie jest poprawny!");
-                    labels[3].ForeColor = Color.Red;
-                    return;
-                }
-
-                // Czy login/email/indeks się nie pokrywa z istniejącym użytkownikiem
-                //string overlappingAttribute = isOccupied(index.Enabled);
-
-                int nrIndeksu;
-
-                if ( index.Text.Equals("") )
-                    nrIndeksu = 0;
-                else
-                    nrIndeksu = Int32.Parse(index.Text);
-
-                string overlappingAttribute = database.isOccupied(index.Enabled, textFields[0].Text, textFields[3].Text, nrIndeksu);
-
-                if (!overlappingAttribute.Equals(""))
-                    throw new UsersOverlappingException(overlappingAttribute);
-                else
-                {
-                    if (index.Enabled)
-                    {
-                        database.createStudentAccount(textFields, nrIndeksu, birthDate.Checked, dateTimePicker1.Value);
-                        MessageBox.Show("Konto zostało poprawnie założone. Możesz się zalogować.", "Koniec", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        database.notifyAdmin(textFields, birthDate.Checked, dateTimePicker1.Value);
-                        MessageBox.Show("Konto zostało poprawnie założone. Należy zaczekać na akceptację administratora.", "Koniec", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    this.registeredSuccessfully = true;
-                    this.Close();
-                }
-
+                this.registeredSuccessfully = true;
+                this.Close();
             }
             catch (EmptyFieldException err)
             {
-                displayMsgBox("Brak danych", "Pola muszą zawierać co najmniej 3 znaki.");
+                displayWarningMsgBox("Brak danych", "Pola muszą zawierać co najmniej 3 znaki.");
                 labels[err.getFieldNumber()].ForeColor = Color.Red;
 
             }
@@ -258,7 +241,6 @@ namespace ProjektBD.Forms
             {
                 MessageBox.Show("Następujący " + err.getMessage() + " jest już zajęty.", "Złe dane", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         /// <summary>
@@ -286,8 +268,9 @@ namespace ProjektBD.Forms
         /// Zaknięcie formatki - Pozbywa się utworzonego kontekstu przy zamykaniu formularza
         /// </summary>
         private void RegisterForm_FormClosed(object sender, FormClosedEventArgs e)
-        {            
-            database.disposeContext();
+        {
+            //database.disposeContext();
+            formController.disposeContext();
         }
 
         #endregion

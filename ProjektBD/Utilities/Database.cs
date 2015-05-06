@@ -137,7 +137,7 @@ namespace ProjektBD.Utilities
 
         /// <summary>
         /// Funkcja do sprawdzania powtórzeń (czy zajęty).
-        /// Nick i adres email trzeba sprawdzić ze wszytskimi userami, indeks tylko ze studentami.
+        /// Nick i adres email trzeba sprawdzić ze wszystkimi userami, indeks tylko ze studentami.
         /// </summary>
         /// <param name="student">Jeżeli user jest studentem, dodatkowo sprawdzamy indeks.</param>
         /// <returns>Zwraca nazwę powtarzającego się atrybutu lub "" jeżeli jest ok (nic się nie powtarza).</returns>
