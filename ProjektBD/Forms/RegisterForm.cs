@@ -15,6 +15,7 @@ using ProjektBD.Exceptions;
 using ProjektBD;
 using ProjektBD.Utilities;
 using ProjektBD.Controllers;
+using System.Data.Entity.Core;
 
 namespace ProjektBD.Forms
 {
@@ -57,7 +58,6 @@ namespace ProjektBD.Forms
         public RegisterForm()
         {
             InitializeComponent();
-            //database = new DatabaseUtils();
             formController = new RegistrationController(textFields, labels, index, birthDate, dateTimePicker1);
         }
 
@@ -89,26 +89,6 @@ namespace ProjektBD.Forms
 
         }
 
-        /// <summary>
-        /// Funkcja do wyświetlania MsgBoxa z warningiem.
-        /// </summary>
-        /// <param name="title">Tytuł okienka MessageBoxa.</param>
-        /// <param name="text">Treść MessageBoxa.</param>
-        private void displayWarningMsgBox(string title, string text)
-        {
-            MessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
-
-        /// <summary>
-        /// Funkcja do wyświetlania MsgBoxa z informacją.
-        /// </summary>
-        /// <param name="title">Tytuł okienka MessageBoxa.</param>
-        /// <param name="text">Treść MessageBoxa.</param>
-        private void displayInformationMsgBox(string title, string text)
-        {
-            MessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
         #endregion
 
         #region Events
@@ -118,7 +98,6 @@ namespace ProjektBD.Forms
         /// </summary>
         private void RegisterForm_Load(object sender, EventArgs e)
         {
-            //if (database.connectToDB())
             if ( formController.connectToDatabase() )
                 this.Close();                               // Nie jestem pewny, czy będzie działać, ale powinno
 
@@ -198,13 +177,13 @@ namespace ProjektBD.Forms
                 switch (czyPoprawneDane)
                 {
                     case "Numer indeksu niekompletny":
-                        displayWarningMsgBox("Zły nr indeksu", "Podany numer indeksu jest niepełny!");
+                        MsgBoxUtils.displayWarningMsgBox("Zły nr indeksu", "Podany numer indeksu jest niepełny!");
 
                         labels[4].ForeColor = Color.Red;
                         return;
 
                     case "Różne hasła":
-                        displayWarningMsgBox("Sprzeczność", "Podane hasła się nie zgadzają!");
+                        MsgBoxUtils.displayWarningMsgBox("Sprzeczność", "Podane hasła się nie zgadzają!");
 
                         labels[1].ForeColor = Color.Red;
                         labels[2].ForeColor = Color.Red;
@@ -214,17 +193,17 @@ namespace ProjektBD.Forms
                         return;
 
                     case "Niepoprawny email":
-                        displayWarningMsgBox("Zły adres e-mail", "Podany adres e-mail nie jest poprawny!");
+                        MsgBoxUtils.displayWarningMsgBox("Zły adres e-mail", "Podany adres e-mail nie jest poprawny!");
 
                         labels[3].ForeColor = Color.Red;
                         return;
 
                     case "Utworzono konto studenta":
-                        displayInformationMsgBox("Koniec", "Konto zostało poprawnie założone. Możesz się zalogować.");
+                        MsgBoxUtils.displayInformationMsgBox("Koniec", "Konto zostało poprawnie założone. Możesz się zalogować.");
                         break;
 
                     case "Utworzono konto prowadzącego":
-                        displayInformationMsgBox("Koniec", "Konto zostało poprawnie założone. Należy zaczekać na akceptację administratora.");
+                        MsgBoxUtils.displayInformationMsgBox("Koniec", "Konto zostało poprawnie założone. Należy zaczekać na akceptację administratora.");
                         break;
                 }
 
@@ -233,13 +212,17 @@ namespace ProjektBD.Forms
             }
             catch (EmptyFieldException err)
             {
-                displayWarningMsgBox("Brak danych", "Pola muszą zawierać co najmniej 3 znaki.");
-                labels[err.getFieldNumber()].ForeColor = Color.Red;
+                MsgBoxUtils.displayWarningMsgBox("Brak danych", "Pola muszą zawierać co najmniej 3 znaki.");
 
+                labels[err.getFieldNumber()].ForeColor = Color.Red;
             }
             catch (UsersOverlappingException err)
             {
-                MessageBox.Show("Następujący " + err.getMessage() + " jest już zajęty.", "Złe dane", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MsgBoxUtils.displayErrorMsgBox("Złe dane", "Następujący " + err.getMessage() + " jest już zajęty.");
+            }
+            catch (EntityException)
+            {
+                MsgBoxUtils.displayConnectionErrorMsgBox();
             }
         }
 
@@ -253,7 +236,7 @@ namespace ProjektBD.Forms
 
             if (!this.registeredSuccessfully && this.DialogResult == DialogResult.Cancel)
             {
-                switch (MessageBox.Show(this, "Jesteś pewien, że chcesz opuścić okno rejestracji?", "Wyjdź", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                switch ( MsgBoxUtils.displayQuestionMsgBox("Wyjdź", "Jesteś pewien, że chcesz opuścić okno rejestracji?", this) )
                 {
                     case DialogResult.No:
                         e.Cancel = true;
@@ -269,7 +252,6 @@ namespace ProjektBD.Forms
         /// </summary>
         private void RegisterForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //database.disposeContext();
             formController.disposeContext();
         }
 

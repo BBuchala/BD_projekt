@@ -40,7 +40,7 @@ namespace ProjektBD.Utilities
 
         /// <summary>
         /// Łączy się z bazą danych i dokonuje jej rekonstrukcji, jeśli modele nie są zgodne.
-        /// Zwraca true, jeśli nastąpił błąd podczas połączenia.
+        /// Zwraca true, jeśli nastąpił błąd podczas połączenia i chcemy zakończyć działanie aplikacji.
         /// </summary>
         public bool connectToDB()
         {
@@ -58,8 +58,7 @@ namespace ProjektBD.Utilities
             {
                 DialogResult connRetry = MessageBox.Show("Nastąpił błąd podczas próby połączenia z bazą danych.\n Upewnij się, czy nie jesteś połączony w innym miejscu. \n Spróbować ponownie?",
                                                        "Błąd połączenia",
-                                                       MessageBoxButtons.YesNo,
-                                                       MessageBoxIcon.Exclamation);
+                                                       MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (connRetry == DialogResult.No)
                     shouldCloseForm = true;
                 else
@@ -172,33 +171,7 @@ namespace ProjektBD.Utilities
 
         #region Formularz administratora
 
-        /// <summary>
-        /// Zmienia aktualny stan bazy danych. Przechodzi w tryb naprawczy, jeśli był ustawiony normalny i vice versa
-        /// </summary>
-        public void changeEmergencyMode()
-        {
-            if (!EmergencyMode.isEmergency)
-            {
-                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
-                    @"  ALTER DATABASE ProjektBD
-                        SET EMERGENCY WITH ROLLBACK IMMEDIATE"          // Przełącza bazę w tryb naprawczy. Dostęp mają tylko najwyżsi admini,
-                    );                                                  // w dodatku mogą oni jedynie SELECT'ować.
-                                                                        // Dodatkowo rozłącza wszystkich userów i cofa niezacommitowane transakcje
-                EmergencyMode.isEmergency = true;
-            }
-
-            else
-            {
-                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
-                    @"  ALTER DATABASE ProjektBD
-                        SET ONLINE"
-                    );
-
-                EmergencyMode.isEmergency = false;
-            }
-        }
-
-        /// <summary>
+                /// <summary>
         /// Wyszukuje listę użytkowników, którzy nie są ani Studentami ani Prowadzącymi
         /// (czyli Ci starający się o Prowadzącego)
         /// </summary>
@@ -273,6 +246,55 @@ namespace ProjektBD.Utilities
             context.Prowadzący.Add(p);
             context.SaveChanges();
 
+        }
+
+        #endregion
+
+        #region Tryb naprawczy
+
+        /// <summary>
+        /// Zmienia aktualny stan bazy danych. Przechodzi w tryb naprawczy, jeśli był ustawiony normalny i vice versa
+        /// </summary>
+        public void changeEmergencyMode()
+        {
+            if (!EmergencyMode.isEmergency)
+            {
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
+                    @"  ALTER DATABASE ProjektBD
+                        SET EMERGENCY WITH ROLLBACK IMMEDIATE"          // Przełącza bazę w tryb naprawczy. Dostęp mają tylko najwyżsi admini,
+                    );                                                  // w dodatku mogą oni jedynie SELECT'ować.
+                                                                        // Dodatkowo rozłącza wszystkich userów i cofa niezacommitowane transakcje
+                EmergencyMode.isEmergency = true;
+            }
+
+            else
+            {
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
+                    @"  ALTER DATABASE ProjektBD
+                        SET ONLINE"
+                    );
+
+                EmergencyMode.isEmergency = false;
+            }
+        }
+
+        /// <summary>
+        /// Sprawdza, czy baza jest w stanie naprawczym
+        /// </summary>
+        public void checkEmergencyMode()
+        {
+            using (ProjektBDContext context = new ProjektBDContext())
+            {
+                string databaseState = context.Database.SqlQuery<string>
+                    (@" SELECT state_desc
+                        FROM sys.databases
+                        WHERE name = 'ProjektBD'").FirstOrDefault();
+
+                if (databaseState.Equals("EMERGENCY"))
+                    EmergencyMode.isEmergency = true;
+                else
+                    EmergencyMode.isEmergency = false;
+            }
         }
 
         #endregion

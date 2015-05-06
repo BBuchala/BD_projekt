@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using ProjektBD.DAL;
 using ProjektBD.Model;
 using System.Data.Entity;
+using ProjektBD.Utilities;
 
 namespace ProjektBD
 {
@@ -211,7 +212,7 @@ namespace ProjektBD
 
             if (this.DialogResult == DialogResult.Cancel)
             {
-                switch (MessageBox.Show(this, "Jesteś pewien, że chcesz się wylogować?", "Wyloguj się", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                switch ( MsgBoxUtils.displayQuestionMsgBox("Wyloguj się", "Jesteś pewien, że chcesz się wylogować?", this) )
                 {
                     case DialogResult.No:
                         e.Cancel = true;

@@ -12,6 +12,7 @@ using System.Data.Entity;
 using ProjektBD.DAL;
 using ProjektBD.Utilities;
 using ProjektBD.Model;
+using System.Data.Entity.Core;
 
 namespace ProjektBD.Forms
 {
@@ -41,24 +42,32 @@ namespace ProjektBD.Forms
         /// </summary>
         private void lookForNewTeachers()
         {
-            newUsers = database.findUsers();
-
-            newUsersCount = newUsers.Count;
-
-            if (newUsersCount != 0)
+            try
             {
-                notificationImage.Image = ProjektBD.Properties.Resources.znak;
-                notificationCount.Visible = true;
+                newUsers = database.findUsers();
 
-                if (newUsersCount <= 100)
-                    notificationCount.Text = newUsersCount.ToString();
+                newUsersCount = newUsers.Count;
+
+                if (newUsersCount != 0)
+                {
+                    notificationImage.Image = ProjektBD.Properties.Resources.znak;
+                    notificationCount.Visible = true;
+
+                    if (newUsersCount <= 100)
+                        notificationCount.Text = newUsersCount.ToString();
+                    else
+                        notificationCount.Text = "99+";
+                }
                 else
-                    notificationCount.Text = "99+";
+                {
+                    notificationImage.Image = ProjektBD.Properties.Resources.znak2;
+                    notificationCount.Visible = false;
+                }
             }
-            else
+
+            catch (EntityException)
             {
-                notificationImage.Image = ProjektBD.Properties.Resources.znak2;
-                notificationCount.Visible = false;
+                MsgBoxUtils.displayConnectionErrorMsgBox();
             }
         }
 
@@ -98,18 +107,26 @@ namespace ProjektBD.Forms
         {
             pictureBox1.Image = ProjektBD.Properties.Resources.unpressed;
 
-            if (!EmergencyMode.isEmergency)
+            try
             {
-                label4.ForeColor = Color.Crimson;
-                label4.Text = "wyłączona";
-            }
-            else
-            {
-                label4.ForeColor = Color.Chartreuse;
-                label4.Text = "włączona";
+                database.changeEmergencyMode();
+
+                if (EmergencyMode.isEmergency)
+                {
+                    label4.ForeColor = Color.Crimson;
+                    label4.Text = "wyłączona";
+                }
+                else
+                {
+                    label4.ForeColor = Color.Chartreuse;
+                    label4.Text = "włączona";
+                }
             }
 
-            database.changeEmergencyMode();
+            catch (EntityException)
+            {
+                MsgBoxUtils.displayConnectionErrorMsgBox();
+            }
         }
 
         private void AdministratorMain_Load(object sender, EventArgs e)
@@ -154,7 +171,7 @@ namespace ProjektBD.Forms
 
             if (this.DialogResult == DialogResult.Cancel)
             {
-                switch (MessageBox.Show(this, "Jesteś pewien, że chcesz opuścić okno rejestracji?", "Wyjdź", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                switch ( MsgBoxUtils.displayQuestionMsgBox("Wyjdź", "Jesteś pewien, że chcesz opuścić okno rejestracji?", this) )
                 {
                     case DialogResult.No:
                         e.Cancel = true;
@@ -216,11 +233,20 @@ namespace ProjektBD.Forms
         /// </summary>
         private void nowyUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < newUsersCount; i++)
+            try                            // dopiero tutaj, a nie wewnątrz funkcji, ponieważ połączenie może się zerwać w połowie dodawania prowadzących
             {
-                acceptNewTeacher(newUsers[i]);
+                for (int i = 0; i < newUsersCount; i++)
+                {
+                    acceptNewTeacher(newUsers[i]);
+                }
+
+                lookForNewTeachers();
             }
-            lookForNewTeachers();
+
+            catch (EntityException)
+            {
+                MsgBoxUtils.displayConnectionErrorMsgBox();
+            }
         }
 
         #endregion

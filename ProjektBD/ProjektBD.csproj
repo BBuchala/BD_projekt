@@ -120,6 +120,7 @@
     </Compile>
     <Compile Include="Utilities\Database.cs" />
     <Compile Include="Utilities\EmergencyMode.cs" />
+    <Compile Include="Utilities\MsgBoxUtils.cs" />
     <Compile Include="Utilities\SpellCheck.cs" />
     <Compile Include="Model\Administrator.cs" />
     <Compile Include="Model\Ocena.cs" />

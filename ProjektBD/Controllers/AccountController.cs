@@ -37,7 +37,7 @@ namespace ProjektBD.Controllers
         /// </summary>
         public Form openUserForm(string userType)
         {
-            EmergencyMode.checkEmergencyMode();
+            database.checkEmergencyMode();
 
             if ( EmergencyMode.isEmergency && !userType.Equals("Administrator") )
             {

@@ -15,6 +15,7 @@ using ProjektBD.Model;
 using ProjektBD.Forms;
 using ProjektBD.Utilities;
 using ProjektBD.Controllers;
+using System.Data.Entity.Core;
 
 namespace ProjektBD
 {
@@ -71,39 +72,44 @@ namespace ProjektBD
             {
                 inputLogin = login.Text;
 
-                string userType = formController.validateUser(login.Text, password.Text);
-
-                if ( userType.Equals("") )
+                try
                 {
-                    MessageBox.Show("Podane dane są niepoprawne. Spróbuj ponownie.", "Błędne dane",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
+                    string userType = formController.validateUser(login.Text, password.Text);
 
-                else if ( userType.Equals("Użytkownik") )
-                {
-                    MessageBox.Show("Poczekaj na zatwierdzenie konta przez administratora", "Cierpliwości",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-
-                else
-                {
-                    Form mainForm = formController.openUserForm(userType);
-
-                    if ( Object.ReferenceEquals(mainForm, null) )         // jeśli baza jest w stanie naprawczym
+                    switch (userType)
                     {
-                        EmergencyMode.notifyAboutEmergencyMode();
+                        case "":
+                            MsgBoxUtils.displayWarningMsgBox("Błędne dane", "Podane dane są niepoprawne. Spróbuj ponownie.");
+                            break;
+
+                        case "Użytkownik":
+                            MsgBoxUtils.displayWarningMsgBox("Cierpliwości", "Poczekaj na zatwierdzenie konta przez administratora");
+                            break;
+
+                        default:
+                            Form mainForm = formController.openUserForm(userType);
+
+                            if (mainForm == null)         // jeśli baza jest w stanie naprawczym
+                                EmergencyMode.notifyAboutEmergencyMode();
+
+                            else
+                            {
+                                this.Hide();
+
+                                mainForm.ShowDialog();
+                                mainForm.Dispose();
+
+                                login.Text = "";
+
+                                this.Show();
+                            }
+
+                            break;
                     }
-                    else
-                    {
-                        this.Hide();
-
-                        mainForm.ShowDialog();
-                        mainForm.Dispose();
-
-                        login.Text = "";
-
-                        this.Show();
-                    }
+                }
+                catch (EntityException)
+                {
+                    MsgBoxUtils.displayConnectionErrorMsgBox();
                 }
 
                 password.Text = "";
@@ -167,23 +173,31 @@ namespace ProjektBD
         {
             if (!backgroundWorker1.IsBusy)
             {
-                EmergencyMode.checkEmergencyMode();
-
-                if (!EmergencyMode.isEmergency)
+                try
                 {
-                    this.Hide();
+                    formController.checkEmergencyMode();
 
-                    RegisterForm mainForm = new RegisterForm();
-                    mainForm.ShowDialog();
-                    mainForm.Dispose();
+                    if (!EmergencyMode.isEmergency)
+                    {
+                        this.Hide();
 
-                    login.Text = "";
-                    password.Text = "";
-                    this.Show();
+                        RegisterForm mainForm = new RegisterForm();
+                        mainForm.ShowDialog();
+                        mainForm.Dispose();
+
+                        login.Text = "";
+                        password.Text = "";
+                        this.Show();
+                    }
+
+                    else
+                        EmergencyMode.notifyAboutEmergencyMode();
                 }
 
-                else
-                    EmergencyMode.notifyAboutEmergencyMode();
+                catch (EntityException)
+                {
+                    MsgBoxUtils.displayConnectionErrorMsgBox();
+                }
             }
 
             else
@@ -267,8 +281,7 @@ namespace ProjektBD
             if (e.CloseReason == CloseReason.WindowsShutDown)
                 return;
 
-            switch (MessageBox.Show(this, "Jesteś pewien, że chcesz zakończyć\npracę z tą aplikacją?", "Zamknij aplikację",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            switch ( MsgBoxUtils.displayQuestionMsgBox("Zamknij aplikację", "Jesteś pewien, że chcesz zakończyć\npracę z tą aplikacją?", this) )
             {
                 case DialogResult.No:
                     e.Cancel = true;

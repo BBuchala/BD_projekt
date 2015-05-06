@@ -42,5 +42,13 @@ namespace ProjektBD.Controllers
         {
             return database.connectionSuccessful;
         }
+
+        /// <summary>
+        /// Sprawdza, czy baza jest w stanie naprawczym
+        /// </summary>
+        public void checkEmergencyMode()
+        {
+            database.checkEmergencyMode();
+        }
     }
 }
