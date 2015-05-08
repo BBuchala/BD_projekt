@@ -41,11 +41,6 @@ namespace ProjektBD.Forms
         /// </summary>
         private bool registeredSuccessfully = false;
 
-        ///// <summary>
-        ///// Zarządza operacjami przeprowadzanymi na bazie danych
-        ///// </summary>
-        //private DatabaseUtils database;
-
         /// <summary>
         /// Warstwa pośrednicząca między widokiem a modelem (bazą danych). Przetwarza i oblicza
         /// </summary>

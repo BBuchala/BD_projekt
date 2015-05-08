@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using System.Data.Entity;
+using System.Data.Entity.Core;
 using ProjektBD.DAL;
 using ProjektBD.Utilities;
 using ProjektBD.Model;
-using System.Data.Entity.Core;
+using ProjektBD.Controllers;
 
 namespace ProjektBD.Forms
 {
     public partial class AdministratorMain : Form
     {
-
         /// <summary>
-        /// Zarządza operacjami przeprowadzanymi na bazie danych
+        /// Warstwa pośrednicząca między widokiem a modelem (bazą danych). Przetwarza i oblicza
         /// </summary>
-        private DatabaseUtils database;
+        private AdminController formController;
 
         List<Użytkownik> newUsers;
 
@@ -31,7 +31,7 @@ namespace ProjektBD.Forms
         public AdministratorMain()
         {
             InitializeComponent();
-            database = new DatabaseUtils();
+            formController = new AdminController();
         }
 
         #region Methods
@@ -44,8 +44,7 @@ namespace ProjektBD.Forms
         {
             try
             {
-                newUsers = database.findUsers();
-
+                newUsers = formController.findNewUsers();
                 newUsersCount = newUsers.Count;
 
                 if (newUsersCount != 0)
@@ -82,11 +81,11 @@ namespace ProjektBD.Forms
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3))
             {
                 case DialogResult.Yes:
-                    database.addTeacher(u);
+                    formController.addTeacher(u);
                     break;
 
                 case DialogResult.No:
-                    database.deleteUser(u);
+                    formController.deleteUser(u);
                     break;
 
                 default:
@@ -109,7 +108,7 @@ namespace ProjektBD.Forms
 
             try
             {
-                database.changeEmergencyMode();
+                formController.changeEmergencyMode();
 
                 if (EmergencyMode.isEmergency)
                 {
@@ -131,7 +130,7 @@ namespace ProjektBD.Forms
 
         private void AdministratorMain_Load(object sender, EventArgs e)
         {
-            if (database.connectToDB())
+            if ( formController.connectToDatabase() )
                 this.Close();
 
             if (EmergencyMode.isEmergency)
@@ -187,7 +186,7 @@ namespace ProjektBD.Forms
         /// </summary>
         private void AdministratorMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            database.disposeContext();
+            formController.disposeContext();
         }
 
         /// <summary>

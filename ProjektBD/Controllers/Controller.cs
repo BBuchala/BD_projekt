@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ProjektBD.Databases;
 using ProjektBD.Utilities;
 
 namespace ProjektBD.Controllers
@@ -16,7 +16,7 @@ namespace ProjektBD.Controllers
         /// <summary>
         /// Zarządza operacjami przeprowadzanymi na bazie danych
         /// </summary>
-        protected DatabaseUtils database = new DatabaseUtils();
+        protected DatabaseBase database;
 
 
         /// <summary>
@@ -49,6 +49,14 @@ namespace ProjektBD.Controllers
         public void checkEmergencyMode()
         {
             database.checkEmergencyMode();
+        }
+
+        /// <summary>
+        /// Zmienia stan bazy danych na przeciwny
+        /// </summary>
+        public void changeEmergencyMode()
+        {
+            database.changeEmergencyMode();
         }
     }
 }

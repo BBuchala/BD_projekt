@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjektBD.Databases;
 using ProjektBD.Exceptions;
 
 namespace ProjektBD.Controllers
@@ -21,6 +22,8 @@ namespace ProjektBD.Controllers
         DateTimePicker dateTimePicker1;
         int nrIndeksu;
 
+        RegistrationDatabase regDatabase;
+
         public RegistrationController(List<TextBoxBase> textFieldsFromForm, List<Label> labelsFromForm, MaskedTextBox indexFromForm,
             CheckBox birthDateFromForm, DateTimePicker dateTimePickerFromForm)
         {
@@ -29,6 +32,9 @@ namespace ProjektBD.Controllers
             index = indexFromForm;
             birthDate = birthDateFromForm;
             dateTimePicker1 = dateTimePickerFromForm;
+
+            database = new RegistrationDatabase();
+            regDatabase = (database as RegistrationDatabase);
         }
 
         /// <summary>
@@ -119,7 +125,7 @@ namespace ProjektBD.Controllers
                 nrIndeksu = Int32.Parse(index.Text);
 
             // Czy login/email/indeks się nie pokrywa z istniejącym użytkownikiem
-            string overlappingAttribute = database.isOccupied(index.Enabled, textFields[0].Text, textFields[3].Text, nrIndeksu);
+            string overlappingAttribute = regDatabase.isOccupied(index.Enabled, textFields[0].Text, textFields[3].Text, nrIndeksu);
 
             if (!overlappingAttribute.Equals(""))
                 throw new UsersOverlappingException(overlappingAttribute);
@@ -133,12 +139,12 @@ namespace ProjektBD.Controllers
         {
             if (index.Enabled)
             {
-                database.createStudentAccount(textFields, nrIndeksu, birthDate.Checked, dateTimePicker1.Value);
+                regDatabase.createStudentAccount(textFields, nrIndeksu, birthDate.Checked, dateTimePicker1.Value);
                 return "Utworzono konto studenta";
             }
             else
             {
-                database.notifyAdmin(textFields, birthDate.Checked, dateTimePicker1.Value);
+                regDatabase.notifyAdmin(textFields, birthDate.Checked, dateTimePicker1.Value);
                 return "Utworzono konto prowadzącego";
             }
         }

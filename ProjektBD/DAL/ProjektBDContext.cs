@@ -19,6 +19,7 @@ namespace ProjektBD.DAL
         // : base(@"Data Source=PC; Initial Catalog=ProjektBD; Integrated Security=True")     // Od strony hosta łączy się inaczej, don't bother
         // : base("ProjektBD")                      // Stary, lokalny CS, na wypadek gdyby ligocki serwer spał
             : base(@"Data Source=PC; Initial Catalog=ProjektBD; User ID=Jan Sebastian;Password=Bach;Connection Timeout=3") 
+
         {
             Database.SetInitializer<ProjektBDContext>(new ProjektBDInitializer());
         }
