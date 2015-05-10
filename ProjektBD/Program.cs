@@ -19,7 +19,7 @@ namespace ProjektBD
             Application.SetCompatibleTextRenderingDefault(false);
             
 
-            Application.Run(new LoginForm());
+            Application.Run(new DodajPrzedmiot());
             //Application.Run(new AdministratorMain());
         }
     }

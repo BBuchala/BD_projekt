@@ -39,15 +39,13 @@
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -74,9 +72,7 @@
             this.tabPage1.Controls.Add(this.textBox9);
             this.tabPage1.Controls.Add(this.label21);
             this.tabPage1.Controls.Add(this.textBox8);
-            this.tabPage1.Controls.Add(this.label16);
             this.tabPage1.Controls.Add(this.button6);
-            this.tabPage1.Controls.Add(this.textBox6);
             this.tabPage1.Controls.Add(this.label17);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -89,7 +85,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(255, 204);
+            this.label24.Location = new System.Drawing.Point(255, 172);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(63, 13);
             this.label24.TabIndex = 30;
@@ -97,7 +93,7 @@
             // 
             // textBox11
             // 
-            this.textBox11.Location = new System.Drawing.Point(361, 204);
+            this.textBox11.Location = new System.Drawing.Point(361, 172);
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(92, 20);
             this.textBox11.TabIndex = 29;
@@ -105,7 +101,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(255, 166);
+            this.label23.Location = new System.Drawing.Point(255, 134);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(32, 13);
             this.label23.TabIndex = 28;
@@ -113,7 +109,7 @@
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(361, 166);
+            this.textBox10.Location = new System.Drawing.Point(361, 134);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(92, 20);
             this.textBox10.TabIndex = 27;
@@ -121,7 +117,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(254, 130);
+            this.label22.Location = new System.Drawing.Point(254, 98);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(32, 13);
             this.label22.TabIndex = 26;
@@ -129,7 +125,7 @@
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(361, 130);
+            this.textBox9.Location = new System.Drawing.Point(361, 98);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(92, 20);
             this.textBox9.TabIndex = 25;
@@ -137,7 +133,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(254, 95);
+            this.label21.Location = new System.Drawing.Point(254, 63);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(38, 13);
             this.label21.TabIndex = 24;
@@ -145,35 +141,19 @@
             // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(361, 95);
+            this.textBox8.Location = new System.Drawing.Point(361, 63);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(92, 20);
             this.textBox8.TabIndex = 23;
             // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(255, 62);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(73, 13);
-            this.label16.TabIndex = 22;
-            this.label16.Text = "Imię nazwisko";
-            // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(361, 239);
+            this.button6.Location = new System.Drawing.Point(361, 207);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(92, 31);
             this.button6.TabIndex = 21;
             this.button6.Text = "Uzupełnij";
             this.button6.UseVisualStyleBackColor = true;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(361, 62);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(92, 20);
-            this.textBox6.TabIndex = 20;
             // 
             // label17
             // 
@@ -208,16 +188,16 @@
             this.tabPage3.Text = "Usuń konto";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // button1
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.checkBox1.Location = new System.Drawing.Point(308, 81);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(78, 24);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "USUŃ";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.button1.Location = new System.Drawing.Point(259, 129);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(178, 51);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Usuń";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.MouseEnter += new System.EventHandler(this.button1_MouseEnter);
             // 
             // label1
             // 
@@ -229,16 +209,16 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "W celu usunięcia konta potwierdź swój wybór";
             // 
-            // button1
+            // checkBox1
             // 
-            this.button1.Location = new System.Drawing.Point(259, 129);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(178, 51);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Usuń";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button1.MouseEnter += new System.EventHandler(this.button1_MouseEnter);
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.checkBox1.Location = new System.Drawing.Point(308, 81);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(78, 24);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "USUŃ";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Zarządzanie_Kontem
             // 
@@ -274,9 +254,7 @@
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
