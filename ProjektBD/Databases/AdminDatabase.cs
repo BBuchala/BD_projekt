@@ -7,6 +7,9 @@ using ProjektBD.Model;
 
 namespace ProjektBD.Databases
 {
+    /// <summary>
+    /// Baza danych dla formularza administratora
+    /// </summary>
     class AdminDatabase : DatabaseBase
     {
         /// <summary>

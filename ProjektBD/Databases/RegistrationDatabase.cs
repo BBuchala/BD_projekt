@@ -7,9 +7,13 @@ using System.Windows.Forms;
 
 using System.Data.Entity;
 using ProjektBD.Model;
+using ProjektBD.Utilities;
 
 namespace ProjektBD.Databases
 {
+    /// <summary>
+    /// Baza danych dla formularza rejestracji
+    /// </summary>
     class RegistrationDatabase : DatabaseBase
     {
         /// <summary>
@@ -17,10 +21,14 @@ namespace ProjektBD.Databases
         /// </summary>
         public void createStudentAccount(List<TextBoxBase> textFields, int numerIndeksu, bool czyPodanoDate, DateTime dataUrodzenia)
         {
+            string salt = Encryption.generateSalt();
+            string hashedPassword = Encryption.HashPassword(textFields[1].Text, salt);
+
             Student s = new Student
             {
                 login = textFields[0].Text,
-                hasło = textFields[1].Text,
+                hasło = hashedPassword,
+                sól = salt,
                 email = textFields[3].Text,
                 miejsceZamieszkania = textFields[5].Text,
                 nrIndeksu = numerIndeksu
@@ -28,7 +36,6 @@ namespace ProjektBD.Databases
 
             if (czyPodanoDate == true)
                 s.dataUrodzenia = dataUrodzenia;
-            else s.dataUrodzenia = null;
 
             context.Studenci.Add(s);
             context.SaveChanges();
@@ -39,17 +46,20 @@ namespace ProjektBD.Databases
         /// </summary>
         public void notifyAdmin(List<TextBoxBase> textFields, bool czyPodanoDate, DateTime dataUrodzenia)
         {
+            string salt = Encryption.generateSalt();
+            string hashedPassword = Encryption.HashPassword(textFields[1].Text, salt);
+
             Użytkownik u = new Użytkownik
             {
                 login = textFields[0].Text,
-                hasło = textFields[1].Text,
+                hasło = hashedPassword,
+                sól = salt,
                 email = textFields[3].Text,
                 miejsceZamieszkania = textFields[5].Text
             };
 
             if (czyPodanoDate == true)
                 u.dataUrodzenia = dataUrodzenia;
-            else u.dataUrodzenia = null;
 
             context.Użytkownicy.Add(u);
             context.SaveChanges();

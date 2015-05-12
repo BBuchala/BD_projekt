@@ -33,12 +33,19 @@ namespace ProjektBD.Controllers
         /// </summary>
         public string validateUser(string login, string password)
         {
-            Użytkownik query = accDatabase.loginQuery(login, password);
+            string salt = accDatabase.getUserSalt(login);
 
-            if (query != null)
-                return query.GetType().Name;
-            else
-                return "";
+            if (salt != null)
+            {
+                string hashedPassword = Encryption.HashPassword(password, salt);
+
+                Użytkownik query = accDatabase.loginQuery(login, hashedPassword);
+
+                if (query != null)
+                    return query.GetType().Name;
+            }
+
+            return "";
         }
 
         /// <summary>

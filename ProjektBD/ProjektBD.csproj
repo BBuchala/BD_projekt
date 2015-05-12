@@ -124,6 +124,7 @@
       <DependentUpon>ZarządzanieKontem.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\EmergencyMode.cs" />
+    <Compile Include="Utilities\Encryption.cs" />
     <Compile Include="Utilities\MsgBoxUtils.cs" />
     <Compile Include="Utilities\SpellCheck.cs" />
     <Compile Include="Model\Administrator.cs" />

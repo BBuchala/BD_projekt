@@ -9,6 +9,9 @@ using ProjektBD.DAL;
 
 namespace ProjektBD.Databases
 {
+    /// <summary>
+    /// Abstrakcyjna klasa zawierająca pola i netody wspólne dla wszystkich baz
+    /// </summary>
     abstract class DatabaseBase
     {
         /// <summary>

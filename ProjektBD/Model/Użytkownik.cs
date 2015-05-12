@@ -21,9 +21,13 @@ namespace ProjektBD.Model
         [Required]
         public string login { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(64)]
         [Required]
         public string hasło { get; set; }
+
+        [MaxLength(32)]
+        [Required]
+        public string sól { get; set; }
 
         [MaxLength(50)]
         [Required]
