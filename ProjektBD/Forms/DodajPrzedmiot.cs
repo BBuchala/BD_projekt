@@ -15,23 +15,24 @@ namespace ProjektBD.Forms
         public DodajPrzedmiot()
         {
             InitializeComponent();
+
+            this.Height -= 50;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked == true)
             {
-                textBox3.Visible = true;
-                label3.Visible = true;
+                textBox1.Visible = true;
+                label1.Visible = true;
+                this.Height += 50;
             }
-            else 
+            else
             {
-                textBox3.Visible = false;
-                label3.Visible = false;
-
-                
+                textBox1.Visible = false;
+                label1.Visible = false;
+                this.Height -= 50;
             }
-            
         }
     }
 }

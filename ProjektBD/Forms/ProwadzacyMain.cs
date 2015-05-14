@@ -17,9 +17,39 @@ namespace ProjektBD.Forms
             InitializeComponent();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
+            DodajPrzedmiot newForm = new DodajPrzedmiot();
+            newForm.ShowDialog();
+            newForm.Dispose();
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem();
+            newForm.ShowDialog();
+            newForm.Dispose();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            EdytujPrzedmioty newForm = new EdytujPrzedmioty();
+            newForm.ShowDialog();
+            newForm.Dispose();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            DodajEdytujProjekt newForm = new DodajEdytujProjekt();
+            newForm.ShowDialog();
+            newForm.Dispose();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            DodajEdytujProjekt newForm = new DodajEdytujProjekt();
+            newForm.ShowDialog();
+            newForm.Dispose();
         }
     }
 }

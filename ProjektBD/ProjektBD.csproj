@@ -203,6 +203,7 @@
     <None Include="Images\mail2.png" />
     <None Include="Images\mail.png" />
     <Content Include="Images\error.png" />
+    <Content Include="Images\logout.png" />
     <Content Include="Images\OK.png" />
     <Content Include="Images\pressed.png" />
     <Content Include="Images\unpressed.png" />

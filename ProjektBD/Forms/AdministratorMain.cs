@@ -146,6 +146,8 @@ namespace ProjektBD.Forms
             }
 
             lookForNewTeachers();
+
+            new ToolTip().SetToolTip(pictureBox2, "Wyloguj");
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -158,35 +160,9 @@ namespace ProjektBD.Forms
 
         private void button3_Click(object sender, EventArgs e)
         {
-        }
-
-        /// <summary>
-        /// Zamykanie formatki - messageBox z zapytaniem.
-        /// </summary>
-        private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.WindowsShutDown)
-                return;
-
-            if (this.DialogResult == DialogResult.Cancel)
-            {
-                switch ( MsgBoxUtils.displayQuestionMsgBox("Wyjdź", "Jesteś pewien, że chcesz opuścić okno rejestracji?", this) )
-                {
-                    case DialogResult.No:
-                        e.Cancel = true;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Zamknięcie formatki - Pozbywa się utworzonego kontekstu przy zamykaniu formularza
-        /// </summary>
-        private void AdministratorMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            formController.disposeContext();
+            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem();
+            newForm.ShowDialog();
+            newForm.Dispose();
         }
 
         /// <summary>
@@ -246,6 +222,36 @@ namespace ProjektBD.Forms
             {
                 MsgBoxUtils.displayConnectionErrorMsgBox();
             }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// Zamykanie formatki - messageBox z zapytaniem.
+        /// </summary>
+        private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.WindowsShutDown)
+                return;
+
+            if (this.DialogResult == DialogResult.Cancel)           // czy ten warunek jest konieczny?
+            {
+                DialogResult result = MsgBoxUtils.displayQuestionMsgBox("Wyjdź", "Czy na pewno chcesz się wylogować?", this);
+
+                if (result == DialogResult.No)
+                    e.Cancel = true;
+            }
+        }
+
+        /// <summary>
+        /// Zamknięcie formatki - Pozbywa się utworzonego kontekstu przy zamykaniu formularza
+        /// </summary>
+        private void AdministratorMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            formController.disposeContext();
         }
 
         #endregion
