@@ -24,9 +24,7 @@ namespace ProjektBD.Forms
         /// </summary>
         private AdminController formController;
 
-        List<Użytkownik> newUsers;
-
-        int newUsersCount;
+        private Notifications notifications;
 
         public AdministratorMain()
         {
@@ -44,16 +42,16 @@ namespace ProjektBD.Forms
         {
             try
             {
-                newUsers = formController.findNewUsers();
-                newUsersCount = newUsers.Count;
+                notifications.newUsers = formController.findNewUsers();
+                notifications.newUsersCount = notifications.newUsers.Count;
 
-                if (newUsersCount != 0)
+                if (notifications.newUsersCount != 0)
                 {
                     notificationImage.Image = ProjektBD.Properties.Resources.znak;
                     notificationCount.Visible = true;
 
-                    if (newUsersCount <= 100)
-                        notificationCount.Text = newUsersCount.ToString();
+                    if (notifications.newUsersCount <= 100)
+                        notificationCount.Text = notifications.newUsersCount.ToString();
                     else
                         notificationCount.Text = "99+";
                 }
@@ -171,11 +169,11 @@ namespace ProjektBD.Forms
         /// </summary>
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            if (newUsersCount > 0)
+            if (notifications.newUsersCount > 0)
             {
                 string str = "";
 
-                str += newUsersCount.ToString() + " nowy" + ((newUsersCount > 1) ? "ch" : "") + " użytkownik" + ((newUsersCount > 1) ? "ów" : "");
+                str += notifications.newUsersCount.ToString() + " nowy" + ((notifications.newUsersCount > 1) ? "ch" : "") + " użytkownik" + ((notifications.newUsersCount > 1) ? "ów" : "");
 
                 nowyUserToolStripMenuItem.Text = str;
                 nowyUserToolStripMenuItem.ForeColor = Color.Red;
@@ -204,24 +202,47 @@ namespace ProjektBD.Forms
         }
 
         /// <summary>
-        /// Wywołuje kolejne msgBoxy tak długo jak są nowe zgłoszenia.
+        /// Dynamicznie ładuje listę nowych użytkowników ubiegających się o prowadzącego
         /// </summary>
-        private void nowyUserToolStripMenuItem_Click(object sender, EventArgs e)
+        private void nowyUserToolStripMenuItem_MouseEnter(object sender, EventArgs e)
         {
+            nowyUserToolStripMenuItem.DropDownItems.Clear();
+            List<ToolStripMenuItem> items = new List<ToolStripMenuItem>();
+
             try                            // dopiero tutaj, a nie wewnątrz funkcji, ponieważ połączenie może się zerwać w połowie dodawania prowadzących
             {
-                for (int i = 0; i < newUsersCount; i++)
+                for (int i = 0; i < (notifications.newUsersCount > 10 ? 10 : notifications.newUsersCount); i++) // do 10, żeby menu się nie rozrastało niepotrzebnie
                 {
-                    acceptNewTeacher(newUsers[i]);
+                    ToolStripMenuItem tmp = new ToolStripMenuItem();
+                    tmp.Text = notifications.newUsers[i].login;
+                    items.Add(tmp);
+                    tmp.Click += new EventHandler(MenuItemClickHandler);
                 }
 
-                lookForNewTeachers();
+                nowyUserToolStripMenuItem.DropDownItems.AddRange(items.ToArray());
+                nowyUserToolStripMenuItem.DropDown.AllowDrop = true;
             }
 
             catch (EntityException)
             {
                 MsgBoxUtils.displayConnectionErrorMsgBox();
             }
+        }
+
+        /// <summary>
+        /// Identyfikuje prowadzącego na podstawie przyciśniętego MenuItema
+        /// </summary>
+        private void MenuItemClickHandler(object sender, EventArgs e)
+        {
+            ToolStripMenuItem clickedItem = (ToolStripMenuItem)sender;
+
+            foreach (Użytkownik u in notifications.newUsers)
+            {
+                if (clickedItem.Text == u.login)
+                    acceptNewTeacher(u);
+            }
+
+            lookForNewTeachers();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -254,7 +275,15 @@ namespace ProjektBD.Forms
             formController.disposeContext();
         }
 
+
         #endregion
 
+        
+    }
+
+    struct Notifications
+    {
+        public List<Użytkownik> newUsers;
+        public int newUsersCount;
     }
 }

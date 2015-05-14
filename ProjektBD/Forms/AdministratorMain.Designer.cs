@@ -126,7 +126,7 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nowyUserToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(176, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(176, 48);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // nowyUserToolStripMenuItem
@@ -136,7 +136,7 @@
             this.nowyUserToolStripMenuItem.Name = "nowyUserToolStripMenuItem";
             this.nowyUserToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.nowyUserToolStripMenuItem.Text = "Nowy Prowadzący";
-            this.nowyUserToolStripMenuItem.Click += new System.EventHandler(this.nowyUserToolStripMenuItem_Click);
+            this.nowyUserToolStripMenuItem.MouseEnter += new System.EventHandler(this.nowyUserToolStripMenuItem_MouseEnter);
             // 
             // notificationImage
             // 
