@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using ProjektBD.Model;
+
+using System.Data.Entity.Infrastructure;
+using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace ProjektBD.Databases
 {
@@ -41,11 +47,11 @@ namespace ProjektBD.Databases
             //var command = @"DELETE FROM UŻYTKOWNIK WHERE UżytkownikID = @param";
             //context.Database.ExecuteSqlCommand(command, new SqlParameter("param", u.UżytkownikID));
 
-            Użytkownik userToDelete = context.Użytkownicy.Where(s => s.UżytkownikID == u.UżytkownikID).FirstOrDefault();
+            Użytkownik userToDelete = context.Użytkownik.Where(s => s.UżytkownikID == u.UżytkownikID).FirstOrDefault();
 
             if (userToDelete != null)
             {
-                context.Użytkownicy.Remove(userToDelete);
+                context.Użytkownik.Remove(userToDelete);
                 context.SaveChanges();
             }
         }
@@ -57,11 +63,11 @@ namespace ProjektBD.Databases
         /// <param name="u">Upgrade'owanmy użytkownik</param>
         internal void addTeacher(Użytkownik u)
         {
-            if (context.Zakłady.Where(z => (z.nazwa.Equals("*nieznany*"))).ToList().Count < 1)
+            if (context.Zakład.Where(z => (z.nazwa.Equals("*nieznany*"))).ToList().Count < 1)
             {
                 Zakład z = new Zakład { nazwa = "*nieznany*" };
 
-                context.Zakłady.Add(z);
+                context.Zakład.Add(z);
                 context.SaveChanges();
             }
 
@@ -86,7 +92,52 @@ namespace ProjektBD.Databases
 
             context.Prowadzący.Add(p);
             context.SaveChanges();
+        }
 
+        /// <summary>
+        /// Pobiera nazwy tabel istniejących w bazie
+        /// </summary>
+        public List<string> getTableNames()
+        {
+            return context.Database.SqlQuery<string>("SELECT name FROM sys.tables ORDER BY name").ToList();
+        }
+
+        /// <summary>
+        /// Pobiera wszystkie wiersze z tablicy o podanej nazwie
+        /// </summary>
+        public async Task< List<object> > getTableData(string tableName)
+        {
+            object kontekstObj = (object) context;
+            PropertyInfo prop = kontekstObj.GetType().GetProperty(tableName);           // Sprawdza, czy własność podana przez parametr
+                                                                                        // znajduje się w kontekście
+            if (prop != null)
+            {
+                var wartość = prop.GetValue(kontekstObj);                               // Pobiera wartość tej własności
+
+                List<object> list = (wartość as IEnumerable<object>).ToList();
+
+                return list;
+            }
+                                                                                        // Własności nie ma w kontekście - potrzeba nam surowego SQL'a :<
+            Type t = Type.GetType("ProjektBD.Databases.AdminDatabase+" + tableName);    // Typ klasy, do której zapisany zostanie wynik zapytania
+
+            return await context.Database.SqlQuery(t, "SELECT * FROM " + tableName).ToListAsync();
+        }
+
+        //---------------------
+        // Prywatne klasy pomocnicze do obsługi tablic, których nie ma w kontekście
+        // (do nich zwracane są wyniki zapytań)
+        //---------------------
+        class Prowadzone_rozmowy
+        {
+            public int RozmowaID { get; set; }
+            public int UżytkownikID { get; set; }
+        }
+
+        class Przedmioty_studenci
+        {
+            public int PrzedmiotID { get; set; }
+            public int StudentID { get; set; }
         }
     }
 }

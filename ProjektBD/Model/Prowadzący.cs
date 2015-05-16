@@ -21,6 +21,7 @@ namespace ProjektBD.Model
 
         public short? ZakładID { get; set; }             // Foreign Key
 
+        [Browsable(false)]
         public virtual Zakład Zakład { get; set; }
 
         [Browsable(false)]

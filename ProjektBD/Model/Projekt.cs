@@ -27,6 +27,7 @@ namespace ProjektBD.Model
 
         public int maxLiczbaStudentów { get; set; }
 
+        [Browsable(false)]
         public virtual Przedmiot Przedmiot { get; set; }
 
         [Browsable(false)]

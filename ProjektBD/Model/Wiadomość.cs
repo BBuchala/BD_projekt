@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace ProjektBD.Model
         public DateTime dataWysłania { get; set; }
         public bool przeczytana { get; set; }
 
+        [Browsable(false)]
         public virtual Rozmowa Rozmowa { get; set; }  
     }
 }

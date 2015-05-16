@@ -35,7 +35,7 @@ namespace ProjektBD.Databases
             try
             {
                 context.Database.Initialize(false);
-                context.Użytkownicy.Load();                 // Wczytuje do lokalnej kolekcji wszystkich użytkowników (w tym studentów, prowadzących itp.)
+                context.Użytkownik.Load();                 // Wczytuje do lokalnej kolekcji wszystkich użytkowników (w tym studentów, prowadzących itp.)
 
                 connectionSuccessful = true;
             }

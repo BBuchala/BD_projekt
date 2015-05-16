@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -25,8 +26,13 @@ namespace ProjektBD.Model
 
         public DateTime? dataWpisania { get; set; }
 
+        [Browsable(false)]
         public virtual Student Student { get; set; }
+
+        [Browsable(false)]
         public virtual Przedmiot Przedmiot { get; set; }
+
+        [Browsable(false)]
         public virtual Projekt Projekt { get; set; }
     }
 }

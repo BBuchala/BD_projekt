@@ -34,6 +34,7 @@ namespace ProjektBD.Model
 
         public int liczbaStudentów { get; set; }
 
+        [Browsable(false)]
         public virtual Prowadzący Prowadzący { get; set; }
 
         [Browsable(false)]

@@ -146,6 +146,8 @@ namespace ProjektBD.Forms
             lookForNewTeachers();
 
             new ToolTip().SetToolTip(pictureBox2, "Wyloguj");
+
+            comboBox1.Items.AddRange( formController.getTableNames() );
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -250,6 +252,28 @@ namespace ProjektBD.Forms
             this.Close();
         }
 
+        private async void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var query = await formController.getTableData(comboBox1.Text);
+
+                dataGridView1.DataSource = query;
+
+                foreach (DataGridViewColumn column in dataGridView1.Columns)
+                {
+                    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;              // Autosize szerokości kolumn
+                }
+            } 
+            catch (System.NotSupportedException) {}     // Niweluje error wyskakujący, gdy asynchroniczne operacje wykonują się zbyt szybko
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            // TODO: zmiana wartości w kontrolce zmienia wartość w BD
+            int x = 2;
+        }
+
         /// <summary>
         /// Zamykanie formatki - messageBox z zapytaniem.
         /// </summary>
@@ -275,10 +299,7 @@ namespace ProjektBD.Forms
             formController.disposeContext();
         }
 
-
         #endregion
-
-        
     }
 
     struct Notifications

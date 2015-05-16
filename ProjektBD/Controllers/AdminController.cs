@@ -46,5 +46,24 @@ namespace ProjektBD.Controllers
         {
             admDatabase.deleteUser(u);
         }
+
+        /// <summary>
+        /// Pobiera nazwy tabel istniejących w bazie
+        /// </summary>
+        public string[] getTableNames()
+        {
+            List<string> tableList = admDatabase.getTableNames();
+            tableList.RemoveAt(0);                                  // Usuwa systemową kolumnę MigrationHistory
+
+            return tableList.ToArray();                             // Wpisanie tablicy do comboboxa to kwestia 1 linijki
+        }
+
+        /// <summary>
+        /// Pobiera wszystkie wiersze z tablicy o podanej nazwie
+        /// </summary>
+        public async Task< List<object> > getTableData(string tableName)
+        {
+            return await admDatabase.getTableData(tableName);
+        }
     }
 }

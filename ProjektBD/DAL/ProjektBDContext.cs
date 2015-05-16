@@ -24,20 +24,20 @@ namespace ProjektBD.DAL
             Database.SetInitializer<ProjektBDContext>(new ProjektBDInitializer());
         }
 
-        public DbSet<Użytkownik>            Użytkownicy         { get; set; }
-        public DbSet<Rozmowa>               Rozmowy             { get; set; }
-        public DbSet<Wiadomość>             Wiadomości          { get; set; }
-        public DbSet<Administrator>         Administratorzy     { get; set; }
-        public DbSet<Student>               Studenci            { get; set; }
+        public DbSet<Użytkownik>            Użytkownik         { get; set; }
+        public DbSet<Rozmowa>               Rozmowa             { get; set; }
+        public DbSet<Wiadomość>             Wiadomość          { get; set; }
+        public DbSet<Administrator>         Administrator     { get; set; }
+        public DbSet<Student>               Student            { get; set; }
         public DbSet<Prowadzący>            Prowadzący          { get; set; }
-        public DbSet<Zakład>                Zakłady             { get; set; }
-        public DbSet<Ocena>                 Oceny               { get; set; }
-        public DbSet<Projekt>               Projekty            { get; set; }
-        public DbSet<Przedmiot>             Przedmioty          { get; set; }
-        public DbSet<PrzedmiotObieralny>    PrzedmiotyObieralne { get; set; }
-        public DbSet<Raport>                Raporty             { get; set; }
-        public DbSet<Zgłoszenie>            Zgłoszenia          { get; set; }
-
+        public DbSet<Zakład>                Zakład             { get; set; }
+        public DbSet<Ocena>                 Ocena               { get; set; }
+        public DbSet<Projekt>               Projekt            { get; set; }
+        public DbSet<Przedmiot>             Przedmiot          { get; set; }
+        public DbSet<PrzedmiotObieralny>    PrzedmiotObieralny { get; set; }
+        public DbSet<Raport>                Raport             { get; set; }
+        public DbSet<Zgłoszenie>            Zgłoszenie          { get; set; }
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // Dzięki temu nazwy tabel nie zostaną zmnogowane ("Rozmowas" itp.)

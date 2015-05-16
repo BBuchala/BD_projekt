@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -24,8 +25,13 @@ namespace ProjektBD.Model
 
         public bool jestZaakceptowane { get; set; }
 
+        [Browsable(false)]
         public virtual Prowadzący Prowadzący { get; set; }
+
+        [Browsable(false)]
         public virtual Student Student { get; set; }
+
+        [Browsable(false)]
         public virtual Przedmiot Przedmiot { get; set; }
     }
 }
