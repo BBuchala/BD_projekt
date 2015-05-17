@@ -37,7 +37,7 @@ namespace ProjektBD.Databases
             if (czyPodanoDate == true)
                 s.dataUrodzenia = dataUrodzenia;
 
-            context.Student.Add(s);
+            context.Studenci.Add(s);
             context.SaveChanges();
         }
 
@@ -61,7 +61,7 @@ namespace ProjektBD.Databases
             if (czyPodanoDate == true)
                 u.dataUrodzenia = dataUrodzenia;
 
-            context.Użytkownik.Add(u);
+            context.Użytkownicy.Add(u);
             context.SaveChanges();
         }
 
@@ -76,21 +76,21 @@ namespace ProjektBD.Databases
             String inputLogin = login;
             String inputEmail = email;
 
-            context.Użytkownik.Load();
+            context.Użytkownicy.Load();
 
-            var query = context.Użytkownik.Local.Where(s => (s.email.Equals(inputEmail)));
+            var query = context.Użytkownicy.Local.Where(s => (s.email.Equals(inputEmail)));
 
             if (query.Count() > 0)
                 return "Email";
 
-            query = context.Użytkownik.Local.Where(s => (s.login.Equals(inputLogin)));
+            query = context.Użytkownicy.Local.Where(s => (s.login.Equals(inputLogin)));
 
             if (query.Count() > 0)
                 return "login";
 
             if (student)
             {
-                query = context.Student.Local.Where(s => (s.nrIndeksu == numerIndeksu));
+                query = context.Studenci.Local.Where(s => (s.nrIndeksu == numerIndeksu));
 
                 if (query.Count() > 0)
                     return "nr indeksu";

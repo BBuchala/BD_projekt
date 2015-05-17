@@ -17,9 +17,9 @@ namespace ProjektBD.Databases
     {
         public string getUserSalt(string login)
         {
-            context.Użytkownik.Load();
+            context.Użytkownicy.Load();
 
-            return context.Użytkownik.Local
+            return context.Użytkownicy.Local
                 .Where(u => u.login.Equals(login))
                 .Select(s => s.sól)
                 .FirstOrDefault();
@@ -34,7 +34,7 @@ namespace ProjektBD.Databases
         internal Użytkownik loginQuery(string login, string hashedPassword)
         {
             // FirstOrDefault zwraca pierwszy wynik zapytania lub null, jeśli użytkownik nie został znaleziony
-            return context.Użytkownik.Local
+            return context.Użytkownicy.Local
                 .Where( s => s.login.Equals(login) && s.hasło.Equals(hashedPassword) )
                 .FirstOrDefault();
         }

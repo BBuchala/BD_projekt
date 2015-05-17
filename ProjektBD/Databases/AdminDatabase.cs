@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using ProjektBD.Model;
-
-using System.Data.Entity.Infrastructure;
 using System.Collections;
-using System.Collections.ObjectModel;
+
+using ProjektBD.Model;
 
 namespace ProjektBD.Databases
 {
@@ -47,11 +44,11 @@ namespace ProjektBD.Databases
             //var command = @"DELETE FROM UŻYTKOWNIK WHERE UżytkownikID = @param";
             //context.Database.ExecuteSqlCommand(command, new SqlParameter("param", u.UżytkownikID));
 
-            Użytkownik userToDelete = context.Użytkownik.Where(s => s.UżytkownikID == u.UżytkownikID).FirstOrDefault();
+            Użytkownik userToDelete = context.Użytkownicy.Where(s => s.UżytkownikID == u.UżytkownikID).FirstOrDefault();
 
             if (userToDelete != null)
             {
-                context.Użytkownik.Remove(userToDelete);
+                context.Użytkownicy.Remove(userToDelete);
                 context.SaveChanges();
             }
         }
@@ -63,11 +60,11 @@ namespace ProjektBD.Databases
         /// <param name="u">Upgrade'owanmy użytkownik</param>
         internal void addTeacher(Użytkownik u)
         {
-            if (context.Zakład.Where(z => (z.nazwa.Equals("*nieznany*"))).ToList().Count < 1)
+            if (context.Zakłady.Where(z => (z.nazwa.Equals("*nieznany*"))).ToList().Count < 1)
             {
                 Zakład z = new Zakład { nazwa = "*nieznany*" };
 
-                context.Zakład.Add(z);
+                context.Zakłady.Add(z);
                 context.SaveChanges();
             }
 
@@ -105,39 +102,28 @@ namespace ProjektBD.Databases
         /// <summary>
         /// Pobiera wszystkie wiersze z tablicy o podanej nazwie
         /// </summary>
-        public async Task< List<object> > getTableData(string tableName)
+        /// <typeparam name="T">Typ encji, której elementy przechowywane będą w zwracanej liscie</typeparam>
+        public IList getTableData<T>(string tableName) where T: class
         {
-            object kontekstObj = (object) context;
-            PropertyInfo prop = kontekstObj.GetType().GetProperty(tableName);           // Sprawdza, czy własność podana przez parametr
-                                                                                        // znajduje się w kontekście
-            if (prop != null)
+            if ( tableName.Equals("Prowadzone_rozmowy") )
             {
-                var wartość = prop.GetValue(kontekstObj);                               // Pobiera wartość tej własności
-
-                List<object> list = (wartość as IEnumerable<object>).ToList();
-
-                return list;
+                return context.Database.SqlQuery<Prowadzone_rozmowy>("SELECT * FROM Prowadzone_rozmowy").ToList();
             }
-                                                                                        // Własności nie ma w kontekście - potrzeba nam surowego SQL'a :<
-            Type t = Type.GetType("ProjektBD.Databases.AdminDatabase+" + tableName);    // Typ klasy, do której zapisany zostanie wynik zapytania
-
-            return await context.Database.SqlQuery(t, "SELECT * FROM " + tableName).ToListAsync();
+            else if ( tableName.Equals("Przedmioty_studenci") )
+            {
+                return context.Database.SqlQuery<Przedmioty_studenci>("SELECT * FROM Przedmioty_studenci").ToList();
+            }
+            else
+            {
+                DbSet<T> result = context.Set<T>();         // Tworzy nowy DbSet, który podpiernicza interesujące nas elementy z istniejącego kontekstu
+                result.Load();
+                return result.Local.ToBindingList();
+            }
         }
 
-        //---------------------
-        // Prywatne klasy pomocnicze do obsługi tablic, których nie ma w kontekście
-        // (do nich zwracane są wyniki zapytań)
-        //---------------------
-        class Prowadzone_rozmowy
+        public bool doesContextHaveChanges()
         {
-            public int RozmowaID { get; set; }
-            public int UżytkownikID { get; set; }
-        }
-
-        class Przedmioty_studenci
-        {
-            public int PrzedmiotID { get; set; }
-            public int StudentID { get; set; }
+            return context.ChangeTracker.HasChanges();
         }
     }
 }

@@ -41,6 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -187,6 +188,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Controls.Add(this.comboBox1);
             this.tabPage1.Controls.Add(this.label2);
@@ -197,14 +199,28 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Przeglądanie bazy danych";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(425, 24);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(84, 13);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Read-only mode";
+            this.label7.Visible = false;
+            // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(22, 55);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1086, 440);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
+            this.dataGridView1.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView1_UserAddedRow);
+            this.dataGridView1.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView1_UserDeletedRow);
             // 
             // comboBox1
             // 
@@ -422,5 +438,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem nowyUserToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label7;
     }
 }

@@ -31,7 +31,7 @@ namespace ProjektBD.DAL
                 dataUrodzenia = DateTime.Parse("2000-01-01"),
                 miejsceZamieszkania = "Gliwice"
             };
-            context.Administrator.Add(admin);                 // Dodaje admina do bazy
+            context.Administratorzy.Add(admin);                 // Dodaje admina do bazy
             context.SaveChanges();                              // Commit
 
             var zakłady = new List<Zakład>
@@ -41,7 +41,7 @@ namespace ProjektBD.DAL
                 new Zakład { nazwa = "Gastrofiz" },
                 new Zakład { nazwa = "ZMiTAC" }
             };
-            zakłady.ForEach( z => context.Zakład.Add(z) );
+            zakłady.ForEach( z => context.Zakłady.Add(z) );
             context.SaveChanges();
 
             var prowadzący = new List<Prowadzący>
@@ -122,7 +122,7 @@ namespace ProjektBD.DAL
                     nrIndeksu = 219795,
                     miejsceZamieszkania = "NekoMikoMikołów" }
             };
-            studenci.ForEach ( s => context.Student.Add(s) );
+            studenci.ForEach ( s => context.Studenci.Add(s) );
             context.SaveChanges();
 
             var przedmioty = new List<Przedmiot>
@@ -131,7 +131,7 @@ namespace ProjektBD.DAL
                 new Przedmiot { nazwa = "Fizyka", liczbaStudentów = 31, ProwadzącyID = 3 },
                 new Przedmiot { nazwa = "TUC", liczbaStudentów = 69, ProwadzącyID = 3 }
             };
-            przedmioty.ForEach( p => context.Przedmiot.Add(p) );
+            przedmioty.ForEach( p => context.Przedmioty.Add(p) );
             context.SaveChanges();
 
             PrzedmiotObieralny przedmObier = new PrzedmiotObieralny
@@ -141,7 +141,7 @@ namespace ProjektBD.DAL
                 maxLiczbaStudentów = 15,
                 ProwadzącyID = 2
             };
-            context.PrzedmiotObieralny.Add(przedmObier);
+            context.PrzedmiotyObieralne.Add(przedmObier);
             context.SaveChanges();
 
             var oceny = new List<Ocena>
@@ -151,7 +151,7 @@ namespace ProjektBD.DAL
                 new Ocena { PrzedmiotID = 2, StudentID = 7, wartość = 2.0, komentarz = "Ściąga w kalkulatorze" },
                 new Ocena { PrzedmiotID = 2, StudentID = 6, wartość = 3.0 }
             };
-            oceny.ForEach( o => context.Ocena.Add(o) );
+            oceny.ForEach( o => context.Oceny.Add(o) );
             context.SaveChanges();
             
             var rozmowy = new List<Rozmowa>
@@ -159,13 +159,13 @@ namespace ProjektBD.DAL
                 new Rozmowa { dataRozpoczęcia = DateTime.Parse("2015-01-18") },
                 new Rozmowa { dataRozpoczęcia = DateTime.Now }
             };
-            rozmowy.ForEach(r => context.Rozmowa.Add(r));
+            rozmowy.ForEach(r => context.Rozmowy.Add(r));
             context.SaveChanges();
 
             //----------------------------------------------------------------------
             // Jeden ze sposobów dodawania rozmowy do studenta - taki trochę na pałę
 
-            List<Student> studentsList = context.Student.ToList();
+            List<Student> studentsList = context.Studenci.ToList();
 
             studentsList[0].Rozmowy.Add( rozmowy[0] );
             studentsList[1].Rozmowy.Add( rozmowy[1] );
@@ -177,7 +177,7 @@ namespace ProjektBD.DAL
                 new Wiadomość { dataWysłania = DateTime.Parse("2015-01-18 13:41:25"), nadawca = "Kirei",
                     treść = "Yorokobe", RozmowaID = 1 }
             };
-            wiadomości.ForEach(w => context.Wiadomość.Add(w));
+            wiadomości.ForEach(w => context.Wiadomości.Add(w));
             context.SaveChanges();
         }
     }
