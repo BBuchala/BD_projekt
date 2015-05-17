@@ -53,6 +53,7 @@ namespace ProjektBD.Forms
             // Wyswietl wszystkie wiadomosci z danym rozmowca.
             ProjektBD.Model.Wiadomość pobranaWiadomosc;
 
+            // Wyswietlanie
             for (int i = 0; i < iloscWiadomosci; ++ i)
             {
                 pobranaWiadomosc = pobierzWiadomosc(i);
@@ -66,6 +67,7 @@ namespace ProjektBD.Forms
         {
             ProjektBD.Model.Użytkownik pobranyKontakt;
 
+            // Wyswietlanie
             for (int i = 0; i < iloscKontaktow; ++ i)
             {
                 pobranyKontakt = pobierzKontakt(i);
