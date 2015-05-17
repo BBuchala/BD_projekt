@@ -82,9 +82,9 @@ namespace ProjektBD
             // Z sortowaniem, yay!
             //--------------------------
 
-            context.Student.Load();
+            context.Studenci.Load();
 
-            var query = context.Student.Local.ToBindingList();
+            var query = context.Studenci.Local.ToBindingList();
             dataGridView1.DataSource = query;
 
             // bajery
@@ -156,11 +156,11 @@ namespace ProjektBD
             // INSERT ver. 1
             //--------------------------
 
-            Student st = context.Student.Where(x => x.nrIndeksu == 219795).FirstOrDefault();
+            Student st = context.Studenci.Where(x => x.nrIndeksu == 219795).FirstOrDefault();
 
             if (st == null)
             {
-                context.Student.Add(s);
+                context.Studenci.Add(s);
                 context.SaveChanges();
             }
 
@@ -180,7 +180,7 @@ namespace ProjektBD
             // UPDATE ver. 1
             //--------------------------
 
-            Student s = context.Student.Where(x => x.login.Equals("Forczu")).FirstOrDefault();
+            Student s = context.Studenci.Where(x => x.login.Equals("Forczu")).FirstOrDefault();
             s.miejsceZamieszkania = "Rybnik";
             context.SaveChanges();
 
@@ -225,7 +225,11 @@ namespace ProjektBD
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception) { }
         }
     }
 }

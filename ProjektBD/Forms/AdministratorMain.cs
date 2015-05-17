@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,9 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using System.Data.Entity;
 using System.Data.Entity.Core;
-using ProjektBD.DAL;
 using ProjektBD.Utilities;
 using ProjektBD.Model;
 using ProjektBD.Controllers;
@@ -25,6 +24,8 @@ namespace ProjektBD.Forms
         private AdminController formController;
 
         private Notifications notifications;
+
+        private long godlyDatagridRowsCount;
 
         public AdministratorMain()
         {
@@ -252,27 +253,64 @@ namespace ProjektBD.Forms
             this.Close();
         }
 
-        private async void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            var query = formController.getTableData(comboBox1.Text);
+
+            if (query.Count > 0)
             {
-                var query = await formController.getTableData(comboBox1.Text);
+                string nazwaTypu = query[0].GetType().Name;
 
-                dataGridView1.DataSource = query;
+                if (nazwaTypu.Equals("Prowadzone_rozmowy") || nazwaTypu.Equals("Przedmioty_studenci"))
+                    label7.Visible = true;
+                else
+                    label7.Visible = false;
+            }
 
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;              // Autosize szerokości kolumn
-                }
-            } 
-            catch (System.NotSupportedException) {}     // Niweluje error wyskakujący, gdy asynchroniczne operacje wykonują się zbyt szybko
+            godlyDatagridRowsCount = query.Count;
+
+            dataGridView1.DataSource = query;
         }
+
+        //------------------------------------------------
+        //Eksperymentalne
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            // TODO: zmiana wartości w kontrolce zmienia wartość w BD
-            int x = 2;
+            try
+            {
+                bool sendChangesToDB = formController.doesContextHaveChanges();
+
+                if (sendChangesToDB)
+                {
+                    formController.saveContext();
+                    dataGridView1.Refresh();
+                }
+            }
+            catch (System.InvalidOperationException)
+            {
+                MsgBoxUtils.displayErrorMsgBox("Błąd", "Nie można zmienić wartości klucza głównego");
+            }
         }
+
+        private void dataGridView1_UserAddedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            godlyDatagridRowsCount++;
+
+            bool sendChangesToDB = formController.doesContextHaveChanges();
+            formController.saveContext();
+        }
+
+        private void dataGridView1_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            godlyDatagridRowsCount--;
+
+            bool sendChangesToDB = formController.doesContextHaveChanges();
+
+            formController.saveContext();
+        }
+
+        //------------------------------------------------
 
         /// <summary>
         /// Zamykanie formatki - messageBox z zapytaniem.

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -61,9 +63,22 @@ namespace ProjektBD.Controllers
         /// <summary>
         /// Pobiera wszystkie wiersze z tablicy o podanej nazwie
         /// </summary>
-        public async Task< List<object> > getTableData(string tableName)
+        public IList getTableData(string tableName)
         {
-            return await admDatabase.getTableData(tableName);
+            Type genericParameterType = Type.GetType("ProjektBD.Model." + tableName);
+
+            MethodInfo method = typeof(AdminDatabase).GetMethod("getTableData");
+
+            MethodInfo genericMethod = method.MakeGenericMethod(genericParameterType);      // Tworzy metodę generyczną o typie podanym przez parametr
+
+            var result = genericMethod.Invoke(admDatabase, new object[] { tableName });
+
+            return (result as IList);
+        }
+
+        public bool doesContextHaveChanges()
+        {
+            return admDatabase.doesContextHaveChanges();
         }
     }
 }

@@ -35,7 +35,7 @@ namespace ProjektBD.Databases
             try
             {
                 context.Database.Initialize(false);
-                context.Użytkownik.Load();                 // Wczytuje do lokalnej kolekcji wszystkich użytkowników (w tym studentów, prowadzących itp.)
+                context.Użytkownicy.Load();                 // Wczytuje do lokalnej kolekcji wszystkich użytkowników (w tym studentów, prowadzących itp.)
 
                 connectionSuccessful = true;
             }
@@ -110,6 +110,15 @@ namespace ProjektBD.Databases
         }
 
         #endregion
+
+        /// <summary>
+        /// Zapisuje zmiany dokonane w kontekście
+        /// </summary>
+        public void saveContext()
+        {
+            if (context != null)
+                context.SaveChanges();
+        }
 
         /// <summary>
         /// Pozbywa się utworzonego kontekstu

@@ -36,6 +36,14 @@ namespace ProjektBD.Controllers
         }
 
         /// <summary>
+        /// Zapisuje zmiany dokonane w kontekście
+        /// </summary>
+        public void saveContext()
+        {
+            database.saveContext();
+        }
+
+        /// <summary>
         /// Zwraca wartość określającą, czy połączenie z bazą przebiegło pomyślnie
         /// </summary>
         public bool connectionSuccessful()
