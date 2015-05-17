@@ -121,6 +121,9 @@ namespace ProjektBD.Databases
             }
         }
 
+        /// <summary>
+        /// Sprawdza, czy kontekst posiada nowe dane, które musi wysłać do bazy
+        /// </summary>
         public bool doesContextHaveChanges()
         {
             return context.ChangeTracker.HasChanges();

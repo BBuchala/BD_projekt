@@ -76,6 +76,9 @@ namespace ProjektBD.Controllers
             return (result as IList);
         }
 
+        /// <summary>
+        /// Sprawdza, czy kontekst posiada nowe dane, które musi wysłać do bazy
+        /// </summary>
         public bool doesContextHaveChanges()
         {
             return admDatabase.doesContextHaveChanges();

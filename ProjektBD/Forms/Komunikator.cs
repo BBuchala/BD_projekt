@@ -53,6 +53,8 @@ namespace ProjektBD.Forms
             // Wyswietl wszystkie wiadomosci z danym rozmowca.
             ProjektBD.Model.Wiadomość pobranaWiadomosc;
 
+            int iloscWiadomosci = 0;
+
             // Wyswietlanie
             for (int i = 0; i < iloscWiadomosci; ++ i)
             {
@@ -66,6 +68,8 @@ namespace ProjektBD.Forms
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             ProjektBD.Model.Użytkownik pobranyKontakt;
+
+            int iloscKontaktow = 0;
 
             // Wyswietlanie
             for (int i = 0; i < iloscKontaktow; ++ i)

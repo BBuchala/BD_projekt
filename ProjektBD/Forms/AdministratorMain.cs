@@ -10,9 +10,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using System.Data.Entity.Core;
+using System.Data.Entity.Validation;
 using ProjektBD.Utilities;
 using ProjektBD.Model;
 using ProjektBD.Controllers;
+using System.Data.Entity.Infrastructure;
 
 namespace ProjektBD.Forms
 {
@@ -25,7 +27,22 @@ namespace ProjektBD.Forms
 
         private Notifications notifications;
 
-        private long godlyDatagridRowsCount;
+        /// <summary>
+        /// Ilość wierszy wyświetlanej tabeli
+        /// </summary>
+        private int godlyDatagridRowsCount;
+
+        private string tableName;
+
+        /// <summary>
+        /// Pozycja ostatnio odwiedzonej prawidłowo wypełnionej komórki
+        /// </summary>
+        private Point lastValidDatagridCell;
+
+        /// <summary>
+        /// Określa, czy użytkownik wpisuje nowy rekord do bazy
+        /// </summary>
+        bool isInsertingNewRow = false;
 
         public AdministratorMain()
         {
@@ -257,39 +274,116 @@ namespace ProjektBD.Forms
         {
             var query = formController.getTableData(comboBox1.Text);
 
+            godlyDatagridRowsCount = query.Count;
+            tableName = comboBox1.Text;
+
+            dataGridView1.DataSource = query;
+
             if (query.Count > 0)
             {
                 string nazwaTypu = query[0].GetType().Name;
 
                 if (nazwaTypu.Equals("Prowadzone_rozmowy") || nazwaTypu.Equals("Przedmioty_studenci"))
+                {
                     label7.Visible = true;
+
+                    foreach (DataGridViewColumn column in dataGridView1.Columns)
+                        column.ReadOnly = true;
+                }
                 else
                     label7.Visible = false;
             }
-
-            godlyDatagridRowsCount = query.Count;
-
-            dataGridView1.DataSource = query;
         }
 
         //------------------------------------------------
         //Eksperymentalne
 
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)     // gdy wartość komórki się zmieni
         {
             try
             {
-                bool sendChangesToDB = formController.doesContextHaveChanges();
+                // jeśli nie jest edytowany wiersz, którego nie ma jeszcze w bazie
+                if (dataGridView1.CurrentCell.RowIndex < godlyDatagridRowsCount - 1 || isInsertingNewRow == false)
+                    formController.saveContext();
+            }
+            catch (InvalidOperationException)
+            {
+                MsgBoxUtils.displayErrorMsgBox("Błąd", "Nie można zmienić wartości klucza głównego.\nZaraz wszystko się wysypie.");
+            }
+        }
 
-                if (sendChangesToDB)
+        private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)           // gdy przejdziemy do innej komórki
+        {
+            int x = lastValidDatagridCell.X;
+            int y = lastValidDatagridCell.Y;
+
+            try
+            {
+                //------------------------------------
+                // Sprawdza, czy został naciśnięty ENTER na ostatnim, dodawanym właśnie do kontekstu wierszu
+                if (dataGridView1.CurrentCell != null && dataGridView1.CurrentCell.RowIndex == godlyDatagridRowsCount && formController.doesContextHaveChanges())
                 {
                     formController.saveContext();
+
+                    isInsertingNewRow = false;
+                    lastValidDatagridCell = dataGridView1.CurrentCellAddress;
+
                     dataGridView1.Refresh();
                 }
+
+                //------------------------------------
+                // Sprawdza, czy user nie wyszedł z wiersza przed zcommitowaniem danych
+                else if (isInsertingNewRow && dataGridView1.CurrentCellAddress.Y != lastValidDatagridCell.Y)
+                {
+                    MsgBoxUtils.displayErrorMsgBox("Błąd", "Nie zatwierdzono nowo wprowadzonych danych.\n" +
+                                                            "Aby zatwierdzić, wypełnij wszystkie wymagane pola i naciśnij klawisz ENTER.");
+
+                    BeginInvoke((Action)delegate
+                    {
+                        dataGridView1.CurrentCell = dataGridView1.Rows[y].Cells[x];
+                        dataGridView1.BeginEdit(true);
+                    });
+                }
+
+                //------------------------------------
+                // Jeśli wszystko w porządku - aktualizuje pozycję ostatnio odwiedzonej prawidłowej komórki
+                else
+                    lastValidDatagridCell = dataGridView1.CurrentCellAddress;
             }
-            catch (System.InvalidOperationException)
+
+            catch (DbEntityValidationException)
             {
-                MsgBoxUtils.displayErrorMsgBox("Błąd", "Nie można zmienić wartości klucza głównego");
+                MsgBoxUtils.displayErrorMsgBox("Błąd", "Nie wszystkie wymagane wartości zostały podane.");
+
+                //--------
+                // Zapożyczone ze stack'a. Dodaje do kolejki zdarzeń nową wiadomość, która wykona się kiedyś po tym zdarzeniu.
+                // Wykorzystane, bo w procedurze obsługi tego zdarzenia nie można zmienić aktualnej komórki,
+                // a nie ma za bardzo do czego podpiąć EventHandler'a.
+                BeginInvoke((Action)delegate
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[y].Cells[x];
+                    dataGridView1.BeginEdit(true);
+                });
+            }
+            catch (DbUpdateException)
+            {
+                MsgBoxUtils.displayErrorMsgBox("Błąd", "Wprowadzono niepoprawną wartość klucza obcego.");
+
+                BeginInvoke((Action)delegate
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[y].Cells[x];
+                    dataGridView1.BeginEdit(true);
+                });
+            }
+            catch (InvalidOperationException)
+            {
+                MsgBoxUtils.displayErrorMsgBox("Błąd", "Wystąpił błąd. Upewnij się, że klucz obcy został wprowadzony prawidłowo.");
+
+                BeginInvoke((Action)delegate
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[y].Cells[x];
+                    dataGridView1.BeginEdit(true);
+                });
             }
         }
 
@@ -297,17 +391,19 @@ namespace ProjektBD.Forms
         {
             godlyDatagridRowsCount++;
 
-            bool sendChangesToDB = formController.doesContextHaveChanges();
-            formController.saveContext();
+            isInsertingNewRow = true;
         }
 
         private void dataGridView1_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
             godlyDatagridRowsCount--;
 
-            bool sendChangesToDB = formController.doesContextHaveChanges();
-
             formController.saveContext();
+        }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MsgBoxUtils.displayErrorMsgBox("Błąd", "Nieprawidłowy format daty.");
         }
 
         //------------------------------------------------
