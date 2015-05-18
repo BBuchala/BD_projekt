@@ -35,7 +35,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.email = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
@@ -76,7 +76,7 @@
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.textBox2);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.email);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.button6);
             this.tabPage1.Controls.Add(this.label17);
@@ -124,12 +124,12 @@
             this.label3.TabIndex = 24;
             this.label3.Text = "Miejsce zamieszkania:";
             // 
-            // textBox1
+            // email
             // 
-            this.textBox1.Location = new System.Drawing.Point(109, 72);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(219, 20);
-            this.textBox1.TabIndex = 23;
+            this.email.Location = new System.Drawing.Point(109, 72);
+            this.email.Name = "email";
+            this.email.Size = new System.Drawing.Size(219, 20);
+            this.email.TabIndex = 23;
             // 
             // label2
             // 
@@ -336,7 +336,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox email;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button button2;

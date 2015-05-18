@@ -56,17 +56,18 @@ namespace ProjektBD.Forms
             int iloscWiadomosci = 0;
 
             // Wyswietlanie
+            /*
             for (int i = 0; i < iloscWiadomosci; ++ i)
             {
                 pobranaWiadomosc = pobierzWiadomosc(i);
                 Console.WriteLine(pobranaWiadomosc.dataWysłania + " - " +
                                   pobranaWiadomosc.nadawca + " : " +
                                   pobranaWiadomosc.treść);
-            }
+            }*/
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {/*
             ProjektBD.Model.Użytkownik pobranyKontakt;
 
             int iloscKontaktow = 0;
@@ -76,7 +77,7 @@ namespace ProjektBD.Forms
             {
                 pobranyKontakt = pobierzKontakt(i);
                 Console.WriteLine(i + ". " + pobranyKontakt.login);
-            }
+            }*/
         }
 
         /**

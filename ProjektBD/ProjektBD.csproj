@@ -54,12 +54,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Controller.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="DAL\ProjektBDContext.cs" />
     <Compile Include="DAL\ProjektBDInitializer.cs" />
     <Compile Include="Databases\AccountDatabase.cs" />
     <Compile Include="Databases\AdminDatabase.cs" />
     <Compile Include="Databases\DatabaseBase.cs" />
+    <Compile Include="Databases\ManageDatabase.cs" />
     <Compile Include="Databases\RegistrationDatabase.cs" />
     <Compile Include="Exceptions\EmptyFieldException.cs" />
     <Compile Include="Exceptions\UsersOverlappingException.cs" />
