@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Collections;
 
 using ProjektBD.Model;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Core;
 
 namespace ProjektBD.Databases
 {
@@ -100,7 +102,15 @@ namespace ProjektBD.Databases
         }
 
         /// <summary>
-        /// Pobiera wszystkie wiersze z tablicy o podanej nazwie
+        /// Pobiera nazwy zakładów istniejących w bazie
+        /// </summary>
+        public List<string> getInstituteNames()
+        {
+            return context.Zakłady.Select(n => n.nazwa).ToList();
+        }
+
+        /// <summary>
+        /// Pobiera wszystkie wiersze z tabeli o podanej nazwie
         /// </summary>
         /// <typeparam name="T">Typ encji, której elementy przechowywane będą w zwracanej liscie</typeparam>
         public IList getTableData<T>(string tableName) where T: class
@@ -122,11 +132,42 @@ namespace ProjektBD.Databases
         }
 
         /// <summary>
+        /// Pobiera nazwy kluczy głównych z tabeli
+        /// </summary>
+        /// <typeparam name="T">Typ klasy encji, której klucza szukamy</typeparam>
+        public List<string> getPrimaryKeyNames<T>() where T : class
+        {
+            var set = ((IObjectContextAdapter)context).ObjectContext.CreateObjectSet<T>();
+            var entitySet = set.EntitySet;
+
+            return entitySet.ElementType.KeyMembers.Select(k => k.Name).ToList();
+        }
+
+        /// <summary>
         /// Sprawdza, czy kontekst posiada nowe dane, które musi wysłać do bazy
         /// </summary>
         public bool doesContextHaveChanges()
         {
             return context.ChangeTracker.HasChanges();
+        }
+
+        /// <summary>
+        /// Pobiera prowadzących z bazy
+        /// </summary>
+        public List<Prowadzący> getTeachers()
+        {
+            var annonymousQuery = context.Prowadzący.Select(a => new { a.UżytkownikID, a.login, a.email, a.miejsceZamieszkania, a.dataUrodzenia }).ToList();
+            var teacherQuery = annonymousQuery.Select(p => new Prowadzący
+            {
+                UżytkownikID = p.UżytkownikID,
+                login = p.login,
+                email = p.email,
+                miejsceZamieszkania = p.miejsceZamieszkania,
+                dataUrodzenia = p.dataUrodzenia
+            });
+
+
+            return teacherQuery.ToList();
         }
     }
 }

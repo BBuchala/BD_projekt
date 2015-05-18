@@ -61,7 +61,15 @@ namespace ProjektBD.Controllers
         }
 
         /// <summary>
-        /// Pobiera wszystkie wiersze z tablicy o podanej nazwie
+        /// Pobiera nazwy zakładów istniejących w bazie
+        /// </summary>
+        public string[] getInstituteNames()
+        {
+            return admDatabase.getInstituteNames().ToArray();
+        }
+
+        /// <summary>
+        /// Pobiera wszystkie wiersze z tabeli o podanej nazwie
         /// </summary>
         public IList getTableData(string tableName)
         {
@@ -77,11 +85,40 @@ namespace ProjektBD.Controllers
         }
 
         /// <summary>
+        /// Pobiera nazwy kluczy głównych z tabeli o podanej nazwie
+        /// </summary>
+        public List<string> getPrimaryKeyNames(string tableName)
+        {
+            Type modelClassType = Type.GetType("ProjektBD.Model." + tableName);         // Typ klasy encji
+            Type baseClassType = modelClassType.BaseType;                               // Typ jej klasy bazowej
+
+            MethodInfo method = typeof(AdminDatabase).GetMethod("getPrimaryKeyNames");
+            MethodInfo genericMethod;
+
+            if (baseClassType.Name.Equals("Object"))
+                genericMethod = method.MakeGenericMethod(modelClassType);               // Jeśli klasa jest bazowa
+            else
+                genericMethod = method.MakeGenericMethod(baseClassType);                // Jeśli klasa jest pochodna
+
+            var result = genericMethod.Invoke(admDatabase, null);
+
+            return (result as List<string>);
+        }
+
+        /// <summary>
         /// Sprawdza, czy kontekst posiada nowe dane, które musi wysłać do bazy
         /// </summary>
         public bool doesContextHaveChanges()
         {
             return admDatabase.doesContextHaveChanges();
+        }
+
+        /// <summary>
+        /// Pobiera prowadzących z bazy
+        /// </summary>
+        public List<Prowadzący> getTeachers()
+        {
+            return admDatabase.getTeachers();
         }
     }
 }

@@ -32,6 +32,9 @@ namespace ProjektBD.Forms
         /// </summary>
         private int godlyDatagridRowsCount;
 
+        /// <summary>
+        /// Nazwa obecnie wyświetlanej tabeli
+        /// </summary>
         private string tableName;
 
         /// <summary>
@@ -43,6 +46,11 @@ namespace ProjektBD.Forms
         /// Określa, czy użytkownik wpisuje nowy rekord do bazy
         /// </summary>
         bool isInsertingNewRow = false;
+
+        /// <summary>
+        /// Ilość wierszy wyświetlanej tabeli
+        /// </summary>
+        object recentValue;
 
         public AdministratorMain()
         {
@@ -166,6 +174,9 @@ namespace ProjektBD.Forms
             new ToolTip().SetToolTip(pictureBox2, "Wyloguj");
 
             comboBox1.Items.AddRange( formController.getTableNames() );
+            comboBox2.Items.AddRange( formController.getInstituteNames() );
+
+            List<Prowadzący> list = formController.getTeachers();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -291,14 +302,25 @@ namespace ProjektBD.Forms
                         column.ReadOnly = true;
                 }
                 else
+                {
                     label7.Visible = false;
+
+                    List<string> keysList = formController.getPrimaryKeyNames(tableName);
+
+                    keysList.ForEach( keyName => dataGridView1.Columns[keyName].ReadOnly = true );
+                }
             }
         }
 
         //------------------------------------------------
         //Eksperymentalne
 
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)     // gdy wartość komórki się zmieni
+        private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            recentValue = dataGridView1[e.ColumnIndex, e.RowIndex].Value;
+        }
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -306,9 +328,13 @@ namespace ProjektBD.Forms
                 if (dataGridView1.CurrentCell.RowIndex < godlyDatagridRowsCount - 1 || isInsertingNewRow == false)
                     formController.saveContext();
             }
-            catch (InvalidOperationException)
+            catch (DbUpdateException)
             {
-                MsgBoxUtils.displayErrorMsgBox("Błąd", "Nie można zmienić wartości klucza głównego.\nZaraz wszystko się wysypie.");
+                MsgBoxUtils.displayErrorMsgBox("Błąd", "Wprowadzono błędną wartość. Upewnij się, czy dane w kolumnie nie muszą być unikalne");
+
+                dataGridView1[e.ColumnIndex, e.RowIndex].Value = recentValue;
+
+                dataGridView1.RefreshEdit();                    // Odświeża zawartość komórki i cofa zmiany dokonane w kontekście
             }
         }
 
@@ -338,7 +364,7 @@ namespace ProjektBD.Forms
                     MsgBoxUtils.displayErrorMsgBox("Błąd", "Nie zatwierdzono nowo wprowadzonych danych.\n" +
                                                             "Aby zatwierdzić, wypełnij wszystkie wymagane pola i naciśnij klawisz ENTER.");
 
-                    BeginInvoke((Action)delegate
+                    BeginInvoke( (Action)delegate
                     {
                         dataGridView1.CurrentCell = dataGridView1.Rows[y].Cells[x];
                         dataGridView1.BeginEdit(true);
@@ -359,7 +385,7 @@ namespace ProjektBD.Forms
                 // Zapożyczone ze stack'a. Dodaje do kolejki zdarzeń nową wiadomość, która wykona się kiedyś po tym zdarzeniu.
                 // Wykorzystane, bo w procedurze obsługi tego zdarzenia nie można zmienić aktualnej komórki,
                 // a nie ma za bardzo do czego podpiąć EventHandler'a.
-                BeginInvoke((Action)delegate
+                BeginInvoke( (Action)delegate
                 {
                     dataGridView1.CurrentCell = dataGridView1.Rows[y].Cells[x];
                     dataGridView1.BeginEdit(true);
@@ -369,7 +395,7 @@ namespace ProjektBD.Forms
             {
                 MsgBoxUtils.displayErrorMsgBox("Błąd", "Wprowadzono niepoprawną wartość klucza obcego.");
 
-                BeginInvoke((Action)delegate
+                BeginInvoke( (Action)delegate
                 {
                     dataGridView1.CurrentCell = dataGridView1.Rows[y].Cells[x];
                     dataGridView1.BeginEdit(true);
@@ -379,7 +405,7 @@ namespace ProjektBD.Forms
             {
                 MsgBoxUtils.displayErrorMsgBox("Błąd", "Wystąpił błąd. Upewnij się, że klucz obcy został wprowadzony prawidłowo.");
 
-                BeginInvoke((Action)delegate
+                BeginInvoke( (Action)delegate
                 {
                     dataGridView1.CurrentCell = dataGridView1.Rows[y].Cells[x];
                     dataGridView1.BeginEdit(true);
@@ -403,7 +429,7 @@ namespace ProjektBD.Forms
 
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            MsgBoxUtils.displayErrorMsgBox("Błąd", "Nieprawidłowy format daty.");
+            MsgBoxUtils.displayErrorMsgBox("Błąd", "Nieprawidłowy format wprowadzonych danych.");
         }
 
         //------------------------------------------------
