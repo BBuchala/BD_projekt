@@ -9,6 +9,7 @@ using System.Collections;
 using ProjektBD.Model;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Core;
+using ProjektBD.Utilities;
 
 namespace ProjektBD.Databases
 {
@@ -70,10 +71,14 @@ namespace ProjektBD.Databases
                 context.SaveChanges();
             }
 
+            string salt = Encryption.generateSalt();
+            string hashedPassword = Encryption.HashPassword(u.hasło, salt);
+
             Prowadzący p = new Prowadzący
             {
                 login = u.login,
-                hasło = u.hasło,
+                hasło = hashedPassword,
+                sól = salt,
                 email = u.email,
                 miejsceZamieszkania = u.miejsceZamieszkania,
                 ZakładID = 4
@@ -87,7 +92,7 @@ namespace ProjektBD.Databases
             // Modyfikuje licznik autoinkrementacji klucza głównego UżytkownikID
             // Dzięki temu świeżo dodanemu użytkownikowi zostanie przydzielony ID tego, który przed chwilą usunęliśmy
             // W zasadzie niepotrzebne, ale za to tabela ładniej wygląda :3
-            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('Użytkownik', RESEED, " + (u.UżytkownikID - 1) + ");");
+            //context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('Użytkownik', RESEED, " + (u.UżytkownikID - 1) + ");");
 
             context.Prowadzący.Add(p);
             context.SaveChanges();

@@ -97,7 +97,7 @@ namespace ProjektBD
                                 this.Hide();
 
                                 mainForm.ShowDialog();
-                                mainForm.Dispose();
+                                mainForm.Dispose();                 // pomyśleć nad przeładowaniem wszystkich kontekstów
 
                                 login.Text = "";
 
