@@ -15,6 +15,7 @@ using ProjektBD.Utilities;
 using ProjektBD.Model;
 using ProjektBD.Controllers;
 using System.Data.Entity.Infrastructure;
+using System.Reflection;
 
 namespace ProjektBD.Forms
 {
@@ -176,14 +177,45 @@ namespace ProjektBD.Forms
             comboBox1.Items.AddRange( formController.getTableNames() );
             comboBox2.Items.AddRange( formController.getInstituteNames() );
 
-            List<Prowadzący> list = formController.getTeachers();
+            //------------------------------------------------------
+            //ListView
+
+            List<ProwadzącyDTO> list = formController.getTeachers();
+
+            PropertyInfo[] atrybuty = typeof(ProwadzącyDTO).GetProperties();
+
+            //---------DODAWANIE KOLUMN---------
+            foreach (PropertyInfo p in atrybuty)
+                listView1.Columns.Add(p.Name);
+
+            //---------DODAWANIE ITEMÓW (wiersze)---------
+            foreach (var sensei in list)
+                listView1.Items.Add(sensei.login);
+
+            //---------DODAWANIE ITEMÓW (kolumny)---------
+            int i = 0;
+            foreach (ListViewItem item in listView1.Items)
+            {
+                item.SubItems.Add(list[i].email);
+                item.SubItems.Add(list[i].nazwaZakładu);
+
+                if (i % 2 == 1)
+                    item.BackColor = Color.FromArgb(255, 235, 235, 235);
+
+                i++;
+            }
+
+            //---------WYŚRODKOWANIE I AUTOSIZE KOLUMN---------
+            foreach (ColumnHeader column in listView1.Columns)
+            {
+                column.TextAlign = HorizontalAlignment.Center;
+                column.Width = -2;                              // Automatyczne wyrównanie do najdłuższego itemu w kolumnie
+            }
+
+            //------------------------------------------------------
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
 

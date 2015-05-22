@@ -116,7 +116,7 @@ namespace ProjektBD.Controllers
         /// <summary>
         /// Pobiera prowadzących z bazy
         /// </summary>
-        public List<Prowadzący> getTeachers()
+        public List<ProwadzącyDTO> getTeachers()
         {
             return admDatabase.getTeachers();
         }

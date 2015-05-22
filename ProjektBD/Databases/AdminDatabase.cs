@@ -159,18 +159,16 @@ namespace ProjektBD.Databases
         /// <summary>
         /// Pobiera prowadzących z bazy
         /// </summary>
-        public List<Prowadzący> getTeachers()
+        public List<ProwadzącyDTO> getTeachers()
         {
-            var annonymousQuery = context.Prowadzący.Select(a => new { a.UżytkownikID, a.login, a.email, a.miejsceZamieszkania, a.dataUrodzenia }).ToList();
-            var teacherQuery = annonymousQuery.Select(p => new Prowadzący
-            {
-                UżytkownikID = p.UżytkownikID,
-                login = p.login,
-                email = p.email,
-                miejsceZamieszkania = p.miejsceZamieszkania,
-                dataUrodzenia = p.dataUrodzenia
-            });
-
+            var teacherQuery = from p in context.Prowadzący
+                               join z in context.Zakłady on p.ZakładID equals z.ZakładID
+                               select new ProwadzącyDTO
+                               {
+                                   login = p.login,
+                                   email = p.email,
+                                   nazwaZakładu = z.nazwa
+                               };
 
             return teacherQuery.ToList();
         }

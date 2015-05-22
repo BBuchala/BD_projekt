@@ -131,7 +131,7 @@
     <Compile Include="Forms\ZarządzanieKontem.Designer.cs">
       <DependentUpon>ZarządzanieKontem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\OtherModelClasses.cs" />
+    <Compile Include="Model\DataTransferObjects.cs" />
     <Compile Include="Utilities\EmergencyMode.cs" />
     <Compile Include="Utilities\Encryption.cs" />
     <Compile Include="Utilities\MsgBoxUtils.cs" />

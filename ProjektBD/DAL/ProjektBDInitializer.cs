@@ -36,10 +36,10 @@ namespace ProjektBD.DAL
 
             var zakłady = new List<Zakład>
             {
-                new Zakład { nazwa = "*nieznany*" },
                 new Zakład { nazwa = "Astrofiz" },
                 new Zakład { nazwa = "Gastrofiz" },
-                new Zakład { nazwa = "ZMiTAC" }
+                new Zakład { nazwa = "ZMiTAC" },
+                new Zakład { nazwa = "*nieznany*" }
             };
             zakłady.ForEach( z => context.Zakłady.Add(z) );
             context.SaveChanges();
