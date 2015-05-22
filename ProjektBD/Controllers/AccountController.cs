@@ -53,7 +53,7 @@ namespace ProjektBD.Controllers
         /// Jeśli jest, zwraca null.
         /// Jeśli nie, zwraca typ formularza zgodny z uprawnieniami użytkownika.
         /// </summary>
-        public Form openUserForm(string userType)
+        public Form openUserForm(string userType, string inputLogin)
         {
             accDatabase.checkEmergencyMode();
 
@@ -69,10 +69,10 @@ namespace ProjektBD.Controllers
                         return new AdministratorMain();
 
                     case "Prowadzący":
-                        return new ProwadzacyMain();
+                        return new ProwadzacyMain(inputLogin);
 
                     case "Student":
-                        return new StudentMain();
+                        return new StudentMain(inputLogin);
 
                     default:
                         return new Form();

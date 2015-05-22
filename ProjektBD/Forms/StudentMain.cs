@@ -14,9 +14,15 @@ namespace ProjektBD.Forms
 {
     public partial class StudentMain : Form
     {
-        public StudentMain()
+        /// <summary>
+        /// Login zalogowanego użytkownika, można używać do wyszukiwania.
+        /// </summary>
+        private string userLogin;
+
+        public StudentMain(string inputLogin)
         {
             InitializeComponent();
+            userLogin = inputLogin;
         }
 
         private void StudentMain_Load(object sender, EventArgs e)
