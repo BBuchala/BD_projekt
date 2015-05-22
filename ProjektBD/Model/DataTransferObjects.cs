@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 namespace ProjektBD.Model
 {
     //---------------------
-    // ~Data Transfer Objects~
-    // Klasy pomocnicze do obsługi tablic, których nie ma w kontekście
-    // (do nich zwracane są wyniki zapytań)
+    // Klasy pomocnicze, do których wracane są wyniki zapytań
     //---------------------
     class Prowadzone_rozmowy
     {
