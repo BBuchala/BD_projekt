@@ -56,13 +56,10 @@
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
-<<<<<<< HEAD
     <Compile Include="Custom Controls\customListView.cs">
       <SubType>Component</SubType>
     </Compile>
-=======
     <Compile Include="Controllers\TeacherController.cs" />
->>>>>>> origin/master
     <Compile Include="DAL\ProjektBDContext.cs" />
     <Compile Include="DAL\ProjektBDInitializer.cs" />
     <Compile Include="Databases\AccountDatabase.cs" />
