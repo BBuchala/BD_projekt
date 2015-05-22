@@ -96,6 +96,7 @@
             this.messageCount.TabIndex = 21;
             this.messageCount.Text = "0";
             this.messageCount.Visible = false;
+            this.messageCount.Click += new System.EventHandler(this.messageCount_Click);
             // 
             // messageImage
             // 
@@ -105,6 +106,7 @@
             this.messageImage.Size = new System.Drawing.Size(40, 40);
             this.messageImage.TabIndex = 20;
             this.messageImage.TabStop = false;
+            this.messageImage.Click += new System.EventHandler(this.messageImage_Click);
             // 
             // notificationCount
             // 

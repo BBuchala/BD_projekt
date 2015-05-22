@@ -26,7 +26,7 @@ namespace ProjektBD.Forms
         /// </summary>
         private AdminController formController;
 
-        private Notifications notifications;
+        private AdminNotifications notifications;
 
         /// <summary>
         /// Ilość wierszy wyświetlanej tabeli
@@ -249,7 +249,7 @@ namespace ProjektBD.Forms
         }
 
         /// <summary>
-        /// Menu kontekstowe również pod PPM
+        /// Menu kontekstowe również pod LPM
         /// </summary>
         private void notificationImage_Click(object sender, EventArgs e)
         {
@@ -257,7 +257,7 @@ namespace ProjektBD.Forms
         }
 
         /// <summary>
-        /// Menu kontekstowe również pod PPM
+        /// Menu kontekstowe również pod LPM
         /// </summary>
         private void notificationCount_Click(object sender, EventArgs e)
         {
@@ -492,9 +492,19 @@ namespace ProjektBD.Forms
         }
 
         #endregion
+
+        private void messageImage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void messageCount_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
-    struct Notifications
+    struct AdminNotifications
     {
         public List<Użytkownik> newUsers;
         public int newUsersCount;

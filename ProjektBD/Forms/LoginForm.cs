@@ -87,7 +87,7 @@ namespace ProjektBD
                             break;
 
                         default:
-                            Form mainForm = formController.openUserForm(userType);
+                            Form mainForm = formController.openUserForm(userType, login.Text);
 
                             if (mainForm == null)         // jeśli baza jest w stanie naprawczym
                                 EmergencyMode.notifyAboutEmergencyMode();
