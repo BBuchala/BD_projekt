@@ -27,4 +27,12 @@ namespace ProjektBD.Model
         public string email { get; set; }
         public string nazwaZakładu { get; set; }
     }
+
+    class PrzedmiotDTO          // Obierki wyróżnione innym kolorem
+    {
+        public string nazwa { get; set; }
+        public int liczbaStudentów { get; set; }
+        public int? maxLiczbaStudentów { get; set; }
+        public string prowadzący { get; set; }
+    }
 }

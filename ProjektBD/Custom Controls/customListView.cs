@@ -44,7 +44,14 @@ namespace ProjektBD.Custom_Controls
             foreach (ListViewItem item in this.Items)
             {
                 for (int j = 1; j < propertiesList.Count; j++)
-                    item.SubItems.Add( propertiesList[j].GetValue(data[i]).ToString() );    // j-ta właściwość z i-tego elementu listy
+                {
+                    object subItem = propertiesList[j].GetValue(data[i]);               // j-ta właściwość z i-tego elementu listy
+
+                    if ( subItem != null)
+                        item.SubItems.Add( subItem.ToString() );
+                    else
+                        item.SubItems.Add( "" );
+                }
 
                 if (i % 2 == 1)
                     item.BackColor = Color.FromArgb(255, 235, 235, 235);

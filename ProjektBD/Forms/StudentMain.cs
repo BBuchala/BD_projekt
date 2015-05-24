@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using ProjektBD.Controllers;
+using ProjektBD.Model;
 using ProjektBD.Utilities;
 
 namespace ProjektBD.Forms
@@ -19,16 +21,28 @@ namespace ProjektBD.Forms
         /// </summary>
         private string userLogin;
 
+        /// <summary>
+        /// Warstwa pośrednicząca między widokiem a modelem (bazą danych). Przetwarza i oblicza
+        /// </summary>
+        private StudentController formController;
+
         public StudentMain(string inputLogin)
         {
             InitializeComponent();
             userLogin = inputLogin;
+            formController = new StudentController(inputLogin);
         }
 
         private void StudentMain_Load(object sender, EventArgs e)
         {
             new ToolTip().SetToolTip(pictureBox2, "Wyloguj");
 
+            List<PrzedmiotDTO> subjectsList = formController.getSubjects();
+            List<PrzedmiotDTO> mySubjectsList = formController.getMySubjects();
+
+            customListView1.fill<PrzedmiotDTO>(subjectsList);
+            customListView2.fill<PrzedmiotDTO>(mySubjectsList);
+            customListView3.fill<PrzedmiotDTO>(subjectsList);
         }
 
         private void button8_Click(object sender, EventArgs e)

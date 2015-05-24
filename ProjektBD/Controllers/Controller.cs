@@ -18,7 +18,6 @@ namespace ProjektBD.Controllers
         /// </summary>
         protected DatabaseBase database;
 
-
         /// <summary>
         /// Inicjalizuje połączenie z bazą danych
         /// </summary>

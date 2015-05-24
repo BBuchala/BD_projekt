@@ -32,15 +32,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button8 = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.listView2 = new System.Windows.Forms.ListView();
             this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.listView11 = new System.Windows.Forms.ListView();
             this.listView12 = new System.Windows.Forms.ListView();
             this.listView16 = new System.Windows.Forms.ListView();
             this.label17 = new System.Windows.Forms.Label();
@@ -51,22 +48,25 @@
             this.button13 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.listView15 = new System.Windows.Forms.ListView();
             this.listView14 = new System.Windows.Forms.ListView();
             this.listView13 = new System.Windows.Forms.ListView();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.listView2 = new System.Windows.Forms.ListView();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.customListView1 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView2 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView3 = new ProjektBD.Custom_Controls.customListView();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -93,8 +93,8 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.customListView3);
             this.tabPage1.Controls.Add(this.listView2);
-            this.tabPage1.Controls.Add(this.listView1);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.button1);
@@ -105,6 +105,14 @@
             this.tabPage1.Size = new System.Drawing.Size(1133, 514);
             this.tabPage1.TabIndex = 5;
             this.tabPage1.Text = "Zgłoszenie";
+            // 
+            // listView2
+            // 
+            this.listView2.Location = new System.Drawing.Point(629, 72);
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(386, 353);
+            this.listView2.TabIndex = 9;
+            this.listView2.UseCompatibleStateImageBehavior = false;
             // 
             // button2
             // 
@@ -152,7 +160,7 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage3.Controls.Add(this.listView11);
+            this.tabPage3.Controls.Add(this.customListView1);
             this.tabPage3.Controls.Add(this.listView12);
             this.tabPage3.Controls.Add(this.listView16);
             this.tabPage3.Controls.Add(this.label17);
@@ -165,53 +173,6 @@
             this.tabPage3.Size = new System.Drawing.Size(1133, 514);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Podgląd";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.button3);
-            this.tabPage2.Controls.Add(this.button6);
-            this.tabPage2.Controls.Add(this.listView15);
-            this.tabPage2.Controls.Add(this.listView14);
-            this.tabPage2.Controls.Add(this.listView13);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1133, 514);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Moje przedmioty i projekty";
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Location = new System.Drawing.Point(12, 53);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1141, 540);
-            this.tabControl1.TabIndex = 1;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::ProjektBD.Properties.Resources.logout;
-            this.pictureBox2.Location = new System.Drawing.Point(1109, 11);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox2.TabIndex = 21;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // listView11
-            // 
-            this.listView11.Location = new System.Drawing.Point(17, 51);
-            this.listView11.Name = "listView11";
-            this.listView11.Size = new System.Drawing.Size(275, 437);
-            this.listView11.TabIndex = 33;
-            this.listView11.UseCompatibleStateImageBehavior = false;
             // 
             // listView12
             // 
@@ -306,6 +267,24 @@
             this.label20.TabIndex = 0;
             this.label20.Text = "Podaj imię lub nazwisko:";
             // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.customListView2);
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.button3);
+            this.tabPage2.Controls.Add(this.button6);
+            this.tabPage2.Controls.Add(this.listView14);
+            this.tabPage2.Controls.Add(this.listView13);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1133, 514);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Moje przedmioty i projekty";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -354,14 +333,6 @@
             this.button6.Text = "Wypisz się z przedmiotu";
             this.button6.UseVisualStyleBackColor = true;
             // 
-            // listView15
-            // 
-            this.listView15.Location = new System.Drawing.Point(44, 52);
-            this.listView15.Name = "listView15";
-            this.listView15.Size = new System.Drawing.Size(307, 382);
-            this.listView15.TabIndex = 17;
-            this.listView15.UseCompatibleStateImageBehavior = false;
-            // 
             // listView14
             // 
             this.listView14.Location = new System.Drawing.Point(773, 52);
@@ -378,21 +349,62 @@
             this.listView13.TabIndex = 15;
             this.listView13.UseCompatibleStateImageBehavior = false;
             // 
-            // listView1
+            // tabControl1
             // 
-            this.listView1.Location = new System.Drawing.Point(107, 72);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(386, 353);
-            this.listView1.TabIndex = 8;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Location = new System.Drawing.Point(12, 53);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1141, 540);
+            this.tabControl1.TabIndex = 1;
             // 
-            // listView2
+            // pictureBox2
             // 
-            this.listView2.Location = new System.Drawing.Point(629, 72);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(386, 353);
-            this.listView2.TabIndex = 9;
-            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.pictureBox2.Image = global::ProjektBD.Properties.Resources.logout;
+            this.pictureBox2.Location = new System.Drawing.Point(1109, 11);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox2.TabIndex = 21;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
+            // customListView1
+            // 
+            this.customListView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView1.FullRowSelect = true;
+            this.customListView1.GridLines = true;
+            this.customListView1.Location = new System.Drawing.Point(17, 51);
+            this.customListView1.Name = "customListView1";
+            this.customListView1.Size = new System.Drawing.Size(275, 437);
+            this.customListView1.TabIndex = 34;
+            this.customListView1.UseCompatibleStateImageBehavior = false;
+            this.customListView1.View = System.Windows.Forms.View.Details;
+            // 
+            // customListView2
+            // 
+            this.customListView2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView2.FullRowSelect = true;
+            this.customListView2.GridLines = true;
+            this.customListView2.Location = new System.Drawing.Point(44, 52);
+            this.customListView2.Name = "customListView2";
+            this.customListView2.Size = new System.Drawing.Size(307, 382);
+            this.customListView2.TabIndex = 27;
+            this.customListView2.UseCompatibleStateImageBehavior = false;
+            this.customListView2.View = System.Windows.Forms.View.Details;
+            // 
+            // customListView3
+            // 
+            this.customListView3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView3.FullRowSelect = true;
+            this.customListView3.GridLines = true;
+            this.customListView3.Location = new System.Drawing.Point(107, 72);
+            this.customListView3.Name = "customListView3";
+            this.customListView3.Size = new System.Drawing.Size(386, 353);
+            this.customListView3.TabIndex = 10;
+            this.customListView3.UseCompatibleStateImageBehavior = false;
+            this.customListView3.View = System.Windows.Forms.View.Details;
             // 
             // StudentMain
             // 
@@ -414,12 +426,12 @@
             this.tabPage1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -438,7 +450,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.ListView listView11;
         private System.Windows.Forms.ListView listView12;
         private System.Windows.Forms.ListView listView16;
         private System.Windows.Forms.Label label17;
@@ -454,10 +465,11 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.ListView listView15;
         private System.Windows.Forms.ListView listView14;
         private System.Windows.Forms.ListView listView13;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ListView listView2;
+        private Custom_Controls.customListView customListView1;
+        private Custom_Controls.customListView customListView2;
+        private Custom_Controls.customListView customListView3;
     }
 }

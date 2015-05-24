@@ -25,6 +25,11 @@ namespace ProjektBD.Databases
         public bool connectionSuccessful = false;
 
         /// <summary>
+        /// Nazwa użytkownika
+        /// </summary>
+        protected string userName;
+
+        /// <summary>
         /// Łączy się z bazą danych i dokonuje jej rekonstrukcji, jeśli modele nie są zgodne.
         /// Zwraca true, jeśli nastąpił błąd podczas połączenia i chcemy zakończyć działanie aplikacji.
         /// </summary>
