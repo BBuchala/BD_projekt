@@ -32,12 +32,12 @@ namespace ProjektBD.Custom_Controls
             //propertiesList[0].GetValue(data[0]);            // Która właściwość zostanie pobrana / z której linijki
 
             //---------DODAWANIE KOLUMN---------
-            foreach (PropertyInfo atr in właściwości)
-                this.Columns.Add(atr.Name);
+            foreach (PropertyInfo wł in właściwości)
+                this.Columns.Add(wł.Name);
 
             //---------DODAWANIE ITEMÓW (wiersze)---------
             foreach (var d in data)
-                this.Items.Add( propertiesList[0].GetValue(d).ToString() );             // 0 - pierwsza właściwość (kolumna), j - który element listy (wiersz)
+                this.Items.Add( propertiesList[0].GetValue(d).ToString() );             // 0 - pierwsza właściwość (kolumna), d - który element listy (wiersz)
 
             //---------DODAWANIE ITEMÓW (kolumny)---------
             int i = 0;

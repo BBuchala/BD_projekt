@@ -60,6 +60,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Custom Controls\godlyDataGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DAL\ProjektBDContext.cs" />
     <Compile Include="DAL\ProjektBDInitializer.cs" />
     <Compile Include="Databases\AccountDatabase.cs" />

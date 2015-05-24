@@ -28,31 +28,6 @@ namespace ProjektBD.Forms
 
         private AdminNotifications notifications;
 
-        /// <summary>
-        /// Ilość wierszy wyświetlanej tabeli
-        /// </summary>
-        private int godlyDatagridRowsCount;
-
-        /// <summary>
-        /// Nazwa obecnie wyświetlanej tabeli
-        /// </summary>
-        private string tableName;
-
-        /// <summary>
-        /// Pozycja ostatnio odwiedzonej prawidłowo wypełnionej komórki
-        /// </summary>
-        private Point lastValidDatagridCell;
-
-        /// <summary>
-        /// Określa, czy użytkownik wpisuje nowy rekord do bazy
-        /// </summary>
-        bool isInsertingNewRow = false;
-
-        /// <summary>
-        /// Ilość wierszy wyświetlanej tabeli
-        /// </summary>
-        object recentValue;
-
         public AdministratorMain()
         {
             InitializeComponent();
@@ -282,156 +257,29 @@ namespace ProjektBD.Forms
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var query = formController.getTableData(comboBox1.Text);
+            string tableName = comboBox1.Text;
 
-            godlyDatagridRowsCount = query.Count;
-            tableName = comboBox1.Text;
+            var query = formController.getTableData(tableName);
 
-            dataGridView1.DataSource = query;
+            godlyDataGrid1.provideParams(formController, query.Count);
+            godlyDataGrid1.DataSource = query;
 
-            if (query.Count > 0)
+            if (tableName.Equals("Prowadzone_rozmowy") || tableName.Equals("Przedmioty_studenci"))
             {
-                string nazwaTypu = query[0].GetType().Name;
+                label7.Visible = true;
 
-                if (nazwaTypu.Equals("Prowadzone_rozmowy") || nazwaTypu.Equals("Przedmioty_studenci"))
-                {
-                    label7.Visible = true;
+                foreach (DataGridViewColumn column in godlyDataGrid1.Columns)
+                    column.ReadOnly = true;
+            }
+            else
+            {
+                label7.Visible = false;
 
-                    foreach (DataGridViewColumn column in dataGridView1.Columns)
-                        column.ReadOnly = true;
-                }
-                else
-                {
-                    label7.Visible = false;
+                List<string> keysList = formController.getPrimaryKeyNames(tableName);
 
-                    List<string> keysList = formController.getPrimaryKeyNames(tableName);
-
-                    keysList.ForEach( keyName => dataGridView1.Columns[keyName].ReadOnly = true );
-                }
+                keysList.ForEach( keyName => godlyDataGrid1.Columns[keyName].ReadOnly = true );
             }
         }
-
-        //------------------------------------------------
-        //Eksperymentalne
-
-        private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            recentValue = dataGridView1[e.ColumnIndex, e.RowIndex].Value;
-        }
-
-        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                // jeśli nie jest edytowany wiersz, którego nie ma jeszcze w bazie
-                if (dataGridView1.CurrentCell.RowIndex < godlyDatagridRowsCount - 1 || isInsertingNewRow == false)
-                    formController.saveContext();
-            }
-            catch (DbUpdateException)
-            {
-                MsgBoxUtils.displayErrorMsgBox("Błąd", "Wprowadzono błędną wartość. Upewnij się, czy dane w kolumnie nie muszą być unikalne");
-
-                dataGridView1[e.ColumnIndex, e.RowIndex].Value = recentValue;
-
-                dataGridView1.RefreshEdit();                    // Odświeża zawartość komórki i cofa zmiany dokonane w kontekście
-            }
-        }
-
-        private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)           // gdy przejdziemy do innej komórki
-        {
-            int x = lastValidDatagridCell.X;
-            int y = lastValidDatagridCell.Y;
-
-            try
-            {
-                //------------------------------------
-                // Sprawdza, czy został naciśnięty ENTER na ostatnim, dodawanym właśnie do kontekstu wierszu
-                if (dataGridView1.CurrentCell != null && dataGridView1.CurrentCell.RowIndex == godlyDatagridRowsCount && formController.doesContextHaveChanges())
-                {
-                    formController.saveContext();
-
-                    isInsertingNewRow = false;
-                    lastValidDatagridCell = dataGridView1.CurrentCellAddress;
-
-                    dataGridView1.Refresh();
-                }
-
-                //------------------------------------
-                // Sprawdza, czy user nie wyszedł z wiersza przed zcommitowaniem danych
-                else if (isInsertingNewRow && dataGridView1.CurrentCellAddress.Y != lastValidDatagridCell.Y)
-                {
-                    MsgBoxUtils.displayErrorMsgBox("Błąd", "Nie zatwierdzono nowo wprowadzonych danych.\n" +
-                                                            "Aby zatwierdzić, wypełnij wszystkie wymagane pola i naciśnij klawisz ENTER.");
-
-                    BeginInvoke( (Action)delegate
-                    {
-                        dataGridView1.CurrentCell = dataGridView1.Rows[y].Cells[x];
-                        dataGridView1.BeginEdit(true);
-                    });
-                }
-
-                //------------------------------------
-                // Jeśli wszystko w porządku - aktualizuje pozycję ostatnio odwiedzonej prawidłowej komórki
-                else
-                    lastValidDatagridCell = dataGridView1.CurrentCellAddress;
-            }
-
-            catch (DbEntityValidationException)
-            {
-                MsgBoxUtils.displayErrorMsgBox("Błąd", "Nie wszystkie wymagane wartości zostały podane.");
-
-                //--------
-                // Zapożyczone ze stack'a. Dodaje do kolejki zdarzeń nową wiadomość, która wykona się kiedyś po tym zdarzeniu.
-                // Wykorzystane, bo w procedurze obsługi tego zdarzenia nie można zmienić aktualnej komórki,
-                // a nie ma za bardzo do czego podpiąć EventHandler'a.
-                BeginInvoke( (Action)delegate
-                {
-                    dataGridView1.CurrentCell = dataGridView1.Rows[y].Cells[x];
-                    dataGridView1.BeginEdit(true);
-                });
-            }
-            catch (DbUpdateException)
-            {
-                MsgBoxUtils.displayErrorMsgBox("Błąd", "Wprowadzono niepoprawną wartość klucza obcego.");
-
-                BeginInvoke( (Action)delegate
-                {
-                    dataGridView1.CurrentCell = dataGridView1.Rows[y].Cells[x];
-                    dataGridView1.BeginEdit(true);
-                });
-            }
-            catch (InvalidOperationException)
-            {
-                MsgBoxUtils.displayErrorMsgBox("Błąd", "Wystąpił błąd. Upewnij się, że klucz obcy został wprowadzony prawidłowo.");
-
-                BeginInvoke( (Action)delegate
-                {
-                    dataGridView1.CurrentCell = dataGridView1.Rows[y].Cells[x];
-                    dataGridView1.BeginEdit(true);
-                });
-            }
-        }
-
-        private void dataGridView1_UserAddedRow(object sender, DataGridViewRowEventArgs e)
-        {
-            godlyDatagridRowsCount++;
-
-            isInsertingNewRow = true;
-        }
-
-        private void dataGridView1_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
-        {
-            godlyDatagridRowsCount--;
-
-            formController.saveContext();
-        }
-
-        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            MsgBoxUtils.displayErrorMsgBox("Błąd", "Nieprawidłowy format wprowadzonych danych.");
-        }
-
-        //------------------------------------------------
 
         /// <summary>
         /// Zamykanie formatki - messageBox z zapytaniem.
