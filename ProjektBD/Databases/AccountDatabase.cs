@@ -33,6 +33,7 @@ namespace ProjektBD.Databases
         /// </returns>
         internal Użytkownik loginQuery(string login, string hashedPassword)
         {
+            
             // FirstOrDefault zwraca pierwszy wynik zapytania lub null, jeśli użytkownik nie został znaleziony
             return context.Użytkownicy.Local
                 .Where( s => s.login.Equals(login) && s.hasło.Equals(hashedPassword) )

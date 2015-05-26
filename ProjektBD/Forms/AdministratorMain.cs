@@ -163,9 +163,9 @@ namespace ProjektBD.Forms
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem();
+           /* Zarządzanie_Kontem newForm = new Zarządzanie_Kontem();
             newForm.ShowDialog();
-            newForm.Dispose();
+            newForm.Dispose();*/
         }
 
         /// <summary>

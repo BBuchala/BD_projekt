@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProjektBD.Databases;
 using ProjektBD.Exceptions;
+using ProjektBD.Utilities;
 
 namespace ProjektBD.Controllers
 {
@@ -15,16 +16,17 @@ namespace ProjektBD.Controllers
     /// </summary>
     class ManageController : Controller
     {
-        TextBoxBase hasło,email, miejscowosc;
+        TextBoxBase starehasło, nowehasło, email, miejscowosc;
         string login;
         DateTimePicker dataUrodzenia;
         ManageDatabase mandatabase;
 
 
-        public ManageController(string loginfromform, TextBoxBase hasłofromform, TextBoxBase emailfromform, TextBoxBase miejscowoscfromform, DateTimePicker dataUrodzeniafromform)
+        public ManageController(string loginfromform, TextBoxBase hasłostarefromform, TextBoxBase hasłonowefromform, TextBoxBase emailfromform, TextBoxBase miejscowoscfromform, DateTimePicker dataUrodzeniafromform)
         {
             login = loginfromform;
-            hasło = hasłofromform;
+            starehasło = hasłostarefromform;
+            nowehasło = hasłonowefromform;
             email = emailfromform;
             miejscowosc = miejscowoscfromform;
             dataUrodzenia = dataUrodzeniafromform;
@@ -32,30 +34,41 @@ namespace ProjektBD.Controllers
             database = new ManageDatabase();
             mandatabase = (database as ManageDatabase);
         }
-           public bool validateInput1(){
+        public bool validateInput1()
+        {
 
-               if (!(SpellCheckUtilities.isValidEmail(email.Text)))
-                   return false;
-               else
-               {
-                   return true;
-                   mandatabase.changeUserPersonalAccount(login, email, dataUrodzenia.Value, miejscowosc);
-               }
+            if (!(SpellCheckUtilities.isValidEmail(email.Text)))
+                return false;
+            else
+            {
+
+                mandatabase.changeUserPersonalAccount(login, email, dataUrodzenia.Value, miejscowosc);
+                return true;
+            }
 
 
-           }
+        }
+        public bool validateInput2()
+        {
 
-            
-        
-            
-           
-        
+            string sols = mandatabase.userSalt(login);
+            string soln = Encryption.generateSalt();
+            if (sols != null)
+            {
+                string hashedsPassword = Encryption.HashPassword(starehasło.Text, sols);
+                string hashednPassword = Encryption.HashPassword(nowehasło.Text, soln);
+                mandatabase.changeUserPasswordAccount(login, hashedsPassword, hashednPassword,soln);
+
+            }
+            return true;
+
+
 
         }
 
-       
 
 
 
-    
+
+    } 
 }

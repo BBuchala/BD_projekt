@@ -23,15 +23,17 @@ namespace ProjektBD.Forms
     {
 
         #region Fields
-        string login;
+        private string login;
 
         private ManageController formcontroller;
         #endregion 
-        public Zarządzanie_Kontem()
+        public Zarządzanie_Kontem(string inputLogin)
         {
             InitializeComponent();
-           // login = getInputLogin();
-            formcontroller = new ManageController(login, textBox3, email, textBox2, dateTimePicker1);
+            login = inputLogin;
+            formcontroller = new ManageController(login, textBox4, textBox5, email, textBox2, dateTimePicker1); 
+            
+            
         }
 
         private void button1_MouseEnter(object sender, EventArgs e)
@@ -48,11 +50,28 @@ namespace ProjektBD.Forms
         private void button6_Click(object sender, EventArgs e)
         {
 
-            bool czyPoprawne = formcontroller.validateInput1();
+
+           
+            bool czyPoprawne =  formcontroller.validateInput1();
+            
             if (czyPoprawne == true)
             {
-                MsgBoxUtils.displayInformationMsgBox("GOOD", "Dane zostały poprawnie zmienione.");
+                MsgBoxUtils.displayInformationMsgBox("Complete", "Dane zostały poprawnie zmienione.");
+                email.Text = null;
+                textBox2.Text = null;
             }
+            else
+            {
+                MsgBoxUtils.displayInformationMsgBox("Błąd","Niepoprawny email");
+            }
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            
+           bool czyPoprawne2 = formcontroller.validateInput2();
         }
     }
 }
