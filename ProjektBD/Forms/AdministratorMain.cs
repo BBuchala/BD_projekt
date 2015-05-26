@@ -264,20 +264,20 @@ namespace ProjektBD.Forms
             godlyDataGrid1.provideParams(formController, query.Count);
             godlyDataGrid1.DataSource = query;
 
-            if (tableName.Equals("Prowadzone_rozmowy") || tableName.Equals("Przedmioty_studenci"))
-            {
-                label7.Visible = true;
-
-                foreach (DataGridViewColumn column in godlyDataGrid1.Columns)
-                    column.ReadOnly = true;
-            }
-            else
+            if ( query.GetType().Name.Contains("Observable") )          // Jeśli zwrócona kolekcja jest obserwowalna, znaczy to, iż mamy ją w kontekście
             {
                 label7.Visible = false;
 
                 List<string> keysList = formController.getPrimaryKeyNames(tableName);
 
-                keysList.ForEach( keyName => godlyDataGrid1.Columns[keyName].ReadOnly = true );
+                keysList.ForEach(keyName => godlyDataGrid1.Columns[keyName].ReadOnly = true);
+            }
+            else
+            {
+                label7.Visible = true;
+
+                foreach (DataGridViewColumn column in godlyDataGrid1.Columns)
+                    column.ReadOnly = true;
             }
         }
 

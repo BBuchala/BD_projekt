@@ -129,7 +129,7 @@ namespace ProjektBD.DAL
             {
                 new Przedmiot { nazwa = "Informatyka", liczbaStudentów = 31, ProwadzącyID = 2 },
                 new Przedmiot { nazwa = "Fizyka", liczbaStudentów = 31, ProwadzącyID = 3 },
-                new Przedmiot { nazwa = "TUC", liczbaStudentów = 69, ProwadzącyID = 3 }
+                new Przedmiot { nazwa = "TUC", liczbaStudentów = 69, ProwadzącyID = 4 }
             };
             przedmioty.ForEach( p => context.Przedmioty.Add(p) );
             context.SaveChanges();
@@ -142,6 +142,18 @@ namespace ProjektBD.DAL
                 ProwadzącyID = 2
             };
             context.PrzedmiotyObieralne.Add(przedmObier);
+            context.SaveChanges();
+
+            var projekty = new List<Projekt>
+            {
+                new Projekt { PrzedmiotID  = 1, nazwa = "Danmaku", opis = "Forczu robi", maxLiczbaStudentów = 4 },
+                new Projekt { PrzedmiotID  = 1, nazwa = "Bazy", maxLiczbaStudentów = 5 },
+                new Projekt { PrzedmiotID  = 1, nazwa = "Algorytmy grafowe", maxLiczbaStudentów = 1 },
+                new Projekt { PrzedmiotID  = 2, nazwa = "???", maxLiczbaStudentów = 10 },
+                new Projekt { PrzedmiotID  = 3, nazwa = "Lutowanie kabelków", maxLiczbaStudentów = 180 },
+                new Projekt { PrzedmiotID  = 4, nazwa = "wBIAI", maxLiczbaStudentów = 2 }
+            };
+            projekty.ForEach( p => context.Projekty.Add(p) );
             context.SaveChanges();
 
             var oceny = new List<Ocena>
@@ -163,12 +175,39 @@ namespace ProjektBD.DAL
             context.SaveChanges();
 
             //----------------------------------------------------------------------
-            // Jeden ze sposobów dodawania rozmowy do studenta - taki trochę na pałę
+            // Dodawanie obiektów do studentów
 
             List<Student> studentsList = context.Studenci.ToList();
+            List<Projekt> projectsList = context.Projekty.ToList();
+            List<Przedmiot> subjectsList = context.Przedmioty.ToList();
 
             studentsList[0].Rozmowy.Add( rozmowy[0] );
             studentsList[1].Rozmowy.Add( rozmowy[1] );
+
+            Student Forczu = context.Studenci.Where( s => s.login.Equals("Forczu") ).First();
+            Forczu.Przedmioty.Add(subjectsList[0]);
+            Forczu.Przedmioty.Add(subjectsList[3]);
+            Forczu.Projekty.Add(projectsList[0]);
+            Forczu.Projekty.Add(projectsList[1]);
+            Forczu.Projekty.Add(projectsList[5]);
+
+            Student Ervi = context.Studenci.Where(s => s.login.Equals("Ervelan")).First();
+            Ervi.Przedmioty.Add(subjectsList[0]);
+            Ervi.Przedmioty.Add(subjectsList[3]);
+            Ervi.Projekty.Add(projectsList[0]);
+            Ervi.Projekty.Add(projectsList[1]);
+            Ervi.Projekty.Add(projectsList[5]);
+
+            Student Wuda = context.Studenci.Where(s => s.login.Equals("Wuda")).First();
+            Wuda.Przedmioty.Add(subjectsList[0]);
+            Wuda.Projekty.Add(projectsList[0]);
+            Wuda.Projekty.Add(projectsList[1]);
+
+            Student pedał = context.Studenci.Where(s => s.login.Equals("Korda")).First();
+            pedał.Przedmioty.Add(subjectsList[2]);
+            pedał.Projekty.Add(projectsList[4]);
+
+            context.SaveChanges();
 
             //----------------------------------------------------------------------
 

@@ -34,5 +34,40 @@ namespace ProjektBD.Controllers
         {
             return studDatabase.getMySubjects();
         }
+
+        /// <summary>
+        /// Pobiera projekty z bazy
+        /// </summary>
+        public List<ProjektDTO> getProjects(string subjectName)
+        {
+            return studDatabase.getProjects(subjectName);
+        }
+
+        /// <summary>
+        /// Pobiera z bazy projekty użytkownika realizowane w ramach przedmiotu
+        /// </summary>
+        public List<ProjektDTO> getMyProjects(string subjectName)
+        {
+            return studDatabase.getMyProjects(subjectName);
+        }
+
+        /// <summary>
+        /// Pobiera z bazy projekty realizowane w ramach przedmiotu, na które nie jest zapisany student
+        /// </summary>
+        public List<ProjektDTO> getNotMyProjects(string subjectName)
+        {
+            return studDatabase.getNotMyProjects(subjectName);
+        }
     }
 }
+
+
+
+
+//      /// <summary>
+//      /// Pobiera z bazy przedmioty, na które nie jest zapisany student
+//      /// </summary>
+//      public List<PrzedmiotDTO> getNotMySubjects()
+//      {
+//          return studDatabase.getNotMySubjects();
+//      }

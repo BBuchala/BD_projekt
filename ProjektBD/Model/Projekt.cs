@@ -13,6 +13,7 @@ namespace ProjektBD.Model
         public Projekt()
         {
             Oceny = new HashSet<Ocena>();
+            Studenci = new HashSet<Student>();
         }
 
         public int ProjektID { get; set; }          // Primary Key
@@ -32,5 +33,8 @@ namespace ProjektBD.Model
 
         [Browsable(false)]
         public virtual ICollection<Ocena> Oceny { get; set; }
+
+        [Browsable(false)]
+        public virtual ICollection<Student> Studenci { get; set; }
     }
 }

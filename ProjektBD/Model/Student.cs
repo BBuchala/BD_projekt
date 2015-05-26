@@ -17,6 +17,7 @@ namespace ProjektBD.Model
             Oceny = new HashSet<Ocena>();
             Przedmioty = new HashSet<Przedmiot>();
             Zgłoszenia = new HashSet<Zgłoszenie>();
+            Projekty = new HashSet<Projekt>();
         }
 
         [Index(IsUnique = true)]                    // Sprawia, że atrybut będzie unikalny
@@ -31,5 +32,8 @@ namespace ProjektBD.Model
 
         [Browsable(false)]
         public virtual ICollection<Zgłoszenie> Zgłoszenia { get; set; }
+
+        [Browsable(false)]
+        public virtual ICollection<Projekt> Projekty { get; set; }
     }
 }

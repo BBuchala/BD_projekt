@@ -120,20 +120,17 @@ namespace ProjektBD.Databases
         /// <typeparam name="T">Typ encji, której elementy przechowywane będą w zwracanej liscie</typeparam>
         public IList getTableData<T>(string tableName) where T: class
         {
-            if ( tableName.Equals("Prowadzone_rozmowy") )
+            DbSet<T> result = context.Set<T>();         // Tworzy nowy DbSet, który podpiernicza interesujące nas elementy z istniejącego kontekstu
+
+            try
             {
-                return context.Database.SqlQuery<Prowadzone_rozmowy>("SELECT * FROM Prowadzone_rozmowy").ToList();
-            }
-            else if ( tableName.Equals("Przedmioty_studenci") )
-            {
-                return context.Database.SqlQuery<Przedmioty_studenci>("SELECT * FROM Przedmioty_studenci").ToList();
-            }
-            else
-            {
-                DbSet<T> result = context.Set<T>();         // Tworzy nowy DbSet, który podpiernicza interesujące nas elementy z istniejącego kontekstu
-                result.Load();
+                result.Load();                          // Wyrzuci wyjątek, jeśli w kontekście nie ma DbSet'u typu T
+
                 return result.Local.ToBindingList();
-            }
+            } 
+            catch (InvalidOperationException) {}
+
+            return context.Database.SqlQuery<T>("SELECT * FROM " + tableName).ToList();     // Zapytanie dla tabel, których nie ma w kontekście
         }
 
         /// <summary>

@@ -26,37 +26,42 @@ namespace ProjektBD.Custom_Controls
         /// <typeparam name="T">Typ klasy encji, której elementy znajdują się w liście</typeparam>
         public void fill<T>(List<T> data) where T : class
         {
-            PropertyInfo[] właściwości = typeof(T).GetProperties();
+            this.Clear();                                     // Usuwa wszystkie wiersze i kolumny z kontrolki, jeśli istnieją
 
-            List<PropertyInfo> propertiesList = data[0].GetType().GetProperties().ToList();      // Lista właściwości
-            //propertiesList[0].GetValue(data[0]);            // Która właściwość zostanie pobrana / z której linijki
+            PropertyInfo[] właściwości = typeof(T).GetProperties();
 
             //---------DODAWANIE KOLUMN---------
             foreach (PropertyInfo wł in właściwości)
                 this.Columns.Add(wł.Name);
 
-            //---------DODAWANIE ITEMÓW (wiersze)---------
-            foreach (var d in data)
-                this.Items.Add( propertiesList[0].GetValue(d).ToString() );             // 0 - pierwsza właściwość (kolumna), d - który element listy (wiersz)
-
-            //---------DODAWANIE ITEMÓW (kolumny)---------
-            int i = 0;
-            foreach (ListViewItem item in this.Items)
+            if (data.Count > 0)
             {
-                for (int j = 1; j < propertiesList.Count; j++)
+                List<PropertyInfo> propertiesList = data[0].GetType().GetProperties().ToList();      // Lista właściwości
+                //propertiesList[0].GetValue(data[0]);            // Która właściwość zostanie pobrana / z której linijki
+
+                //---------DODAWANIE ITEMÓW (wiersze)---------
+                foreach (var d in data)
+                    this.Items.Add(propertiesList[0].GetValue(d).ToString());             // 0 - pierwsza właściwość (kolumna), d - który element listy (wiersz)
+
+                //---------DODAWANIE ITEMÓW (kolumny)---------
+                int i = 0;
+                foreach (ListViewItem item in this.Items)
                 {
-                    object subItem = propertiesList[j].GetValue(data[i]);               // j-ta właściwość z i-tego elementu listy
+                    for (int j = 1; j < propertiesList.Count; j++)
+                    {
+                        object subItem = propertiesList[j].GetValue(data[i]);               // j-ta właściwość z i-tego elementu listy
 
-                    if ( subItem != null)
-                        item.SubItems.Add( subItem.ToString() );
-                    else
-                        item.SubItems.Add( "" );
+                        if (subItem != null)
+                            item.SubItems.Add(subItem.ToString());
+                        else
+                            item.SubItems.Add("");
+                    }
+
+                    if (i % 2 == 1)
+                        item.BackColor = Color.FromArgb(255, 235, 235, 235);
+
+                    i++;
                 }
-
-                if (i % 2 == 1)
-                    item.BackColor = Color.FromArgb(255, 235, 235, 235);
-
-                i++;
             }
 
             //---------WYŚRODKOWANIE I AUTOSIZE KOLUMN---------

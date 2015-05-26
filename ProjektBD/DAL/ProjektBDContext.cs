@@ -63,6 +63,16 @@ namespace ProjektBD.DAL
                     m.MapLeftKey("PrzedmiotID");
                     m.MapRightKey("StudentID");
                 });
+
+            modelBuilder.Entity<Projekt>()
+                .HasMany(t => t.Studenci)
+                .WithMany(t => t.Projekty)
+                .Map(m =>
+                {
+                    m.ToTable("Projekty_studenci");
+                    m.MapLeftKey("ProjektID");
+                    m.MapRightKey("StudentID");
+                });
         }
     }
 }

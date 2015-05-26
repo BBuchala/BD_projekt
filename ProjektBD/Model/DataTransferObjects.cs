@@ -21,6 +21,12 @@ namespace ProjektBD.Model
         public int StudentID { get; set; }
     }
 
+    class Projekty_studenci
+    {
+        public int ProjektID { get; set; }
+        public int StudentID { get; set; }
+    }
+
     class ProwadzącyDTO
     {
         public string login { get; set; }
@@ -28,11 +34,17 @@ namespace ProjektBD.Model
         public string nazwaZakładu { get; set; }
     }
 
-    class PrzedmiotDTO          // Obierki wyróżnione innym kolorem
+    class PrzedmiotDTO          // Obierki wyróżnione innym kolorem. Wywalić inty, na PPM rozszerzone informacje o przedmiocie
     {
         public string nazwa { get; set; }
-        public int liczbaStudentów { get; set; }
-        public int? maxLiczbaStudentów { get; set; }
+        //public int liczbaStudentów { get; set; }
+        //public int? maxLiczbaStudentów { get; set; }
         public string prowadzący { get; set; }
+    }
+
+    class ProjektDTO
+    {
+        public string nazwa { get; set; }
+        public int maxLiczbaStudentów { get; set; }
     }
 }

@@ -41,8 +41,8 @@ namespace ProjektBD.Forms
             List<PrzedmiotDTO> mySubjectsList = formController.getMySubjects();
 
             customListView1.fill<PrzedmiotDTO>(subjectsList);
-            customListView2.fill<PrzedmiotDTO>(mySubjectsList);
             customListView3.fill<PrzedmiotDTO>(subjectsList);
+            customListView2.fill<PrzedmiotDTO>(mySubjectsList);
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -55,6 +55,27 @@ namespace ProjektBD.Forms
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void customListView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            List<ProjektDTO> projectsList = formController.getProjects(e.Item.Text);
+
+            customListView4.fill<ProjektDTO>(projectsList);
+        }
+
+        private void customListView2_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            List<ProjektDTO> myProjectsList = formController.getMyProjects(e.Item.Text);
+
+            customListView5.fill<ProjektDTO>(myProjectsList);
+        }
+
+        private void customListView3_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            List<ProjektDTO> projectsList = formController.getNotMyProjects(e.Item.Text);
+
+            customListView6.fill<ProjektDTO>(projectsList);
         }
 
         /// <summary>
