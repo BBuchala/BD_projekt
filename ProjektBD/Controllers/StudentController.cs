@@ -58,6 +58,22 @@ namespace ProjektBD.Controllers
         {
             return studDatabase.getNotMyProjects(subjectName);
         }
+
+        /// <summary>
+        /// Pobiera studentów zapisanych na przedmiot
+        /// </summary>
+        public List<StudentDTO> getStudentsFromSubject(string subjectName)
+        {
+            return studDatabase.getStudentsFromSubject(subjectName);
+        }
+
+        /// <summary>
+        /// Pobiera studentów zapisanych na projekt z danego przedmiotu
+        /// </summary>
+        public List<StudentDTO> getStudentsFromProject(string subjectName, string projectName)
+        {
+            return studDatabase.getStudentsFromProject(subjectName, projectName);
+        }
     }
 }
 

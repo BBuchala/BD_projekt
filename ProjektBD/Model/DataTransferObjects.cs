@@ -42,9 +42,22 @@ namespace ProjektBD.Model
         public string prowadzący { get; set; }
     }
 
-    class ProjektDTO
+    class ProjektDTO            // Opis pod PPM (MessageBox?)
     {
         public string nazwa { get; set; }
         public int maxLiczbaStudentów { get; set; }
+    }
+
+    class StudentDTO
+    {
+        public int nrIndeksu { get; set; }
+        public string login { get; set; }
+        public string email { get; set; }
+    }
+
+    class OcenaDTO              // Komentarz pod PPM (MessageBox?)
+    {
+        public double wartość { get; set; }
+        public DateTime? dataWpisania { get; set; }
     }
 }

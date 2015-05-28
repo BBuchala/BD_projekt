@@ -56,14 +56,6 @@ namespace ProjektBD.Databases
                     connectToDB();
             }
 
-            //catch (System.Data.DataException)
-            //{
-            //    MessageBox.Show("Baza danych jest obecnie wyłączona. Proszę spróbować później", "Prace konserwacyjne",
-            //                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            //    //backgroundWorker1.RunWorkerCompleted += (s, e) => Close();
-            //}
-
             return shouldCloseForm;
         }
 

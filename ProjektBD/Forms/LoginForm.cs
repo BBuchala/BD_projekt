@@ -281,15 +281,10 @@ namespace ProjektBD
             if (e.CloseReason == CloseReason.WindowsShutDown)
                 return;
 
-            switch ( MsgBoxUtils.displayQuestionMsgBox("Zamknij aplikację", "Jesteś pewien, że chcesz zakończyć\npracę z tą aplikacją?", this) )
-            {
-                case DialogResult.No:
-                    e.Cancel = true;
-                    break;
-
-                default:
-                    break;
-            }
+            DialogResult result = MsgBoxUtils.displayQuestionMsgBox("Zamknij aplikację", "Jesteś pewien, że chcesz zakończyć\npracę z tą aplikacją?", this);
+            
+            if (result == DialogResult.No)
+                e.Cancel = true;
         }
 
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)

@@ -59,9 +59,13 @@ namespace ProjektBD.Forms
 
         private void customListView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            List<ProjektDTO> projectsList = formController.getProjects(e.Item.Text);
+            string subjectName = e.Item.Text;
+
+            List<ProjektDTO> projectsList = formController.getProjects(subjectName);
+            List<StudentDTO> studentsList = formController.getStudentsFromSubject(subjectName);
 
             customListView4.fill<ProjektDTO>(projectsList);
+            customListView7.fill<StudentDTO>(studentsList);
         }
 
         private void customListView2_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -76,6 +80,16 @@ namespace ProjektBD.Forms
             List<ProjektDTO> projectsList = formController.getNotMyProjects(e.Item.Text);
 
             customListView6.fill<ProjektDTO>(projectsList);
+        }
+
+        private void customListView4_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            string subjectName = customListView1.SelectedItems[0].Text;
+            string projectName = e.Item.Text;
+
+            List<StudentDTO> studentsList = formController.getStudentsFromProject(subjectName, projectName);
+
+            customListView7.fill<StudentDTO>(studentsList);
         }
 
         /// <summary>
@@ -93,6 +107,14 @@ namespace ProjektBD.Forms
                 if (result == DialogResult.No)
                     e.Cancel = true;
             }
+        }
+
+        /// <summary>
+        /// Zamknięcie formatki - Pozbywa się utworzonego kontekstu przy zamykaniu formularza
+        /// </summary>
+        private void AdministratorMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            formController.disposeContext();
         }
     }
 }

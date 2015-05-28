@@ -161,7 +161,11 @@ namespace ProjektBD.DAL
                 new Ocena { PrzedmiotID = 1, StudentID = 5, wartość = 3.5, komentarz = "Nie ma GUI" },
                 new Ocena { PrzedmiotID = 1, StudentID = 7, wartość = 5.0 },
                 new Ocena { PrzedmiotID = 2, StudentID = 7, wartość = 2.0, komentarz = "Ściąga w kalkulatorze" },
-                new Ocena { PrzedmiotID = 2, StudentID = 6, wartość = 3.0 }
+                new Ocena { PrzedmiotID = 2, StudentID = 6, wartość = 3.0 },
+                new Ocena { PrzedmiotID = 1, StudentID = 8, ProjektID = 2, wartość = 2.0 },
+                new Ocena { PrzedmiotID = 1, StudentID = 8, ProjektID = 1,  wartość = 5.0 },
+                new Ocena { PrzedmiotID = 1, StudentID = 8, ProjektID = 1,  wartość = 4.0, komentarz = "Nieoptymalne kolizje" },
+                new Ocena { PrzedmiotID = 4, StudentID = 8, ProjektID = 6,  wartość = 2.0, komentarz = "Brak repo" },
             };
             oceny.ForEach( o => context.Oceny.Add(o) );
             context.SaveChanges();
