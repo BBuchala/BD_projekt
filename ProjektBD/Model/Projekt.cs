@@ -36,5 +36,8 @@ namespace ProjektBD.Model
 
         [Browsable(false)]
         public virtual ICollection<Student> Studenci { get; set; }
+
+        [Browsable(false)]
+        public virtual ICollection<Zgłoszenie> Zgłoszenia { get; set; }
     }
 }

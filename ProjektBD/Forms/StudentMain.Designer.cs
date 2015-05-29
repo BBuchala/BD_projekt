@@ -41,7 +41,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.listView17 = new System.Windows.Forms.ListView();
             this.button13 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -51,12 +50,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.listView14 = new System.Windows.Forms.ListView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.customListView7 = new ProjektBD.Custom_Controls.customListView();
             this.customListView4 = new ProjektBD.Custom_Controls.customListView();
             this.customListView1 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView9 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView8 = new ProjektBD.Custom_Controls.customListView();
             this.customListView5 = new ProjektBD.Custom_Controls.customListView();
             this.customListView2 = new ProjektBD.Custom_Controls.customListView();
             this.customListView6 = new ProjektBD.Custom_Controls.customListView();
@@ -105,6 +105,7 @@
             this.tabPage1.Size = new System.Drawing.Size(1133, 514);
             this.tabPage1.TabIndex = 5;
             this.tabPage1.Text = "Zgłoszenie";
+            this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
             // 
             // button2
             // 
@@ -115,6 +116,7 @@
             this.button2.TabIndex = 5;
             this.button2.Text = "Zapisz";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label3
             // 
@@ -137,6 +139,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Zapisz";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -199,7 +202,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.listView17);
+            this.groupBox2.Controls.Add(this.customListView9);
             this.groupBox2.Controls.Add(this.button13);
             this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Controls.Add(this.label20);
@@ -210,14 +213,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Wyszukiwanie użytkownika";
             // 
-            // listView17
-            // 
-            this.listView17.Location = new System.Drawing.Point(9, 158);
-            this.listView17.Name = "listView17";
-            this.listView17.Size = new System.Drawing.Size(174, 265);
-            this.listView17.TabIndex = 3;
-            this.listView17.UseCompatibleStateImageBehavior = false;
-            // 
             // button13
             // 
             this.button13.Location = new System.Drawing.Point(47, 100);
@@ -226,6 +221,7 @@
             this.button13.TabIndex = 2;
             this.button13.Text = "Szukaj";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // textBox1
             // 
@@ -237,16 +233,17 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label20.Location = new System.Drawing.Point(6, 43);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(84, 15);
+            this.label20.Size = new System.Drawing.Size(176, 13);
             this.label20.TabIndex = 0;
-            this.label20.Text = "Podaj login:";
+            this.label20.Text = "Podaj login lub jego fragment:";
             // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.customListView8);
             this.tabPage2.Controls.Add(this.customListView5);
             this.tabPage2.Controls.Add(this.customListView2);
             this.tabPage2.Controls.Add(this.label4);
@@ -254,13 +251,13 @@
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.button6);
-            this.tabPage2.Controls.Add(this.listView14);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1133, 514);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Moje przedmioty i projekty";
+            this.tabPage2.Enter += new System.EventHandler(this.tabPage2_Enter);
             // 
             // label4
             // 
@@ -301,6 +298,7 @@
             this.button3.TabIndex = 21;
             this.button3.Text = "Wypisz się z projektu";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button6
             // 
@@ -311,14 +309,7 @@
             this.button6.TabIndex = 18;
             this.button6.Text = "Wypisz się z przedmiotu";
             this.button6.UseVisualStyleBackColor = true;
-            // 
-            // listView14
-            // 
-            this.listView14.Location = new System.Drawing.Point(773, 52);
-            this.listView14.Name = "listView14";
-            this.listView14.Size = new System.Drawing.Size(307, 382);
-            this.listView14.TabIndex = 16;
-            this.listView14.UseCompatibleStateImageBehavior = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // tabControl1
             // 
@@ -379,6 +370,30 @@
             this.customListView1.View = System.Windows.Forms.View.Details;
             this.customListView1.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView1_ItemSelectionChanged);
             // 
+            // customListView9
+            // 
+            this.customListView9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView9.FullRowSelect = true;
+            this.customListView9.GridLines = true;
+            this.customListView9.Location = new System.Drawing.Point(9, 158);
+            this.customListView9.Name = "customListView9";
+            this.customListView9.Size = new System.Drawing.Size(174, 265);
+            this.customListView9.TabIndex = 4;
+            this.customListView9.UseCompatibleStateImageBehavior = false;
+            this.customListView9.View = System.Windows.Forms.View.Details;
+            // 
+            // customListView8
+            // 
+            this.customListView8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView8.FullRowSelect = true;
+            this.customListView8.GridLines = true;
+            this.customListView8.Location = new System.Drawing.Point(773, 52);
+            this.customListView8.Name = "customListView8";
+            this.customListView8.Size = new System.Drawing.Size(307, 382);
+            this.customListView8.TabIndex = 29;
+            this.customListView8.UseCompatibleStateImageBehavior = false;
+            this.customListView8.View = System.Windows.Forms.View.Details;
+            // 
             // customListView5
             // 
             this.customListView5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
@@ -390,6 +405,7 @@
             this.customListView5.TabIndex = 28;
             this.customListView5.UseCompatibleStateImageBehavior = false;
             this.customListView5.View = System.Windows.Forms.View.Details;
+            this.customListView5.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView5_ItemSelectionChanged);
             // 
             // customListView2
             // 
@@ -415,6 +431,7 @@
             this.customListView6.TabIndex = 11;
             this.customListView6.UseCompatibleStateImageBehavior = false;
             this.customListView6.View = System.Windows.Forms.View.Details;
+            this.customListView6.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView6_ItemSelectionChanged);
             // 
             // customListView3
             // 
@@ -477,7 +494,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ListView listView17;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label20;
@@ -486,7 +502,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.ListView listView14;
         private Custom_Controls.customListView customListView1;
         private Custom_Controls.customListView customListView2;
         private Custom_Controls.customListView customListView3;
@@ -494,5 +509,7 @@
         private Custom_Controls.customListView customListView5;
         private Custom_Controls.customListView customListView6;
         private Custom_Controls.customListView customListView7;
+        private Custom_Controls.customListView customListView8;
+        private Custom_Controls.customListView customListView9;
     }
 }

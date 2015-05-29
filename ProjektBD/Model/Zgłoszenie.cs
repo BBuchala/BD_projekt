@@ -16,7 +16,8 @@ namespace ProjektBD.Model
         }
 
         public long ZgłoszenieID { get; set; }          // Primary Key
-        public int PrzedmiotID { get; set; }            // Foreign Key
+        public int PrzedmiotID { get; set; }           // Foreign Key
+        public int? ProjektID { get; set; }             // Foreign Key
 
         [ForeignKey("Student")]
         public int StudentID { get; set; }              // Foreign Key
@@ -33,5 +34,8 @@ namespace ProjektBD.Model
 
         [Browsable(false)]
         public virtual Przedmiot Przedmiot { get; set; }
+
+        [Browsable(false)]
+        public virtual Projekt Projekt { get; set; }
     }
 }

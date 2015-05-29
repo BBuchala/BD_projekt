@@ -4,18 +4,39 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using System.Data.Entity;
 using ProjektBD.Model;
 
 namespace ProjektBD.Databases
 {
     class StudentDatabase : DatabaseBase
     {
-        //TODO: pobrać z bazy ID użytkownika w konstruktorze i przechować je jako prywatne pole
-        //      zoptymalizować niektóre zapytania (parę zbędnych JOIN'ów)
+        // TODO:
+        // - zamiast joinować, w LINQ wykorzystać navigation properties
+        // - przy wyszukiwaniu projektów uwzględnić tylko te, w których są jeszcze miejsca
+
+        private int userID;
 
         public StudentDatabase(string studentName)
         {
-            this.userName = studentName;
+            userID = context.Użytkownicy
+                .Where( u => u.login.Equals(studentName) )
+                .Select( u => u.UżytkownikID )
+                .Single();
+        }
+
+        /// <summary>
+        /// Pobiera z bazy listę użytkowników, których login zawiera w sobie podane słowo
+        /// </summary>
+        public List<UżytkownikDTO> getUser(string loginFragment)
+        {
+            var userQuery = from user in context.Użytkownicy
+                            where user.login.Contains(loginFragment) &&
+                                !user.login.Equals("admin")
+                            select new UżytkownikDTO { login = user.login, stanowisko = (user is Student)? "Student" : "Prowadzący" };
+
+            return userQuery.ToList();
         }
 
         /// <summary>
@@ -23,27 +44,9 @@ namespace ProjektBD.Databases
         /// </summary>
         public List<PrzedmiotDTO> getSubjects()
         {
-            // Tworzy zapytanie tak przejebane, że w okienku Debuga się nie mieści,
-            // za to nie generuje wyjątku-widmo
-
-            //var teacherQuery = from p in context.Przedmioty
-            //                   join sensei in context.Prowadzący on p.Prowadzący equals sensei
-            //                   join o in context.PrzedmiotyObieralne on p.PrzedmiotID equals o.PrzedmiotID into ob
-
-            //                   from obierka in ob.DefaultIfEmpty()
-            //                   select new PrzedmiotDTO
-            //                   {
-            //                       nazwa = p.nazwa,
-            //                       liczbaStudentów = p.liczbaStudentów,
-            //                       maxLiczbaStudentów = obierka.maxLiczbaStudentów,
-            //                       prowadzący = sensei.login
-            //                   };
-
-            var teacherQuery = context.Database.SqlQuery<PrzedmiotDTO>(@"
-                            SELECT p.nazwa, prow.login AS prowadzący
-                            FROM Przedmiot p
-                                LEFT JOIN PrzedmiotObieralny ob ON ob.PrzedmiotID = p.PrzedmiotID
-                                JOIN Użytkownik prow ON prow.UżytkownikID = p.ProwadzącyID");
+            var teacherQuery =  from subj in context.Przedmioty
+                                    join prow in context.Prowadzący on subj.ProwadzącyID equals prow.UżytkownikID
+                                select new PrzedmiotDTO { nazwa = subj.nazwa, prowadzący = prow.login };
 
             return teacherQuery.ToList();
         }
@@ -56,13 +59,9 @@ namespace ProjektBD.Databases
             var teacherQuery = context.Database.SqlQuery<PrzedmiotDTO>(@"
                             SELECT p.nazwa, prow.login AS prowadzący
                             FROM Przedmiot p
-	                            LEFT JOIN PrzedmiotObieralny ob ON ob.PrzedmiotID = p.PrzedmiotID
 	                            JOIN Użytkownik prow ON prow.UżytkownikID = p.ProwadzącyID
 	                            JOIN Przedmioty_studenci ps ON ps.PrzedmiotID = p.PrzedmiotID
-                            WHERE ps.StudentID = (
-	                            SELECT s.UżytkownikID
-	                            FROM Użytkownik s
-	                            WHERE s.login = '" + userName + "')");
+                            WHERE ps.StudentID = " + userID);
 
             return teacherQuery.ToList();
         }
@@ -91,9 +90,7 @@ namespace ProjektBD.Databases
 	                            JOIN Przedmiot subj ON subj.PrzedmiotID = p.PrzedmiotID
 	                            JOIN Projekty_studenci ps ON ps.ProjektID = p.ProjektID
                             WHERE subj.nazwa = '" + subjectName + @"' AND
-                                ps.StudentID = ( SELECT u.UżytkownikID
-                                                 FROM Użytkownik u
-                                                 WHERE u.login = '" + userName + "')");
+                                ps.StudentID = " + userID);
 
             return projectQuery.ToList();
         }
@@ -113,9 +110,7 @@ namespace ProjektBD.Databases
 		                            SELECT p.nazwa
 		                            FROM Projekt p
 			                            JOIN Projekty_studenci ps ON ps.ProjektID = p.ProjektID
-		                            WHERE ps.StudentID = (SELECT u.UżytkownikID
-							                              FROM Użytkownik u
-							                              WHERE u.login = '" + userName + @"')
+		                            WHERE ps.StudentID = " + userID + @"
                                 )");
 
             return projectQuery.ToList();
@@ -140,18 +135,15 @@ namespace ProjektBD.Databases
         /// <summary>
         /// Pobiera studentów zapisanych na projekt z danego przedmiotu
         /// </summary>
-        public List<StudentDTO> getStudentsFromProject(string subjectName, string projectName)
+        public List<StudentDTO> getStudentsFromProject(string projectName)
         {
             var studentQuery = context.Database.SqlQuery<StudentDTO>(@"
                             SELECT s.nrIndeksu, u.login, u.email
                             FROM Student s
 	                            JOIN Użytkownik u ON u.UżytkownikID = s.UżytkownikID
-	                            JOIN Przedmioty_studenci ps ON ps.StudentID = s.UżytkownikID
-	                            JOIN Przedmiot subj ON subj.PrzedmiotID = ps.PrzedmiotID
-	                            JOIN Projekty_studenci projs ON projs.StudentID = s.UżytkownikID
-	                            JOIN Projekt proj ON proj.ProjektID = projs.ProjektID
-                            WHERE subj.nazwa = '" + subjectName + @"' AND
-                                proj.nazwa = '" + projectName + "'");
+	                            JOIN Projekty_studenci ps ON ps.StudentID = s.UżytkownikID
+	                            JOIN Projekt proj ON proj.ProjektID = ps.ProjektID
+                            WHERE proj.nazwa = '" + projectName + "'");
 
             return studentQuery.ToList();
         }
@@ -161,14 +153,12 @@ namespace ProjektBD.Databases
         /// </summary>
         public List<OcenaDTO> getGradesFromSubject(string subjectName)
         {
-            var gradeQuery = context.Database.SqlQuery<OcenaDTO>(@"
-                            SELECT o.wartość, o.dataWpisania
-                            FROM Ocena o
-	                            JOIN Przedmiot p ON p.PrzedmiotID = o.PrzedmiotID
-	                            JOIN Student s ON s.UżytkownikID = o.StudentID
-	                            JOIN Użytkownik usr ON usr.UżytkownikID = s.UżytkownikID
-                            WHERE usr.login = '" + userName + @"' AND
-	                            p.nazwa = '" + subjectName + "'");
+            var gradeQuery = from o in context.Oceny
+                                join subj in context.Przedmioty on o.PrzedmiotID equals subj.PrzedmiotID
+                                join user in context.Studenci on o.StudentID equals user.UżytkownikID
+                            where user.UżytkownikID == userID &&
+                                subj.nazwa.Equals(subjectName)
+                            select new OcenaDTO { wartość = o.wartość, dataWpisania = o.dataWpisania };
 
             return gradeQuery.ToList();
         }
@@ -176,23 +166,105 @@ namespace ProjektBD.Databases
         /// <summary>
         /// Pobiera oceny z podanego projektu
         /// </summary>
-        public List<OcenaDTO> getGradesFromProject(string subjectName, string projectName)
+        public List<OcenaDTO> getGradesFromProject(string projectName)
         {
-            var gradeQuery = context.Database.SqlQuery<OcenaDTO>(@"
-                            SELECT o.wartość, o.dataWpisania
-                            FROM Ocena o
-	                            JOIN Przedmiot p ON p.PrzedmiotID = o.PrzedmiotID
-	                            JOIN Student s ON s.UżytkownikID = o.StudentID
-	                            JOIN Użytkownik usr ON usr.UżytkownikID = o.StudentID
-	                            JOIN Projekty_studenci ps ON
-		                            ps.StudentID = o.StudentID AND
-		                            ps.ProjektID = o.ProjektID
-	                            JOIN Projekt proj ON proj.ProjektID = o.ProjektID
-                            WHERE p.nazwa = '" + subjectName + @"' AND
-	                            usr.login = '" + userName + @"' AND
-	                            proj.nazwa = '" + projectName + "'");
+            var gradeQuery = from o in context.Oceny
+                                join proj in context.Projekty on o.ProjektID equals proj.ProjektID
+                                join user in context.Studenci on o.StudentID equals user.UżytkownikID
+                             where user.UżytkownikID == userID &&
+                                 proj.nazwa.Equals(projectName)
+                             select new OcenaDTO { wartość = o.wartość, dataWpisania = o.dataWpisania }; 
 
             return gradeQuery.ToList();
+        }
+
+        /// <summary>
+        /// Zapisuje studenta na przedmiot o podanej nazwie.
+        /// <para> Zwraca false, jeśli student jest już zapisany na dany przedmiot. </para>
+        /// </summary>
+        public bool enrollToSubject(string subjectName)
+        {
+            Student stud = context.Studenci
+                .Where( s => s.UżytkownikID == userID )
+                .Include("Przedmioty")                  // Załadowany zostanie równiez Navigation Property z powiązanymi przedmiotami
+                .Single();
+
+            Przedmiot subj = context.Przedmioty.Where( p => p.nazwa.Equals(subjectName) ).Single();
+
+            if ( stud.Przedmioty.Contains(subj) )
+                return false;
+
+            Zgłoszenie z = new Zgłoszenie
+            {
+                StudentID = stud.UżytkownikID,
+                PrzedmiotID = subj.PrzedmiotID,
+                ProwadzącyID = subj.ProwadzącyID,
+                jestZaakceptowane = false
+            };
+
+            context.Zgłoszenia.Add(z);
+            context.SaveChanges();
+
+            return true;
+        }
+
+        /// <summary>
+        /// Zapisuje studenta na projekt o podanej nazwie
+        /// </summary>
+        public void enrollToProject(string projectName)
+        {
+            Student stud = context.Studenci.Where( s => s.UżytkownikID == userID ).Single();
+            Projekt proj = context.Projekty.Where( p => p.nazwa.Equals(projectName) ).Single();
+
+            Zgłoszenie z = new Zgłoszenie
+            {
+                StudentID = stud.UżytkownikID,
+                ProjektID = proj.ProjektID,
+                PrzedmiotID = proj.PrzedmiotID,
+                ProwadzącyID = proj.Przedmiot.ProwadzącyID,
+                jestZaakceptowane = false
+            };
+
+            context.Zgłoszenia.Add(z);
+            context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Usuwa studenta z przedmiotu o podanej nazwie
+        /// </summary>
+        public void RemoveFromSubject(string subjectName)
+        {
+            Student stud = context.Studenci
+                .Where(s => s.UżytkownikID == userID)
+                .Include("Przedmioty")                  // Załadowany zostanie równiez Navigation Property z powiązanymi przedmiotami
+                .Include("Projekty")
+                .Single();
+
+            Przedmiot subj = context.Przedmioty.Where(p => p.nazwa.Equals(subjectName)).Single();
+
+            stud.Przedmioty.Remove(subj);
+            subj.liczbaStudentów--;
+
+            var projectsList = stud.Projekty.Where( p => p.Przedmiot.Equals(subj) ).ToList();
+            projectsList.ForEach( proj => stud.Projekty.Remove(proj) );
+
+            context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Usuwa studenta z projektu o podanej nazwie
+        /// </summary>
+        public void RemoveFromProject(string projectName)
+        {
+            Student stud = context.Studenci
+                .Where(s => s.UżytkownikID == userID)
+                .Include("Projekty")                  // Załadowany zostanie równiez Navigation Property z powiązanymi projektami
+                .Single();
+
+            Projekt proj = context.Projekty.Where(p => p.nazwa.Equals(projectName)).Single();
+
+            stud.Projekty.Remove(proj);
+            context.SaveChanges();
         }
     }
 }

@@ -41,6 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.godlyDataGrid1 = new ProjektBD.Custom_Controls.godlyDataGrid();
             this.label7 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,25 +51,24 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.customListView1 = new ProjektBD.Custom_Controls.customListView();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.customListView1 = new ProjektBD.Custom_Controls.customListView();
-            this.godlyDataGrid1 = new ProjektBD.Custom_Controls.godlyDataGrid();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.messageImage)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notificationImage)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.godlyDataGrid1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.godlyDataGrid1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -200,6 +200,15 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Przeglądanie bazy danych";
             // 
+            // godlyDataGrid1
+            // 
+            this.godlyDataGrid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.godlyDataGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.godlyDataGrid1.Location = new System.Drawing.Point(22, 55);
+            this.godlyDataGrid1.Name = "godlyDataGrid1";
+            this.godlyDataGrid1.Size = new System.Drawing.Size(1086, 440);
+            this.godlyDataGrid1.TabIndex = 4;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -302,6 +311,18 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Zarządzanie prowadzącymi";
             // 
+            // customListView1
+            // 
+            this.customListView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView1.FullRowSelect = true;
+            this.customListView1.GridLines = true;
+            this.customListView1.Location = new System.Drawing.Point(258, 74);
+            this.customListView1.Name = "customListView1";
+            this.customListView1.Size = new System.Drawing.Size(368, 406);
+            this.customListView1.TabIndex = 10;
+            this.customListView1.UseCompatibleStateImageBehavior = false;
+            this.customListView1.View = System.Windows.Forms.View.Details;
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(713, 294);
@@ -350,27 +371,6 @@
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
-            // customListView1
-            // 
-            this.customListView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.customListView1.FullRowSelect = true;
-            this.customListView1.GridLines = true;
-            this.customListView1.Location = new System.Drawing.Point(258, 74);
-            this.customListView1.Name = "customListView1";
-            this.customListView1.Size = new System.Drawing.Size(368, 406);
-            this.customListView1.TabIndex = 10;
-            this.customListView1.UseCompatibleStateImageBehavior = false;
-            this.customListView1.View = System.Windows.Forms.View.Details;
-            // 
-            // godlyDataGrid1
-            // 
-            this.godlyDataGrid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.godlyDataGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.godlyDataGrid1.Location = new System.Drawing.Point(22, 55);
-            this.godlyDataGrid1.Name = "godlyDataGrid1";
-            this.godlyDataGrid1.Size = new System.Drawing.Size(1086, 440);
-            this.godlyDataGrid1.TabIndex = 4;
-            // 
             // AdministratorMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -399,6 +399,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.godlyDataGrid1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -406,7 +407,6 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.godlyDataGrid1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

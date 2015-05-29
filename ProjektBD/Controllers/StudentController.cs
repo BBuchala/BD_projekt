@@ -20,6 +20,14 @@ namespace ProjektBD.Controllers
         }
 
         /// <summary>
+        /// Pobiera z bazy listę użytkowników, których login zawiera w sobie podane słowo
+        /// </summary>
+        public List<UżytkownikDTO> getUser(string loginFragment)
+        {
+            return studDatabase.getUser(loginFragment);
+        }
+
+        /// <summary>
         /// Pobiera przedmioty z bazy
         /// </summary>
         public List<PrzedmiotDTO> getSubjects()
@@ -70,9 +78,58 @@ namespace ProjektBD.Controllers
         /// <summary>
         /// Pobiera studentów zapisanych na projekt z danego przedmiotu
         /// </summary>
-        public List<StudentDTO> getStudentsFromProject(string subjectName, string projectName)
+        public List<StudentDTO> getStudentsFromProject(string projectName)
         {
-            return studDatabase.getStudentsFromProject(subjectName, projectName);
+            return studDatabase.getStudentsFromProject(projectName);
+        }
+
+        /// <summary>
+        /// Pobiera oceny z podanego przedmiotu
+        /// </summary>
+        public List<OcenaDTO> getGradesFromSubject(string subjectName)
+        {
+            return studDatabase.getGradesFromSubject(subjectName);
+        }
+
+        /// <summary>
+        /// Pobiera oceny z podanego projektu
+        /// </summary>
+        public List<OcenaDTO> getGradesFromProject(string projectName)
+        {
+            return studDatabase.getGradesFromProject(projectName);
+        }
+
+        /// <summary>
+        /// Zapisuje studenta na przedmiot o podanej nazwie.
+        /// <para> Zwraca false, jeśli student jest już zapisany na dany przedmiot. </para>
+        /// </summary>
+        public bool enrollToSubject(string subjectName)
+        {
+            return studDatabase.enrollToSubject(subjectName);
+        }
+
+        /// <summary>
+        /// Zapisuje studenta na projekt o podanej nazwie.
+        /// </summary>
+        public void enrollToProject(string projectName)
+        {
+            studDatabase.enrollToProject(projectName);
+        }
+
+        /// <summary>
+        /// Usuwa studenta z przedmiotu o podanej nazwie
+        /// </summary>
+        public void RemoveFromSubject(string subjectName)
+        {
+            studDatabase.RemoveFromSubject(subjectName);
+        }
+
+        /// <summary>
+        /// Usuwa studenta z projektu o podanej nazwie
+        /// </summary>
+        public void RemoveFromProject(string projectName)
+        {
+            studDatabase.RemoveFromProject(projectName);
         }
     }
 }

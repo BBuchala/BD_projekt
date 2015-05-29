@@ -55,6 +55,12 @@ namespace ProjektBD.Model
         public string email { get; set; }
     }
 
+    class UżytkownikDTO
+    {
+        public string login { get; set; }
+        public string stanowisko { get; set; }
+    }
+
     class OcenaDTO              // Komentarz pod PPM (MessageBox?)
     {
         public double wartość { get; set; }

@@ -18,6 +18,7 @@ namespace ProjektBD.Custom_Controls
             this.FullRowSelect = true;
             this.GridLines = true;
             this.View = View.Details;
+            //this.MultiSelect = false;
         }
 
         /// <summary>
