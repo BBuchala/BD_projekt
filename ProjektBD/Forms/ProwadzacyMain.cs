@@ -32,7 +32,7 @@ namespace ProjektBD.Forms
         {
             InitializeComponent();
             formController = new TeacherController();
-            inputLogin = userLogin;
+            userLogin = inputLogin;
         }
 
         /// <summary>
@@ -40,16 +40,19 @@ namespace ProjektBD.Forms
         /// </summary>
         private void checkForNewApplications()
         {
-            notifications.applicationList = formController.getNewApplications(userLogin);
-            notifications.applicationCount = notifications.applicationList.Count;
+            notifications.subjectApplicationList = formController.getSubjectApplications(userLogin);
+            notifications.subjectApplicationCount = notifications.subjectApplicationList.Count;
 
-            if (notifications.applicationCount != 0)
+            notifications.projectApplicationList = formController.getProjectApplications(userLogin);
+            notifications.projectApplicationCount = notifications.projectApplicationList.Count;
+
+            if (notifications.projectApplicationCount != 0 || notifications.subjectApplicationCount != 0)
             {
                 notificationImage.Image = ProjektBD.Properties.Resources.znak;
                 notificationCount.Visible = true;
 
-                if (notifications.applicationCount <= 100)
-                    notificationCount.Text = notifications.applicationCount.ToString();
+                if (notifications.projectApplicationCount + notifications.subjectApplicationCount <= 100)
+                    notificationCount.Text = (notifications.projectApplicationCount + notifications.subjectApplicationCount).ToString();
                 else
                     notificationCount.Text = "99+";
             }
@@ -61,7 +64,45 @@ namespace ProjektBD.Forms
         }
 
 
+
         #region Events
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if (notifications.projectApplicationCount > 0)
+            {
+                string str = "";
+
+                str += notifications.projectApplicationCount.ToString() + " now" + ((notifications.projectApplicationCount > 1) ? "ych" : "e") +
+                    " zgłosze" + ((notifications.projectApplicationCount > 1) ? "ń" : "nie") + " na projekt" +
+                    ((notifications.projectApplicationCount > 1) ? "y" : "");
+
+                zgłoszeniaNaProjektyToolStripMenuItem.Text = str;
+                zgłoszeniaNaProjektyToolStripMenuItem.ForeColor = Color.Red;
+            }
+            else
+            {
+                zgłoszeniaNaProjektyToolStripMenuItem.Text = "Brak nowych zapisów na projekty";
+                zgłoszeniaNaProjektyToolStripMenuItem.ForeColor = Color.Black;
+            }
+            if (notifications.subjectApplicationCount > 0)
+            {
+                string str = "";
+
+                str += notifications.subjectApplicationCount.ToString() + " now" + ((notifications.subjectApplicationCount > 1) ? "ych" : "e") +
+                    " zgłosze" + ((notifications.subjectApplicationCount > 1) ? "ń" : "nie") + " na przedmiot" +
+                    ((notifications.subjectApplicationCount > 1) ? "y" : "");
+
+                zgłoszeniaNaPrzedmiotToolStripMenuItem.Text = str;
+                zgłoszeniaNaPrzedmiotToolStripMenuItem.ForeColor = Color.Red;
+            }
+            else
+            {
+                zgłoszeniaNaPrzedmiotToolStripMenuItem.Text = "Brak nowych zapisów na przedmioty";
+                zgłoszeniaNaPrzedmiotToolStripMenuItem.ForeColor = Color.Black;
+            }
+
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -130,11 +171,41 @@ namespace ProjektBD.Forms
 
         #endregion
 
+        private void ProwadzacyMain_Load(object sender, EventArgs e)
+        {
+            if (formController.connectToDatabase())
+                this.Close();
+
+            checkForNewApplications();
+
+            new ToolTip().SetToolTip(pictureBox2, "Wyloguj");
+        }
+
+        /// <summary>
+        /// Menu kontekstowe również pod LPM
+        /// </summary>
+        private void notificationCount_Click(object sender, EventArgs e)
+        {
+            contextMenuStrip1.Show(Control.MousePosition);
+        }
+
+        /// <summary>
+        /// Menu kontekstowe również pod LPM
+        /// </summary>
+        private void notificationImage_Click(object sender, EventArgs e)
+        {
+            contextMenuStrip1.Show(Control.MousePosition);
+        }
+
+
     }
 
     struct TeacherNotifications
     {
-        public List<Zgłoszenie> applicationList;
-        public int applicationCount;
+        public List<Zgłoszenie> subjectApplicationList;
+        public int subjectApplicationCount;
+
+        public List<Zgłoszenie> projectApplicationList;
+        public int projectApplicationCount;
     }
 }

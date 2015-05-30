@@ -14,18 +14,28 @@ namespace ProjektBD.Databases
     class TeacherDatabase : DatabaseBase
     {
 
-        internal List<Zgłoszenie> getNewApplications(string teacherLogin)
+        internal List<Zgłoszenie> getProjectApplications(string teacherLogin)
         {
             var query = context.Database.SqlQuery<Zgłoszenie>("SELECT * " +
-                                                            "FROM ZGŁOSZENIE WHERE ProwadzącyID = " +
-                                                            getTeacherID(teacherLogin) + " AND jestZaakceptowane = false").ToList();
+                                                            "FROM ZGŁOSZENIE WHERE ProwadzącyID = " +  getTeacherID(teacherLogin) + 
+                                                            " AND jestZaakceptowane = 'false' AND ProjektID IS NOT NULL").ToList();
 
             return query;
         }
 
+        internal List<Zgłoszenie> getSubjectApplications(string teacherLogin)
+        {
+            var query = context.Database.SqlQuery<Zgłoszenie>("SELECT * " +
+                                                            "FROM ZGŁOSZENIE WHERE ProwadzącyID = " + getTeacherID(teacherLogin) +
+                                                            " AND jestZaakceptowane = 'false' AND ProjektID IS NULL").ToList();
+
+            return query;
+
+        }
+
         public int getTeacherID(string teacherLogin)
         {
-            return context.Prowadzący.Local.Where(s => s.login.Equals(teacherLogin)).FirstOrDefault().UżytkownikID;
+            return context.Użytkownicy.Local.Where(s => s.login.Equals(teacherLogin)).FirstOrDefault().UżytkownikID;
         }
     }
 }

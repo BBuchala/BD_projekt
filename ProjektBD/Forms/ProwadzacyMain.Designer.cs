@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProwadzacyMain));
             this.label1 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
@@ -100,6 +101,9 @@
             this.messageCount = new System.Windows.Forms.Label();
             this.messageImage = new System.Windows.Forms.PictureBox();
             this.notificationCount = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.zgłoszeniaNaProjektyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zgłoszeniaNaPrzedmiotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notificationImage = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -115,6 +119,7 @@
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.messageImage)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notificationImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -857,6 +862,7 @@
             this.notificationCount.AutoSize = true;
             this.notificationCount.BackColor = System.Drawing.Color.Transparent;
             this.notificationCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.notificationCount.ContextMenuStrip = this.contextMenuStrip1;
             this.notificationCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.notificationCount.ForeColor = System.Drawing.Color.Red;
             this.notificationCount.Location = new System.Drawing.Point(207, 19);
@@ -865,15 +871,39 @@
             this.notificationCount.TabIndex = 0;
             this.notificationCount.Text = "0";
             this.notificationCount.Visible = false;
+            this.notificationCount.ContextMenuStripChanged += new System.EventHandler(this.notificationCount_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zgłoszeniaNaProjektyToolStripMenuItem,
+            this.zgłoszeniaNaPrzedmiotToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(204, 70);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // zgłoszeniaNaProjektyToolStripMenuItem
+            // 
+            this.zgłoszeniaNaProjektyToolStripMenuItem.Name = "zgłoszeniaNaProjektyToolStripMenuItem";
+            this.zgłoszeniaNaProjektyToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.zgłoszeniaNaProjektyToolStripMenuItem.Text = "Zgłoszenia na projekty";
+            // 
+            // zgłoszeniaNaPrzedmiotToolStripMenuItem
+            // 
+            this.zgłoszeniaNaPrzedmiotToolStripMenuItem.Name = "zgłoszeniaNaPrzedmiotToolStripMenuItem";
+            this.zgłoszeniaNaPrzedmiotToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.zgłoszeniaNaPrzedmiotToolStripMenuItem.Text = "Zgłoszenia na przedmiot";
             // 
             // notificationImage
             // 
+            this.notificationImage.ContextMenuStrip = this.contextMenuStrip1;
             this.notificationImage.Image = global::ProjektBD.Properties.Resources.znak2;
             this.notificationImage.Location = new System.Drawing.Point(173, 0);
             this.notificationImage.Name = "notificationImage";
             this.notificationImage.Size = new System.Drawing.Size(40, 40);
             this.notificationImage.TabIndex = 20;
             this.notificationImage.TabStop = false;
+            this.notificationImage.Click += new System.EventHandler(this.notificationImage_Click);
             // 
             // pictureBox2
             // 
@@ -914,6 +944,7 @@
             this.Text = "ProwadzacyMain";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProwadzacyMain_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProwadzacyMain_FormClosed);
+            this.Load += new System.EventHandler(this.ProwadzacyMain_Load);
             this.tabPage2.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
@@ -933,6 +964,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.messageImage)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.notificationImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -1018,5 +1050,8 @@
         private System.Windows.Forms.PictureBox notificationImage;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem zgłoszeniaNaProjektyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zgłoszeniaNaPrzedmiotToolStripMenuItem;
     }
 }

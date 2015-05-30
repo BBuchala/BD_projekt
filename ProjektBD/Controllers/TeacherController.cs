@@ -23,9 +23,14 @@ namespace ProjektBD.Controllers
         }
 
 
-        public List<Zgłoszenie> getNewApplications(string teacherLogin)
+        public List<Zgłoszenie> getProjectApplications(string teacherLogin)
         {
-            return teacherdb.getNewApplications(teacherLogin);
+            return teacherdb.getProjectApplications(teacherLogin);
+        }
+
+        public List<Zgłoszenie> getSubjectApplications(string teacherLogin)
+        {
+            return teacherdb.getSubjectApplications(teacherLogin);
         }
     }
 }
