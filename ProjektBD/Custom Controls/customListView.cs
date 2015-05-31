@@ -12,13 +12,15 @@ namespace ProjektBD.Custom_Controls
 {
     class customListView : ListView
     {
+        public Color previouslySelectedItemColor = new Color();
+
         public customListView()
         {
             this.Font = new Font("Microsoft Sans Serif", 9);
             this.FullRowSelect = true;
             this.GridLines = true;
             this.View = View.Details;
-            //this.MultiSelect = false;
+            this.MultiSelect = false;
         }
 
         /// <summary>
@@ -42,7 +44,14 @@ namespace ProjektBD.Custom_Controls
 
                 //---------DODAWANIE ITEMÓW (wiersze)---------
                 foreach (var d in data)
-                    this.Items.Add(propertiesList[0].GetValue(d).ToString());             // 0 - pierwsza właściwość (kolumna), d - który element listy (wiersz)
+                {
+                    object itemValue = propertiesList[0].GetValue(d);
+
+                    if (itemValue != null)
+                        this.Items.Add( itemValue.ToString() );           // 0 - pierwsza właściwość (kolumna), d - który element listy (wiersz)
+                    else
+                        this.Items.Add("");
+                }
 
                 //---------DODAWANIE ITEMÓW (kolumny)---------
                 int i = 0;
@@ -50,10 +59,10 @@ namespace ProjektBD.Custom_Controls
                 {
                     for (int j = 1; j < propertiesList.Count; j++)
                     {
-                        object subItem = propertiesList[j].GetValue(data[i]);               // j-ta właściwość z i-tego elementu listy
+                        object subItemValue = propertiesList[j].GetValue(data[i]);               // j-ta właściwość z i-tego elementu listy
 
-                        if (subItem != null)
-                            item.SubItems.Add(subItem.ToString());
+                        if (subItemValue != null)
+                            item.SubItems.Add( subItemValue.ToString() );
                         else
                             item.SubItems.Add("");
                     }

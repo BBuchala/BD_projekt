@@ -34,7 +34,10 @@ namespace ProjektBD.Databases
             var userQuery = from user in context.Użytkownicy
                             where user.login.Contains(loginFragment) &&
                                 !user.login.Equals("admin")
-                            select new UżytkownikDTO { login = user.login, stanowisko = (user is Student)? "Student" : "Prowadzący" };
+                            select new UżytkownikDTO {
+                                login = user.login,
+                                stanowisko = (user is Student)? "Student" : "Prowadzący"
+                            };
 
             return userQuery.ToList();
         }
@@ -158,7 +161,11 @@ namespace ProjektBD.Databases
                                 join user in context.Studenci on o.StudentID equals user.UżytkownikID
                             where user.UżytkownikID == userID &&
                                 subj.nazwa.Equals(subjectName)
-                            select new OcenaDTO { wartość = o.wartość, dataWpisania = o.dataWpisania };
+                            select new OcenaDTO {
+                                nazwaProjektu = o.Projekt.nazwa,
+                                wartość = o.wartość,
+                                dataWpisania = o.dataWpisania
+                            };
 
             return gradeQuery.ToList();
         }
@@ -166,14 +173,14 @@ namespace ProjektBD.Databases
         /// <summary>
         /// Pobiera oceny z podanego projektu
         /// </summary>
-        public List<OcenaDTO> getGradesFromProject(string projectName)
+        public List<OcenaZProjektuDTO> getGradesFromProject(string projectName)
         {
             var gradeQuery = from o in context.Oceny
                                 join proj in context.Projekty on o.ProjektID equals proj.ProjektID
                                 join user in context.Studenci on o.StudentID equals user.UżytkownikID
                              where user.UżytkownikID == userID &&
                                  proj.nazwa.Equals(projectName)
-                             select new OcenaDTO { wartość = o.wartość, dataWpisania = o.dataWpisania }; 
+                             select new OcenaZProjektuDTO { wartość = o.wartość, dataWpisania = o.dataWpisania }; 
 
             return gradeQuery.ToList();
         }

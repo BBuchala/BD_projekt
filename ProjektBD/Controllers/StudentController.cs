@@ -94,7 +94,7 @@ namespace ProjektBD.Controllers
         /// <summary>
         /// Pobiera oceny z podanego projektu
         /// </summary>
-        public List<OcenaDTO> getGradesFromProject(string projectName)
+        public List<OcenaZProjektuDTO> getGradesFromProject(string projectName)
         {
             return studDatabase.getGradesFromProject(projectName);
         }

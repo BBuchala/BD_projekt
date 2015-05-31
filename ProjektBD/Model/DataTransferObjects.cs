@@ -63,6 +63,13 @@ namespace ProjektBD.Model
 
     class OcenaDTO              // Komentarz pod PPM (MessageBox?)
     {
+        public string nazwaProjektu { get; set; }
+        public double wartość { get; set; }
+        public DateTime? dataWpisania { get; set; }
+    }
+
+    class OcenaZProjektuDTO
+    {
         public double wartość { get; set; }
         public DateTime? dataWpisania { get; set; }
     }

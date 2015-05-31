@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using ProjektBD.Controllers;
+using ProjektBD.Custom_Controls;
 using ProjektBD.Model;
 using ProjektBD.Utilities;
 
@@ -17,6 +18,7 @@ namespace ProjektBD.Forms
     public partial class StudentMain : Form
     {
         #region Pola i konstruktor
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Login zalogowanego użytkownika, można używać do wyszukiwania.
@@ -35,12 +37,15 @@ namespace ProjektBD.Forms
             formController = new StudentController(inputLogin);
         }
 
+        //----------------------------------------------------------------
         #endregion
 
-        #region Ładowanie kart i formularza
+        #region Ładowanie formularza
 
         private void StudentMain_Load(object sender, EventArgs e)
         {
+            label8.Text = userLogin;
+
             new ToolTip().SetToolTip(pictureBox2, "Wyloguj");
 
             List<PrzedmiotDTO> subjectsList = formController.getSubjects();
@@ -51,75 +56,265 @@ namespace ProjektBD.Forms
             customListView2.fill<PrzedmiotDTO>(mySubjectsList);
         }
 
-        private void tabPage1_Enter(object sender, EventArgs e)
-        {
-            button1.Enabled = false;
-            button2.Enabled = false;
-        }
-
-        private void tabPage2_Enter(object sender, EventArgs e)
-        {
-            button3.Enabled = false;
-            button6.Enabled = false;
-        }
-
         #endregion
 
         #region Obsługa customListView'ów
         //----------------------------------------------------------------
-        // TODO: bug przy ponownym kliknięciu tego samego przedmiotu
+
+        #region listView1 (Podgląd -> Lista przedmiotów)
+        //---------------------
 
         private void customListView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            string subjectName = e.Item.Text;
+            if (customListView1.SelectedItems.Count > 0)
+            {
+                string subjectName = e.Item.Text;
 
-            List<ProjektDTO> projectsList = formController.getProjects(subjectName);
-            List<StudentDTO> studentsList = formController.getStudentsFromSubject(subjectName);
+                List<ProjektDTO> projectsList = formController.getProjects(subjectName);
+                List<StudentDTO> studentsList = formController.getStudentsFromSubject(subjectName);
 
-            customListView4.fill<ProjektDTO>(projectsList);
-            customListView7.fill<StudentDTO>(studentsList);
+                customListView4.fill<ProjektDTO>(projectsList);
+                customListView7.fill<StudentDTO>(studentsList);
+            }
+            else
+            {
+                customListView4.Clear();
+                customListView7.Clear();
+            }
         }
+
+        private void customListView1_Enter(object sender, EventArgs e)
+        {
+            if (customListView1.SelectedItems.Count > 0)
+            {
+                string subjectName = customListView1.SelectedItems[0].Text;
+
+                List<ProjektDTO> projectsList = formController.getProjects(subjectName);                // do wywalenia?
+                List<StudentDTO> studentsList = formController.getStudentsFromSubject(subjectName);
+
+                customListView4.fill<ProjektDTO>(projectsList);
+                customListView7.fill<StudentDTO>(studentsList);
+
+                customListView1.SelectedItems[0].BackColor = customListView1.previouslySelectedItemColor;
+            }
+        }
+
+        private void customListView1_Leave(object sender, EventArgs e)
+        {
+            saveItemState(customListView1);
+        }
+
+        //---------------------
+        #endregion
+
+        #region listView2 (Moje przedmioty i projekty -> Wybierz przedmiot)
+        //---------------------
 
         private void customListView2_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            List<ProjektDTO> myProjectsList = formController.getMyProjects(e.Item.Text);
-            List<OcenaDTO> mySubjectGradesList = formController.getGradesFromSubject(e.Item.Text);
+            if (customListView2.SelectedItems.Count > 0)
+            {
+                string subjectName = e.Item.Text;
 
-            customListView5.fill<ProjektDTO>(myProjectsList);
-            customListView8.fill<OcenaDTO>(mySubjectGradesList);
+                List<ProjektDTO> myProjectsList = formController.getMyProjects(subjectName);
+                List<OcenaDTO> mySubjectGradesList = formController.getGradesFromSubject(subjectName);
 
-            button6.Enabled = true;
+                customListView5.fill<ProjektDTO>(myProjectsList);
+                customListView8.fill<OcenaDTO>(mySubjectGradesList);
+
+                button6.Enabled = true;
+            }
+            else
+            {
+                button6.Enabled = false;
+                customListView5.Clear();
+                customListView8.Clear();
+            }
         }
+
+        private void customListView2_Enter(object sender, EventArgs e)
+        {
+            button3.Enabled = false;
+
+            // Gdy coś jest zaznaczone, wypełniamy pozostałe listView'y i odblokowujemy przycisk
+            if (customListView2.SelectedItems.Count > 0)
+            {
+                string selectedSubjectName = customListView2.SelectedItems[0].Text;
+
+                List<ProjektDTO> myProjectsList = formController.getMyProjects(selectedSubjectName);            // do wywalenia?
+                List<OcenaDTO> mySubjectGradesList = formController.getGradesFromSubject(selectedSubjectName);
+
+                customListView5.fill<ProjektDTO>(myProjectsList);
+                customListView8.fill<OcenaDTO>(mySubjectGradesList);
+
+                customListView2.SelectedItems[0].BackColor = customListView2.previouslySelectedItemColor;
+
+                button6.Enabled = true;
+            }
+        }
+
+        private void customListView2_Leave(object sender, EventArgs e)
+        {
+            saveItemState(customListView2);
+        }
+
+        //---------------------
+        #endregion
+
+        #region listView3 (Zgłoszenie -> Lista przedmiotów)
+        //---------------------
 
         private void customListView3_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            List<ProjektDTO> projectsList = formController.getNotMyProjects(e.Item.Text);
+            if (customListView3.SelectedItems.Count > 0)
+            {
+                List<ProjektDTO> projectsList = formController.getNotMyProjects(e.Item.Text);
 
-            customListView6.fill<ProjektDTO>(projectsList);
+                customListView6.fill<ProjektDTO>(projectsList);
 
-            button1.Enabled = true;
+                button1.Enabled = true;
+            }
+            else
+            {
+                button1.Enabled = false;
+                customListView6.Clear();
+            }
         }
+
+        private void customListView3_Enter(object sender, EventArgs e)
+        {
+            button2.Enabled = false;
+
+            loadItemState(customListView3);
+        }
+
+        private void customListView3_Leave(object sender, EventArgs e)
+        {
+            saveItemState(customListView3);
+        }
+
+        //---------------------
+        #endregion
+
+        #region listView4 (Podgląd -> Lista projektów)
+        //---------------------
 
         private void customListView4_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            List<StudentDTO> studentsList = formController.getStudentsFromProject(e.Item.Text);
+            if (customListView4.SelectedItems.Count > 0)
+            {
+                List<StudentDTO> studentsList = formController.getStudentsFromProject(e.Item.Text);
 
-            customListView7.fill<StudentDTO>(studentsList);
+                customListView7.fill<StudentDTO>(studentsList);
+            }
+            else
+            {
+                List<StudentDTO> studentsList = formController.getStudentsFromSubject( customListView1.SelectedItems[0].Text );
+
+                customListView7.fill<StudentDTO>(studentsList);
+            }
         }
+
+        private void customListView4_Enter(object sender, EventArgs e)
+        {
+            loadItemState(customListView4);
+        }
+
+        private void customListView4_Leave(object sender, EventArgs e)
+        {
+            saveItemState(customListView4);
+        }
+        //---------------------
+        #endregion
+
+        #region listView5 (Moje przedmioty i projekty -> Wybierz projekt)
+        //---------------------
 
         private void customListView5_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            List<OcenaDTO> myProjectGradesList = formController.getGradesFromProject(e.Item.Text);
+            if (customListView5.SelectedItems.Count > 0)
+            {
+                List<OcenaZProjektuDTO> myProjectGradesList = formController.getGradesFromProject(e.Item.Text);
 
-            customListView8.fill<OcenaDTO>(myProjectGradesList);
+                customListView8.fill<OcenaZProjektuDTO>(myProjectGradesList);
 
-            button3.Enabled = true;
+                button3.Enabled = true;
+            }
+            else
+            {
+                button3.Enabled = false;
+
+                List<OcenaDTO> mySubjectGradesList = formController.getGradesFromSubject( customListView2.SelectedItems[0].Text );
+
+                customListView8.fill<OcenaDTO>(mySubjectGradesList);
+            }
         }
+
+        private void customListView5_Enter(object sender, EventArgs e)
+        {
+            loadItemState(customListView5);
+        }
+
+        private void customListView5_Leave(object sender, EventArgs e)
+        {
+            saveItemState(customListView5);
+        }
+
+        //---------------------
+        #endregion
+
+        #region listView6 (Zgłoszenie -> Lista projektów)
+        //---------------------
 
         private void customListView6_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            button2.Enabled = true;
+            if (customListView6.SelectedItems.Count > 0)
+                button2.Enabled = true;
+            else
+                button2.Enabled = false;
         }
+
+        private void customListView6_Enter(object sender, EventArgs e)
+        {
+            loadItemState(customListView6);
+        }
+
+        private void customListView6_Leave(object sender, EventArgs e)
+        {
+            saveItemState(customListView6);
+        }
+
+        //---------------------
+        #endregion
+
+        #region Metody pomocnicze
+        //---------------------
+
+        /// <summary>
+        /// Po wyjściu z kontrolki zapamiętuje zaznaczony item, tymczasowo zmieniając jego kolor.
+        /// </summary>
+        /// <param name="listView"> Kontrolka, z której wychodzimy. </param>
+        private void saveItemState(customListView listView)
+        {
+            if (listView.SelectedItems.Count > 0)
+            {
+                listView.previouslySelectedItemColor = listView.SelectedItems[0].BackColor;
+                listView.SelectedItems[0].BackColor = Color.AntiqueWhite;
+            }
+        }
+
+        /// <summary>
+        /// Przywraca poprzedni kolor zaznaczonego itemu, zmieniony podczas przechodzenia do innej listy.
+        /// </summary>
+        /// <param name="listView"> Kontrolka, do której wchodzimy. </param>
+        private void loadItemState(customListView listView)
+        {
+            if (listView.SelectedItems.Count > 0)
+                listView.SelectedItems[0].BackColor = listView.previouslySelectedItemColor;
+        }
+
+        //---------------------
+        #endregion
 
         //----------------------------------------------------------------
         #endregion
@@ -195,6 +390,7 @@ namespace ProjektBD.Forms
         #endregion
 
         #region Zamykanie formularza
+        //----------------------------------------------------------------
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
@@ -226,7 +422,7 @@ namespace ProjektBD.Forms
             formController.disposeContext();
         }
 
+        //----------------------------------------------------------------
         #endregion
-
     }
 }
