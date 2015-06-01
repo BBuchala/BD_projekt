@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using ProjektBD.Model;
 
 namespace ProjektBD.Custom_Controls
@@ -80,6 +82,65 @@ namespace ProjektBD.Custom_Controls
                 column.TextAlign = HorizontalAlignment.Center;
                 column.Width = -2;                              // Automatyczne wyrównanie do najdłuższego itemu w kolumnie
             }
+
+            createMenuStrip();
+        }
+
+        /// <summary>
+        /// Tworzy rozwijane menu w zależności od rodzaju danych przechowywanych przez kontrolkę
+        /// </summary>
+        private void createMenuStrip()
+        {
+            ContextMenuStrip cms = new ContextMenuStrip();
+
+            foreach (ColumnHeader column in this.Columns)
+            {
+                if (column.Text.Equals("login"))
+                {
+                    cms.Items.Add("Pokaż profil");
+                    cms.Items.Add("Wyślij wiadomość");
+                    break;
+                }
+                else if (column.Text.Equals("prowadzący"))
+                {
+                    cms.Items.Add("Pokaż szczegóły");
+                    cms.Items.Add("Wyślij wiadomość do prowadzącego");
+                    break;
+                }
+            }
+
+            if (cms.Items.Count < 2)
+                cms.Items.Add("Pokaż szczegóły");
+
+            // Przy otwieraniu menusa na PPM sprawdza, czy jest zaznaczony jakikolwiek item. Jeśli nie, anuluje event
+            cms.Opening += (s, e) =>
+                {
+                    if ( this.SelectedItems.Count == 0 )
+                        e.Cancel = true;
+                };
+
+            this.ContextMenuStrip = cms;
+        }
+
+        /// <summary>
+        /// Po wyjściu z kontrolki zapamiętuje zaznaczony item, tymczasowo zmieniając jego kolor.
+        /// </summary>
+        public void saveItemState()
+        {
+            if (this.SelectedItems.Count > 0)
+            {
+                this.previouslySelectedItemColor = this.SelectedItems[0].BackColor;
+                this.SelectedItems[0].BackColor = Color.AntiqueWhite;
+            }
+        }
+
+        /// <summary>
+        /// Przywraca poprzedni kolor zaznaczonego itemu, zmieniony podczas przechodzenia do innej listy.
+        /// </summary>
+        public void loadItemState()
+        {
+            if (this.SelectedItems.Count > 0)
+                this.SelectedItems[0].BackColor = this.previouslySelectedItemColor;
         }
     }
 }

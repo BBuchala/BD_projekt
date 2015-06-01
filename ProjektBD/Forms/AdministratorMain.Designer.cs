@@ -317,6 +317,7 @@
             this.customListView1.FullRowSelect = true;
             this.customListView1.GridLines = true;
             this.customListView1.Location = new System.Drawing.Point(258, 74);
+            this.customListView1.MultiSelect = false;
             this.customListView1.Name = "customListView1";
             this.customListView1.Size = new System.Drawing.Size(368, 406);
             this.customListView1.TabIndex = 10;
@@ -388,7 +389,7 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdminstratorMain";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterForm_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdministratorMain_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AdministratorMain_FormClosed);
             this.Load += new System.EventHandler(this.AdministratorMain_Load);
             this.panel1.ResumeLayout(false);

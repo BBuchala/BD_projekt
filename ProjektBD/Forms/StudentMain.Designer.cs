@@ -503,8 +503,8 @@
             this.Name = "StudentMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "StudentMain";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterForm_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AdministratorMain_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StudentMain_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StudentMain_FormClosed);
             this.Load += new System.EventHandler(this.StudentMain_Load);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

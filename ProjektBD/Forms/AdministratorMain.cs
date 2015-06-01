@@ -284,7 +284,7 @@ namespace ProjektBD.Forms
         /// <summary>
         /// Zamykanie formatki - messageBox z zapytaniem.
         /// </summary>
-        private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void AdministratorMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.WindowsShutDown)
                 return;

@@ -62,7 +62,7 @@ namespace ProjektBD.Controllers
         /// <summary>
         /// Pobiera z bazy projekty realizowane w ramach przedmiotu, na które nie jest zapisany student
         /// </summary>
-        public List<ProjektDTO> getNotMyProjects(string subjectName)
+        public List<ForeignProjektDTO> getNotMyProjects(string subjectName)
         {
             return studDatabase.getNotMyProjects(subjectName);
         }

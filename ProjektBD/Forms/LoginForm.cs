@@ -49,7 +49,7 @@ namespace ProjektBD
         /// <summary>
         /// Warstwa pośrednicząca między widokiem a modelem (bazą danych). Przetwarza i oblicza
         /// </summary>
-        private  AccountController formController;
+        private AccountController formController;
 
         #endregion
 
@@ -89,7 +89,7 @@ namespace ProjektBD
                         default:
                             Form mainForm = formController.openUserForm(userType, login.Text);
 
-                            if (mainForm == null)         // jeśli baza jest w stanie naprawczym
+                            if (mainForm == null)           // jeśli baza jest w stanie naprawczym
                                 EmergencyMode.notifyAboutEmergencyMode();
 
                             else
@@ -97,10 +97,7 @@ namespace ProjektBD
                                 this.Hide();
 
                                 mainForm.ShowDialog();
-                                mainForm.Dispose();
-                                                             
-
-                               // pomyśleć nad przeładowaniem wszystkich kontekstów
+                                mainForm.Dispose();         // pomyśleć nad przeładowaniem wszystkich kontekstów
 
                                 login.Text = "";
 

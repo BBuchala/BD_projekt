@@ -102,7 +102,7 @@ namespace ProjektBD.Forms
 
         private void customListView1_Leave(object sender, EventArgs e)
         {
-            saveItemState(customListView1);
+            customListView1.saveItemState();
         }
 
         //---------------------
@@ -156,7 +156,7 @@ namespace ProjektBD.Forms
 
         private void customListView2_Leave(object sender, EventArgs e)
         {
-            saveItemState(customListView2);
+            customListView2.saveItemState();
         }
 
         //---------------------
@@ -169,9 +169,9 @@ namespace ProjektBD.Forms
         {
             if (customListView3.SelectedItems.Count > 0)
             {
-                List<ProjektDTO> projectsList = formController.getNotMyProjects(e.Item.Text);
+                List<ForeignProjektDTO> projectsList = formController.getNotMyProjects(e.Item.Text);
 
-                customListView6.fill<ProjektDTO>(projectsList);
+                customListView6.fill<ForeignProjektDTO>(projectsList);
 
                 button1.Enabled = true;
             }
@@ -186,12 +186,12 @@ namespace ProjektBD.Forms
         {
             button2.Enabled = false;
 
-            loadItemState(customListView3);
+            customListView3.loadItemState();
         }
 
         private void customListView3_Leave(object sender, EventArgs e)
         {
-            saveItemState(customListView3);
+            customListView3.saveItemState();
         }
 
         //---------------------
@@ -218,12 +218,12 @@ namespace ProjektBD.Forms
 
         private void customListView4_Enter(object sender, EventArgs e)
         {
-            loadItemState(customListView4);
+            customListView4.loadItemState();
         }
 
         private void customListView4_Leave(object sender, EventArgs e)
         {
-            saveItemState(customListView4);
+            customListView4.saveItemState();
         }
         //---------------------
         #endregion
@@ -253,12 +253,12 @@ namespace ProjektBD.Forms
 
         private void customListView5_Enter(object sender, EventArgs e)
         {
-            loadItemState(customListView5);
+            customListView5.loadItemState();
         }
 
         private void customListView5_Leave(object sender, EventArgs e)
         {
-            saveItemState(customListView5);
+            customListView5.saveItemState();
         }
 
         //---------------------
@@ -277,41 +277,12 @@ namespace ProjektBD.Forms
 
         private void customListView6_Enter(object sender, EventArgs e)
         {
-            loadItemState(customListView6);
+            customListView6.loadItemState();
         }
 
         private void customListView6_Leave(object sender, EventArgs e)
         {
-            saveItemState(customListView6);
-        }
-
-        //---------------------
-        #endregion
-
-        #region Metody pomocnicze
-        //---------------------
-
-        /// <summary>
-        /// Po wyjściu z kontrolki zapamiętuje zaznaczony item, tymczasowo zmieniając jego kolor.
-        /// </summary>
-        /// <param name="listView"> Kontrolka, z której wychodzimy. </param>
-        private void saveItemState(customListView listView)
-        {
-            if (listView.SelectedItems.Count > 0)
-            {
-                listView.previouslySelectedItemColor = listView.SelectedItems[0].BackColor;
-                listView.SelectedItems[0].BackColor = Color.AntiqueWhite;
-            }
-        }
-
-        /// <summary>
-        /// Przywraca poprzedni kolor zaznaczonego itemu, zmieniony podczas przechodzenia do innej listy.
-        /// </summary>
-        /// <param name="listView"> Kontrolka, do której wchodzimy. </param>
-        private void loadItemState(customListView listView)
-        {
-            if (listView.SelectedItems.Count > 0)
-                listView.SelectedItems[0].BackColor = listView.previouslySelectedItemColor;
+            customListView6.saveItemState();
         }
 
         //---------------------
@@ -327,15 +298,15 @@ namespace ProjektBD.Forms
         {
             Zarządzanie_Kontem newForm = new Zarządzanie_Kontem(userLogin);
             newForm.ShowDialog();
+
             if (newForm.close == true)
             {
                 newForm.Dispose();
                 close = true;
                 this.Close();
-
             }
             else
-            newForm.Dispose();
+                newForm.Dispose();
             
         }
 
@@ -405,13 +376,12 @@ namespace ProjektBD.Forms
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             this.Close();
-           
         }
 
         /// <summary>
         /// Zamykanie formatki - messageBox z zapytaniem.
         /// </summary>
-        private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void StudentMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.WindowsShutDown)
                 return;
@@ -430,11 +400,9 @@ namespace ProjektBD.Forms
         /// <summary>
         /// Zamknięcie formatki - Pozbywa się utworzonego kontekstu przy zamykaniu formularza
         /// </summary>
-        private void AdministratorMain_FormClosed(object sender, FormClosedEventArgs e)
+        private void StudentMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-           formController.disposeContext();
-
-         
+            formController.disposeContext();
         }
 
         //----------------------------------------------------------------

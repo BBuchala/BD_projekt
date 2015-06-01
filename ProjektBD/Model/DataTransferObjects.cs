@@ -48,6 +48,13 @@ namespace ProjektBD.Model
         public int maxLiczbaStudentów { get; set; }
     }
 
+    class ForeignProjektDTO
+    {
+        public string nazwa { get; set; }
+        public int liczbaStudentów { get; set; }
+        public int maxLiczbaStudentów { get; set; }
+    }
+
     class StudentDTO
     {
         public int nrIndeksu { get; set; }

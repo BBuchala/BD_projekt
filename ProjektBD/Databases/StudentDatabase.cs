@@ -14,7 +14,6 @@ namespace ProjektBD.Databases
     {
         // TODO:
         // - zamiast joinować, w LINQ wykorzystać navigation properties
-        // - przy wyszukiwaniu projektów uwzględnić tylko te, w których są jeszcze miejsca
 
         private int userID;
 
@@ -101,12 +100,13 @@ namespace ProjektBD.Databases
         /// <summary>
         /// Pobiera z bazy projekty realizowane w ramach przedmiotu, na które nie jest zapisany student
         /// </summary>
-        public List<ProjektDTO> getNotMyProjects(string subjectName)
+        public List<ForeignProjektDTO> getNotMyProjects(string subjectName)
         {
-            var projectQuery = context.Database.SqlQuery<ProjektDTO>(@"
-                            SELECT p.nazwa, p.maxLiczbaStudentów
+            var projectQuery = context.Database.SqlQuery<ForeignProjektDTO>(@"
+                            SELECT p.nazwa, COUNT(ps.ProjektID) AS liczbaStudentów, p.maxLiczbaStudentów
                             FROM Projekt p
                                 JOIN Przedmiot subj ON subj.PrzedmiotID = p.PrzedmiotID
+                                LEFT JOIN Projekty_studenci ps ON ps.ProjektID = p.ProjektID
                             WHERE subj.nazwa = '" + subjectName + @"' AND
 	                            p.nazwa NOT IN
 	                            (
@@ -114,7 +114,9 @@ namespace ProjektBD.Databases
 		                            FROM Projekt p
 			                            JOIN Projekty_studenci ps ON ps.ProjektID = p.ProjektID
 		                            WHERE ps.StudentID = " + userID + @"
-                                )");
+                                )
+                            GROUP BY p.nazwa, p.maxLiczbaStudentów
+                            HAVING COUNT(ps.ProjektID) < p.maxLiczbaStudentów");
 
             return projectQuery.ToList();
         }
