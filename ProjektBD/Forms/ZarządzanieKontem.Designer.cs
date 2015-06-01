@@ -313,6 +313,8 @@
             this.Name = "Zarządzanie_Kontem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Zarządzanie Kontem";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ZarządznieKontem_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ZarządzanieKontem_FormClosed);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

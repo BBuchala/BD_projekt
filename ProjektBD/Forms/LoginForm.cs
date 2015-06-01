@@ -49,7 +49,7 @@ namespace ProjektBD
         /// <summary>
         /// Warstwa pośrednicząca między widokiem a modelem (bazą danych). Przetwarza i oblicza
         /// </summary>
-        private AccountController formController;
+        private  AccountController formController;
 
         #endregion
 
@@ -97,7 +97,10 @@ namespace ProjektBD
                                 this.Hide();
 
                                 mainForm.ShowDialog();
-                                mainForm.Dispose();                 // pomyśleć nad przeładowaniem wszystkich kontekstów
+                                mainForm.Dispose();
+                                                             
+
+                               // pomyśleć nad przeładowaniem wszystkich kontekstów
 
                                 login.Text = "";
 

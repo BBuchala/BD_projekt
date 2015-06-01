@@ -24,6 +24,7 @@ namespace ProjektBD.Forms
         /// Login zalogowanego użytkownika, można używać do wyszukiwania.
         /// </summary>
         private string userLogin;
+        private bool close = false;
 
         /// <summary>
         /// Warstwa pośrednicząca między widokiem a modelem (bazą danych). Przetwarza i oblicza
@@ -326,7 +327,16 @@ namespace ProjektBD.Forms
         {
             Zarządzanie_Kontem newForm = new Zarządzanie_Kontem(userLogin);
             newForm.ShowDialog();
+            if (newForm.close == true)
+            {
+                newForm.Dispose();
+                close = true;
+                this.Close();
+
+            }
+            else
             newForm.Dispose();
+            
         }
 
         // Zapisanie na przedmiot
@@ -395,6 +405,7 @@ namespace ProjektBD.Forms
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             this.Close();
+           
         }
 
         /// <summary>
@@ -403,6 +414,8 @@ namespace ProjektBD.Forms
         private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.WindowsShutDown)
+                return;
+            if (close == true)
                 return;
 
             if (this.DialogResult == DialogResult.Cancel)
@@ -419,7 +432,9 @@ namespace ProjektBD.Forms
         /// </summary>
         private void AdministratorMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            formController.disposeContext();
+           formController.disposeContext();
+
+         
         }
 
         //----------------------------------------------------------------

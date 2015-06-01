@@ -33,6 +33,7 @@ namespace ProjektBD.Controllers
         /// </summary>
         public string validateUser(string login, string password)
         {
+            
             string salt = accDatabase.getUserSalt(login);
 
             if (salt != null)

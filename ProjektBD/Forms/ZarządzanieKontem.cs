@@ -24,14 +24,16 @@ namespace ProjektBD.Forms
 
         #region Fields
         private string login;
+        
 
         private ManageController formcontroller;
+        public bool close = false;
         #endregion 
         public Zarządzanie_Kontem(string inputLogin)
         {
             InitializeComponent();
             login = inputLogin;
-            formcontroller = new ManageController(login, textBox4, textBox5, email, textBox2, dateTimePicker1); 
+            formcontroller = new ManageController(login, textBox4, textBox5, email, textBox2, dateTimePicker1,textBox3); 
             
             
         }
@@ -44,6 +46,18 @@ namespace ProjektBD.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            if(checkBox1.Checked==true){
+                formcontroller.deleteUser();
+                MsgBoxUtils.displayInformationMsgBox("Complete", "Usunięto użytkownika z bazy");
+                close = true;
+                this.Close();
+
+
+            }
+            else
+                MsgBoxUtils.displayInformationMsgBox("Error", "Należy potwierdzić wybór");
+
             
         }
 
@@ -52,26 +66,103 @@ namespace ProjektBD.Forms
 
 
            
-            bool czyPoprawne =  formcontroller.validateInput1();
+            string  czyPoprawne1 =  formcontroller.validateInput1();
+
+            switch (czyPoprawne1)
+            {
+
+                case "Zla dlugosc":
+                    MsgBoxUtils.displayInformationMsgBox("Error", "Zła długość pół. Pola musza zajmować conajmniej 3 znaki");
+                    email.Text = null;
+                    textBox2.Text = null;
+                    return;
+
+                case "Zla forma email":
+                    MsgBoxUtils.displayInformationMsgBox("Error", "Zły adres email.");
+                    email.Text = null;
+                    textBox2.Text = null;
+                    return;
+
+                case "ok":
+                    MsgBoxUtils.displayInformationMsgBox("Complete", "Dane zostały poprawnie zmienione");
+                    email.Text = null;
+                    textBox2.Text = null;
+                    break;
+
+            }
+       
             
-            if (czyPoprawne == true)
-            {
-                MsgBoxUtils.displayInformationMsgBox("Complete", "Dane zostały poprawnie zmienione.");
-                email.Text = null;
-                textBox2.Text = null;
-            }
-            else
-            {
-                MsgBoxUtils.displayInformationMsgBox("Błąd","Niepoprawny email");
-            }
             
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
 
+
+            string czyPoprawne2 = formcontroller.validateInput2();
+
+
+            switch (czyPoprawne2)
+            {
+
+                case "Zla dlugosc":
+                    MsgBoxUtils.displayInformationMsgBox("Error", "Zła długość pół. Pola musza zajmować conajmniej 3 znaki");
+                    textBox3.Text = null;
+                    textBox4.Text = null;
+                    textBox5.Text = null;
+                    return;
+
+                case "Rozne hasla":
+                    MsgBoxUtils.displayInformationMsgBox("Error", "Nowe hasło nie jest takie samo.");
+                    textBox3.Text = null;
+                    textBox4.Text = null;
+                    textBox5.Text = null;
+                    return;
+
+                case "Zle stare haslo":
+                    MsgBoxUtils.displayInformationMsgBox("Error", "Stare hasło jest niepoprawne.");
+                    textBox3.Text = null;
+                    textBox4.Text = null;
+                    textBox5.Text = null;
+                    return;
+
+                case "ok":
+                    MsgBoxUtils.displayInformationMsgBox("Complete", "Dane zostały poprawnie zmienione");
+                     textBox3.Text = null;
+                    textBox4.Text = null;
+                    textBox5.Text = null;
+                 
+                    break;
+             
+
+            }
+        }
+
+        private void ZarządznieKontem_FormClosing(object sender, FormClosingEventArgs e)
+        {
             
-           bool czyPoprawne2 = formcontroller.validateInput2();
+           
+            if (e.CloseReason == CloseReason.WindowsShutDown)
+                return;
+            if (close == true)
+                return;
+
+            if (e.CloseReason == CloseReason.UserClosing)
+                 {
+
+                DialogResult result = MsgBoxUtils.displayQuestionMsgBox("Zamknij ustawienia", "Jesteś pewien, że chcesz wyjść z ustawień konta?", this);
+
+                if (result == DialogResult.No)
+                    e.Cancel = true;
+
+            }
+            
+           
+
+        }
+        private void ZarządzanieKontem_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            formcontroller.disposeContext();
         }
     }
 }

@@ -15,6 +15,15 @@ namespace ProjektBD.Databases
     /// </summary>
     class AccountDatabase : DatabaseBase
     {
+
+        //public static void ReloadEntity<TEntity>(
+        //this DbContext context,
+        //TEntity entity)
+        //where TEntity : class
+        //{
+        //    context.Entry(entity).Reload();
+        //}
+
         public string getUserSalt(string login)
         {
             context.Użytkownicy.Load();

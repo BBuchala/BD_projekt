@@ -36,17 +36,39 @@ namespace ProjektBD.Databases
             context.SaveChanges();
         }
 
-        public void changeUserPasswordAccount(string login, string shasło, string nhasło,string soln)
+        public bool changeUserPasswordAccount(string login, string shasło, string nhasło,string soln)
         {
             context.Użytkownicy.Load();
             Użytkownik u = context.Użytkownicy.Local
                 .Where(s => s.login.Equals(login) && s.hasło.Equals(shasło))
                 .FirstOrDefault();
-
-            u.hasło = nhasło;
-            u.sól = soln;
-            context.SaveChanges();
+            if (u != null)
+            {
+                u.hasło = nhasło;
+                u.sól = soln;
+                context.SaveChanges();
+                return true;
+            }
+            else 
+               return false;
+            
+            
+            
+           
+           
+           
          }
+        public void deleteFromDatabase(string login)
+        {
+            context.Użytkownicy.Load();
+            Użytkownik u = context.Użytkownicy.Local
+                .Where(a => a.login.Equals(login))
+                .FirstOrDefault();
+
+            context.Użytkownicy.Remove(u);
+            context.SaveChanges();
+
+        }
 
     }
 }
