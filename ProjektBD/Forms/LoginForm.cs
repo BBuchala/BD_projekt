@@ -16,6 +16,7 @@ using ProjektBD.Forms;
 using ProjektBD.Utilities;
 using ProjektBD.Controllers;
 using System.Data.Entity.Core;
+using ProjektBD.Forms.HelpForms;
 
 namespace ProjektBD
 {
@@ -293,5 +294,10 @@ namespace ProjektBD
         }
 
         #endregion
+
+        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        {
+            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Login);
+        }
     }
 }
