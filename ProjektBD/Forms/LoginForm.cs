@@ -293,11 +293,14 @@ namespace ProjektBD
             formController.disposeContext();
         }
 
-        #endregion
-
-        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Wyświetlanie pomocy
+        /// </summary>
+        private void toolStripLabel1_Click(object sender, EventArgs e)
         {
             HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Login);
         }
+
+        #endregion
     }
 }

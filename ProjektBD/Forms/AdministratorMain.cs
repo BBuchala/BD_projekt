@@ -21,18 +21,35 @@ namespace ProjektBD.Forms
 {
     public partial class AdministratorMain : Form
     {
+        #region Fields $ Constructor
+
         /// <summary>
         /// Warstwa pośrednicząca między widokiem a modelem (bazą danych). Przetwarza i oblicza
         /// </summary>
         private AdminController formController;
 
+        /// <summary>
+        /// Dtruktura z powiadomieniami dla admina
+        /// </summary>
         private AdminNotifications notifications;
 
-        public AdministratorMain()
+        /// <summary>
+        /// Login zalogowanego admina.
+        /// </summary>
+        private string userLogin;
+
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="inputLogin">Login zalogowanego admina.</param>
+        public AdministratorMain(string inputLogin)
         {
             InitializeComponent();
             formController = new AdminController();
+            userLogin = inputLogin;        
         }
+
+#endregion
 
         #region Methods
 
@@ -159,13 +176,6 @@ namespace ProjektBD.Forms
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-           /* Zarządzanie_Kontem newForm = new Zarządzanie_Kontem();
-            newForm.ShowDialog();
-            newForm.Dispose();*/
         }
 
         /// <summary>
@@ -306,7 +316,7 @@ namespace ProjektBD.Forms
             formController.disposeContext();
         }
 
-        #endregion
+       
 
         private void messageImage_Click(object sender, EventArgs e)
         {
@@ -317,8 +327,44 @@ namespace ProjektBD.Forms
         {
 
         }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Otwieranie zarządzania kontem.
+        /// </summary>
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem(userLogin);
+            newForm.ShowDialog();
+            newForm.Dispose();
+        }
+
+        /// <summary>
+        /// Wyświetlanie "About"
+        /// </summary>
+        private void toolStripLabel3_Click(object sender, EventArgs e)
+        {
+            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.About);
+        }
+
+        /// <summary>
+        /// Wyświetlanie pomocy
+        /// </summary>
+        private void toolStripLabel2_Click(object sender, EventArgs e)
+        {
+            //HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Admin);
+        }
+
+        #endregion
     }
 
+    /// <summary>
+    /// Struktura z powiadomieniami dla admina.
+    /// </summary>
     struct AdminNotifications
     {
         public List<Użytkownik> newUsers;

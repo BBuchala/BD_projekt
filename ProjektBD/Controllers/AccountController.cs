@@ -67,7 +67,7 @@ namespace ProjektBD.Controllers
                 switch (userType)
                 {
                     case "Administrator":
-                        return new AdministratorMain();
+                        return new AdministratorMain(inputLogin);
 
                     case "Prowadzący":
                         return new ProwadzacyMain(inputLogin);

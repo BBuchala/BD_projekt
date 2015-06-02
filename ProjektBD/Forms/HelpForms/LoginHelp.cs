@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace ProjektBD.Forms.HelpForms
 {
+    /// <summary>
+    /// Formatka z podpowiedziami do okna logowania.
+    /// </summary>
     public partial class LoginHelp : Form
     {
         public LoginHelp()
@@ -17,6 +20,8 @@ namespace ProjektBD.Forms.HelpForms
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Zamknięcie formatki na przycisku.
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();

@@ -159,6 +159,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "LoginHelp";
             this.Text = "Pomoc";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

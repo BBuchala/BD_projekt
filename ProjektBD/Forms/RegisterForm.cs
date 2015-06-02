@@ -93,7 +93,7 @@ namespace ProjektBD.Forms
         /// </summary>
         private void RegisterForm_Load(object sender, EventArgs e)
         {
-            if ( formController.connectToDatabase() )
+            if (formController.connectToDatabase())
                 this.Close();                               // Nie jestem pewny, czy będzie działać, ale powinno
 
             // Do pola z indeksem można wpisac tylko 6-cyfrowego inta
@@ -231,7 +231,7 @@ namespace ProjektBD.Forms
 
             if (!this.registeredSuccessfully && this.DialogResult == DialogResult.Cancel)
             {
-                switch ( MsgBoxUtils.displayQuestionMsgBox("Wyjdź", "Jesteś pewien, że chcesz opuścić okno rejestracji?", this) )
+                switch (MsgBoxUtils.displayQuestionMsgBox("Wyjdź", "Jesteś pewien, że chcesz opuścić okno rejestracji?", this))
                 {
                     case DialogResult.No:
                         e.Cancel = true;
@@ -250,7 +250,14 @@ namespace ProjektBD.Forms
             formController.disposeContext();
         }
 
-        #endregion
-    }
+        /// <summary>
+        /// Wyświetlanie pomocy
+        /// </summary>
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+            //HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Register);
+        }
 
+        #endregion
+    }    
 }

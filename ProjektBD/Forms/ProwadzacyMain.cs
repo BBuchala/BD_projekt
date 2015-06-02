@@ -17,6 +17,8 @@ namespace ProjektBD.Forms
 {
     public partial class ProwadzacyMain : Form
     {
+        #region Fields & Constructor
+
         /// <summary>
         /// Kontroler do zarządzania i komunikowania się z bazą danych.
         /// </summary>
@@ -27,14 +29,25 @@ namespace ProjektBD.Forms
         /// </summary>
         private string userLogin;
 
+        /// <summary>
+        /// Struktura zawierająca informacje o zgłoszeniach dla danego nauczyciela.
+        /// </summary>
         private TeacherNotifications notifications;
 
+        /// <summary>
+        /// Konstruktor.
+        /// </summary>
+        /// <param name="inputLogin">Nazwa zalogowanego prowadzącego.</param>
         public ProwadzacyMain(string inputLogin)
         {
             InitializeComponent();
             formController = new TeacherController();
             userLogin = inputLogin;
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Szukamy nowych zgłoszeń pod naszym adresem.
@@ -64,6 +77,10 @@ namespace ProjektBD.Forms
             }
         }
 
+        /// <summary>
+        /// Rozpatrzenie zgłoszenia na przedmiot poprzez MsgBox.
+        /// </summary>
+        /// <param name="app">Rozpatrywane zgłoszenie.</param>
         private void addStudentToSubject(ZgłoszenieNaPrzedmiotDTO app)
         {
             switch (MessageBox.Show("Student" + app.loginStudenta + " o numerze indeksu: " + app.numerIndeksu +
@@ -83,6 +100,10 @@ namespace ProjektBD.Forms
             }
         }
 
+        /// <summary>
+        /// Rozpatrzenie zgłoszenia na projekt poprzez MsgBox.
+        /// </summary>
+        /// <param name="app">Rozpatrywane zgłoszenie.</param>
         private void addStudentToProject(ZgłoszenieNaProjektDTO app)
         {
             switch (MessageBox.Show("Student" + app.loginStudenta + " o numerze indeksu: " + app.numerIndeksu +
@@ -103,8 +124,13 @@ namespace ProjektBD.Forms
             }
         }
 
+        #endregion
+
         #region Events
 
+        /// <summary>
+        /// Wyświetlanie nowych zgłoszeń w menu kontekstowym.
+        /// </summary>
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             if (notifications.projectApplicationCount > 0)
@@ -145,13 +171,6 @@ namespace ProjektBD.Forms
         private void button2_Click(object sender, EventArgs e)
         {
             DodajPrzedmiot newForm = new DodajPrzedmiot();
-            newForm.ShowDialog();
-            newForm.Dispose();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem(userLogin);
             newForm.ShowDialog();
             newForm.Dispose();
         }
@@ -206,8 +225,6 @@ namespace ProjektBD.Forms
         {
 
         }
-
-        #endregion
 
         private void ProwadzacyMain_Load(object sender, EventArgs e)
         {
@@ -329,10 +346,44 @@ namespace ProjektBD.Forms
 
             checkForNewApplications();
         }
+       
+        /// <summary>
+        /// Wyświetlanie pomocy
+        /// </summary>
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            //HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Teacher);
+        }
 
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem(userLogin);
+            newForm.ShowDialog();
+            newForm.Dispose();
+        }
 
+        /// <summary>
+        /// Wyświetlanie pomocy
+        /// </summary>
+        private void toolStripLabel2_Click(object sender, EventArgs e)
+        {
+            //HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Teacher);
+        }
+
+        /// <summary>
+        /// Wyświetlanie "About"
+        /// </summary>
+        private void toolStripLabel3_Click(object sender, EventArgs e)
+        {
+            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.About);
+        }
+
+        #endregion    
     }
 
+    /// <summary>
+    /// Struktura zawierająca informacje o zgłoszeniach.
+    /// </summary>
     struct TeacherNotifications
     {
         public List<ZgłoszenieNaPrzedmiotDTO> subjectApplicationList;

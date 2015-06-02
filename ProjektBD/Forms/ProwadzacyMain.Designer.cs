@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProwadzacyMain));
             this.label1 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage7 = new System.Windows.Forms.TabPage();
@@ -99,14 +98,29 @@
             this.listView3 = new System.Windows.Forms.ListView();
             this.label5 = new System.Windows.Forms.Label();
             this.messageCount = new System.Windows.Forms.Label();
-            this.messageImage = new System.Windows.Forms.PictureBox();
             this.notificationCount = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.zgłoszeniaNaProjektyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zgłoszeniaNaPrzedmiotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.notificationImage = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.messageImage = new System.Windows.Forms.PictureBox();
+            this.notificationImage = new System.Windows.Forms.PictureBox();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.label21 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.tabPage2.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage7.SuspendLayout();
@@ -118,11 +132,18 @@
             this.groupBox2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.messageImage)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.messageImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationImage)).BeginInit();
+            this.toolStrip1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -137,16 +158,6 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Panel sterowania prowadzącego";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(12, 9);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(116, 22);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "Zarządzanie kontem";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // tabPage2
             // 
@@ -848,15 +859,6 @@
             this.messageCount.Text = "0";
             this.messageCount.Visible = false;
             // 
-            // messageImage
-            // 
-            this.messageImage.Image = global::ProjektBD.Properties.Resources.mail2;
-            this.messageImage.Location = new System.Drawing.Point(100, 0);
-            this.messageImage.Name = "messageImage";
-            this.messageImage.Size = new System.Drawing.Size(40, 40);
-            this.messageImage.TabIndex = 20;
-            this.messageImage.TabStop = false;
-            // 
             // notificationCount
             // 
             this.notificationCount.AutoSize = true;
@@ -879,7 +881,7 @@
             this.zgłoszeniaNaProjektyToolStripMenuItem,
             this.zgłoszeniaNaPrzedmiotToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(204, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(204, 48);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // zgłoszeniaNaProjektyToolStripMenuItem
@@ -896,16 +898,17 @@
             this.zgłoszeniaNaPrzedmiotToolStripMenuItem.Text = "Zgłoszenia na przedmiot";
             this.zgłoszeniaNaPrzedmiotToolStripMenuItem.MouseEnter += new System.EventHandler(this.zgłoszeniaNaPrzedmiotToolStripMenuItem_MouseEnter);
             // 
-            // notificationImage
+            // panel1
             // 
-            this.notificationImage.ContextMenuStrip = this.contextMenuStrip1;
-            this.notificationImage.Image = global::ProjektBD.Properties.Resources.znak2;
-            this.notificationImage.Location = new System.Drawing.Point(173, 0);
-            this.notificationImage.Name = "notificationImage";
-            this.notificationImage.Size = new System.Drawing.Size(40, 40);
-            this.notificationImage.TabIndex = 20;
-            this.notificationImage.TabStop = false;
-            this.notificationImage.Click += new System.EventHandler(this.notificationImage_Click);
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.messageCount);
+            this.panel1.Controls.Add(this.messageImage);
+            this.panel1.Controls.Add(this.notificationCount);
+            this.panel1.Controls.Add(this.notificationImage);
+            this.panel1.Location = new System.Drawing.Point(855, 11);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(248, 50);
+            this.panel1.TabIndex = 21;
             // 
             // pictureBox2
             // 
@@ -917,16 +920,173 @@
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
-            // panel1
+            // pictureBox1
             // 
-            this.panel1.Controls.Add(this.messageCount);
-            this.panel1.Controls.Add(this.messageImage);
-            this.panel1.Controls.Add(this.notificationCount);
-            this.panel1.Controls.Add(this.notificationImage);
-            this.panel1.Location = new System.Drawing.Point(855, 11);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(248, 50);
-            this.panel1.TabIndex = 21;
+            this.pictureBox1.Image = global::ProjektBD.Properties.Resources.help;
+            this.pictureBox1.Location = new System.Drawing.Point(27, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox1.TabIndex = 22;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // messageImage
+            // 
+            this.messageImage.Image = global::ProjektBD.Properties.Resources.mail2;
+            this.messageImage.Location = new System.Drawing.Point(100, 0);
+            this.messageImage.Name = "messageImage";
+            this.messageImage.Size = new System.Drawing.Size(40, 40);
+            this.messageImage.TabIndex = 20;
+            this.messageImage.TabStop = false;
+            // 
+            // notificationImage
+            // 
+            this.notificationImage.ContextMenuStrip = this.contextMenuStrip1;
+            this.notificationImage.Image = global::ProjektBD.Properties.Resources.znak2;
+            this.notificationImage.Location = new System.Drawing.Point(173, 0);
+            this.notificationImage.Name = "notificationImage";
+            this.notificationImage.Size = new System.Drawing.Size(40, 40);
+            this.notificationImage.TabIndex = 20;
+            this.notificationImage.TabStop = false;
+            this.notificationImage.Click += new System.EventHandler(this.notificationImage_Click);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1,
+            this.toolStripSeparator1,
+            this.toolStripLabel2,
+            this.toolStripSeparator2,
+            this.toolStripLabel3});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1165, 25);
+            this.toolStrip1.TabIndex = 23;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(113, 22);
+            this.toolStripLabel1.Text = "Zarządzanie kontem";
+            this.toolStripLabel1.Click += new System.EventHandler(this.toolStripLabel1_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(45, 22);
+            this.toolStripLabel2.Text = "Pomoc";
+            this.toolStripLabel2.Click += new System.EventHandler(this.toolStripLabel2_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(67, 22);
+            this.toolStripLabel3.Text = "O projekcie";
+            this.toolStripLabel3.Click += new System.EventHandler(this.toolStripLabel3_Click);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.BackColor = System.Drawing.Color.Transparent;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label21.ForeColor = System.Drawing.Color.Brown;
+            this.label21.Location = new System.Drawing.Point(414, 25);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(352, 25);
+            this.label21.TabIndex = 3;
+            this.label21.Text = "Panel sterowania prowadzącego";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.pictureBox3);
+            this.panel2.Controls.Add(this.label22);
+            this.panel2.Controls.Add(this.pictureBox4);
+            this.panel2.Controls.Add(this.label23);
+            this.panel2.Controls.Add(this.pictureBox5);
+            this.panel2.Location = new System.Drawing.Point(855, 25);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(248, 44);
+            this.panel2.TabIndex = 21;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::ProjektBD.Properties.Resources.help;
+            this.pictureBox3.Location = new System.Drawing.Point(27, 0);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox3.TabIndex = 22;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.BackColor = System.Drawing.Color.White;
+            this.label22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label22.ForeColor = System.Drawing.Color.Red;
+            this.label22.Location = new System.Drawing.Point(134, 20);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(19, 20);
+            this.label22.TabIndex = 21;
+            this.label22.Text = "0";
+            this.label22.Visible = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::ProjektBD.Properties.Resources.mail2;
+            this.pictureBox4.Location = new System.Drawing.Point(100, 0);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox4.TabIndex = 20;
+            this.pictureBox4.TabStop = false;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.BackColor = System.Drawing.Color.Transparent;
+            this.label23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label23.ForeColor = System.Drawing.Color.Red;
+            this.label23.Location = new System.Drawing.Point(207, 19);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(19, 20);
+            this.label23.TabIndex = 0;
+            this.label23.Text = "0";
+            this.label23.Visible = false;
+            this.label23.ContextMenuStripChanged += new System.EventHandler(this.notificationCount_Click);
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::ProjektBD.Properties.Resources.znak2;
+            this.pictureBox5.Location = new System.Drawing.Point(173, 0);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox5.TabIndex = 20;
+            this.pictureBox5.TabStop = false;
+            this.pictureBox5.Click += new System.EventHandler(this.notificationImage_Click);
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::ProjektBD.Properties.Resources.logout;
+            this.pictureBox6.Location = new System.Drawing.Point(1109, 25);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox6.TabIndex = 22;
+            this.pictureBox6.TabStop = false;
+            this.pictureBox6.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // ProwadzacyMain
             // 
@@ -934,10 +1094,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1165, 605);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.label21);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -965,12 +1128,21 @@
             this.tabPage3.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.messageImage)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.notificationImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.messageImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationImage)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -979,7 +1151,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage7;
@@ -1055,5 +1226,20 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem zgłoszeniaNaProjektyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zgłoszeniaNaPrzedmiotToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureBox6;
     }
 }
