@@ -224,13 +224,14 @@ namespace ProjektBD.Databases
         {
             Student stud = context.Studenci.Where( s => s.UżytkownikID == userID ).Single();
             Projekt proj = context.Projekty.Where( p => p.nazwa.Equals(projectName) ).Single();
+            Przedmiot prz = context.Przedmioty.Where(pr => pr.PrzedmiotID == proj.PrzedmiotID).Single();
 
             Zgłoszenie z = new Zgłoszenie
             {
                 StudentID = stud.UżytkownikID,
                 ProjektID = proj.ProjektID,
                 PrzedmiotID = proj.PrzedmiotID,
-                ProwadzącyID = proj.Przedmiot.ProwadzącyID,
+                ProwadzącyID = prz.ProwadzącyID,
                 jestZaakceptowane = false
             };
 

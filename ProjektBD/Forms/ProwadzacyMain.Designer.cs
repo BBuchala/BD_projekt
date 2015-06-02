@@ -887,12 +887,14 @@
             this.zgłoszeniaNaProjektyToolStripMenuItem.Name = "zgłoszeniaNaProjektyToolStripMenuItem";
             this.zgłoszeniaNaProjektyToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.zgłoszeniaNaProjektyToolStripMenuItem.Text = "Zgłoszenia na projekty";
+            this.zgłoszeniaNaProjektyToolStripMenuItem.MouseEnter += new System.EventHandler(this.zgłoszeniaNaProjektyToolStripMenuItem_MouseEnter);
             // 
             // zgłoszeniaNaPrzedmiotToolStripMenuItem
             // 
             this.zgłoszeniaNaPrzedmiotToolStripMenuItem.Name = "zgłoszeniaNaPrzedmiotToolStripMenuItem";
             this.zgłoszeniaNaPrzedmiotToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.zgłoszeniaNaPrzedmiotToolStripMenuItem.Text = "Zgłoszenia na przedmiot";
+            this.zgłoszeniaNaPrzedmiotToolStripMenuItem.MouseEnter += new System.EventHandler(this.zgłoszeniaNaPrzedmiotToolStripMenuItem_MouseEnter);
             // 
             // notificationImage
             // 

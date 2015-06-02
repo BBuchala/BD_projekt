@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using ProjektBD.Utilities;
 using ProjektBD.Controllers;
 using ProjektBD.Model;
+using System.Data.Entity.Core;
 
 namespace ProjektBD.Forms
 {
@@ -63,7 +64,44 @@ namespace ProjektBD.Forms
             }
         }
 
+        private void addStudentToSubject(ZgłoszenieNaPrzedmiotDTO app)
+        {
+            switch (MessageBox.Show("Student" + app.loginStudenta + " o numerze indeksu: " + app.numerIndeksu +
+                " chce zapisać się na przedmiot " + app.nazwaPrzedmiotu + ".\n Akceptować zagłoszenie na przedmiot?", "Zapis na przedmiot" + app.nazwaPrzedmiotu,
+                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3))
+            {
+                case DialogResult.Yes:
+                    formController.addStudentToSubject(app.IDZgłoszenia);
+                    break;
 
+                case DialogResult.No:
+                    formController.deleteApplication(app.IDZgłoszenia);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void addStudentToProject(ZgłoszenieNaProjektDTO app)
+        {
+            switch (MessageBox.Show("Student" + app.loginStudenta + " o numerze indeksu: " + app.numerIndeksu +
+                " chce zapisać się na projekt " + app.nazwaProjektu + " w ramacg przedmiotu " + 
+                app.nazwaPrzedmiotu + ".\n Akceptować zagłoszenie na projekt?", "Zapis na projekt " + app.nazwaProjektu,
+                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3))
+            {
+                case DialogResult.Yes:
+                    formController.addStudentToProject(app.IDZgłoszenia);
+                    break;
+
+                case DialogResult.No:
+                    formController.deleteApplication(app.IDZgłoszenia);
+                    break;
+
+                default:
+                    break;
+            }
+        }
 
         #region Events
 
@@ -197,15 +235,110 @@ namespace ProjektBD.Forms
             contextMenuStrip1.Show(Control.MousePosition);
         }
 
+        /// <summary>
+        /// Wyświetlanie zgłoszeń na projekty
+        /// </summary>
+        private void zgłoszeniaNaProjektyToolStripMenuItem_MouseEnter(object sender, EventArgs e)
+        {
+            zgłoszeniaNaProjektyToolStripMenuItem.DropDownItems.Clear();
+            List<ToolStripMenuItem> items = new List<ToolStripMenuItem>();
+
+            try                            // dopiero tutaj, a nie wewnątrz funkcji, ponieważ połączenie może się zerwać w połowie dodawania prowadzących
+            {
+                for (int i = 0; i < (notifications.projectApplicationCount > 10 ? 10 : notifications.projectApplicationCount); i++) // do 10, żeby menu się nie rozrastało niepotrzebnie
+                {
+                    ToolStripMenuItem tmp = new ToolStripMenuItem();
+                    tmp.Text = "Student " + notifications.projectApplicationList[i].loginStudenta + " na projekt " + notifications.projectApplicationList[i].nazwaProjektu;
+                    tmp.Tag = notifications.projectApplicationList[i].loginStudenta + " " + notifications.projectApplicationList[i].nazwaProjektu;
+                    items.Add(tmp);
+                    tmp.Click += new EventHandler(ProjectMenuItemClickHandler);
+                }
+
+                zgłoszeniaNaProjektyToolStripMenuItem.DropDownItems.AddRange(items.ToArray());
+                zgłoszeniaNaProjektyToolStripMenuItem.DropDown.AllowDrop = true;
+            }
+
+            catch (EntityException)
+            {
+                MsgBoxUtils.displayConnectionErrorMsgBox();
+            }
+        }
+
+        /// <summary>
+        /// Wyświetlanie zgłoszeń na przedmioty
+        /// </summary>
+        private void zgłoszeniaNaPrzedmiotToolStripMenuItem_MouseEnter(object sender, EventArgs e)
+        {
+            zgłoszeniaNaPrzedmiotToolStripMenuItem.DropDownItems.Clear();
+            List<ToolStripMenuItem> items = new List<ToolStripMenuItem>();
+
+            try                            // dopiero tutaj, a nie wewnątrz funkcji, ponieważ połączenie może się zerwać w połowie dodawania prowadzących
+            {
+                for (int i = 0; i < (notifications.subjectApplicationCount > 10 ? 10 : notifications.subjectApplicationCount); i++) // do 10, żeby menu się nie rozrastało niepotrzebnie
+                {
+                    ToolStripMenuItem tmp = new ToolStripMenuItem();
+                    tmp.Text = "Student " + notifications.subjectApplicationList[i].loginStudenta + " na przedmiot " + notifications.subjectApplicationList[i].nazwaPrzedmiotu;
+                    tmp.Tag = notifications.subjectApplicationList[i].loginStudenta + " " + notifications.subjectApplicationList[i].nazwaPrzedmiotu;
+                    items.Add(tmp);
+                    tmp.Click += new EventHandler(SubjectMenuItemClickHandler);
+                }
+
+                zgłoszeniaNaPrzedmiotToolStripMenuItem.DropDownItems.AddRange(items.ToArray());
+                zgłoszeniaNaPrzedmiotToolStripMenuItem.DropDown.AllowDrop = true;
+            }
+
+            catch (EntityException)
+            {
+                MsgBoxUtils.displayConnectionErrorMsgBox();
+            }
+        }
+
+
+        /// <summary>
+        /// Identyfikuje prowadzącego na podstawie przyciśniętego MenuItema
+        /// </summary>
+        private void ProjectMenuItemClickHandler(object sender, EventArgs e)
+        {
+            ToolStripMenuItem clickedItem = (ToolStripMenuItem)sender;
+
+            string[] tags = clickedItem.Tag.ToString().Split(' ');
+
+            foreach (ZgłoszenieNaProjektDTO application in notifications.projectApplicationList)
+            {
+                if (tags[0].Equals(application.loginStudenta) && tags[1].Equals(application.nazwaProjektu))
+                    addStudentToProject(application);
+            }
+
+            checkForNewApplications();
+        }
+
+        /// <summary>
+        /// Identyfikuje prowadzącego na podstawie przyciśniętego MenuItema
+        /// </summary>
+        private void SubjectMenuItemClickHandler(object sender, EventArgs e)
+        {
+            ToolStripMenuItem clickedItem = (ToolStripMenuItem)sender;
+
+            string[] tags = clickedItem.Tag.ToString().Split(' ');
+
+            foreach (ZgłoszenieNaPrzedmiotDTO application in notifications.subjectApplicationList)
+            {
+                if (tags[0].Equals(application.loginStudenta) && tags[1].Equals(application.nazwaPrzedmiotu))
+                    addStudentToSubject(application);
+            }
+
+            checkForNewApplications();
+        }
+
 
     }
 
     struct TeacherNotifications
     {
-        public List<Zgłoszenie> subjectApplicationList;
+        public List<ZgłoszenieNaPrzedmiotDTO> subjectApplicationList;
         public int subjectApplicationCount;
 
-        public List<Zgłoszenie> projectApplicationList;
+        public List<ZgłoszenieNaProjektDTO> projectApplicationList;
         public int projectApplicationCount;
     }
 }

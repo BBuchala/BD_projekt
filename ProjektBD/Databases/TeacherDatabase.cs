@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ProjektBD.Model;
+using System.Data.SqlClient;
 
 namespace ProjektBD.Databases
 {
@@ -14,28 +15,93 @@ namespace ProjektBD.Databases
     class TeacherDatabase : DatabaseBase
     {
 
-        internal List<Zgłoszenie> getProjectApplications(string teacherLogin)
+        /// <summary>
+        /// Przeszukuje bazę danych pod katem zgłoszeń dla odpowiedniego nauczyciela
+        /// </summary>
+        /// <param name="teacherLogin">Login prowadzącego, dla którego szukamy zgłoszeń</param>
+        /// <returns>Lista zgłoszeń na projekt w odpowiedniej formie</returns>
+        internal List<ZgłoszenieNaProjektDTO> getProjectApplications(string teacherLogin)
         {
-            var query = context.Database.SqlQuery<Zgłoszenie>("SELECT * " +
-                                                            "FROM ZGŁOSZENIE WHERE ProwadzącyID = " +  getTeacherID(teacherLogin) + 
-                                                            " AND jestZaakceptowane = 'false' AND ProjektID IS NOT NULL").ToList();
+            var query = from u in context.Użytkownicy
+                        join zg in context.Zgłoszenia on u.UżytkownikID equals zg.StudentID
+                        join p in context.Projekty on zg.ProjektID equals p.ProjektID
+                        join u2 in context.Użytkownicy on zg.ProwadzącyID equals u2.UżytkownikID
+                        join s in context.Studenci on u.UżytkownikID equals s.UżytkownikID
+                        join prz in context.Przedmioty on zg.PrzedmiotID equals prz.PrzedmiotID
+                        where u2.login == teacherLogin &&
+                        zg.jestZaakceptowane == false && zg.ProjektID.HasValue
+                        select new ZgłoszenieNaProjektDTO { loginStudenta = u.login, nazwaProjektu = p.nazwa, numerIndeksu = s.nrIndeksu, nazwaPrzedmiotu = prz.nazwa, IDZgłoszenia = zg.ZgłoszenieID };
 
-            return query;
+            return query.ToList();
         }
 
-        internal List<Zgłoszenie> getSubjectApplications(string teacherLogin)
+        /// <summary>
+        /// Przeszukuje bazę danych pod katem zgłoszeń dla odpowiedniego nauczyciela
+        /// </summary>
+        /// <param name="teacherLogin">Login prowadzącego, dla którego szukamy zgłoszeń</param>
+        /// <returns>Lista zgłoszeń na przedmiot w odpowiedniej formie</returns>
+        internal List<ZgłoszenieNaPrzedmiotDTO> getSubjectApplications(string teacherLogin)
         {
-            var query = context.Database.SqlQuery<Zgłoszenie>("SELECT * " +
-                                                            "FROM ZGŁOSZENIE WHERE ProwadzącyID = " + getTeacherID(teacherLogin) +
-                                                            " AND jestZaakceptowane = 'false' AND ProjektID IS NULL").ToList();
+            var query = from u in context.Użytkownicy
+                        join zg in context.Zgłoszenia on u.UżytkownikID equals zg.StudentID
+                        join p in context.Przedmioty on zg.PrzedmiotID equals p.PrzedmiotID
+                        join u2 in context.Użytkownicy on zg.ProwadzącyID equals u2.UżytkownikID
+                        join s in context.Studenci on u.UżytkownikID equals s.UżytkownikID
+                        where u2.login == teacherLogin &&
+                        zg.jestZaakceptowane == false && !zg.ProjektID.HasValue
+                        select new ZgłoszenieNaPrzedmiotDTO { loginStudenta = u.login, nazwaPrzedmiotu = p.nazwa, numerIndeksu = s.nrIndeksu, IDZgłoszenia = zg.ZgłoszenieID };
 
-            return query;
+
+            return query.ToList();
 
         }
 
-        public int getTeacherID(string teacherLogin)
+        /// <summary>
+        /// Dodaje studenta do przedmiotu.
+        /// </summary>
+        /// <param name="appl">Zgłoszenie, na podstawie którego zostaje przyęty.</param>
+        public void addStudentToSubject(long applicationID)
         {
-            return context.Użytkownicy.Local.Where(s => s.login.Equals(teacherLogin)).FirstOrDefault().UżytkownikID;
+           
+            Zgłoszenie appl = context.Zgłoszenia.Where(z => z.ZgłoszenieID == applicationID).Single();
+
+            var command = @"INSERT INTO Przedmioty_studenci VALUES (@param, @param2)";
+
+            var teacherQuery = context.Database.ExecuteSqlCommand(command, new SqlParameter("param", appl.PrzedmiotID), new SqlParameter("param2",appl.StudentID));
+
+            deleteApplication(applicationID);
         }
+
+        /// <summary>
+        /// Dodaje studenta do projektu.
+        /// </summary>
+        /// <param name="appl">Zgłoszenie, na podstawie którego zostaje przyęty.</param>
+        public void addStudentToProject(long applicationID)
+        {
+            Zgłoszenie appl = context.Zgłoszenia.Where(z => z.ZgłoszenieID == applicationID).Single();
+
+            var command = @"INSERT INTO Projekty_studenci VALUES (@param, @param2)";
+
+            var teacherQuery = context.Database.ExecuteSqlCommand(command, new SqlParameter("param", appl.ProjektID), new SqlParameter("param2", appl.StudentID));
+
+            deleteApplication(applicationID);
+        }
+
+        /// <summary>
+        /// Wywala Zgłoszenie z bazy danych.
+        /// </summary>
+        /// <param name="applicationID">ID usuwanego zgłoszenia</param>
+        public void deleteApplication(long applicationID)
+        {
+            Zgłoszenie AppToDelete = context.Zgłoszenia.Where(zg => zg.ZgłoszenieID == applicationID).FirstOrDefault();
+
+            if (AppToDelete != null)
+            {
+                context.Zgłoszenia.Remove(AppToDelete);
+                context.SaveChanges();
+            }
+        }
+
+
     }
 }

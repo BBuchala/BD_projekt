@@ -80,4 +80,21 @@ namespace ProjektBD.Model
         public double wartość { get; set; }
         public DateTime? dataWpisania { get; set; }
     }
+
+    class ZgłoszenieNaProjektDTO
+    {
+        public string loginStudenta { get; set; }
+        public string nazwaProjektu { get; set; }
+        public int numerIndeksu { get; set; }
+        public string nazwaPrzedmiotu { get; set; }
+        public long IDZgłoszenia { get; set; }
+    }
+
+    class ZgłoszenieNaPrzedmiotDTO
+    {
+        public string loginStudenta { get; set; }
+        public string nazwaPrzedmiotu { get; set; }
+        public int numerIndeksu { get; set; }
+        public long IDZgłoszenia { get; set; }
+    }
 }

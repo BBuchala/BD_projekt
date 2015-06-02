@@ -19,8 +19,8 @@ namespace ProjektBD
             Application.SetCompatibleTextRenderingDefault(false);
 
             Application.Run(new LoginForm());
-            //Application.Run(new StudentMain("Forczu"));
-            //Application.Run(new AdministratorMain());
+            //Application.Run(new ProwadzacyMain("ASzydło"));
+
         }
     }
 }
