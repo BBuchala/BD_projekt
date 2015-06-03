@@ -255,7 +255,7 @@ namespace ProjektBD.Forms
         /// </summary>
         private void toolStripLabel1_Click(object sender, EventArgs e)
         {
-            //HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Register);
+            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Register);
         }
 
         #endregion

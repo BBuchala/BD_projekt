@@ -34,6 +34,10 @@ namespace ProjektBD.Utilities
                     helpForm = new AboutBox();
                     break;
 
+                case (HelpFormTypes.Register):
+                    helpForm = new RegisterHelp();
+                    break;
+
                 default:
                     break;
             }

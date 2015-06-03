@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using ProjektBD.Utilities;
+
 namespace ProjektBD.Forms.HelpForms
 {
     /// <summary>
@@ -18,11 +20,14 @@ namespace ProjektBD.Forms.HelpForms
         public LoginHelp()
         {
             InitializeComponent();
+
+            label1.Select();            // drobne oszustwo - przenosi focus na pierwszy element -> scroll idzie na samą górę
         }
 
         /// <summary>
         /// Zamknięcie formatki na przycisku.
-        private void button1_Click(object sender, EventArgs e)
+        /// </summary>
+        private void button1_Click_1(object sender, EventArgs e)
         {
             this.Close();
         }
