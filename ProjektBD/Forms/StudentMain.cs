@@ -405,6 +405,36 @@ namespace ProjektBD.Forms
             formController.disposeContext();
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Student);
+        }
+
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem(userLogin);
+            newForm.ShowDialog();
+
+            if (newForm.close == true)
+            {
+                newForm.Dispose();
+                close = true;
+                this.Close();
+            }
+            else
+                newForm.Dispose();
+        }
+
+        private void toolStripLabel3_Click(object sender, EventArgs e)
+        {
+            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.About);
+        }
+
+        private void toolStripLabel2_Click(object sender, EventArgs e)
+        {
+            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Student);
+        }
+
         //----------------------------------------------------------------
         #endregion
     }

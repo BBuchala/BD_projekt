@@ -38,6 +38,14 @@ namespace ProjektBD.Utilities
                     helpForm = new RegisterHelp();
                     break;
 
+                case (HelpFormTypes.Admin):
+                    helpForm = new AdminHelp();
+                    break;
+
+                case (HelpFormTypes.Student):
+                    helpForm = new StudentHelp();
+                    break;
+
                 default:
                     break;
             }
