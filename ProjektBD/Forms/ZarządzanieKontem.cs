@@ -164,5 +164,18 @@ namespace ProjektBD.Forms
         {
             formcontroller.disposeContext();
         }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedIndex != 3)
+            {
+                //this.Size.Height = 450;
+                this.AutoScroll = false;
+            }
+            else
+            {
+                this.AutoScroll = true;
+            }
+        }
     }
 }
