@@ -12,6 +12,9 @@ namespace ProjektBD.Databases
 {
     class StudentDatabase : DatabaseBase
     {
+        #region Pola i konstruktor
+        //----------------------------------------------------------------
+
         // TODO:
         // - zamiast joinować, w LINQ wykorzystać navigation properties
 
@@ -24,6 +27,15 @@ namespace ProjektBD.Databases
                 .Select( u => u.UżytkownikID )
                 .Single();
         }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Pobieranie
+        //----------------------------------------------------------------
+
+        #region Użytkownicy
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Pobiera z bazy listę użytkowników, których login zawiera w sobie podane słowo
@@ -40,6 +52,12 @@ namespace ProjektBD.Databases
 
             return userQuery.ToList();
         }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Przedmioty
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Pobiera przedmioty z bazy
@@ -67,6 +85,11 @@ namespace ProjektBD.Databases
 
             return teacherQuery.ToList();
         }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Projekty
 
         /// <summary>
         /// Pobiera projekty realizowane w ramach przedmiotu
@@ -121,6 +144,11 @@ namespace ProjektBD.Databases
             return projectQuery.ToList();
         }
 
+        #endregion
+
+        #region Studenci
+        //----------------------------------------------------------------
+
         /// <summary>
         /// Pobiera studentów zapisanych na przedmiot
         /// </summary>
@@ -152,6 +180,11 @@ namespace ProjektBD.Databases
 
             return studentQuery.ToList();
         }
+
+        #endregion
+
+        #region Oceny
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Pobiera oceny z podanego przedmiotu
@@ -187,21 +220,22 @@ namespace ProjektBD.Databases
             return gradeQuery.ToList();
         }
 
+        //----------------------------------------------------------------
+        #endregion
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Zapisywanie
+        //----------------------------------------------------------------
+
         /// <summary>
         /// Zapisuje studenta na przedmiot o podanej nazwie.
-        /// <para> Zwraca false, jeśli student jest już zapisany na dany przedmiot. </para>
         /// </summary>
-        public bool enrollToSubject(string subjectName)
+        public void enrollToSubject(string subjectName)
         {
-            Student stud = context.Studenci
-                .Where( s => s.UżytkownikID == userID )
-                .Include("Przedmioty")                  // Załadowany zostanie równiez Navigation Property z powiązanymi przedmiotami
-                .Single();
-
+            Student stud = context.Studenci.Where( s => s.UżytkownikID == userID ).Single();
             Przedmiot subj = context.Przedmioty.Where( p => p.nazwa.Equals(subjectName) ).Single();
-
-            if ( stud.Przedmioty.Contains(subj) )
-                return false;
 
             Zgłoszenie z = new Zgłoszenie
             {
@@ -213,8 +247,6 @@ namespace ProjektBD.Databases
 
             context.Zgłoszenia.Add(z);
             context.SaveChanges();
-
-            return true;
         }
 
         /// <summary>
@@ -239,6 +271,103 @@ namespace ProjektBD.Databases
             context.SaveChanges();
         }
 
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Metody pomocnicze
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Sprawdza, czy student nie wysłał już zgłoszenia na podany projekt.
+        /// <para> Zwraca false, jeśli student nie oczekuje na akceptację prowadzącego. </para>
+        /// </summary>
+        public bool checkIfApplyingToProject(string projectName)
+        {
+            Student stud = context.Studenci
+                .Where(s => s.UżytkownikID == userID)
+                .Include("Zgłoszenia.Projekt")                  // Ładuje zgłoszenia studenta i powiązany z nimi projekt
+                .Single();
+            
+            foreach (Zgłoszenie z in stud.Zgłoszenia)
+            {
+                if ( z.Projekt != null && z.Projekt.nazwa.Equals(projectName) )
+                    return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Sprawdza, czy student nie wysłał już zgłoszenia na podany przedmiot.
+        /// <para> Zwraca false, jeśli student nie oczekuje na akceptację prowadzącego. </para>
+        /// </summary>
+        public bool checkIfApplyingToSubject(string subjectName)
+        {
+            Student stud = context.Studenci
+                .Where(s => s.UżytkownikID == userID)
+                .Include("Zgłoszenia.Przedmiot")                  // Ładuje zgłoszenia studenta i powiązany z nimi przedmiot
+                .Single();
+
+            foreach (Zgłoszenie z in stud.Zgłoszenia)
+            {
+                if (z.Przedmiot != null && z.Przedmiot.nazwa.Equals(subjectName))
+                    return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Sprawdza, czy student jest zapisany na przedmiot, do którego należy projekt, na który się zapisuje
+        /// <para> Zwraca false, jeśli nie jest. </para>
+        /// </summary>
+        public bool checkIfEnrolledToSuperiorSubject(string projectName)
+        {
+            Student stud = context.Studenci
+                .Where(s => s.UżytkownikID == userID)
+                .Include("Przedmioty")                          // Ładuje przedmioty, na które jest zapisany student
+                .Single();
+
+            Przedmiot x = ( from subj in context.Przedmioty
+                                join proj in context.Projekty on subj.PrzedmiotID equals proj.PrzedmiotID
+                            where proj.nazwa.Equals(projectName)
+                            select subj
+                          ).FirstOrDefault();
+
+            foreach (Przedmiot p in stud.Przedmioty)
+            {
+                if (p.PrzedmiotID == x.PrzedmiotID)
+                    return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Sprawdza, czy student jest już zapisany na przedmiot
+        /// <para> Zwraca false, jeśli nie jest. </para>
+        /// </summary>
+        public bool checkIfEnrolledToSubject(string subjectName)
+        {
+            Student stud = context.Studenci
+                .Where(s => s.UżytkownikID == userID)
+                .Include("Przedmioty")                          // Ładuje przedmioty, na które jest zapisany student
+                .Single();
+
+            foreach (Przedmiot p in stud.Przedmioty)
+            {
+                if ( p.nazwa.Equals(subjectName) )
+                    return true;
+            }
+
+            return false;
+        }
+
+        #endregion
+
+        #region Usuwanie
+        //----------------------------------------------------------------
+
         /// <summary>
         /// Usuwa studenta z przedmiotu o podanej nazwie
         /// </summary>
@@ -246,17 +375,26 @@ namespace ProjektBD.Databases
         {
             Student stud = context.Studenci
                 .Where(s => s.UżytkownikID == userID)
-                .Include("Przedmioty")                  // Załadowany zostanie równiez Navigation Property z powiązanymi przedmiotami
-                .Include("Projekty")
+                .Include("Przedmioty").Include("Projekty").Include("Oceny").Include("Zgłoszenia")   // Załaduje wszystkie Navigation Properties
                 .Single();
-
+            
             Przedmiot subj = context.Przedmioty.Where(p => p.nazwa.Equals(subjectName)).Single();
-
+            
             stud.Przedmioty.Remove(subj);
             subj.liczbaStudentów--;
 
+            //--------------------------------
+            // Usuwanie zależnych rekordów - projekty i oceny z danego przedmiotu, a także zgłoszenia na realizowane w nim projekty
             var projectsList = stud.Projekty.Where( p => p.Przedmiot.Equals(subj) ).ToList();
             projectsList.ForEach( proj => stud.Projekty.Remove(proj) );
+
+            var gradesList = stud.Oceny.Where( o => o.Przedmiot.Equals(subj) ).ToList();
+            gradesList.ForEach( o => stud.Oceny.Remove(o) );
+            context.Oceny.RemoveRange(gradesList);                  // Całkowicie usuwa oceny z bazy
+
+            var applicationsList = stud.Zgłoszenia.Where( z => z.Przedmiot.Equals(subj) ).ToList();
+            applicationsList.ForEach( app => stud.Zgłoszenia.Remove(app) );
+            context.Zgłoszenia.RemoveRange( applicationsList );     // Całkowicie usuwa zgłoszenia z bazy
 
             context.SaveChanges();
         }
@@ -276,6 +414,9 @@ namespace ProjektBD.Databases
             stud.Projekty.Remove(proj);
             context.SaveChanges();
         }
+
+        //----------------------------------------------------------------
+        #endregion
     }
 }
 

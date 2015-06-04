@@ -315,12 +315,20 @@ namespace ProjektBD.Forms
         {
             string subjectName = customListView3.SelectedItems[0].Text;
 
-            bool isNewSubject = formController.enrollToSubject(subjectName);
+            switch ( formController.enrollToSubject(subjectName) )
+            {
+                case "Znaleziono aplikację na przedmiot":
+                    MsgBoxUtils.displayInformationMsgBox("Infomacja", "Podczekaj na akceptację bądź odrzucenie aplikacji przez prowadzącego.");
+                    break;
 
-            if ( isNewSubject )
-                MsgBoxUtils.displayInformationMsgBox("Informacja", "Zgłoszenie zostało wysłane do prowadzącego przedmiot");
-            else
-                MsgBoxUtils.displayInformationMsgBox("Informacja", "Jesteś już zapisany na wybrany przedmiot");
+                case "Już zapisany":
+                    MsgBoxUtils.displayInformationMsgBox("Infomacja", "Jesteś już zapisany na wybrany przedmiot.");
+                    break;
+
+                case "Zapisywanie zakończone pomyślnie":
+                    MsgBoxUtils.displayInformationMsgBox("Informacja", "Zgłoszenie zostało wysłane do prowadzącego przedmiot.");
+                    break;
+            }
         }
 
         // Wypisanie z przedmiotu
@@ -330,17 +338,28 @@ namespace ProjektBD.Forms
 
             formController.RemoveFromSubject(subjectName);
 
-            customListView2.fill<PrzedmiotDTO>( formController.getMySubjects() );                 // refresh
+            customListView2.fill<PrzedmiotDTO>( formController.getMySubjects() );           // refresh
         }
-
+        
         // Zapisanie na projekt
         private void button2_Click(object sender, EventArgs e)
         {
             string projectName = customListView6.SelectedItems[0].Text;
 
-            formController.enrollToProject(projectName);
+            switch ( formController.enrollToProject(projectName) )
+            {
+                case "Znaleziono aplikację na projekt":
+                    MsgBoxUtils.displayInformationMsgBox("Infomacja", "Podczekaj na akceptację bądź odrzucenie aplikacji przez prowadzącego.");
+                    break;
 
-            MsgBoxUtils.displayInformationMsgBox("Informacja", "Zgłoszenie zostało wysłane do prowadzącego przedmiot");
+                case "Niezapisany na przedmiot nadrzędny":
+                    MsgBoxUtils.displayInformationMsgBox("Informacja", "Najpierw zapisz się na przedmiot, do którego należy ten projekt.");
+                    break;
+
+                case "Zapisywanie zakończone pomyślnie":
+                    MsgBoxUtils.displayInformationMsgBox("Informacja", "Zgłoszenie zostało wysłane do prowadzącego przedmiot.");
+                    break;
+            }
         }
 
         // Wypisanie z projektu

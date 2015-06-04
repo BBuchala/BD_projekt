@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using ProjektBD.Model;
 using System.Data.SqlClient;
+
+using System.Data.Entity;
+using ProjektBD.Model;
 
 namespace ProjektBD.Databases
 {
@@ -23,14 +24,22 @@ namespace ProjektBD.Databases
         internal List<ZgłoszenieNaProjektDTO> getProjectApplications(string teacherLogin)
         {
             var query = from u in context.Użytkownicy
-                        join zg in context.Zgłoszenia on u.UżytkownikID equals zg.StudentID
-                        join p in context.Projekty on zg.ProjektID equals p.ProjektID
-                        join u2 in context.Użytkownicy on zg.ProwadzącyID equals u2.UżytkownikID
-                        join s in context.Studenci on u.UżytkownikID equals s.UżytkownikID
-                        join prz in context.Przedmioty on zg.PrzedmiotID equals prz.PrzedmiotID
+                            join zg in context.Zgłoszenia on u.UżytkownikID equals zg.StudentID
+                            join p in context.Projekty on zg.ProjektID equals p.ProjektID
+                            join u2 in context.Użytkownicy on zg.ProwadzącyID equals u2.UżytkownikID
+                            join s in context.Studenci on u.UżytkownikID equals s.UżytkownikID
+                            join prz in context.Przedmioty on zg.PrzedmiotID equals prz.PrzedmiotID
                         where u2.login == teacherLogin &&
-                        zg.jestZaakceptowane == false && zg.ProjektID.HasValue
-                        select new ZgłoszenieNaProjektDTO { loginStudenta = u.login, nazwaProjektu = p.nazwa, numerIndeksu = s.nrIndeksu, nazwaPrzedmiotu = prz.nazwa, IDZgłoszenia = zg.ZgłoszenieID };
+                            zg.jestZaakceptowane == false &&
+                            zg.ProjektID.HasValue
+                        select new ZgłoszenieNaProjektDTO
+                        {
+                            loginStudenta = u.login,
+                            nazwaProjektu = p.nazwa,
+                            numerIndeksu = s.nrIndeksu,
+                            nazwaPrzedmiotu = prz.nazwa,
+                            IDZgłoszenia = zg.ZgłoszenieID
+                        };
 
             return query.ToList();
         }
@@ -65,6 +74,9 @@ namespace ProjektBD.Databases
            
             Zgłoszenie appl = context.Zgłoszenia.Where(z => z.ZgłoszenieID == applicationID).Single();
 
+            // Na wszelki wypadek lepiej zmieńmy to na student.Add(przedmiot)
+            // W teorii zmiany dokonane przez ExecuteSqlCommand nie powinny być widoczne dla kontekstu,
+            // więc nie wiadomo, czy kiedyś się to nie wykrzaczy
             var command = @"INSERT INTO Przedmioty_studenci VALUES (@param, @param2)";
 
             var teacherQuery = context.Database.ExecuteSqlCommand(command, new SqlParameter("param", appl.PrzedmiotID), new SqlParameter("param2",appl.StudentID));

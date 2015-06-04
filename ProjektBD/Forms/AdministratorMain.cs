@@ -272,6 +272,9 @@ namespace ProjektBD.Forms
             var query = formController.getTableData(tableName);
 
             godlyDataGrid1.provideParams(formController, query.Count);
+
+            // Naprawia mały bug edycji przy przechodzeniu np. z Projektu do Oceny (ProjektID wciąż był tylko do odczytu)
+            godlyDataGrid1.DataSource = null;
             godlyDataGrid1.DataSource = query;
 
             if ( query.GetType().Name.Contains("Observable") )          // Jeśli zwrócona kolekcja jest obserwowalna, znaczy to, iż mamy ją w kontekście

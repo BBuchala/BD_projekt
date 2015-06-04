@@ -101,19 +101,34 @@ namespace ProjektBD.Controllers
 
         /// <summary>
         /// Zapisuje studenta na przedmiot o podanej nazwie.
-        /// <para> Zwraca false, jeśli student jest już zapisany na dany przedmiot. </para>
+        /// <para> Zwraca string określający stan operacji.</para>
         /// </summary>
-        public bool enrollToSubject(string subjectName)
+        public string enrollToSubject(string subjectName)
         {
-            return studDatabase.enrollToSubject(subjectName);
+            if ( studDatabase.checkIfApplyingToSubject(subjectName) )
+                return "Znaleziono aplikację na przedmiot";
+
+            if ( studDatabase.checkIfEnrolledToSubject(subjectName) )
+                return "Już zapisany";
+
+            studDatabase.enrollToSubject(subjectName);
+            return "Zapisywanie zakończone pomyślnie";
         }
 
         /// <summary>
         /// Zapisuje studenta na projekt o podanej nazwie.
+        /// <para> Zwraca string określający stan operacji. </para>
         /// </summary>
-        public void enrollToProject(string projectName)
+        public string enrollToProject(string projectName)
         {
+            if ( studDatabase.checkIfApplyingToProject(projectName) )
+                return "Znaleziono aplikację na projekt";
+
+            if ( !studDatabase.checkIfEnrolledToSuperiorSubject(projectName) )
+                return "Niezapisany na przedmiot nadrzędny";
+
             studDatabase.enrollToProject(projectName);
+            return "Zapisywanie zakończone pomyślnie";
         }
 
         /// <summary>
@@ -133,14 +148,3 @@ namespace ProjektBD.Controllers
         }
     }
 }
-
-
-
-
-//      /// <summary>
-//      /// Pobiera z bazy przedmioty, na które nie jest zapisany student
-//      /// </summary>
-//      public List<PrzedmiotDTO> getNotMySubjects()
-//      {
-//          return studDatabase.getNotMySubjects();
-//      }
