@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 using System.Data.Entity;
 using ProjektBD.Model;
-using ProjektBD.Utilities;
 
 namespace ProjektBD.Databases
 {
@@ -26,9 +25,7 @@ namespace ProjektBD.Databases
 
         public string getUserSalt(string login)
         {
-            context.Użytkownicy.Load();
-
-            return context.Użytkownicy.Local
+            return context.Użytkownicy
                 .Where(u => u.login.Equals(login))
                 .Select(s => s.sól)
                 .FirstOrDefault();
@@ -42,9 +39,8 @@ namespace ProjektBD.Databases
         /// </returns>
         internal Użytkownik loginQuery(string login, string hashedPassword)
         {
-            
             // FirstOrDefault zwraca pierwszy wynik zapytania lub null, jeśli użytkownik nie został znaleziony
-            return context.Użytkownicy.Local
+            return context.Użytkownicy
                 .Where( s => s.login.Equals(login) && s.hasło.Equals(hashedPassword) )
                 .FirstOrDefault();
         }

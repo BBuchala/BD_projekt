@@ -71,14 +71,11 @@ namespace ProjektBD.Databases
                 context.SaveChanges();
             }
 
-            string salt = Encryption.generateSalt();
-            string hashedPassword = Encryption.HashPassword(u.hasło, salt);
-
             Prowadzący p = new Prowadzący
             {
                 login = u.login,
-                hasło = hashedPassword,
-                sól = salt,
+                hasło = u.hasło,
+                sól = u.sól,
                 email = u.email,
                 miejsceZamieszkania = u.miejsceZamieszkania,
                 ZakładID = 4
