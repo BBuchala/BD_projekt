@@ -15,6 +15,12 @@ namespace ProjektBD.Forms.HelpForms
         public StudentHelp()
         {
             InitializeComponent();
+            label3.Select();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
