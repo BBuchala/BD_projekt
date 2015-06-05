@@ -18,6 +18,9 @@ namespace ProjektBD.Databases
     /// </summary>
     class AdminDatabase : DatabaseBase
     {
+        #region Dodawanie prowadzących
+        //----------------------------------------------------------------
+
         /// <summary>
         /// Wyszukuje listę użytkowników, którzy nie są ani Studentami ani Prowadzącymi
         /// (czyli Ci starający się o Prowadzącego)
@@ -95,20 +98,18 @@ namespace ProjektBD.Databases
             context.SaveChanges();
         }
 
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Obsługa dataGrid'a
+        //----------------------------------------------------------------
+
         /// <summary>
         /// Pobiera nazwy tabel istniejących w bazie
         /// </summary>
         public List<string> getTableNames()
         {
             return context.Database.SqlQuery<string>("SELECT name FROM sys.tables ORDER BY name").ToList();
-        }
-
-        /// <summary>
-        /// Pobiera nazwy zakładów istniejących w bazie
-        /// </summary>
-        public List<string> getInstituteNames()
-        {
-            return context.Zakłady.Select(n => n.nazwa).ToList();
         }
 
         /// <summary>
@@ -136,12 +137,12 @@ namespace ProjektBD.Databases
         /// <typeparam name="T">Typ klasy encji, której klucza szukamy</typeparam>
         public List<string> getPrimaryKeyNames<T>() where T : class
         {
-            var set = ((IObjectContextAdapter)context).ObjectContext.CreateObjectSet<T>();
+            var set = ( (IObjectContextAdapter)context ).ObjectContext.CreateObjectSet<T>();
             var entitySet = set.EntitySet;
 
             return entitySet.ElementType.KeyMembers.Select(k => k.Name).ToList();
         }
-
+         
         /// <summary>
         /// Sprawdza, czy kontekst posiada nowe dane, które musi wysłać do bazy
         /// </summary>
@@ -150,21 +151,50 @@ namespace ProjektBD.Databases
             return context.ChangeTracker.HasChanges();
         }
 
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Przypisywanie do zakładu
+        //----------------------------------------------------------------
+
         /// <summary>
         /// Pobiera prowadzących z bazy
         /// </summary>
         public List<ProwadzącyDTO> getTeachers()
         {
-            var teacherQuery = from p in context.Prowadzący
-                               join z in context.Zakłady on p.ZakładID equals z.ZakładID
-                               select new ProwadzącyDTO
-                               {
-                                   login = p.login,
-                                   email = p.email,
-                                   nazwaZakładu = z.nazwa
-                               };
+            var teacherQuery =  from p in context.Prowadzący
+                                    join z in context.Zakłady on p.ZakładID equals z.ZakładID
+                                select new ProwadzącyDTO
+                                {
+                                    login = p.login,
+                                    email = p.email,
+                                    nazwaZakładu = z.nazwa
+                                };
 
             return teacherQuery.ToList();
         }
+
+        /// <summary>
+        /// Pobiera nazwy zakładów istniejących w bazie
+        /// </summary>
+        public List<string> getInstituteNames()
+        {
+            return context.Zakłady.Select(n => n.nazwa).ToList();
+        }
+
+        /// <summary>
+        /// Przypisuje prowadzącego do zakładu
+        /// </summary>
+        public void assignToInstitute(string instituteName, string teacherLogin)
+        {
+            Prowadzący teacher = context.Prowadzący.Where( p => p.login.Equals(teacherLogin) ).Single();
+            Zakład institute = context.Zakłady.Where( z => z.nazwa.Equals(instituteName) ).Single();
+
+            teacher.Zakład = institute;
+            context.SaveChanges();
+        }
+
+        //----------------------------------------------------------------
+        #endregion
     }
 }

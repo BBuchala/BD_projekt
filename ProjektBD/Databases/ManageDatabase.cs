@@ -18,15 +18,17 @@ namespace ProjektBD.Databases
             context.Użytkownicy.Load();
 
             return context.Użytkownicy.Local
-                .Where(u => u.login.Equals(login))
+                .Where( u => u.login.Equals(login) )
                 .Select(s => s.sól)
                 .FirstOrDefault();
         }
+
         public void changeUserPersonalAccount(string login, TextBoxBase nemail, DateTime ndataUrodzenia, TextBoxBase nmiejscowosc)
         {
             context.Użytkownicy.Load();
+
             Użytkownik u = context.Użytkownicy.Local
-                .Where(a => a.login.Equals(login))
+                .Where( a => a.login.Equals(login) )
                 .FirstOrDefault();
 
             u.email = nemail.Text;
@@ -36,39 +38,36 @@ namespace ProjektBD.Databases
             context.SaveChanges();
         }
 
-        public bool changeUserPasswordAccount(string login, string shasło, string nhasło,string soln)
+        public bool changeUserPasswordAccount(string login, string shasło, string nhasło, string soln)
         {
             context.Użytkownicy.Load();
+
             Użytkownik u = context.Użytkownicy.Local
-                .Where(s => s.login.Equals(login) && s.hasło.Equals(shasło))
+                .Where( s => s.login.Equals(login) && s.hasło.Equals(shasło) )
                 .FirstOrDefault();
+
             if (u != null)
             {
                 u.hasło = nhasło;
                 u.sól = soln;
+
                 context.SaveChanges();
                 return true;
             }
             else 
                return false;
-            
-            
-            
-           
-           
-           
-         }
+        }
+
         public void deleteFromDatabase(string login)
         {
             context.Użytkownicy.Load();
+
             Użytkownik u = context.Użytkownicy.Local
-                .Where(a => a.login.Equals(login))
+                .Where( a => a.login.Equals(login) )
                 .FirstOrDefault();
 
             context.Użytkownicy.Remove(u);
             context.SaveChanges();
-
         }
-
     }
 }

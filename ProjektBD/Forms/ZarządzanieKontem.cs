@@ -21,22 +21,23 @@ namespace ProjektBD.Forms
 {
     public partial class Zarządzanie_Kontem : Form
     {
+        #region Fields and constructor
+        //----------------------------------------------------------------
 
-        #region Fields
         private string login;
-        
-
         private ManageController formcontroller;
         public bool close = false;
-        #endregion 
+
         public Zarządzanie_Kontem(string inputLogin)
         {
             InitializeComponent();
             login = inputLogin;
-            formcontroller = new ManageController(login, textBox4, textBox5, email, textBox2, dateTimePicker1,textBox3); 
-            
-            
+
+            formcontroller = new ManageController(login, textBox4, textBox5, email, textBox2, dateTimePicker1, textBox3); 
         }
+
+        //----------------------------------------------------------------
+        #endregion 
 
         private void button1_MouseEnter(object sender, EventArgs e)
         {
@@ -46,67 +47,57 @@ namespace ProjektBD.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            if(checkBox1.Checked==true){
+            if (checkBox1.Checked == true)
+            {
                 formcontroller.deleteUser();
+
                 MsgBoxUtils.displayInformationMsgBox("Complete", "Usunięto użytkownika z bazy");
+
                 close = true;
                 this.Close();
-
-
             }
             else
                 MsgBoxUtils.displayInformationMsgBox("Error", "Należy potwierdzić wybór");
-
-            
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-
-
-           
             string  czyPoprawne1 =  formcontroller.validateInput1();
 
             switch (czyPoprawne1)
             {
-
                 case "Zla dlugosc":
                     MsgBoxUtils.displayInformationMsgBox("Error", "Zła długość pół. Pola musza zajmować conajmniej 3 znaki");
+
                     email.Text = null;
                     textBox2.Text = null;
                     return;
 
                 case "Zla forma email":
                     MsgBoxUtils.displayInformationMsgBox("Error", "Zły adres email.");
+
                     email.Text = null;
                     textBox2.Text = null;
                     return;
 
                 case "ok":
                     MsgBoxUtils.displayInformationMsgBox("Complete", "Dane zostały poprawnie zmienione");
+
                     email.Text = null;
                     textBox2.Text = null;
                     break;
-
             }
-       
-            
-            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-
             string czyPoprawne2 = formcontroller.validateInput2();
-
 
             switch (czyPoprawne2)
             {
-
                 case "Zla dlugosc":
                     MsgBoxUtils.displayInformationMsgBox("Error", "Zła długość pół. Pola musza zajmować conajmniej 3 znaki");
+
                     textBox3.Text = null;
                     textBox4.Text = null;
                     textBox5.Text = null;
@@ -114,6 +105,7 @@ namespace ProjektBD.Forms
 
                 case "Rozne hasla":
                     MsgBoxUtils.displayInformationMsgBox("Error", "Nowe hasło nie jest takie samo.");
+
                     textBox3.Text = null;
                     textBox4.Text = null;
                     textBox5.Text = null;
@@ -121,6 +113,7 @@ namespace ProjektBD.Forms
 
                 case "Zle stare haslo":
                     MsgBoxUtils.displayInformationMsgBox("Error", "Stare hasło jest niepoprawne.");
+
                     textBox3.Text = null;
                     textBox4.Text = null;
                     textBox5.Text = null;
@@ -128,37 +121,30 @@ namespace ProjektBD.Forms
 
                 case "ok":
                     MsgBoxUtils.displayInformationMsgBox("Complete", "Dane zostały poprawnie zmienione");
-                     textBox3.Text = null;
+
+                    textBox3.Text = null;
                     textBox4.Text = null;
                     textBox5.Text = null;
                  
                     break;
-             
-
             }
         }
 
         private void ZarządznieKontem_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
-           
             if (e.CloseReason == CloseReason.WindowsShutDown)
                 return;
+
             if (close == true)
                 return;
 
             if (e.CloseReason == CloseReason.UserClosing)
-                 {
-
+            {
                 DialogResult result = MsgBoxUtils.displayQuestionMsgBox("Zamknij ustawienia", "Jesteś pewien, że chcesz wyjść z ustawień konta?", this);
 
                 if (result == DialogResult.No)
                     e.Cancel = true;
-
             }
-            
-           
-
         }
         private void ZarządzanieKontem_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -168,14 +154,10 @@ namespace ProjektBD.Forms
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedIndex != 3)
-            {
                 //this.Size.Height = 450;
                 this.AutoScroll = false;
-            }
             else
-            {
                 this.AutoScroll = true;
-            }
         }
     }
 }

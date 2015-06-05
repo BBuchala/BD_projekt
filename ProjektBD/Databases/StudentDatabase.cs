@@ -18,8 +18,6 @@ namespace ProjektBD.Databases
         // TODO:
         // - zamiast joinować, w LINQ wykorzystać navigation properties
 
-        private int userID;
-
         public StudentDatabase(string studentName)
         {
             userID = context.Użytkownicy
@@ -389,11 +387,9 @@ namespace ProjektBD.Databases
             projectsList.ForEach( proj => stud.Projekty.Remove(proj) );
 
             var gradesList = stud.Oceny.Where( o => o.Przedmiot.Equals(subj) ).ToList();
-            gradesList.ForEach( o => stud.Oceny.Remove(o) );
             context.Oceny.RemoveRange(gradesList);                  // Całkowicie usuwa oceny z bazy
 
             var applicationsList = stud.Zgłoszenia.Where( z => z.Przedmiot.Equals(subj) ).ToList();
-            applicationsList.ForEach( app => stud.Zgłoszenia.Remove(app) );
             context.Zgłoszenia.RemoveRange( applicationsList );     // Całkowicie usuwa zgłoszenia z bazy
 
             context.SaveChanges();
@@ -406,12 +402,15 @@ namespace ProjektBD.Databases
         {
             Student stud = context.Studenci
                 .Where(s => s.UżytkownikID == userID)
-                .Include("Projekty")                  // Załadowany zostanie równiez Navigation Property z powiązanymi projektami
+                .Include("Projekty").Include("Oceny")   // Załadowane zostaną również Navigation Properties z powiązanymi projektami i ocenami
                 .Single();
 
             Projekt proj = context.Projekty.Where(p => p.nazwa.Equals(projectName)).Single();
-
             stud.Projekty.Remove(proj);
+
+            var gradesList = stud.Oceny.Where( o => o.Projekt.Equals(proj) ).ToList();
+            context.Oceny.RemoveRange(gradesList);      // Całkowicie usuwa oceny z bazy
+
             context.SaveChanges();
         }
 

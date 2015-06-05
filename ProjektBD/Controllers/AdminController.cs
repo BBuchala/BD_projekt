@@ -17,6 +17,9 @@ namespace ProjektBD.Controllers
     /// </summary>
     class AdminController : Controller
     {
+        #region Pola i konstruktor
+        //----------------------------------------------------------------
+
         AdminDatabase admDatabase;
 
         public AdminController()
@@ -24,6 +27,11 @@ namespace ProjektBD.Controllers
             database = new AdminDatabase();
             admDatabase = (database as AdminDatabase);
         }
+
+        #endregion
+
+        #region Dodawanie prowadzących
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Wyszukuje i zwraca listę użytkowników starających się o uprawnienia prowadzącego
@@ -49,6 +57,13 @@ namespace ProjektBD.Controllers
             admDatabase.deleteUser(u);
         }
 
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Obsługa dataGrid'a
+        //----------------------------------------------------------------
+
         /// <summary>
         /// Pobiera nazwy tabel istniejących w bazie
         /// </summary>
@@ -58,14 +73,6 @@ namespace ProjektBD.Controllers
             tableList.RemoveAt(0);                                  // Usuwa systemową kolumnę MigrationHistory
 
             return tableList.ToArray();                             // Wpisanie tablicy do comboboxa to kwestia 1 linijki
-        }
-
-        /// <summary>
-        /// Pobiera nazwy zakładów istniejących w bazie
-        /// </summary>
-        public string[] getInstituteNames()
-        {
-            return admDatabase.getInstituteNames().ToArray();
         }
 
         /// <summary>
@@ -113,6 +120,11 @@ namespace ProjektBD.Controllers
             return admDatabase.doesContextHaveChanges();
         }
 
+        #endregion
+
+        #region Przypisywanie do zakładu
+        //----------------------------------------------------------------
+
         /// <summary>
         /// Pobiera prowadzących z bazy
         /// </summary>
@@ -120,5 +132,32 @@ namespace ProjektBD.Controllers
         {
             return admDatabase.getTeachers();
         }
+
+        /// <summary>
+        /// Pobiera nazwy zakładów istniejących w bazie
+        /// </summary>
+        public string[] getInstituteNames()
+        {
+            return admDatabase.getInstituteNames().ToArray();
+        }
+
+        /// <summary>
+        /// Przypisuje prowadzącego do zakładu.
+        /// <para> Zwraca string określający stan operacji.</para>
+        /// </summary>
+        public string assignToInstitute(string instituteName, string teacherLogin)
+        {
+            if ( instituteName.Equals("") )
+                return "Nie podano zakładu";
+
+            if ( teacherLogin.Equals("") )
+                return "Nie wybrano prowadzącego";
+
+            admDatabase.assignToInstitute(instituteName, teacherLogin);
+            return "Przypisanie przebiegło pomyślnie";
+        }
+
+        //----------------------------------------------------------------
+        #endregion
     }
 }

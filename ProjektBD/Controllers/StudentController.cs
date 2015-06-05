@@ -11,6 +11,9 @@ namespace ProjektBD.Controllers
 {
     class StudentController : Controller
     {
+        #region Pola i konstruktor
+        //----------------------------------------------------------------
+
         StudentDatabase studDatabase;
 
         public StudentController(string userName)
@@ -19,6 +22,14 @@ namespace ProjektBD.Controllers
             studDatabase = (database as StudentDatabase);
         }
 
+        #endregion
+
+        #region Pobieranie
+        //----------------------------------------------------------------
+
+        #region Użytkownicy
+        //----------------------------------------------------------------
+
         /// <summary>
         /// Pobiera z bazy listę użytkowników, których login zawiera w sobie podane słowo
         /// </summary>
@@ -26,6 +37,12 @@ namespace ProjektBD.Controllers
         {
             return studDatabase.getUser(loginFragment);
         }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Przedmioty
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Pobiera przedmioty z bazy
@@ -42,6 +59,12 @@ namespace ProjektBD.Controllers
         {
             return studDatabase.getMySubjects();
         }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Projekty
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Pobiera projekty z bazy
@@ -67,6 +90,12 @@ namespace ProjektBD.Controllers
             return studDatabase.getNotMyProjects(subjectName);
         }
 
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Studenci
+        //----------------------------------------------------------------
+
         /// <summary>
         /// Pobiera studentów zapisanych na przedmiot
         /// </summary>
@@ -82,6 +111,12 @@ namespace ProjektBD.Controllers
         {
             return studDatabase.getStudentsFromProject(projectName);
         }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Oceny
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Pobiera oceny z podanego przedmiotu
@@ -99,6 +134,15 @@ namespace ProjektBD.Controllers
             return studDatabase.getGradesFromProject(projectName);
         }
 
+        //----------------------------------------------------------------
+        #endregion
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Zapisywanie
+        //----------------------------------------------------------------
+
         /// <summary>
         /// Zapisuje studenta na przedmiot o podanej nazwie.
         /// <para> Zwraca string określający stan operacji.</para>
@@ -112,6 +156,7 @@ namespace ProjektBD.Controllers
                 return "Już zapisany";
 
             studDatabase.enrollToSubject(subjectName);
+
             return "Zapisywanie zakończone pomyślnie";
         }
 
@@ -128,8 +173,15 @@ namespace ProjektBD.Controllers
                 return "Niezapisany na przedmiot nadrzędny";
 
             studDatabase.enrollToProject(projectName);
+
             return "Zapisywanie zakończone pomyślnie";
         }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Usuwanie
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Usuwa studenta z przedmiotu o podanej nazwie
@@ -146,5 +198,8 @@ namespace ProjektBD.Controllers
         {
             studDatabase.RemoveFromProject(projectName);
         }
+
+        //----------------------------------------------------------------
+        #endregion
     }
 }

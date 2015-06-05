@@ -49,7 +49,7 @@ namespace ProjektBD.Forms
             userLogin = inputLogin;        
         }
 
-#endregion
+        #endregion
 
         #region Methods
 
@@ -112,7 +112,7 @@ namespace ProjektBD.Forms
 
         #endregion 
 
-        # region Events
+        #region Events
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -260,11 +260,6 @@ namespace ProjektBD.Forms
             lookForNewTeachers();
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             string tableName = comboBox1.Text;
@@ -292,6 +287,38 @@ namespace ProjektBD.Forms
                 foreach (DataGridViewColumn column in godlyDataGrid1.Columns)
                     column.ReadOnly = true;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string instituteName = comboBox2.Text;
+            string teacherLogin = "";
+
+            if (customListView1.SelectedItems.Count > 0)
+                teacherLogin = customListView1.SelectedItems[0].Text;
+
+            switch ( formController.assignToInstitute(instituteName, teacherLogin) )
+            {
+                case "Nie podano zakładu":
+                    MsgBoxUtils.displayWarningMsgBox("Błąd", "Proszę wybrać zakład z listy");
+                    break;
+
+                case "Nie wybrano prowadzącego":
+                    MsgBoxUtils.displayWarningMsgBox("Błąd", "Proszę wybrać prowadzącego z listy");
+                    break;
+
+                case "Przypisanie przebiegło pomyślnie":
+                    MsgBoxUtils.displayInformationMsgBox("Informacja", "Prowadzący został pomyślnie przypisany do zakładu");
+
+                    List<ProwadzącyDTO> list = formController.getTeachers();
+                    customListView1.fill<ProwadzącyDTO>(list);                  // refresh
+                    break;
+            }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         /// <summary>

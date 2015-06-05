@@ -291,24 +291,8 @@ namespace ProjektBD.Forms
         //----------------------------------------------------------------
         #endregion
 
-        #region Buttony
+        #region Buttony i zarządzanie kontem
         //----------------------------------------------------------------
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem(userLogin);
-            newForm.ShowDialog();
-
-            if (newForm.close == true)
-            {
-                newForm.Dispose();
-                close = true;
-                this.Close();
-            }
-            else
-                newForm.Dispose();
-            
-        }
 
         // Zapisanie na przedmiot
         private void button1_Click(object sender, EventArgs e)
@@ -339,6 +323,8 @@ namespace ProjektBD.Forms
             formController.RemoveFromSubject(subjectName);
 
             customListView2.fill<PrzedmiotDTO>( formController.getMySubjects() );           // refresh
+            customListView5.Clear();
+            customListView8.Clear();
         }
         
         // Zapisanie na projekt
@@ -371,6 +357,7 @@ namespace ProjektBD.Forms
             formController.RemoveFromProject(projectName);
 
             customListView5.fill<ProjektDTO>( formController.getMyProjects(subjectName) );        // refresh
+            customListView8.Clear();
         }
 
         // Wyszukiwanie użytkownika
@@ -384,6 +371,43 @@ namespace ProjektBD.Forms
 
                 customListView9.fill<UżytkownikDTO>(usersList);
             }
+        }
+
+        // Zarządzanie kontem
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem(userLogin);
+            newForm.ShowDialog();
+
+            if (newForm.close == true)
+            {
+                newForm.Dispose();
+                close = true;
+                this.Close();
+            }
+            else
+                newForm.Dispose();
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Help
+        //----------------------------------------------------------------
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Student);
+        }
+
+        private void toolStripLabel3_Click(object sender, EventArgs e)
+        {
+            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.About);
+        }
+
+        private void toolStripLabel2_Click(object sender, EventArgs e)
+        {
+            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Student);
         }
 
         //----------------------------------------------------------------
@@ -422,36 +446,6 @@ namespace ProjektBD.Forms
         private void StudentMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             formController.disposeContext();
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Student);
-        }
-
-        private void toolStripLabel1_Click(object sender, EventArgs e)
-        {
-            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem(userLogin);
-            newForm.ShowDialog();
-
-            if (newForm.close == true)
-            {
-                newForm.Dispose();
-                close = true;
-                this.Close();
-            }
-            else
-                newForm.Dispose();
-        }
-
-        private void toolStripLabel3_Click(object sender, EventArgs e)
-        {
-            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.About);
-        }
-
-        private void toolStripLabel2_Click(object sender, EventArgs e)
-        {
-            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Student);
         }
 
         //----------------------------------------------------------------

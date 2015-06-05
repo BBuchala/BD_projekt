@@ -21,7 +21,6 @@ namespace ProjektBD.Controllers
         DateTimePicker dataUrodzenia;
         ManageDatabase mandatabase;
 
-
         public ManageController(string loginfromform, TextBoxBase hasłostarefromform, TextBoxBase hasłonowefromform, TextBoxBase emailfromform, TextBoxBase miejscowoscfromform, DateTimePicker dataUrodzeniafromform, TextBoxBase powtorznehaslofromform)
         {
             login = loginfromform;
@@ -39,17 +38,17 @@ namespace ProjektBD.Controllers
 
         public string validateInput1()
         {
-            if (!checkLength1())
+            if ( !checkLength1() )
                 return "Zla dlugosc";
-            if (!(SpellCheckUtilities.isValidEmail(email.Text)))
+
+            if ( !SpellCheckUtilities.isValidEmail(email.Text) )
                 return "Zla forma email";
+
             else
             {
                  mandatabase.changeUserPersonalAccount(login, email, dataUrodzenia.Value, miejscowosc);
                  return "ok";
             }
-
-
         }
         bool checkPasswords()
         {
@@ -64,46 +63,41 @@ namespace ProjektBD.Controllers
         {
             if (!checkLength2())
                 return "Zla dlugosc";
+
             if (!checkPasswords())
                 return "Rozne hasla";
+
             else
             {
                 string sols = mandatabase.userSalt(login);
-               
-                
-                
-                    string soln = Encryption.generateSalt();
-                    if (sols != null)
-                    {
-                        string hashedsPassword = Encryption.HashPassword(starehasło.Text, sols);
-                        string hashednPassword = Encryption.HashPassword(nowehasło.Text, soln);
-                       bool czystare = mandatabase.changeUserPasswordAccount(login, hashedsPassword, hashednPassword, soln);
-                       if (czystare == false)
-                           return "Zle stare haslo";
-                       
-                    }
+                string soln = Encryption.generateSalt();
 
-                    return "ok";
-                
+                if (sols != null)
+                {
+                    string hashedsPassword = Encryption.HashPassword(starehasło.Text, sols);
+                    string hashednPassword = Encryption.HashPassword(nowehasło.Text, soln);
+
+                    bool czystare = mandatabase.changeUserPasswordAccount(login, hashedsPassword, hashednPassword, soln);
+
+                    if (czystare == false)
+                        return "Zle stare haslo";
+                }
+
+                return "ok";
             }
-             
-
-
         }
 
         public void deleteUser()
         {
             mandatabase.deleteFromDatabase(login);
-
         }
 
         public bool checkLength1()
         {
+            if ( email.Text.Equals("") || email.Text.Length < 3 || email.Text == null )
+                return false;
 
-
-            if ((email.Text.Equals("")) || (email.Text.Length < 3) || (email.Text == null))
-                return false; ;
-            if ((miejscowosc.Text.Equals("")) || (miejscowosc.Text.Length < 3) || (miejscowosc.Text == null))
+            if ( miejscowosc.Text.Equals("") || miejscowosc.Text.Length < 3 || miejscowosc.Text == null )
                 return false;
 
             return true;
@@ -111,19 +105,16 @@ namespace ProjektBD.Controllers
 
         public bool checkLength2()
         {
-
-
-            if ((starehasło.Text.Equals("")) || (starehasło.Text.Length < 3) || (starehasło.Text == null))
-                return false; ;
-            if ((nowehasło.Text.Equals("")) || (nowehasło.Text.Length < 3) || (nowehasło.Text == null))
+            if  (starehasło.Text.Equals("") || starehasło.Text.Length < 3 || starehasło.Text == null )
                 return false;
-            if ((powtorzonehaslo.Text.Equals("")) || (powtorzonehaslo.Text.Length < 3) || (powtorzonehaslo.Text == null))
+
+            if ( nowehasło.Text.Equals("") || nowehasło.Text.Length < 3 || nowehasło.Text == null )
+                return false;
+
+            if ( powtorzonehaslo.Text.Equals("") || powtorzonehaslo.Text.Length < 3 || powtorzonehaslo.Text == null )
                 return false;
 
             return true;
         }
-
-
-
-    } 
+    }
 }

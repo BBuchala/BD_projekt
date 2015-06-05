@@ -53,9 +53,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -327,14 +327,14 @@
             this.tabPage4.Text = "Pomoc";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // label9
+            // pictureBox1
             // 
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label9.Location = new System.Drawing.Point(7, 12);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(413, 120);
-            this.label9.TabIndex = 0;
-            this.label9.Text = resources.GetString("label9.Text");
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(92, 312);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(244, 156);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // label10
             // 
@@ -345,14 +345,14 @@
             this.label10.TabIndex = 1;
             this.label10.Text = resources.GetString("label10.Text");
             // 
-            // pictureBox1
+            // label9
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(92, 312);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(244, 156);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label9.Location = new System.Drawing.Point(7, 12);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(413, 120);
+            this.label9.TabIndex = 0;
+            this.label9.Text = resources.GetString("label9.Text");
             // 
             // label11
             // 
