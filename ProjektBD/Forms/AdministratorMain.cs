@@ -21,7 +21,8 @@ namespace ProjektBD.Forms
 {
     public partial class AdministratorMain : Form
     {
-        #region Fields $ Constructor
+        #region Pola i konstruktor
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Warstwa pośrednicząca między widokiem a modelem (bazą danych). Przetwarza i oblicza
@@ -49,9 +50,154 @@ namespace ProjektBD.Forms
             userLogin = inputLogin;        
         }
 
+        //----------------------------------------------------------------
         #endregion
 
-        #region Methods
+        #region Ładowanie formularza
+        //----------------------------------------------------------------
+
+        private void AdministratorMain_Load(object sender, EventArgs e)
+        {
+            if (formController.connectToDatabase())
+                this.Close();
+
+            if (EmergencyMode.isEmergency)
+            {
+                label4.ForeColor = Color.Crimson;
+                label4.Text = "wyłączona";
+            }
+
+            else
+            {
+                label4.ForeColor = Color.Chartreuse;
+                label4.Text = "włączona";
+            }
+
+            lookForNewTeachers();
+
+            new ToolTip().SetToolTip(pictureBox2, "Wyloguj");
+
+            comboBox1.Items.AddRange(formController.getTableNames());
+            comboBox2.Items.AddRange(formController.getInstituteNames());
+
+            List<ProwadzącyDTO> list = formController.getTeachers();
+
+            customListView1.fill<ProwadzącyDTO>(list);
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Tryb awaryjny
+        //----------------------------------------------------------------
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            pictureBox1.Image = ProjektBD.Properties.Resources.pressed;
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            pictureBox1.Image = ProjektBD.Properties.Resources.unpressed;
+
+            try
+            {
+                formController.changeEmergencyMode();
+
+                if (EmergencyMode.isEmergency)
+                {
+                    label4.ForeColor = Color.Crimson;
+                    label4.Text = "wyłączona";
+                }
+                else
+                {
+                    label4.ForeColor = Color.Chartreuse;
+                    label4.Text = "włączona";
+                }
+            }
+
+            catch (EntityException)
+            {
+                MsgBoxUtils.displayConnectionErrorMsgBox();
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region DataGrid
+        //----------------------------------------------------------------
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string tableName = comboBox1.Text;
+
+            var query = formController.getTableData(tableName);
+
+            godlyDataGrid1.provideParams(formController, query.Count);
+
+            // Naprawia mały bug edycji przy przechodzeniu np. z Projektu do Oceny (ProjektID wciąż był tylko do odczytu)
+            godlyDataGrid1.DataSource = null;
+            godlyDataGrid1.DataSource = query;
+
+            if ( query.GetType().Name.Contains("Observable") )          // Jeśli zwrócona kolekcja jest obserwowalna, znaczy to, iż mamy ją w kontekście
+            {
+                label7.Visible = false;
+
+                List<string> keysList = formController.getPrimaryKeyNames(tableName);
+
+                keysList.ForEach(keyName => godlyDataGrid1.Columns[keyName].ReadOnly = true);
+            }
+            else
+            {
+                label7.Visible = true;
+
+                foreach (DataGridViewColumn column in godlyDataGrid1.Columns)
+                    column.ReadOnly = true;
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Przypisywanie do zakładu
+        //----------------------------------------------------------------
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string instituteName = comboBox2.Text;
+            string teacherLogin = "";
+
+            if (customListView1.SelectedItems.Count > 0)
+                teacherLogin = customListView1.SelectedItems[0].Text;
+
+            switch ( formController.assignToInstitute(instituteName, teacherLogin) )
+            {
+                case "Nie podano zakładu":
+                    MsgBoxUtils.displayWarningMsgBox("Błąd", "Proszę wybrać zakład z listy");
+                    break;
+
+                case "Nie wybrano prowadzącego":
+                    MsgBoxUtils.displayWarningMsgBox("Błąd", "Proszę wybrać prowadzącego z listy");
+                    break;
+
+                case "Przypisanie przebiegło pomyślnie":
+                    MsgBoxUtils.displayInformationMsgBox("Informacja", "Prowadzący został pomyślnie przypisany do zakładu");
+
+                    List<ProwadzącyDTO> list = formController.getTeachers();
+                    customListView1.fill<ProwadzącyDTO>(list);                  // refresh
+                    break;
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Akceptowanie prowadzących
+        //----------------------------------------------------------------
+
+        #region Metody
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Odświeża informacje o nowych notyfikacjach. Teraz tylko 
@@ -110,74 +256,27 @@ namespace ProjektBD.Forms
             }
         }
 
-        #endregion 
+        //----------------------------------------------------------------
+        #endregion
 
-        #region Events
+        #region Eventy
+        //----------------------------------------------------------------
 
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        /// <summary>
+        /// Menu kontekstowe również pod LPM
+        /// </summary>
+        private void notificationImage_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = ProjektBD.Properties.Resources.pressed;
+            contextMenuStrip1.Show(Control.MousePosition);
         }
 
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        /// <summary>
+        /// Menu kontekstowe również pod LPM
+        /// </summary>
+        private void notificationCount_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = ProjektBD.Properties.Resources.unpressed;
-
-            try
-            {
-                formController.changeEmergencyMode();
-
-                if (EmergencyMode.isEmergency)
-                {
-                    label4.ForeColor = Color.Crimson;
-                    label4.Text = "wyłączona";
-                }
-                else
-                {
-                    label4.ForeColor = Color.Chartreuse;
-                    label4.Text = "włączona";
-                }
-            }
-
-            catch (EntityException)
-            {
-                MsgBoxUtils.displayConnectionErrorMsgBox();
-            }
+            contextMenuStrip1.Show(Control.MousePosition);
         }
-
-        private void AdministratorMain_Load(object sender, EventArgs e)
-        {
-            if ( formController.connectToDatabase() )
-                this.Close();
-
-            if (EmergencyMode.isEmergency)
-            {
-                label4.ForeColor = Color.Crimson;
-                label4.Text = "wyłączona";
-            }
-
-            else
-            {
-                label4.ForeColor = Color.Chartreuse;
-                label4.Text = "włączona";
-            }
-
-            lookForNewTeachers();
-
-            new ToolTip().SetToolTip(pictureBox2, "Wyloguj");
-
-            comboBox1.Items.AddRange( formController.getTableNames() );
-            comboBox2.Items.AddRange( formController.getInstituteNames() );
-
-            List<ProwadzącyDTO> list = formController.getTeachers();
-
-            customListView1.fill<ProwadzącyDTO>(list);
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
         /// <summary>
         /// Poinformuj ile użytkowników ubiega się o prowadzącego.
         /// W przyszłości może być więcej rodzajów notek, wtedy modyfikujemy dalsze menuItemy.
@@ -198,22 +297,6 @@ namespace ProjektBD.Forms
                 nowyUserToolStripMenuItem.Text = "Brak nowych użytkowników";
                 nowyUserToolStripMenuItem.ForeColor = Color.Black;
             }
-        }
-
-        /// <summary>
-        /// Menu kontekstowe również pod LPM
-        /// </summary>
-        private void notificationImage_Click(object sender, EventArgs e)
-        {
-            contextMenuStrip1.Show(Control.MousePosition);
-        }
-
-        /// <summary>
-        /// Menu kontekstowe również pod LPM
-        /// </summary>
-        private void notificationCount_Click(object sender, EventArgs e)
-        {
-            contextMenuStrip1.Show(Control.MousePosition);
         }
 
         /// <summary>
@@ -260,93 +343,14 @@ namespace ProjektBD.Forms
             lookForNewTeachers();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string tableName = comboBox1.Text;
+        //----------------------------------------------------------------
+        #endregion
 
-            var query = formController.getTableData(tableName);
+        //----------------------------------------------------------------
+        #endregion
 
-            godlyDataGrid1.provideParams(formController, query.Count);
-
-            // Naprawia mały bug edycji przy przechodzeniu np. z Projektu do Oceny (ProjektID wciąż był tylko do odczytu)
-            godlyDataGrid1.DataSource = null;
-            godlyDataGrid1.DataSource = query;
-
-            if ( query.GetType().Name.Contains("Observable") )          // Jeśli zwrócona kolekcja jest obserwowalna, znaczy to, iż mamy ją w kontekście
-            {
-                label7.Visible = false;
-
-                List<string> keysList = formController.getPrimaryKeyNames(tableName);
-
-                keysList.ForEach(keyName => godlyDataGrid1.Columns[keyName].ReadOnly = true);
-            }
-            else
-            {
-                label7.Visible = true;
-
-                foreach (DataGridViewColumn column in godlyDataGrid1.Columns)
-                    column.ReadOnly = true;
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string instituteName = comboBox2.Text;
-            string teacherLogin = "";
-
-            if (customListView1.SelectedItems.Count > 0)
-                teacherLogin = customListView1.SelectedItems[0].Text;
-
-            switch ( formController.assignToInstitute(instituteName, teacherLogin) )
-            {
-                case "Nie podano zakładu":
-                    MsgBoxUtils.displayWarningMsgBox("Błąd", "Proszę wybrać zakład z listy");
-                    break;
-
-                case "Nie wybrano prowadzącego":
-                    MsgBoxUtils.displayWarningMsgBox("Błąd", "Proszę wybrać prowadzącego z listy");
-                    break;
-
-                case "Przypisanie przebiegło pomyślnie":
-                    MsgBoxUtils.displayInformationMsgBox("Informacja", "Prowadzący został pomyślnie przypisany do zakładu");
-
-                    List<ProwadzącyDTO> list = formController.getTeachers();
-                    customListView1.fill<ProwadzącyDTO>(list);                  // refresh
-                    break;
-            }
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        /// <summary>
-        /// Zamykanie formatki - messageBox z zapytaniem.
-        /// </summary>
-        private void AdministratorMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.WindowsShutDown)
-                return;
-
-            if (this.DialogResult == DialogResult.Cancel)           // czy ten warunek jest konieczny?
-            {
-                DialogResult result = MsgBoxUtils.displayQuestionMsgBox("Wyjdź", "Czy na pewno chcesz się wylogować?", this);
-
-                if (result == DialogResult.No)
-                    e.Cancel = true;
-            }
-        }
-
-        /// <summary>
-        /// Zamknięcie formatki - Pozbywa się utworzonego kontekstu przy zamykaniu formularza
-        /// </summary>
-        private void AdministratorMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            formController.disposeContext();
-        }
-
-       
+        #region Wiadomości
+        //----------------------------------------------------------------
 
         private void messageImage_Click(object sender, EventArgs e)
         {
@@ -358,20 +362,11 @@ namespace ProjektBD.Forms
 
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
+        //----------------------------------------------------------------
+        #endregion
 
-        }
-
-        /// <summary>
-        /// Otwieranie zarządzania kontem.
-        /// </summary>
-        private void toolStripLabel1_Click(object sender, EventArgs e)
-        {
-            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem(userLogin);
-            newForm.ShowDialog();
-            newForm.Dispose();
-        }
+        #region Help i zarządzanie kontem
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Wyświetlanie "About"
@@ -389,6 +384,55 @@ namespace ProjektBD.Forms
             //HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Admin);
         }
 
+        /// <summary>
+        /// Otwieranie zarządzania kontem.
+        /// </summary>
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem(userLogin);
+            newForm.ShowDialog();
+            newForm.Dispose();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Zamykanie formularza
+        //----------------------------------------------------------------
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// Zamykanie formatki - messageBox z zapytaniem.
+        /// </summary>
+        private void AdministratorMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.WindowsShutDown)
+                return;
+
+            DialogResult result = MsgBoxUtils.displayQuestionMsgBox("Wyjdź", "Czy na pewno chcesz się wylogować?", this);
+
+            if (result == DialogResult.No)
+                e.Cancel = true;
+        }
+
+        /// <summary>
+        /// Zamknięcie formatki - Pozbywa się utworzonego kontekstu przy zamykaniu formularza
+        /// </summary>
+        private void AdministratorMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            formController.disposeContext();
+        }
+
+        //----------------------------------------------------------------
         #endregion
     }
 

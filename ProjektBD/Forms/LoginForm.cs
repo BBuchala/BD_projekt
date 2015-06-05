@@ -25,7 +25,8 @@ namespace ProjektBD
     /// </summary>
     public partial class LoginForm : Form
     {
-        #region Fields
+        #region Pola, konstruktor i getter'y
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Ile razy nastąpi zmiana koloru migotającego label'a
@@ -52,9 +53,11 @@ namespace ProjektBD
         /// </summary>
         private AccountController formController;
 
-        #endregion
-
-        #region Constructor and methods
+        public LoginForm()
+        {
+            InitializeComponent();
+            formController = new AccountController();
+        }
 
         /// <summary>
         /// Pobiera login, za którego pomocą zalogowano się do systemu. Na chwilę obecną @Deprecated
@@ -63,6 +66,26 @@ namespace ProjektBD
         {
             return inputLogin;
         }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Ładowanie formularza
+        //----------------------------------------------------------------
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync();     //Uruchamia drugi wątek, w którym następuje połączenie się z bazą
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Logowanie
+        //----------------------------------------------------------------
+
+        #region Główna metoda
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Sprawdza, czy użytkownik istnieje w bazie i loguje go, otwierając stosowny do uprawnień formularz
@@ -115,24 +138,22 @@ namespace ProjektBD
 
                 password.Text = "";
             }
-
             else
                 timer1.Start();                 // Uruchamia zdarzenie timera - migotanie tekstu
         }
 
-        public LoginForm()
-        {
-            InitializeComponent();
-            formController = new AccountController();
-        }
-
+        //----------------------------------------------------------------
         #endregion
 
-        #region Events
+        #region Eventy pomocnicze
+        //----------------------------------------------------------------
 
-        private void Form2_Load(object sender, EventArgs e)
+        /// <summary>
+        /// Tu wyszukujemy (po naciśnięciu pierwszego przycisku)
+        /// </summary>
+        private void loginButton_Click(object sender, EventArgs e)
         {
-            backgroundWorker1.RunWorkerAsync();     //Uruchamia drugi wątek, w którym następuje połączenie się z bazą
+            logUser();
         }
 
         private void loginButton_MouseEnter(object sender, EventArgs e)
@@ -147,6 +168,90 @@ namespace ProjektBD
             loginButton.ForeColor = Color.White;
         }
 
+        private void password_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)            // Enter
+            {
+                logUser();
+                e.Handled = true;           // wyłącza beep po powrocie do formularza
+            }
+        }
+
+        private void login_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)            // Enter
+            {
+                logUser();
+                e.Handled = true;           // wyłącza beep po powrocie do formularza
+            }
+        }
+
+        /// <summary>
+        /// Zmienia kolor label'a informującego o połączeniu z bazą. Ilość mignięć definiowana zmienną flashLimit
+        /// </summary>
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (flashCounter < flashLimit && !label6.ForeColor.Equals(Color.Green))
+            {
+                if (label6.ForeColor.Equals(Color.Black))
+                    label6.ForeColor = Color.Red;
+                else
+                    label6.ForeColor = Color.Black;
+
+                flashCounter++;
+            }
+            else
+            {
+                flashCounter = 0;
+                timer1.Stop();
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Wątki
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Zadania wykonywane w ramach drugiego wątku
+        /// </summary>
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (formController.connectToDatabase())
+                backgroundWorker1.RunWorkerCompleted += (s, ev) => Close();
+        }
+
+        /// <summary>
+        /// Uruchamiana, gdy wątek zakończy swą pracę
+        /// </summary>
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (formController.connectionSuccessful())
+            {
+                label6.Text = "Połączenie zostało nawiązane!";
+                label6.ForeColor = Color.Green;
+
+                pictureBox1.Image = ProjektBD.Properties.Resources.OK;
+            }
+            else
+            {
+                label6.Text = "Połączenie nie zostało nawiązane!";
+                label6.ForeColor = Color.Red;
+
+                pictureBox1.Image = ProjektBD.Properties.Resources.error;
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Rejestracja
+        //----------------------------------------------------------------
+
         private void signButton_MouseEnter(object sender, EventArgs e)
         {
             signButton.BackColor = Color.PaleTurquoise;
@@ -157,14 +262,6 @@ namespace ProjektBD
         {
             signButton.BackColor = Color.Red;
             signButton.ForeColor = Color.White;
-        }
-
-        /// <summary>
-        /// Tu wyszukujemy (po naciśnięciu pierwszego przycisku)
-        /// </summary>
-        private void loginButton_Click(object sender, EventArgs e)
-        {
-            logUser();
         }
 
         /// <summary>
@@ -205,74 +302,25 @@ namespace ProjektBD
                 timer1.Start();
         }
 
-        private void password_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13)            // Enter
-            {
-                logUser();
-                e.Handled = true;           // wyłącza beep po powrocie do formularza
-            }
-        }
+        //----------------------------------------------------------------
+        #endregion
 
-        private void login_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13)            // Enter
-            {
-                logUser();
-                e.Handled = true;           // wyłącza beep po powrocie do formularza
-            }
-        }
+        #region Help
+        //----------------------------------------------------------------
 
         /// <summary>
-        /// Zmienia kolor label'a informującego o połączeniu z bazą. Ilość mignięć definiowana zmienną flashLimit
+        /// Wyświetlanie pomocy
         /// </summary>
-        private void timer1_Tick(object sender, EventArgs e)
+        private void toolStripLabel1_Click(object sender, EventArgs e)
         {
-            if ( flashCounter < flashLimit && !label6.ForeColor.Equals(Color.Green))
-            {
-                if ( label6.ForeColor.Equals(Color.Black) )
-                    label6.ForeColor = Color.Red;
-                else
-                    label6.ForeColor = Color.Black;
-
-                flashCounter++;
-            }
-            else
-            {
-                flashCounter = 0;
-                timer1.Stop();
-            }
+            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Login);
         }
 
-        /// <summary>
-        /// Zadania wykonywane w ramach drugiego wątku
-        /// </summary>
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            if ( formController.connectToDatabase() )
-                backgroundWorker1.RunWorkerCompleted += (s, ev) => Close();
-        }
+        //----------------------------------------------------------------
+        #endregion
 
-        /// <summary>
-        /// Uruchamiana, gdy wątek zakończy swą pracę
-        /// </summary>
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if ( formController.connectionSuccessful() )
-            {
-                label6.Text = "Połączenie zostało nawiązane!";
-                label6.ForeColor = Color.Green;
-
-                pictureBox1.Image = ProjektBD.Properties.Resources.OK;
-            }
-            else
-            {
-                label6.Text = "Połączenie nie zostało nawiązane!";
-                label6.ForeColor = Color.Red;
-
-                pictureBox1.Image = ProjektBD.Properties.Resources.error;
-            }
-        }
+        #region Zamykanie formularza
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Wyświetla msgBox z pytaniem o pozostanie w aplikacji
@@ -293,14 +341,7 @@ namespace ProjektBD
             formController.disposeContext();
         }
 
-        /// <summary>
-        /// Wyświetlanie pomocy
-        /// </summary>
-        private void toolStripLabel1_Click(object sender, EventArgs e)
-        {
-            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Login);
-        }
-
+        //----------------------------------------------------------------
         #endregion
     }
 }

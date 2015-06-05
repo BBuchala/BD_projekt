@@ -14,6 +14,9 @@ namespace ProjektBD.Controllers
     /// </summary>
     class RegistrationController : Controller
     {
+        #region Pola i konstruktor
+        //----------------------------------------------------------------
+
         List<TextBoxBase> textFields;
         List<Label> labels;
 
@@ -36,6 +39,9 @@ namespace ProjektBD.Controllers
             database = new RegistrationDatabase();
             regDatabase = (database as RegistrationDatabase);
         }
+
+        //----------------------------------------------------------------
+        #endregion
 
         /// <summary>
         /// Dokonuje sprawdzenia, czy użytkownik podał prawidłowe dane podczas rejestracji

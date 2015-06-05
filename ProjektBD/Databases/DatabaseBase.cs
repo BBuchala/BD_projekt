@@ -14,6 +14,9 @@ namespace ProjektBD.Databases
     /// </summary>
     abstract class DatabaseBase
     {
+        #region Pola
+        //----------------------------------------------------------------
+
         /// <summary>
         /// Kontekst bazy danych
         /// </summary>
@@ -28,6 +31,9 @@ namespace ProjektBD.Databases
         /// ID aktualnego użytkownika
         /// </summary>
         protected int userID;
+
+        //----------------------------------------------------------------
+        #endregion
 
         /// <summary>
         /// Łączy się z bazą danych i dokonuje jej rekonstrukcji, jeśli modele nie są zgodne.
@@ -60,6 +66,7 @@ namespace ProjektBD.Databases
         }
 
         #region Tryb naprawczy
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Zmienia aktualny stan bazy danych. Przechodzi w tryb naprawczy, jeśli był ustawiony normalny i vice versa
@@ -106,6 +113,7 @@ namespace ProjektBD.Databases
             }
         }
 
+        //----------------------------------------------------------------
         #endregion
 
         /// <summary>

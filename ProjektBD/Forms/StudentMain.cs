@@ -24,6 +24,7 @@ namespace ProjektBD.Forms
         /// Login zalogowanego użytkownika, można używać do wyszukiwania.
         /// </summary>
         private string userLogin;
+
         private bool close = false;
 
         /// <summary>
@@ -431,13 +432,10 @@ namespace ProjektBD.Forms
             if (close == true)
                 return;
 
-            if (this.DialogResult == DialogResult.Cancel)
-            {
-                DialogResult result = MsgBoxUtils.displayQuestionMsgBox("Wyjdź", "Czy na pewno chcesz się wylogować?", this);
+            DialogResult result = MsgBoxUtils.displayQuestionMsgBox("Wyjdź", "Czy na pewno chcesz się wylogować?", this);
 
-                if (result == DialogResult.No)
-                    e.Cancel = true;
-            }
+            if (result == DialogResult.No)
+                e.Cancel = true;
         }
 
         /// <summary>
