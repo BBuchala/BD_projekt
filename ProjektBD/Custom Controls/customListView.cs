@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using ProjektBD.DAL;
+using ProjektBD.Databases;
+using ProjektBD.Forms.CommonForms;
 using ProjektBD.Model;
 
 namespace ProjektBD.Custom_Controls
@@ -104,6 +107,7 @@ namespace ProjektBD.Custom_Controls
                 else if (column.Text.Equals("prowadzący"))
                 {
                     cms.Items.Add("Pokaż szczegóły");
+                    cms.Items.Add("Pokaż profil prowadzącego");
                     cms.Items.Add("Wyślij wiadomość do prowadzącego");
                     break;
                 }
@@ -119,7 +123,94 @@ namespace ProjektBD.Custom_Controls
                         e.Cancel = true;
                 };
 
+            cms.ItemClicked += ContextMenuStrip_ItemClicked;
+
             this.ContextMenuStrip = cms;
+        }
+
+        void ContextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            Form newForm;
+            dynamic profile;                                                // Typ określi sobie podczas wykonywania programu
+
+            customListViewDatabase db = new customListViewDatabase();
+            string selectedListViewItem = this.SelectedItems[0].Text;
+            string selectedMenuStripItem = e.ClickedItem.Text;
+
+            // Zabezpieczenie przed bullshitem powstającym przy otwieraniu profilu z kontrolki wyszukiwania użytkowników
+            if (selectedMenuStripItem.Equals("Pokaż profil"))
+            {
+                foreach (ColumnHeader col in this.Columns)
+                {
+                    if (col.Text.Equals("stanowisko"))
+                    {
+                        foreach (ListViewItem.ListViewSubItem item in this.SelectedItems[0].SubItems)
+                        {
+                            if (item.Text.Equals("Student"))
+                            {
+                                selectedMenuStripItem = "Pokaż profil studenta z listy użytkowników";
+                                break;
+                            }
+                            else if (item.Text.Equals("Prowadzący"))
+                            {
+                                selectedMenuStripItem = "Pokaż profil prowadzącego z listy użytkowników";
+                                break;
+                            }
+                        }
+                        break;
+                    }
+
+                    else if (col.Text.Equals("nazwaZakładu"))
+                    {
+                        selectedMenuStripItem = "Pokaż profil prowadzącego z listy użytkowników";
+                        break;
+                    }
+                }
+            }
+
+            switch (selectedMenuStripItem)
+            {
+                case "Pokaż profil":
+                    int nrIndeksu = Int32.Parse(selectedListViewItem);      // Być może w niektórych listView'ach nr indeksu nie będzie 1 kolumną.
+                                                                            // W razie czego błędów szukać tutaj.
+                    profile = db.getStudentProfileData(nrIndeksu);
+
+                    newForm = new StudentProfileForm(profile);
+                    break;
+
+                case "Pokaż profil studenta z listy użytkowników":
+                    string studentLogin = selectedListViewItem;
+
+                    profile = db.getStudentProfileData(studentLogin);
+
+                    newForm = new StudentProfileForm(profile);
+                    break;
+
+                case "Pokaż profil prowadzącego":
+                    string subjectName = selectedListViewItem;
+
+                    profile = db.getTeacherProfileFromSubject(subjectName);
+
+                    newForm = new TeacherProfileForm(profile);
+                    break;
+
+                case "Pokaż profil prowadzącego z listy użytkowników":
+                    string teacherLogin = selectedListViewItem;
+
+                    profile = db.getTeacherProfile(teacherLogin);
+
+                    newForm = new TeacherProfileForm(profile);
+                    break;
+
+                default:
+                    newForm = new Form();
+                    break;
+            }
+
+            newForm.ShowDialog();
+            newForm.Dispose();
+
+            db.disposeContext();
         }
 
         /// <summary>

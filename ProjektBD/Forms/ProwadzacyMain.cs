@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Core;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ using System.Windows.Forms;
 using ProjektBD.Utilities;
 using ProjektBD.Controllers;
 using ProjektBD.Model;
-using System.Data.Entity.Core;
+using ProjektBD.Forms.TeacherForms;
 
 namespace ProjektBD.Forms
 {

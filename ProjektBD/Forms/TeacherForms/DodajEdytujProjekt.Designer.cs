@@ -1,4 +1,4 @@
-﻿namespace ProjektBD.Forms
+﻿namespace ProjektBD.Forms.TeacherForms
 {
     partial class DodajEdytujProjekt
     {
@@ -88,12 +88,13 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.Lime;
             this.button1.Location = new System.Drawing.Point(106, 294);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(138, 42);
             this.button1.TabIndex = 8;
             this.button1.Text = "Dodaj / Edytuj";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // label4
             // 

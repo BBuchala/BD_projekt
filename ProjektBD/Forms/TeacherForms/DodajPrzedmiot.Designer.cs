@@ -1,4 +1,4 @@
-﻿namespace ProjektBD.Forms
+﻿namespace ProjektBD.Forms.TeacherForms
 {
     partial class DodajPrzedmiot
     {
@@ -75,12 +75,13 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button2.BackColor = System.Drawing.Color.Lime;
             this.button2.Location = new System.Drawing.Point(106, 329);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(138, 42);
             this.button2.TabIndex = 21;
             this.button2.Text = "Dodaj";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             // 
             // textBox1
             // 

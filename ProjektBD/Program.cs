@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProjektBD.Forms;
+using ProjektBD.Forms.CommonForms;
 
 namespace ProjektBD
 {
@@ -20,7 +21,7 @@ namespace ProjektBD
 
             Application.Run(new LoginForm());
             //Application.Run(new ProwadzacyMain("ASzydło"));
-
+            //Application.Run(new StudentProfileForm());
         }
     }
 }

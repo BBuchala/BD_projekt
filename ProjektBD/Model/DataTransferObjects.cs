@@ -97,4 +97,22 @@ namespace ProjektBD.Model
         public int numerIndeksu { get; set; }
         public long IDZgłoszenia { get; set; }
     }
+
+    public class StudentProfileDTO
+    {
+        public string login { get; set; }
+        public int nrIndeksu { get; set; }
+        public string email { get; set; }
+        public string miejsceZamieszkania { get; set; }
+        public DateTime? dataUrodzenia { get; set; }
+    }
+
+    public class TeacherProfileDTO
+    {
+        public string login { get; set; }
+        public string email { get; set; }
+        public string miejsceZamieszkania { get; set; }
+        public DateTime? dataUrodzenia { get; set; }
+        public string nazwaZakładu { get; set; }
+    }
 }

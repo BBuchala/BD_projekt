@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProjektBD.Forms
+namespace ProjektBD.Forms.TeacherForms
 {
-    public partial class EdytujPrzedmioty : Form
+    public partial class DodajEdytujProjekt : Form
     {
-        public EdytujPrzedmioty()
+        public DodajEdytujProjekt()
         {
             InitializeComponent();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

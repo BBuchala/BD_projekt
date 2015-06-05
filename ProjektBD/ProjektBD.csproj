@@ -68,6 +68,7 @@
     <Compile Include="DAL\ProjektBDInitializer.cs" />
     <Compile Include="Databases\AccountDatabase.cs" />
     <Compile Include="Databases\AdminDatabase.cs" />
+    <Compile Include="Databases\customListViewDatabase.cs" />
     <Compile Include="Databases\DatabaseBase.cs" />
     <Compile Include="Databases\ManageDatabase.cs" />
     <Compile Include="Databases\RegistrationDatabase.cs" />
@@ -81,16 +82,28 @@
     <Compile Include="Forms\AdministratorMain.Designer.cs">
       <DependentUpon>AdministratorMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DodajPrzedmiot.cs">
+    <Compile Include="Forms\CommonForms\StudentProfileForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DodajPrzedmiot.Designer.cs">
+    <Compile Include="Forms\CommonForms\StudentProfileForm.Designer.cs">
+      <DependentUpon>StudentProfileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CommonForms\TeacherProfileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CommonForms\TeacherProfileForm.Designer.cs">
+      <DependentUpon>TeacherProfileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TeacherForms\DodajPrzedmiot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TeacherForms\DodajPrzedmiot.Designer.cs">
       <DependentUpon>DodajPrzedmiot.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EdytujPrzedmioty.cs">
+    <Compile Include="Forms\TeacherForms\EdytujPrzedmioty.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EdytujPrzedmioty.Designer.cs">
+    <Compile Include="Forms\TeacherForms\EdytujPrzedmioty.Designer.cs">
       <DependentUpon>EdytujPrzedmioty.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Form1.cs">
@@ -99,10 +112,10 @@
     <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DodajEdytujProjekt.cs">
+    <Compile Include="Forms\TeacherForms\DodajEdytujProjekt.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DodajEdytujProjekt.Designer.cs">
+    <Compile Include="Forms\TeacherForms\DodajEdytujProjekt.Designer.cs">
       <DependentUpon>DodajEdytujProjekt.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\HelpForms\AboutBox1.cs">
@@ -195,13 +208,19 @@
     <EmbeddedResource Include="Forms\AdministratorMain.resx">
       <DependentUpon>AdministratorMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DodajEdytujProjekt.resx">
+    <EmbeddedResource Include="Forms\CommonForms\StudentProfileForm.resx">
+      <DependentUpon>StudentProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CommonForms\TeacherProfileForm.resx">
+      <DependentUpon>TeacherProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TeacherForms\DodajEdytujProjekt.resx">
       <DependentUpon>DodajEdytujProjekt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DodajPrzedmiot.resx">
+    <EmbeddedResource Include="Forms\TeacherForms\DodajPrzedmiot.resx">
       <DependentUpon>DodajPrzedmiot.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EdytujPrzedmioty.resx">
+    <EmbeddedResource Include="Forms\TeacherForms\EdytujPrzedmioty.resx">
       <DependentUpon>EdytujPrzedmioty.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
@@ -280,6 +299,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Images\loading.gif" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
