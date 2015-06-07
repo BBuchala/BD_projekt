@@ -197,7 +197,8 @@ namespace ProjektBD.Databases
                             select new OcenaDTO {
                                 nazwaProjektu = o.Projekt.nazwa,
                                 wartość = o.wartość,
-                                dataWpisania = o.dataWpisania
+                                dataWpisania = o.dataWpisania,
+                                ocenaID = o.OcenaID
                             };
 
             return gradeQuery.ToList();
@@ -213,7 +214,12 @@ namespace ProjektBD.Databases
                                 join user in context.Studenci on o.StudentID equals user.UżytkownikID
                              where user.UżytkownikID == userID &&
                                  proj.nazwa.Equals(projectName)
-                             select new OcenaZProjektuDTO { wartość = o.wartość, dataWpisania = o.dataWpisania }; 
+                             select new OcenaZProjektuDTO
+                             {
+                                 wartość = o.wartość,
+                                 dataWpisania = o.dataWpisania,
+                                 ocenaID = o.OcenaID
+                             }; 
 
             return gradeQuery.ToList();
         }

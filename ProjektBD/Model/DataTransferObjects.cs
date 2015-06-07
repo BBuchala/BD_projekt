@@ -82,12 +82,18 @@ namespace ProjektBD.Model
         public string nazwaProjektu { get; set; }
         public double wartość { get; set; }
         public DateTime? dataWpisania { get; set; }
+
+        [SkipInListView]
+        public long ocenaID { get; set; }
     }
 
     class OcenaZProjektuDTO
     {
         public double wartość { get; set; }
         public DateTime? dataWpisania { get; set; }
+
+        [SkipInListView]
+        public long ocenaID { get; set; }
     }
 
     //----------------------------------------------------------------

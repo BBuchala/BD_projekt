@@ -19,11 +19,18 @@ namespace ProjektBD.Forms.CommonForms
             InitializeComponent();
 
             label3.Text = gradeDetails.nazwaPrzedmiotu;
-            label5.Text = gradeDetails.nazwaProjektu;
+
+            if (gradeDetails.nazwaProjektu != null)
+                label5.Text = gradeDetails.nazwaProjektu;
+            else
+                label5.Text = "brak";
+
             label7.Text = gradeDetails.wartość.ToString();
 
             if (gradeDetails.dataWpisania.HasValue)
                 label9.Text = gradeDetails.dataWpisania.Value.ToLongDateString();
+            else
+                label9.Text = "brak";
 
             label11.Text = gradeDetails.komentarz;
         }

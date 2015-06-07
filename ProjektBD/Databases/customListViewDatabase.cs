@@ -128,12 +128,13 @@ namespace ProjektBD.Databases
             return query.Single();
         }
 
-        public OcenaDetailsDTO getGradeDetails(string studentLogin, string subjectName, string projectName)
+        /// <summary>
+        /// Pobiera z bazy informacje o ocenie
+        /// </summary>
+        public OcenaDetailsDTO getGradeDetails(long gradeID)
         {
             var query = from grade in context.Oceny
-                        where grade.Student.login.Equals(studentLogin) &&
-                            grade.Przedmiot.nazwa.Equals(subjectName) &&
-                            grade.Projekt.nazwa.Equals(projectName)
+                        where grade.OcenaID == gradeID
                         select new OcenaDetailsDTO
                         {
                             nazwaPrzedmiotu = grade.Przedmiot.nazwa,

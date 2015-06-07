@@ -32,6 +32,11 @@ namespace ProjektBD.Forms
         /// </summary>
         private StudentController formController;
 
+        /// <summary>
+        /// Słownik przechowujący zmapowane wartości ID ocen i ich indeksów w kontrolce CustomListView
+        /// </summary>
+        private Dictionary<int, long> gradeDictionary = new Dictionary<int,long>();          // <indeks w kontrolce, ID oceny>
+
         public StudentMain(string inputLogin)
         {
             InitializeComponent();
@@ -56,8 +61,6 @@ namespace ProjektBD.Forms
             customListView1.fill<PrzedmiotDTO>(subjectsList);
             customListView3.fill<PrzedmiotDTO>(subjectsList);
             customListView2.fill<PrzedmiotDTO>(mySubjectsList);
-
-            customListView6.gradeOwner = userLogin;
         }
 
         #endregion
@@ -127,6 +130,10 @@ namespace ProjektBD.Forms
                 customListView8.fill<OcenaDTO>(mySubjectGradesList);
 
                 button6.Enabled = true;
+
+                gradeDictionary.Clear();
+                for (int i = 0; i < mySubjectGradesList.Count; i++)
+                    gradeDictionary.Add(i, mySubjectGradesList[i].ocenaID);
             }
             else
             {
@@ -154,6 +161,10 @@ namespace ProjektBD.Forms
                 customListView2.SelectedItems[0].BackColor = customListView2.previouslySelectedItemColor;
 
                 button6.Enabled = true;
+
+                gradeDictionary.Clear();
+                for (int i = 0; i < mySubjectGradesList.Count; i++)
+                    gradeDictionary.Add(i, mySubjectGradesList[i].ocenaID);
             }
         }
 
@@ -243,6 +254,10 @@ namespace ProjektBD.Forms
                 customListView8.fill<OcenaZProjektuDTO>(myProjectGradesList);
 
                 button3.Enabled = true;
+
+                gradeDictionary.Clear();
+                for (int i = 0; i < myProjectGradesList.Count; i++)
+                    gradeDictionary.Add(i, myProjectGradesList[i].ocenaID);
             }
             else
             {
@@ -251,6 +266,10 @@ namespace ProjektBD.Forms
                 List<OcenaDTO> mySubjectGradesList = formController.getGradesFromSubject( customListView2.SelectedItems[0].Text );
 
                 customListView8.fill<OcenaDTO>(mySubjectGradesList);
+
+                gradeDictionary.Clear();
+                for (int i = 0; i < mySubjectGradesList.Count; i++)
+                    gradeDictionary.Add(i, mySubjectGradesList[i].ocenaID);
             }
         }
 
@@ -289,6 +308,23 @@ namespace ProjektBD.Forms
         }
 
         //---------------------
+        #endregion
+
+        #region listView8 (Moje przedmioty i projekty -> Twoje oceny)
+        //----------------------------------------------------------------
+
+        private void customListView8_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            customListView lv = (sender as customListView);
+
+            if (lv.SelectedItems.Count > 0)
+            {
+                int index = lv.SelectedItems[0].Index;
+                lv.gradeID = gradeDictionary[index];
+            }
+        }
+
+        //----------------------------------------------------------------
         #endregion
 
         //----------------------------------------------------------------

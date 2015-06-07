@@ -12,6 +12,7 @@ using ProjektBD.DAL;
 using ProjektBD.Databases;
 using ProjektBD.Forms.CommonForms;
 using ProjektBD.Model;
+using ProjektBD.Utilities;
 
 namespace ProjektBD.Custom_Controls
 {
@@ -22,9 +23,9 @@ namespace ProjektBD.Custom_Controls
         private listViewType dataType;
 
         /// <summary>
-        /// Właściciel oceny, dla której pobierane są szczegóły
+        /// ID oceny, dla której pobierane są szczegóły
         /// </summary>
-        public string gradeOwner;
+        public long gradeID;
 
         private enum listViewType
         {
@@ -53,7 +54,7 @@ namespace ProjektBD.Custom_Controls
         {
             this.Clear();                                     // Usuwa wszystkie wiersze i kolumny z kontrolki, jeśli istnieją
 
-            PropertyInfo[] właściwości = typeof(T).GetProperties();
+            PropertyInfo[] właściwości = typeof(T).GetPropertiesForListView();
 
             //---------DODAWANIE KOLUMN---------
             foreach (PropertyInfo wł in właściwości)
@@ -61,7 +62,7 @@ namespace ProjektBD.Custom_Controls
 
             if (data.Count > 0)
             {
-                List<PropertyInfo> propertiesList = data[0].GetType().GetProperties().ToList();      // Lista właściwości
+                List<PropertyInfo> propertiesList = właściwości.ToList();               // Lista właściwości
                 //propertiesList[0].GetValue(data[0]);            // Która właściwość zostanie pobrana / z której linijki
 
                 //---------DODAWANIE ITEMÓW (wiersze)---------
@@ -242,8 +243,8 @@ namespace ProjektBD.Custom_Controls
                             break;
 
                         case listViewType.Grades:
-
-                            //newForm = new GradeDetails();
+                            dataForForm = db.getGradeDetails(gradeID);
+                            newForm = new GradeDetails(dataForForm);
                             break;
                     }
                     break;

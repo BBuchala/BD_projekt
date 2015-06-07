@@ -31,19 +31,28 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentMain));
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.customListView6 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView3 = new ProjektBD.Custom_Controls.customListView();
             this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.customListView7 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView4 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView1 = new ProjektBD.Custom_Controls.customListView();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.customListView9 = new ProjektBD.Custom_Controls.customListView();
             this.button13 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.customListView8 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView5 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView2 = new ProjektBD.Custom_Controls.customListView();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -60,15 +69,6 @@
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.customListView7 = new ProjektBD.Custom_Controls.customListView();
-            this.customListView4 = new ProjektBD.Custom_Controls.customListView();
-            this.customListView1 = new ProjektBD.Custom_Controls.customListView();
-            this.customListView9 = new ProjektBD.Custom_Controls.customListView();
-            this.customListView8 = new ProjektBD.Custom_Controls.customListView();
-            this.customListView5 = new ProjektBD.Custom_Controls.customListView();
-            this.customListView2 = new ProjektBD.Custom_Controls.customListView();
-            this.customListView6 = new ProjektBD.Custom_Controls.customListView();
-            this.customListView3 = new ProjektBD.Custom_Controls.customListView();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -105,6 +105,38 @@
             this.tabPage1.Size = new System.Drawing.Size(1133, 514);
             this.tabPage1.TabIndex = 5;
             this.tabPage1.Text = "Zgłoszenie";
+            // 
+            // customListView6
+            // 
+            this.customListView6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView6.FullRowSelect = true;
+            this.customListView6.GridLines = true;
+            this.customListView6.Location = new System.Drawing.Point(629, 72);
+            this.customListView6.MultiSelect = false;
+            this.customListView6.Name = "customListView6";
+            this.customListView6.Size = new System.Drawing.Size(386, 353);
+            this.customListView6.TabIndex = 11;
+            this.customListView6.UseCompatibleStateImageBehavior = false;
+            this.customListView6.View = System.Windows.Forms.View.Details;
+            this.customListView6.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView6_ItemSelectionChanged);
+            this.customListView6.Enter += new System.EventHandler(this.customListView6_Enter);
+            this.customListView6.Leave += new System.EventHandler(this.customListView6_Leave);
+            // 
+            // customListView3
+            // 
+            this.customListView3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView3.FullRowSelect = true;
+            this.customListView3.GridLines = true;
+            this.customListView3.Location = new System.Drawing.Point(107, 72);
+            this.customListView3.MultiSelect = false;
+            this.customListView3.Name = "customListView3";
+            this.customListView3.Size = new System.Drawing.Size(386, 353);
+            this.customListView3.TabIndex = 10;
+            this.customListView3.UseCompatibleStateImageBehavior = false;
+            this.customListView3.View = System.Windows.Forms.View.Details;
+            this.customListView3.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView3_ItemSelectionChanged);
+            this.customListView3.Enter += new System.EventHandler(this.customListView3_Enter);
+            this.customListView3.Leave += new System.EventHandler(this.customListView3_Leave);
             // 
             // button2
             // 
@@ -169,6 +201,51 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Podgląd";
             // 
+            // customListView7
+            // 
+            this.customListView7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView7.FullRowSelect = true;
+            this.customListView7.GridLines = true;
+            this.customListView7.Location = new System.Drawing.Point(609, 51);
+            this.customListView7.MultiSelect = false;
+            this.customListView7.Name = "customListView7";
+            this.customListView7.Size = new System.Drawing.Size(275, 437);
+            this.customListView7.TabIndex = 36;
+            this.customListView7.UseCompatibleStateImageBehavior = false;
+            this.customListView7.View = System.Windows.Forms.View.Details;
+            // 
+            // customListView4
+            // 
+            this.customListView4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView4.FullRowSelect = true;
+            this.customListView4.GridLines = true;
+            this.customListView4.Location = new System.Drawing.Point(313, 51);
+            this.customListView4.MultiSelect = false;
+            this.customListView4.Name = "customListView4";
+            this.customListView4.Size = new System.Drawing.Size(275, 437);
+            this.customListView4.TabIndex = 35;
+            this.customListView4.UseCompatibleStateImageBehavior = false;
+            this.customListView4.View = System.Windows.Forms.View.Details;
+            this.customListView4.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView4_ItemSelectionChanged);
+            this.customListView4.Enter += new System.EventHandler(this.customListView4_Enter);
+            this.customListView4.Leave += new System.EventHandler(this.customListView4_Leave);
+            // 
+            // customListView1
+            // 
+            this.customListView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView1.FullRowSelect = true;
+            this.customListView1.GridLines = true;
+            this.customListView1.Location = new System.Drawing.Point(17, 51);
+            this.customListView1.MultiSelect = false;
+            this.customListView1.Name = "customListView1";
+            this.customListView1.Size = new System.Drawing.Size(275, 437);
+            this.customListView1.TabIndex = 34;
+            this.customListView1.UseCompatibleStateImageBehavior = false;
+            this.customListView1.View = System.Windows.Forms.View.Details;
+            this.customListView1.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView1_ItemSelectionChanged);
+            this.customListView1.Enter += new System.EventHandler(this.customListView1_Enter);
+            this.customListView1.Leave += new System.EventHandler(this.customListView1_Leave);
+            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -211,6 +288,19 @@
             this.groupBox2.TabIndex = 27;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Wyszukiwanie użytkownika";
+            // 
+            // customListView9
+            // 
+            this.customListView9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView9.FullRowSelect = true;
+            this.customListView9.GridLines = true;
+            this.customListView9.Location = new System.Drawing.Point(9, 158);
+            this.customListView9.MultiSelect = false;
+            this.customListView9.Name = "customListView9";
+            this.customListView9.Size = new System.Drawing.Size(174, 265);
+            this.customListView9.TabIndex = 4;
+            this.customListView9.UseCompatibleStateImageBehavior = false;
+            this.customListView9.View = System.Windows.Forms.View.Details;
             // 
             // button13
             // 
@@ -256,6 +346,52 @@
             this.tabPage2.Size = new System.Drawing.Size(1133, 514);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Moje przedmioty i projekty";
+            // 
+            // customListView8
+            // 
+            this.customListView8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView8.FullRowSelect = true;
+            this.customListView8.GridLines = true;
+            this.customListView8.Location = new System.Drawing.Point(773, 52);
+            this.customListView8.MultiSelect = false;
+            this.customListView8.Name = "customListView8";
+            this.customListView8.Size = new System.Drawing.Size(307, 382);
+            this.customListView8.TabIndex = 29;
+            this.customListView8.UseCompatibleStateImageBehavior = false;
+            this.customListView8.View = System.Windows.Forms.View.Details;
+            this.customListView8.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView8_ItemSelectionChanged);
+            // 
+            // customListView5
+            // 
+            this.customListView5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView5.FullRowSelect = true;
+            this.customListView5.GridLines = true;
+            this.customListView5.Location = new System.Drawing.Point(411, 52);
+            this.customListView5.MultiSelect = false;
+            this.customListView5.Name = "customListView5";
+            this.customListView5.Size = new System.Drawing.Size(307, 382);
+            this.customListView5.TabIndex = 28;
+            this.customListView5.UseCompatibleStateImageBehavior = false;
+            this.customListView5.View = System.Windows.Forms.View.Details;
+            this.customListView5.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView5_ItemSelectionChanged);
+            this.customListView5.Enter += new System.EventHandler(this.customListView5_Enter);
+            this.customListView5.Leave += new System.EventHandler(this.customListView5_Leave);
+            // 
+            // customListView2
+            // 
+            this.customListView2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView2.FullRowSelect = true;
+            this.customListView2.GridLines = true;
+            this.customListView2.Location = new System.Drawing.Point(44, 52);
+            this.customListView2.MultiSelect = false;
+            this.customListView2.Name = "customListView2";
+            this.customListView2.Size = new System.Drawing.Size(307, 382);
+            this.customListView2.TabIndex = 27;
+            this.customListView2.UseCompatibleStateImageBehavior = false;
+            this.customListView2.View = System.Windows.Forms.View.Details;
+            this.customListView2.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView2_ItemSelectionChanged);
+            this.customListView2.Enter += new System.EventHandler(this.customListView2_Enter);
+            this.customListView2.Leave += new System.EventHandler(this.customListView2_Leave);
             // 
             // label4
             // 
@@ -404,141 +540,6 @@
             this.toolStripLabel3.Size = new System.Drawing.Size(74, 22);
             this.toolStripLabel3.Text = "O programie";
             this.toolStripLabel3.Click += new System.EventHandler(this.toolStripLabel3_Click);
-            // 
-            // customListView7
-            // 
-            this.customListView7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.customListView7.FullRowSelect = true;
-            this.customListView7.GridLines = true;
-            this.customListView7.Location = new System.Drawing.Point(609, 51);
-            this.customListView7.MultiSelect = false;
-            this.customListView7.Name = "customListView7";
-            this.customListView7.Size = new System.Drawing.Size(275, 437);
-            this.customListView7.TabIndex = 36;
-            this.customListView7.UseCompatibleStateImageBehavior = false;
-            this.customListView7.View = System.Windows.Forms.View.Details;
-            // 
-            // customListView4
-            // 
-            this.customListView4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.customListView4.FullRowSelect = true;
-            this.customListView4.GridLines = true;
-            this.customListView4.Location = new System.Drawing.Point(313, 51);
-            this.customListView4.MultiSelect = false;
-            this.customListView4.Name = "customListView4";
-            this.customListView4.Size = new System.Drawing.Size(275, 437);
-            this.customListView4.TabIndex = 35;
-            this.customListView4.UseCompatibleStateImageBehavior = false;
-            this.customListView4.View = System.Windows.Forms.View.Details;
-            this.customListView4.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView4_ItemSelectionChanged);
-            this.customListView4.Enter += new System.EventHandler(this.customListView4_Enter);
-            this.customListView4.Leave += new System.EventHandler(this.customListView4_Leave);
-            // 
-            // customListView1
-            // 
-            this.customListView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.customListView1.FullRowSelect = true;
-            this.customListView1.GridLines = true;
-            this.customListView1.Location = new System.Drawing.Point(17, 51);
-            this.customListView1.MultiSelect = false;
-            this.customListView1.Name = "customListView1";
-            this.customListView1.Size = new System.Drawing.Size(275, 437);
-            this.customListView1.TabIndex = 34;
-            this.customListView1.UseCompatibleStateImageBehavior = false;
-            this.customListView1.View = System.Windows.Forms.View.Details;
-            this.customListView1.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView1_ItemSelectionChanged);
-            this.customListView1.Enter += new System.EventHandler(this.customListView1_Enter);
-            this.customListView1.Leave += new System.EventHandler(this.customListView1_Leave);
-            // 
-            // customListView9
-            // 
-            this.customListView9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.customListView9.FullRowSelect = true;
-            this.customListView9.GridLines = true;
-            this.customListView9.Location = new System.Drawing.Point(9, 158);
-            this.customListView9.MultiSelect = false;
-            this.customListView9.Name = "customListView9";
-            this.customListView9.Size = new System.Drawing.Size(174, 265);
-            this.customListView9.TabIndex = 4;
-            this.customListView9.UseCompatibleStateImageBehavior = false;
-            this.customListView9.View = System.Windows.Forms.View.Details;
-            // 
-            // customListView8
-            // 
-            this.customListView8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.customListView8.FullRowSelect = true;
-            this.customListView8.GridLines = true;
-            this.customListView8.Location = new System.Drawing.Point(773, 52);
-            this.customListView8.MultiSelect = false;
-            this.customListView8.Name = "customListView8";
-            this.customListView8.Size = new System.Drawing.Size(307, 382);
-            this.customListView8.TabIndex = 29;
-            this.customListView8.UseCompatibleStateImageBehavior = false;
-            this.customListView8.View = System.Windows.Forms.View.Details;
-            // 
-            // customListView5
-            // 
-            this.customListView5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.customListView5.FullRowSelect = true;
-            this.customListView5.GridLines = true;
-            this.customListView5.Location = new System.Drawing.Point(411, 52);
-            this.customListView5.MultiSelect = false;
-            this.customListView5.Name = "customListView5";
-            this.customListView5.Size = new System.Drawing.Size(307, 382);
-            this.customListView5.TabIndex = 28;
-            this.customListView5.UseCompatibleStateImageBehavior = false;
-            this.customListView5.View = System.Windows.Forms.View.Details;
-            this.customListView5.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView5_ItemSelectionChanged);
-            this.customListView5.Enter += new System.EventHandler(this.customListView5_Enter);
-            this.customListView5.Leave += new System.EventHandler(this.customListView5_Leave);
-            // 
-            // customListView2
-            // 
-            this.customListView2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.customListView2.FullRowSelect = true;
-            this.customListView2.GridLines = true;
-            this.customListView2.Location = new System.Drawing.Point(44, 52);
-            this.customListView2.MultiSelect = false;
-            this.customListView2.Name = "customListView2";
-            this.customListView2.Size = new System.Drawing.Size(307, 382);
-            this.customListView2.TabIndex = 27;
-            this.customListView2.UseCompatibleStateImageBehavior = false;
-            this.customListView2.View = System.Windows.Forms.View.Details;
-            this.customListView2.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView2_ItemSelectionChanged);
-            this.customListView2.Enter += new System.EventHandler(this.customListView2_Enter);
-            this.customListView2.Leave += new System.EventHandler(this.customListView2_Leave);
-            // 
-            // customListView6
-            // 
-            this.customListView6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.customListView6.FullRowSelect = true;
-            this.customListView6.GridLines = true;
-            this.customListView6.Location = new System.Drawing.Point(629, 72);
-            this.customListView6.MultiSelect = false;
-            this.customListView6.Name = "customListView6";
-            this.customListView6.Size = new System.Drawing.Size(386, 353);
-            this.customListView6.TabIndex = 11;
-            this.customListView6.UseCompatibleStateImageBehavior = false;
-            this.customListView6.View = System.Windows.Forms.View.Details;
-            this.customListView6.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView6_ItemSelectionChanged);
-            this.customListView6.Enter += new System.EventHandler(this.customListView6_Enter);
-            this.customListView6.Leave += new System.EventHandler(this.customListView6_Leave);
-            // 
-            // customListView3
-            // 
-            this.customListView3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.customListView3.FullRowSelect = true;
-            this.customListView3.GridLines = true;
-            this.customListView3.Location = new System.Drawing.Point(107, 72);
-            this.customListView3.MultiSelect = false;
-            this.customListView3.Name = "customListView3";
-            this.customListView3.Size = new System.Drawing.Size(386, 353);
-            this.customListView3.TabIndex = 10;
-            this.customListView3.UseCompatibleStateImageBehavior = false;
-            this.customListView3.View = System.Windows.Forms.View.Details;
-            this.customListView3.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView3_ItemSelectionChanged);
-            this.customListView3.Enter += new System.EventHandler(this.customListView3_Enter);
-            this.customListView3.Leave += new System.EventHandler(this.customListView3_Leave);
             // 
             // StudentMain
             // 
