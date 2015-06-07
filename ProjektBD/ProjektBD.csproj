@@ -82,11 +82,29 @@
     <Compile Include="Forms\AdministratorMain.Designer.cs">
       <DependentUpon>AdministratorMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CommonForms\GradeDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CommonForms\GradeDetails.Designer.cs">
+      <DependentUpon>GradeDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CommonForms\ProjectDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CommonForms\ProjectDetails.Designer.cs">
+      <DependentUpon>ProjectDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CommonForms\StudentProfileForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\CommonForms\StudentProfileForm.Designer.cs">
       <DependentUpon>StudentProfileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CommonForms\SubjectDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CommonForms\SubjectDetails.Designer.cs">
+      <DependentUpon>SubjectDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CommonForms\TeacherProfileForm.cs">
       <SubType>Form</SubType>
@@ -208,8 +226,17 @@
     <EmbeddedResource Include="Forms\AdministratorMain.resx">
       <DependentUpon>AdministratorMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CommonForms\GradeDetails.resx">
+      <DependentUpon>GradeDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CommonForms\ProjectDetails.resx">
+      <DependentUpon>ProjectDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CommonForms\StudentProfileForm.resx">
       <DependentUpon>StudentProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CommonForms\SubjectDetails.resx">
+      <DependentUpon>SubjectDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CommonForms\TeacherProfileForm.resx">
       <DependentUpon>TeacherProfileForm.cs</DependentUpon>

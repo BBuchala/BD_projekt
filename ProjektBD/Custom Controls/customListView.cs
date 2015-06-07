@@ -19,6 +19,8 @@ namespace ProjektBD.Custom_Controls
     {
         public Color previouslySelectedItemColor = new Color();
 
+        private listViewType dataType;
+
         public customListView()
         {
             this.Font = new Font("Microsoft Sans Serif", 9);
@@ -87,6 +89,7 @@ namespace ProjektBD.Custom_Controls
             }
 
             createMenuStrip();
+            setListViewType<T>();
         }
 
         /// <summary>
@@ -128,82 +131,102 @@ namespace ProjektBD.Custom_Controls
             this.ContextMenuStrip = cms;
         }
 
+        private void setListViewType<T>() where T: class
+        {
+            string typeName = typeof(T).Name;
+
+            switch (typeName)
+            {
+                case "ProwadzącyDTO":
+                    dataType = listViewType.TeachersWithLogin;
+                    return;
+
+                case "StudentDTO":
+                    dataType = listViewType.StudentsWithIndexNumber;
+                    return;
+
+                case "PrzedmiotDTO":
+                    dataType = listViewType.Subjects;
+                    return;
+
+                case "ProjektDTO":
+                case "ForeignProjektDTO":
+                    dataType = listViewType.Projects;
+                    return;
+
+                case "OcenaDTO": 
+                case "OcenaZProjektuDTO":
+                    dataType = listViewType.Grades;
+                    return;
+            }
+        }
+
         void ContextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            Form newForm;
-            dynamic profile;                                                // Typ określi sobie podczas wykonywania programu
+            Form newForm = new Form();
+            dynamic profile;                             // Typ określi sobie podczas wykonywania programu
 
             customListViewDatabase db = new customListViewDatabase();
-            string selectedListViewItem = this.SelectedItems[0].Text;
+            string selectedItem = this.SelectedItems[0].Text;
             string selectedMenuStripItem = e.ClickedItem.Text;
 
-            // Zabezpieczenie przed bullshitem powstającym przy otwieraniu profilu z kontrolki wyszukiwania użytkowników
-            if (selectedMenuStripItem.Equals("Pokaż profil"))
-            {
-                foreach (ColumnHeader col in this.Columns)
-                {
-                    if (col.Text.Equals("stanowisko"))
-                    {
-                        foreach (ListViewItem.ListViewSubItem item in this.SelectedItems[0].SubItems)
-                        {
-                            if (item.Text.Equals("Student"))
-                            {
-                                selectedMenuStripItem = "Pokaż profil studenta z listy użytkowników";
-                                break;
-                            }
-                            else if (item.Text.Equals("Prowadzący"))
-                            {
-                                selectedMenuStripItem = "Pokaż profil prowadzącego z listy użytkowników";
-                                break;
-                            }
-                        }
-                        break;
-                    }
-
-                    else if (col.Text.Equals("nazwaZakładu"))
-                    {
-                        selectedMenuStripItem = "Pokaż profil prowadzącego z listy użytkowników";
-                        break;
-                    }
-                }
-            }
+            // Zabezpieczenie przed bullshitem powstającym przy otwieraniu profilu prowadzących
+            if ( selectedMenuStripItem.Equals("Pokaż profil") )
+                correctDataType();
 
             switch (selectedMenuStripItem)
             {
                 case "Pokaż profil":
-                    int nrIndeksu = Int32.Parse(selectedListViewItem);      // Być może w niektórych listView'ach nr indeksu nie będzie 1 kolumną.
-                                                                            // W razie czego błędów szukać tutaj.
-                    profile = db.getStudentProfileData(nrIndeksu);
+                    switch (dataType)
+                    {
+                        case listViewType.StudentsWithIndexNumber:
+                            int nrIndeksu = Int32.Parse(selectedItem);
 
-                    newForm = new StudentProfileForm(profile);
-                    break;
+                            profile = db.getStudentProfileData(nrIndeksu);
+                            newForm = new StudentProfileForm(profile);
 
-                case "Pokaż profil studenta z listy użytkowników":
-                    string studentLogin = selectedListViewItem;
+                            break;
 
-                    profile = db.getStudentProfileData(studentLogin);
+                        case listViewType.StudentsWithLogin:
+                            string studentLogin = selectedItem;
 
-                    newForm = new StudentProfileForm(profile);
+                            profile = db.getStudentProfileData(studentLogin);
+                            newForm = new StudentProfileForm(profile);
+
+                            break;
+
+                        case listViewType.TeachersWithLogin:
+                            string teacherLogin = selectedItem;
+
+                            profile = db.getTeacherProfile(teacherLogin);
+                            newForm = new TeacherProfileForm(profile);
+
+                            break;
+                    }
                     break;
 
                 case "Pokaż profil prowadzącego":
-                    string subjectName = selectedListViewItem;
+                    string subjectName = selectedItem;
 
                     profile = db.getTeacherProfileFromSubject(subjectName);
-
                     newForm = new TeacherProfileForm(profile);
                     break;
 
-                case "Pokaż profil prowadzącego z listy użytkowników":
-                    string teacherLogin = selectedListViewItem;
+                case "Pokaż szczegóły":
+                    switch (dataType)
+                    {
+                        case listViewType.Subjects:
+                            newForm = new SubjectDetails();
+                            break;
+                            
+                        case listViewType.Projects:
+                            newForm = new ProjectDetails();
+                            break;
 
-                    profile = db.getTeacherProfile(teacherLogin);
-
-                    newForm = new TeacherProfileForm(profile);
-                    break;
-
-                default:
-                    newForm = new Form();
+                        case listViewType.Grades:
+                            newForm = new GradeDetails();
+                            break;
+                    }
                     break;
             }
 
@@ -211,6 +234,33 @@ namespace ProjektBD.Custom_Controls
             newForm.Dispose();
 
             db.disposeContext();
+        }
+
+        /// <summary>
+        /// Ustawia prawidłowy typ danych w kontrolce w przypadku próby otwarcia profilu użytkownika
+        /// </summary>
+        private void correctDataType()
+        {
+            foreach (ColumnHeader col in this.Columns)
+            {
+                if (col.Text.Equals("stanowisko"))
+                {
+                    foreach (ListViewItem.ListViewSubItem item in this.SelectedItems[0].SubItems)
+                    {
+                        if (item.Text.Equals("Student"))
+                        {
+                            dataType = listViewType.StudentsWithLogin;
+                            break;
+                        }
+                        else if (item.Text.Equals("Prowadzący"))
+                        {
+                            dataType = listViewType.TeachersWithLogin;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
         }
 
         /// <summary>
@@ -233,5 +283,15 @@ namespace ProjektBD.Custom_Controls
             if (this.SelectedItems.Count > 0)
                 this.SelectedItems[0].BackColor = this.previouslySelectedItemColor;
         }
+
+        private enum listViewType
+        {
+            StudentsWithIndexNumber,
+            StudentsWithLogin,
+            TeachersWithLogin,
+            Subjects,
+            Projects,
+            Grades
+        };
     }
 }
