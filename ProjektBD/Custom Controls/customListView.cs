@@ -21,6 +21,21 @@ namespace ProjektBD.Custom_Controls
 
         private listViewType dataType;
 
+        /// <summary>
+        /// Właściciel oceny, dla której pobierane są szczegóły
+        /// </summary>
+        public string gradeOwner;
+
+        private enum listViewType
+        {
+            StudentsWithIndexNumber,
+            StudentsWithLogin,
+            TeachersWithLogin,
+            Subjects,
+            Projects,
+            Grades
+        };
+
         public customListView()
         {
             this.Font = new Font("Microsoft Sans Serif", 9);
@@ -164,7 +179,7 @@ namespace ProjektBD.Custom_Controls
         void ContextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             Form newForm = new Form();
-            dynamic profile;                             // Typ określi sobie podczas wykonywania programu
+            dynamic dataForForm;                             // Typ określi sobie podczas wykonywania programu
 
             customListViewDatabase db = new customListViewDatabase();
             string selectedItem = this.SelectedItems[0].Text;
@@ -182,49 +197,53 @@ namespace ProjektBD.Custom_Controls
                         case listViewType.StudentsWithIndexNumber:
                             int nrIndeksu = Int32.Parse(selectedItem);
 
-                            profile = db.getStudentProfileData(nrIndeksu);
-                            newForm = new StudentProfileForm(profile);
-
+                            dataForForm = db.getStudentProfileData(nrIndeksu);
+                            newForm = new StudentProfileForm(dataForForm);
                             break;
 
                         case listViewType.StudentsWithLogin:
                             string studentLogin = selectedItem;
 
-                            profile = db.getStudentProfileData(studentLogin);
-                            newForm = new StudentProfileForm(profile);
-
+                            dataForForm = db.getStudentProfileData(studentLogin);
+                            newForm = new StudentProfileForm(dataForForm);
                             break;
 
                         case listViewType.TeachersWithLogin:
                             string teacherLogin = selectedItem;
 
-                            profile = db.getTeacherProfile(teacherLogin);
-                            newForm = new TeacherProfileForm(profile);
-
+                            dataForForm = db.getTeacherProfileData(teacherLogin);
+                            newForm = new TeacherProfileForm(dataForForm);
                             break;
                     }
                     break;
 
                 case "Pokaż profil prowadzącego":
-                    string subjectName = selectedItem;
+                    string subject = selectedItem;
 
-                    profile = db.getTeacherProfileFromSubject(subjectName);
-                    newForm = new TeacherProfileForm(profile);
+                    dataForForm = db.getTeacherProfileFromSubject(subject);
+                    newForm = new TeacherProfileForm(dataForForm);
                     break;
 
                 case "Pokaż szczegóły":
                     switch (dataType)
                     {
                         case listViewType.Subjects:
-                            newForm = new SubjectDetails();
+                            string subjectName = selectedItem;
+
+                            dataForForm = db.getSubjectDetails(subjectName);
+                            newForm = new SubjectDetails(dataForForm);
                             break;
                             
                         case listViewType.Projects:
-                            newForm = new ProjectDetails();
+                            string projectName = selectedItem;
+
+                            dataForForm = db.getProjectDetails(projectName);
+                            newForm = new ProjectDetails(dataForForm);
                             break;
 
                         case listViewType.Grades:
-                            newForm = new GradeDetails();
+
+                            //newForm = new GradeDetails();
                             break;
                     }
                     break;
@@ -283,15 +302,5 @@ namespace ProjektBD.Custom_Controls
             if (this.SelectedItems.Count > 0)
                 this.SelectedItems[0].BackColor = this.previouslySelectedItemColor;
         }
-
-        private enum listViewType
-        {
-            StudentsWithIndexNumber,
-            StudentsWithLogin,
-            TeachersWithLogin,
-            Subjects,
-            Projects,
-            Grades
-        };
     }
 }

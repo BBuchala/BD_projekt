@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProjektBD.Utilities;
 
 namespace ProjektBD.Model
 {
     //---------------------
     // Klasy pomocnicze, do których wracane są wyniki zapytań
     //---------------------
+
+    #region Złączenia M:N
+    //----------------------------------------------------------------
+
     class Prowadzone_rozmowy
     {
         public int RozmowaID { get; set; }
@@ -27,6 +32,12 @@ namespace ProjektBD.Model
         public int StudentID { get; set; }
     }
 
+    //----------------------------------------------------------------
+    #endregion
+
+    #region ListView'y
+    //----------------------------------------------------------------
+
     class ProwadzącyDTO
     {
         public string login { get; set; }
@@ -34,15 +45,13 @@ namespace ProjektBD.Model
         public string nazwaZakładu { get; set; }
     }
 
-    class PrzedmiotDTO          // Obierki wyróżnione innym kolorem. Wywalić inty, na PPM rozszerzone informacje o przedmiocie
+    class PrzedmiotDTO          // Obierki wyróżnione innym kolorem?
     {
         public string nazwa { get; set; }
-        //public int liczbaStudentów { get; set; }
-        //public int? maxLiczbaStudentów { get; set; }
         public string prowadzący { get; set; }
     }
 
-    class ProjektDTO            // Opis pod PPM (MessageBox?)
+    class ProjektDTO
     {
         public string nazwa { get; set; }
         public int maxLiczbaStudentów { get; set; }
@@ -81,6 +90,45 @@ namespace ProjektBD.Model
         public DateTime? dataWpisania { get; set; }
     }
 
+    //----------------------------------------------------------------
+    #endregion
+
+    #region Szczegóły (przedmiotu, projektu, oceny)
+    //----------------------------------------------------------------
+    
+    public class PrzedmiotDetailsDTO
+    {
+        public string nazwa { get; set; }
+        public int liczbaStudentów { get; set; }
+        public int? maxLiczbaStudentów { get; set; }
+        public string prowadzący { get; set; }
+        public string opis { get; set; }
+    }
+
+    public class ProjektDetailsDTO
+    {
+        public string nazwa { get; set; }
+        public string nazwaPrzedmiotu { get; set; }
+        public int liczbaStudentów { get; set; }
+        public int maxLiczbaStudentów { get; set; }
+        public string opis { get; set; }
+    }
+
+    public class OcenaDetailsDTO
+    {
+        public string nazwaPrzedmiotu { get; set; }
+        public string nazwaProjektu { get; set; }
+        public double wartość { get; set; }
+        public DateTime? dataWpisania { get; set; }
+        public string komentarz { get; set; }
+    }
+
+    //----------------------------------------------------------------
+    #endregion
+
+    #region Zgłoszenia
+    //----------------------------------------------------------------
+
     class ZgłoszenieNaProjektDTO
     {
         public string loginStudenta { get; set; }
@@ -97,6 +145,12 @@ namespace ProjektBD.Model
         public int numerIndeksu { get; set; }
         public long IDZgłoszenia { get; set; }
     }
+
+    //----------------------------------------------------------------
+    #endregion
+
+    #region Profile użytkowników
+    //----------------------------------------------------------------
 
     public class StudentProfileDTO
     {
@@ -115,4 +169,7 @@ namespace ProjektBD.Model
         public DateTime? dataUrodzenia { get; set; }
         public string nazwaZakładu { get; set; }
     }
+
+    //----------------------------------------------------------------
+    #endregion
 }

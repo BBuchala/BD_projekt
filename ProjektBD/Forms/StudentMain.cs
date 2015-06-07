@@ -56,6 +56,8 @@ namespace ProjektBD.Forms
             customListView1.fill<PrzedmiotDTO>(subjectsList);
             customListView3.fill<PrzedmiotDTO>(subjectsList);
             customListView2.fill<PrzedmiotDTO>(mySubjectsList);
+
+            customListView6.gradeOwner = userLogin;
         }
 
         #endregion
@@ -374,26 +376,10 @@ namespace ProjektBD.Forms
             }
         }
 
-        // Zarządzanie kontem
-        private void toolStripLabel1_Click(object sender, EventArgs e)
-        {
-            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem(userLogin);
-            newForm.ShowDialog();
-
-            if (newForm.close == true)
-            {
-                newForm.Dispose();
-                close = true;
-                this.Close();
-            }
-            else
-                newForm.Dispose();
-        }
-
         //----------------------------------------------------------------
         #endregion
 
-        #region Help
+        #region Help i zarządzanie kontem
         //----------------------------------------------------------------
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -409,6 +395,22 @@ namespace ProjektBD.Forms
         private void toolStripLabel2_Click(object sender, EventArgs e)
         {
             HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Student);
+        }
+
+        // Zarządzanie kontem
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem(userLogin);
+            newForm.ShowDialog();
+
+            if (newForm.close == true)
+            {
+                newForm.Dispose();
+                close = true;
+                this.Close();
+            }
+            else
+                newForm.Dispose();
         }
 
         //----------------------------------------------------------------

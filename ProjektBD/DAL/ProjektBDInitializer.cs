@@ -129,7 +129,10 @@ namespace ProjektBD.DAL
             {
                 new Przedmiot { nazwa = "Informatyka", liczbaStudentów = 31, ProwadzącyID = 2 },
                 new Przedmiot { nazwa = "Fizyka", liczbaStudentów = 31, ProwadzącyID = 3 },
-                new Przedmiot { nazwa = "TUC", liczbaStudentów = 69, ProwadzącyID = 4 }
+                new Przedmiot { nazwa = "TUC", liczbaStudentów = 69, ProwadzącyID = 4,
+                                opis = @"asdasdasdasdasdasddsadasdsdsdasdasdahlsafiuhasldfiuhasldfiuhasfasdf
+sdfsdlfkjsd;flksjd;falksdj;flaskjdf;alskdfj;aslkdjf;aslkdjf;alskdjfh;weroiqwej;roqijwe;roiqjw
+dsfsdf;askdjfa;osidfj;aosidfj;aosijdf;oaisjd;foaijsd;foiajs;dfoiajsqdsdsdssssssssaqweqweqwkjnlkjnlzxicuz"}
             };
             przedmioty.ForEach( p => context.Przedmioty.Add(p) );
             context.SaveChanges();
@@ -139,7 +142,16 @@ namespace ProjektBD.DAL
                 nazwa = "Fizycznie inspirowane algorytmy informatyczne",
                 liczbaStudentów = 7,
                 maxLiczbaStudentów = 15,
-                ProwadzącyID = 2
+                ProwadzącyID = 2,
+                opis = @"
+                            s
+                            d
+                            s
+                            sa
+                            s
+                            d
+                            s
+                            as"
             };
             context.PrzedmiotyObieralne.Add(przedmObier);
             context.SaveChanges();
@@ -147,7 +159,7 @@ namespace ProjektBD.DAL
             var projekty = new List<Projekt>
             {
                 new Projekt { PrzedmiotID  = 1, nazwa = "Danmaku", opis = "Forczu robi", maxLiczbaStudentów = 4 },
-                new Projekt { PrzedmiotID  = 1, nazwa = "Bazy", maxLiczbaStudentów = 5 },
+                new Projekt { PrzedmiotID  = 1, nazwa = "Bazy", maxLiczbaStudentów = 5, opis = "Jebać Bachową" },
                 new Projekt { PrzedmiotID  = 1, nazwa = "Algorytmy grafowe", maxLiczbaStudentów = 1 },
                 new Projekt { PrzedmiotID  = 2, nazwa = "???", maxLiczbaStudentów = 10 },
                 new Projekt { PrzedmiotID  = 3, nazwa = "Lutowanie kabelków", maxLiczbaStudentów = 180 },
