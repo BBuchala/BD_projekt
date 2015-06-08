@@ -46,6 +46,10 @@ namespace ProjektBD.Utilities
                     helpForm = new StudentHelp();
                     break;
 
+                case (HelpFormTypes.Teacher):
+                    helpForm = new ProwadzącyHelp();
+                    break;
+
                 default:
                     break;
             }

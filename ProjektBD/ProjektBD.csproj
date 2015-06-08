@@ -112,6 +112,12 @@
     <Compile Include="Forms\CommonForms\TeacherProfileForm.Designer.cs">
       <DependentUpon>TeacherProfileForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\HelpForms\ProwadzącyHelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HelpForms\ProwadzącyHelp.Designer.cs">
+      <DependentUpon>ProwadzącyHelp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\TeacherForms\DodajPrzedmiot.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CommonForms\TeacherProfileForm.resx">
       <DependentUpon>TeacherProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HelpForms\ProwadzącyHelp.resx">
+      <DependentUpon>ProwadzącyHelp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeacherForms\DodajEdytujProjekt.resx">
       <DependentUpon>DodajEdytujProjekt.cs</DependentUpon>

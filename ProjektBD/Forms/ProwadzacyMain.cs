@@ -370,7 +370,7 @@ namespace ProjektBD.Forms
         /// </summary>
         private void toolStripLabel2_Click(object sender, EventArgs e)
         {
-            //HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Teacher);
+            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Teacher);
         }
 
         /// <summary>
