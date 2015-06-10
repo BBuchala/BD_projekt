@@ -26,8 +26,6 @@ namespace ProjektBD.Controllers
         /// </summary>
         public TeacherController(string teacherLogin)
         {
-            //database = new TeacherDatabase(teacherLogin);
-            //teacherdb = (database as TeacherDatabase);
             database = usrDatabase = new TeacherDatabase(teacherLogin);
             teacherdb = (usrDatabase as TeacherDatabase);
         }
@@ -90,6 +88,23 @@ namespace ProjektBD.Controllers
         {
             teacherdb.addStudentToProject(applicationID);
         }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Pobieranie
+        //----------------------------------------------------------------
+
+        #region Przedmioty
+        //----------------------------------------------------------------
+
+        public List<PrzedmiotProwadzącegoDTO> getMySubjects()
+        {
+            return teacherdb.getMySubjects();
+        }
+
+        //----------------------------------------------------------------
+        #endregion
 
         //----------------------------------------------------------------
         #endregion

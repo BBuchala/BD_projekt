@@ -18,6 +18,9 @@ namespace ProjektBD.Custom_Controls
 {
     class customListView : ListView
     {
+        #region Pola i konstruktor
+        //----------------------------------------------------------------
+
         public Color previouslySelectedItemColor = new Color();
 
         /// <summary>
@@ -47,7 +50,16 @@ namespace ProjektBD.Custom_Controls
             this.GridLines = true;
             this.View = View.Details;
             this.MultiSelect = false;
+
+            this.Enter += loadItemState;
+            this.Leave += saveItemState;
         }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Wypełnienie danymi, tworzenie rozwijalnego menu, ustawienie typu
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Wypełnia listView danymi z listy podanej przez parametr
@@ -107,8 +119,8 @@ namespace ProjektBD.Custom_Controls
                 column.Width = -2;                              // Automatyczne wyrównanie do najdłuższego itemu w kolumnie
             }
 
-            createMenuStrip();
             setListViewType<T>();
+            createMenuStrip();
         }
 
         /// <summary>
@@ -126,7 +138,7 @@ namespace ProjektBD.Custom_Controls
                     cms.Items.Add("Wyślij wiadomość");
                     break;
                 }
-                else if (column.Text.Equals("prowadzący"))
+                else if ( column.Text.Equals("prowadzący") || this.dataType == listViewType.Subjects )
                 {
                     cms.Items.Add("Pokaż szczegóły");
                     cms.Items.Add("Pokaż profil prowadzącego");
@@ -150,6 +162,10 @@ namespace ProjektBD.Custom_Controls
             this.ContextMenuStrip = cms;
         }
 
+        /// <summary>
+        /// Ustawia typ danych wyświetlanych przez kontrolkę
+        /// </summary>
+        /// <typeparam name="T">Typ danych, jakimi wypełniona została kontrolka</typeparam>
         private void setListViewType<T>() where T: class
         {
             string typeName = typeof(T).Name;
@@ -165,6 +181,7 @@ namespace ProjektBD.Custom_Controls
                     return;
 
                 case "PrzedmiotDTO":
+                case "PrzedmiotProwadzącegoDTO":
                     dataType = listViewType.Subjects;
                     return;
 
@@ -179,6 +196,12 @@ namespace ProjektBD.Custom_Controls
                     return;
             }
         }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Zaznaczanie itemów
+        //----------------------------------------------------------------
 
         void ContextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -286,10 +309,16 @@ namespace ProjektBD.Custom_Controls
             }
         }
 
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Zmiana kolorów
+        //----------------------------------------------------------------
+
         /// <summary>
         /// Po wyjściu z kontrolki zapamiętuje zaznaczony item, tymczasowo zmieniając jego kolor.
         /// </summary>
-        public void saveItemState()
+        private void saveItemState(object sender, EventArgs e)
         {
             if (this.SelectedItems.Count > 0)
             {
@@ -301,10 +330,13 @@ namespace ProjektBD.Custom_Controls
         /// <summary>
         /// Przywraca poprzedni kolor zaznaczonego itemu, zmieniony podczas przechodzenia do innej listy.
         /// </summary>
-        public void loadItemState()
+        private void loadItemState(object sender, EventArgs e)
         {
             if (this.SelectedItems.Count > 0)
                 this.SelectedItems[0].BackColor = this.previouslySelectedItemColor;
         }
+
+        //----------------------------------------------------------------
+        #endregion
     }
 }

@@ -43,6 +43,7 @@ namespace ProjektBD.Forms
         public ProwadzacyMain(string inputLogin)
         {
             InitializeComponent();
+
             userLogin = inputLogin;
             formController = new TeacherController(inputLogin);
         }
@@ -63,6 +64,16 @@ namespace ProjektBD.Forms
             checkForNewApplications();
 
             new ToolTip().SetToolTip(pictureBox2, "Wyloguj");
+
+            List<PrzedmiotDTO> subjectsList = formController.getSubjects();
+            List<PrzedmiotProwadzącegoDTO> mySubjectsList = formController.getMySubjects();
+
+            customListView1.fill<PrzedmiotDTO>(subjectsList);
+            customListView5.fill<PrzedmiotProwadzącegoDTO>(mySubjectsList);
+            customListView8.fill<PrzedmiotProwadzącegoDTO>(mySubjectsList);
+            customListView11.fill<PrzedmiotProwadzącegoDTO>(mySubjectsList);
+            customListView14.fill<PrzedmiotProwadzącegoDTO>(mySubjectsList);
+            customListView17.fill<PrzedmiotProwadzącegoDTO>(mySubjectsList);
         }
 
         //----------------------------------------------------------------
@@ -325,7 +336,71 @@ namespace ProjektBD.Forms
         #region Obsługa customListView'ów
         //----------------------------------------------------------------
 
+        #region listView1 (Podgląd -> Lista przedmiotów)
+        //----------------------------------------------------------------
 
+        private void customListView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (customListView1.SelectedItems.Count > 0)
+            {
+                string subjectName = e.Item.Text;
+
+                List<ProjektDTO> projectsList = formController.getProjects(subjectName);
+                List<StudentDTO> studentsList = formController.getStudentsFromSubject(subjectName);
+
+                customListView2.fill<ProjektDTO>(projectsList);
+                customListView3.fill<StudentDTO>(studentsList);
+            }
+            else
+            {
+                customListView2.Clear();
+                customListView3.Clear();
+            }
+        }
+
+        private void customListView1_Enter(object sender, EventArgs e)
+        {
+            if (customListView1.SelectedItems.Count > 0)
+            {
+                string subjectName = customListView1.SelectedItems[0].Text;
+
+                List<StudentDTO> studentsList = formController.getStudentsFromSubject(subjectName);
+                customListView3.fill<StudentDTO>(studentsList);
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region listView2 (Podgląd -> Lista projektów)
+        //----------------------------------------------------------------
+
+        private void customListView2_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (customListView2.SelectedItems.Count > 0)
+            {
+                List<StudentDTO> studentsList = formController.getStudentsFromProject(e.Item.Text);
+
+                customListView3.fill<StudentDTO>(studentsList);
+            }
+            else
+            {
+                List<StudentDTO> studentsList = formController.getStudentsFromSubject(customListView1.SelectedItems[0].Text);
+
+                customListView3.fill<StudentDTO>(studentsList);
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region listView5 (Moje przedmioty i projekty -> Lista przedmiotów)
+        //----------------------------------------------------------------
+
+
+
+        //----------------------------------------------------------------
+        #endregion
 
         //----------------------------------------------------------------
         #endregion
@@ -359,6 +434,19 @@ namespace ProjektBD.Forms
             DodajEdytujProjekt newForm = new DodajEdytujProjekt();
             newForm.ShowDialog();
             newForm.Dispose();
+        }
+
+        // Wyszukiwanie użytkownika
+        private void button13_Click(object sender, EventArgs e)
+        {
+            string loginFragment = textBox1.Text;
+
+            if (loginFragment != null)
+            {
+                List<UżytkownikDTO> usersList = formController.getUser(loginFragment);
+
+                customListView4.fill<UżytkownikDTO>(usersList);
+            }
         }
 
         //----------------------------------------------------------------

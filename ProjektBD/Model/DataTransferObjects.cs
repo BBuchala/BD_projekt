@@ -51,6 +51,13 @@ namespace ProjektBD.Model
         public string prowadzący { get; set; }
     }
 
+    class PrzedmiotProwadzącegoDTO
+    {
+        public string nazwa { get; set; }
+        public int liczbaStudentów { get; set; }
+        public int maxLiczbaStudentów { get; set; }
+    }
+
     class ProjektDTO
     {
         public string nazwa { get; set; }

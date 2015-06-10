@@ -17,8 +17,6 @@ namespace ProjektBD.Controllers
 
         public StudentController(string userName)
         {
-            //database = new StudentDatabase(userName);
-            //studDatabase = (database as StudentDatabase);
             database = usrDatabase = new StudentDatabase(userName);
             studDatabase = (usrDatabase as StudentDatabase);
         }

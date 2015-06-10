@@ -143,5 +143,38 @@ namespace ProjektBD.Databases
 
         //----------------------------------------------------------------
         #endregion
+
+        #region Pobieranie
+        //----------------------------------------------------------------
+
+        #region Przedmioty
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Pobiera przedmioty prowadzącego z bazy
+        /// </summary>
+        public List<PrzedmiotProwadzącegoDTO> getMySubjects()
+        {
+            var query = from prow in context.Prowadzący
+                            join subj in context.Przedmioty on prow.UżytkownikID equals subj.ProwadzącyID
+                            join ob in context.PrzedmiotyObieralne on prow.UżytkownikID equals ob.ProwadzącyID into obier
+
+                        from obierki in obier.DefaultIfEmpty()
+                        where prow.UżytkownikID == userID
+                        select new PrzedmiotProwadzącegoDTO
+                        {
+                            nazwa = subj.nazwa,
+                            liczbaStudentów = subj.liczbaStudentów,
+                            maxLiczbaStudentów = obierki.maxLiczbaStudentów
+                        };
+
+            return query.ToList();
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        //----------------------------------------------------------------
+        #endregion
     }
 }

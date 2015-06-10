@@ -122,8 +122,6 @@
             this.customListView6.UseCompatibleStateImageBehavior = false;
             this.customListView6.View = System.Windows.Forms.View.Details;
             this.customListView6.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView6_ItemSelectionChanged);
-            this.customListView6.Enter += new System.EventHandler(this.customListView6_Enter);
-            this.customListView6.Leave += new System.EventHandler(this.customListView6_Leave);
             // 
             // customListView3
             // 
@@ -139,7 +137,6 @@
             this.customListView3.View = System.Windows.Forms.View.Details;
             this.customListView3.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView3_ItemSelectionChanged);
             this.customListView3.Enter += new System.EventHandler(this.customListView3_Enter);
-            this.customListView3.Leave += new System.EventHandler(this.customListView3_Leave);
             // 
             // button2
             // 
@@ -230,8 +227,6 @@
             this.customListView4.UseCompatibleStateImageBehavior = false;
             this.customListView4.View = System.Windows.Forms.View.Details;
             this.customListView4.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView4_ItemSelectionChanged);
-            this.customListView4.Enter += new System.EventHandler(this.customListView4_Enter);
-            this.customListView4.Leave += new System.EventHandler(this.customListView4_Leave);
             // 
             // customListView1
             // 
@@ -247,7 +242,6 @@
             this.customListView1.View = System.Windows.Forms.View.Details;
             this.customListView1.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView1_ItemSelectionChanged);
             this.customListView1.Enter += new System.EventHandler(this.customListView1_Enter);
-            this.customListView1.Leave += new System.EventHandler(this.customListView1_Leave);
             // 
             // label17
             // 
@@ -377,8 +371,6 @@
             this.customListView5.UseCompatibleStateImageBehavior = false;
             this.customListView5.View = System.Windows.Forms.View.Details;
             this.customListView5.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView5_ItemSelectionChanged);
-            this.customListView5.Enter += new System.EventHandler(this.customListView5_Enter);
-            this.customListView5.Leave += new System.EventHandler(this.customListView5_Leave);
             // 
             // customListView2
             // 
@@ -394,7 +386,6 @@
             this.customListView2.View = System.Windows.Forms.View.Details;
             this.customListView2.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView2_ItemSelectionChanged);
             this.customListView2.Enter += new System.EventHandler(this.customListView2_Enter);
-            this.customListView2.Leave += new System.EventHandler(this.customListView2_Leave);
             // 
             // label4
             // 

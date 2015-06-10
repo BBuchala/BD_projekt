@@ -101,14 +101,7 @@ namespace ProjektBD.Forms
 
                 customListView4.fill<ProjektDTO>(projectsList);
                 customListView7.fill<StudentDTO>(studentsList);
-
-                customListView1.SelectedItems[0].BackColor = customListView1.previouslySelectedItemColor;
             }
-        }
-
-        private void customListView1_Leave(object sender, EventArgs e)
-        {
-            customListView1.saveItemState();
         }
 
         //---------------------
@@ -158,19 +151,12 @@ namespace ProjektBD.Forms
                 customListView5.fill<ProjektDTO>(myProjectsList);
                 customListView8.fill<OcenaDTO>(mySubjectGradesList);
 
-                customListView2.SelectedItems[0].BackColor = customListView2.previouslySelectedItemColor;
-
                 button6.Enabled = true;
 
                 gradeDictionary.Clear();
                 for (int i = 0; i < mySubjectGradesList.Count; i++)
                     gradeDictionary.Add(i, mySubjectGradesList[i].ocenaID);
             }
-        }
-
-        private void customListView2_Leave(object sender, EventArgs e)
-        {
-            customListView2.saveItemState();
         }
 
         //---------------------
@@ -199,13 +185,6 @@ namespace ProjektBD.Forms
         private void customListView3_Enter(object sender, EventArgs e)
         {
             button2.Enabled = false;
-
-            customListView3.loadItemState();
-        }
-
-        private void customListView3_Leave(object sender, EventArgs e)
-        {
-            customListView3.saveItemState();
         }
 
         //---------------------
@@ -230,15 +209,6 @@ namespace ProjektBD.Forms
             }
         }
 
-        private void customListView4_Enter(object sender, EventArgs e)
-        {
-            customListView4.loadItemState();
-        }
-
-        private void customListView4_Leave(object sender, EventArgs e)
-        {
-            customListView4.saveItemState();
-        }
         //---------------------
         #endregion
 
@@ -273,16 +243,6 @@ namespace ProjektBD.Forms
             }
         }
 
-        private void customListView5_Enter(object sender, EventArgs e)
-        {
-            customListView5.loadItemState();
-        }
-
-        private void customListView5_Leave(object sender, EventArgs e)
-        {
-            customListView5.saveItemState();
-        }
-
         //---------------------
         #endregion
 
@@ -295,16 +255,6 @@ namespace ProjektBD.Forms
                 button2.Enabled = true;
             else
                 button2.Enabled = false;
-        }
-
-        private void customListView6_Enter(object sender, EventArgs e)
-        {
-            customListView6.loadItemState();
-        }
-
-        private void customListView6_Leave(object sender, EventArgs e)
-        {
-            customListView6.saveItemState();
         }
 
         //---------------------
