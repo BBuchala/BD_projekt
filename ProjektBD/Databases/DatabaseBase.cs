@@ -27,11 +27,6 @@ namespace ProjektBD.Databases
         /// </summary>
         public bool connectionSuccessful = false;
 
-        /// <summary>
-        /// ID aktualnego użytkownika
-        /// </summary>
-        protected int userID;
-
         //----------------------------------------------------------------
         #endregion
 
@@ -116,6 +111,9 @@ namespace ProjektBD.Databases
         //----------------------------------------------------------------
         #endregion
 
+        #region Operacje na kontekście
+        //----------------------------------------------------------------
+
         /// <summary>
         /// Zapisuje zmiany dokonane w kontekście
         /// </summary>
@@ -133,5 +131,8 @@ namespace ProjektBD.Databases
             if (context != null)
                 context.Dispose();
         }
+
+        //----------------------------------------------------------------
+        #endregion
     }
 }

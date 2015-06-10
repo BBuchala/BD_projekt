@@ -77,7 +77,7 @@ namespace ProjektBD.Model
         public string stanowisko { get; set; }
     }
 
-    class OcenaDTO              // Komentarz pod PPM (MessageBox?)
+    class OcenaDTO
     {
         public string nazwaProjektu { get; set; }
         public double wartość { get; set; }

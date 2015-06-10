@@ -57,6 +57,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Custom Controls\customListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -74,6 +75,7 @@
     <Compile Include="Databases\RegistrationDatabase.cs" />
     <Compile Include="Databases\StudentDatabase.cs" />
     <Compile Include="Databases\TeacherDatabase.cs" />
+    <Compile Include="Databases\UserDatabase.cs" />
     <Compile Include="Exceptions\EmptyFieldException.cs" />
     <Compile Include="Exceptions\UsersOverlappingException.cs" />
     <Compile Include="Forms\AdministratorMain.cs">

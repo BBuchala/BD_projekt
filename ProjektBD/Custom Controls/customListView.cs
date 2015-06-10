@@ -20,6 +20,9 @@ namespace ProjektBD.Custom_Controls
     {
         public Color previouslySelectedItemColor = new Color();
 
+        /// <summary>
+        /// Typ danych przechowywanych przez kontrolkę
+        /// </summary>
         private listViewType dataType;
 
         /// <summary>

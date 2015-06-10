@@ -35,9 +35,6 @@
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.listView6 = new System.Windows.Forms.ListView();
-            this.listView5 = new System.Windows.Forms.ListView();
-            this.listView4 = new System.Windows.Forms.ListView();
             this.label27 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -46,18 +43,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.listView8 = new System.Windows.Forms.ListView();
             this.label9 = new System.Windows.Forms.Label();
-            this.listView7 = new System.Windows.Forms.ListView();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.button7 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.listView2 = new System.Windows.Forms.ListView();
-            this.listView9 = new System.Windows.Forms.ListView();
-            this.listView10 = new System.Windows.Forms.ListView();
             this.label12 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -76,26 +67,18 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.listView15 = new System.Windows.Forms.ListView();
-            this.listView14 = new System.Windows.Forms.ListView();
-            this.listView13 = new System.Windows.Forms.ListView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.listView11 = new System.Windows.Forms.ListView();
-            this.listView12 = new System.Windows.Forms.ListView();
-            this.listView16 = new System.Windows.Forms.ListView();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.listView17 = new System.Windows.Forms.ListView();
             this.button13 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button10 = new System.Windows.Forms.Button();
-            this.listView3 = new System.Windows.Forms.ListView();
             this.label5 = new System.Windows.Forms.Label();
             this.messageCount = new System.Windows.Forms.Label();
             this.notificationCount = new System.Windows.Forms.Label();
@@ -103,24 +86,35 @@
             this.zgłoszeniaNaProjektyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zgłoszeniaNaPrzedmiotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.messageImage = new System.Windows.Forms.PictureBox();
             this.notificationImage = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.label21 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.customListView3 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView2 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView1 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView4 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView7 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView6 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView5 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView10 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView9 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView8 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView13 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView12 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView11 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView16 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView15 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView14 = new ProjektBD.Custom_Controls.customListView();
+            this.customListView17 = new ProjektBD.Custom_Controls.customListView();
             this.tabPage2.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage7.SuspendLayout();
@@ -134,16 +128,11 @@
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.messageImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -152,7 +141,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.ForeColor = System.Drawing.Color.Brown;
-            this.label1.Location = new System.Drawing.Point(414, 11);
+            this.label1.Location = new System.Drawing.Point(414, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(352, 25);
             this.label1.TabIndex = 3;
@@ -184,10 +173,10 @@
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage7.Controls.Add(this.customListView10);
+            this.tabPage7.Controls.Add(this.customListView9);
+            this.tabPage7.Controls.Add(this.customListView8);
             this.tabPage7.Controls.Add(this.comboBox1);
-            this.tabPage7.Controls.Add(this.listView6);
-            this.tabPage7.Controls.Add(this.listView5);
-            this.tabPage7.Controls.Add(this.listView4);
             this.tabPage7.Controls.Add(this.label27);
             this.tabPage7.Controls.Add(this.textBox5);
             this.tabPage7.Controls.Add(this.label15);
@@ -217,30 +206,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(158, 21);
             this.comboBox1.TabIndex = 13;
-            // 
-            // listView6
-            // 
-            this.listView6.Location = new System.Drawing.Point(27, 51);
-            this.listView6.Name = "listView6";
-            this.listView6.Size = new System.Drawing.Size(275, 394);
-            this.listView6.TabIndex = 12;
-            this.listView6.UseCompatibleStateImageBehavior = false;
-            // 
-            // listView5
-            // 
-            this.listView5.Location = new System.Drawing.Point(333, 51);
-            this.listView5.Name = "listView5";
-            this.listView5.Size = new System.Drawing.Size(275, 394);
-            this.listView5.TabIndex = 11;
-            this.listView5.UseCompatibleStateImageBehavior = false;
-            // 
-            // listView4
-            // 
-            this.listView4.Location = new System.Drawing.Point(640, 51);
-            this.listView4.Name = "listView4";
-            this.listView4.Size = new System.Drawing.Size(275, 394);
-            this.listView4.TabIndex = 10;
-            this.listView4.UseCompatibleStateImageBehavior = false;
             // 
             // label27
             // 
@@ -314,10 +279,10 @@
             // tabPage8
             // 
             this.tabPage8.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage8.Controls.Add(this.listView8);
+            this.tabPage8.Controls.Add(this.customListView13);
+            this.tabPage8.Controls.Add(this.customListView12);
+            this.tabPage8.Controls.Add(this.customListView11);
             this.tabPage8.Controls.Add(this.label9);
-            this.tabPage8.Controls.Add(this.listView7);
-            this.tabPage8.Controls.Add(this.listView1);
             this.tabPage8.Controls.Add(this.button7);
             this.tabPage8.Controls.Add(this.label10);
             this.tabPage8.Controls.Add(this.label11);
@@ -328,14 +293,6 @@
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "Usuń";
             // 
-            // listView8
-            // 
-            this.listView8.Location = new System.Drawing.Point(390, 53);
-            this.listView8.Name = "listView8";
-            this.listView8.Size = new System.Drawing.Size(286, 394);
-            this.listView8.TabIndex = 13;
-            this.listView8.UseCompatibleStateImageBehavior = false;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -345,22 +302,6 @@
             this.label9.Size = new System.Drawing.Size(138, 18);
             this.label9.TabIndex = 12;
             this.label9.Text = "Wybierz studenta";
-            // 
-            // listView7
-            // 
-            this.listView7.Location = new System.Drawing.Point(47, 53);
-            this.listView7.Name = "listView7";
-            this.listView7.Size = new System.Drawing.Size(286, 394);
-            this.listView7.TabIndex = 11;
-            this.listView7.UseCompatibleStateImageBehavior = false;
-            // 
-            // listView1
-            // 
-            this.listView1.Location = new System.Drawing.Point(736, 113);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(337, 263);
-            this.listView1.TabIndex = 10;
-            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // button7
             // 
@@ -396,10 +337,10 @@
             // tabPage9
             // 
             this.tabPage9.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage9.Controls.Add(this.customListView16);
+            this.tabPage9.Controls.Add(this.customListView15);
+            this.tabPage9.Controls.Add(this.customListView14);
             this.tabPage9.Controls.Add(this.comboBox2);
-            this.tabPage9.Controls.Add(this.listView2);
-            this.tabPage9.Controls.Add(this.listView9);
-            this.tabPage9.Controls.Add(this.listView10);
             this.tabPage9.Controls.Add(this.label12);
             this.tabPage9.Controls.Add(this.textBox3);
             this.tabPage9.Controls.Add(this.label13);
@@ -429,30 +370,6 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(158, 21);
             this.comboBox2.TabIndex = 24;
-            // 
-            // listView2
-            // 
-            this.listView2.Location = new System.Drawing.Point(27, 51);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(275, 394);
-            this.listView2.TabIndex = 23;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            // 
-            // listView9
-            // 
-            this.listView9.Location = new System.Drawing.Point(333, 51);
-            this.listView9.Name = "listView9";
-            this.listView9.Size = new System.Drawing.Size(275, 394);
-            this.listView9.TabIndex = 22;
-            this.listView9.UseCompatibleStateImageBehavior = false;
-            // 
-            // listView10
-            // 
-            this.listView10.Location = new System.Drawing.Point(640, 51);
-            this.listView10.Name = "listView10";
-            this.listView10.Size = new System.Drawing.Size(275, 394);
-            this.listView10.TabIndex = 21;
-            this.listView10.UseCompatibleStateImageBehavior = false;
             // 
             // label12
             // 
@@ -526,6 +443,9 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.customListView7);
+            this.tabPage1.Controls.Add(this.customListView6);
+            this.tabPage1.Controls.Add(this.customListView5);
             this.tabPage1.Controls.Add(this.button9);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
@@ -536,9 +456,6 @@
             this.tabPage1.Controls.Add(this.button5);
             this.tabPage1.Controls.Add(this.button4);
             this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.listView15);
-            this.tabPage1.Controls.Add(this.listView14);
-            this.tabPage1.Controls.Add(this.listView13);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -643,37 +560,13 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // listView15
-            // 
-            this.listView15.Location = new System.Drawing.Point(44, 52);
-            this.listView15.Name = "listView15";
-            this.listView15.Size = new System.Drawing.Size(307, 317);
-            this.listView15.TabIndex = 2;
-            this.listView15.UseCompatibleStateImageBehavior = false;
-            // 
-            // listView14
-            // 
-            this.listView14.Location = new System.Drawing.Point(773, 52);
-            this.listView14.Name = "listView14";
-            this.listView14.Size = new System.Drawing.Size(307, 317);
-            this.listView14.TabIndex = 1;
-            this.listView14.UseCompatibleStateImageBehavior = false;
-            // 
-            // listView13
-            // 
-            this.listView13.Location = new System.Drawing.Point(411, 52);
-            this.listView13.Name = "listView13";
-            this.listView13.Size = new System.Drawing.Size(307, 317);
-            this.listView13.TabIndex = 0;
-            this.listView13.UseCompatibleStateImageBehavior = false;
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(12, 53);
+            this.tabControl1.Location = new System.Drawing.Point(13, 83);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1141, 540);
@@ -682,9 +575,9 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage4.Controls.Add(this.listView11);
-            this.tabPage4.Controls.Add(this.listView12);
-            this.tabPage4.Controls.Add(this.listView16);
+            this.tabPage4.Controls.Add(this.customListView3);
+            this.tabPage4.Controls.Add(this.customListView2);
+            this.tabPage4.Controls.Add(this.customListView1);
             this.tabPage4.Controls.Add(this.label17);
             this.tabPage4.Controls.Add(this.label18);
             this.tabPage4.Controls.Add(this.label19);
@@ -694,30 +587,6 @@
             this.tabPage4.Size = new System.Drawing.Size(1133, 514);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Podgląd";
-            // 
-            // listView11
-            // 
-            this.listView11.Location = new System.Drawing.Point(17, 51);
-            this.listView11.Name = "listView11";
-            this.listView11.Size = new System.Drawing.Size(275, 437);
-            this.listView11.TabIndex = 26;
-            this.listView11.UseCompatibleStateImageBehavior = false;
-            // 
-            // listView12
-            // 
-            this.listView12.Location = new System.Drawing.Point(313, 51);
-            this.listView12.Name = "listView12";
-            this.listView12.Size = new System.Drawing.Size(275, 437);
-            this.listView12.TabIndex = 25;
-            this.listView12.UseCompatibleStateImageBehavior = false;
-            // 
-            // listView16
-            // 
-            this.listView16.Location = new System.Drawing.Point(609, 51);
-            this.listView16.Name = "listView16";
-            this.listView16.Size = new System.Drawing.Size(275, 437);
-            this.listView16.TabIndex = 24;
-            this.listView16.UseCompatibleStateImageBehavior = false;
             // 
             // label17
             // 
@@ -751,7 +620,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.listView17);
+            this.groupBox2.Controls.Add(this.customListView4);
             this.groupBox2.Controls.Add(this.button13);
             this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Controls.Add(this.label20);
@@ -761,14 +630,6 @@
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Wyszukiwanie użytkownika";
-            // 
-            // listView17
-            // 
-            this.listView17.Location = new System.Drawing.Point(9, 158);
-            this.listView17.Name = "listView17";
-            this.listView17.Size = new System.Drawing.Size(174, 265);
-            this.listView17.TabIndex = 3;
-            this.listView17.UseCompatibleStateImageBehavior = false;
             // 
             // button13
             // 
@@ -789,12 +650,12 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label20.Location = new System.Drawing.Point(6, 43);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(167, 15);
+            this.label20.Size = new System.Drawing.Size(176, 13);
             this.label20.TabIndex = 0;
-            this.label20.Text = "Podaj imię lub nazwisko:";
+            this.label20.Text = "Podaj login lub jego fragment:";
             // 
             // tabPage3
             // 
@@ -808,8 +669,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.customListView17);
             this.groupBox1.Controls.Add(this.button10);
-            this.groupBox1.Controls.Add(this.listView3);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Location = new System.Drawing.Point(205, 36);
             this.groupBox1.Name = "groupBox1";
@@ -826,14 +687,6 @@
             this.button10.TabIndex = 2;
             this.button10.Text = "Generuj raport";
             this.button10.UseVisualStyleBackColor = true;
-            // 
-            // listView3
-            // 
-            this.listView3.Location = new System.Drawing.Point(205, 80);
-            this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(309, 282);
-            this.listView3.TabIndex = 1;
-            this.listView3.UseCompatibleStateImageBehavior = false;
             // 
             // label5
             // 
@@ -852,7 +705,7 @@
             this.messageCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.messageCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.messageCount.ForeColor = System.Drawing.Color.Red;
-            this.messageCount.Location = new System.Drawing.Point(134, 20);
+            this.messageCount.Location = new System.Drawing.Point(116, 20);
             this.messageCount.Name = "messageCount";
             this.messageCount.Size = new System.Drawing.Size(19, 20);
             this.messageCount.TabIndex = 21;
@@ -867,7 +720,7 @@
             this.notificationCount.ContextMenuStrip = this.contextMenuStrip1;
             this.notificationCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.notificationCount.ForeColor = System.Drawing.Color.Red;
-            this.notificationCount.Location = new System.Drawing.Point(207, 19);
+            this.notificationCount.Location = new System.Drawing.Point(189, 19);
             this.notificationCount.Name = "notificationCount";
             this.notificationCount.Size = new System.Drawing.Size(19, 20);
             this.notificationCount.TabIndex = 0;
@@ -905,25 +758,15 @@
             this.panel1.Controls.Add(this.messageImage);
             this.panel1.Controls.Add(this.notificationCount);
             this.panel1.Controls.Add(this.notificationImage);
-            this.panel1.Location = new System.Drawing.Point(855, 11);
+            this.panel1.Location = new System.Drawing.Point(878, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(248, 50);
+            this.panel1.Size = new System.Drawing.Size(217, 41);
             this.panel1.TabIndex = 21;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::ProjektBD.Properties.Resources.logout;
-            this.pictureBox2.Location = new System.Drawing.Point(1109, 11);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox2.TabIndex = 22;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ProjektBD.Properties.Resources.help;
-            this.pictureBox1.Location = new System.Drawing.Point(27, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(9, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(40, 40);
             this.pictureBox1.TabIndex = 22;
@@ -933,7 +776,7 @@
             // messageImage
             // 
             this.messageImage.Image = global::ProjektBD.Properties.Resources.mail2;
-            this.messageImage.Location = new System.Drawing.Point(100, 0);
+            this.messageImage.Location = new System.Drawing.Point(82, 0);
             this.messageImage.Name = "messageImage";
             this.messageImage.Size = new System.Drawing.Size(40, 40);
             this.messageImage.TabIndex = 20;
@@ -943,12 +786,22 @@
             // 
             this.notificationImage.ContextMenuStrip = this.contextMenuStrip1;
             this.notificationImage.Image = global::ProjektBD.Properties.Resources.znak2;
-            this.notificationImage.Location = new System.Drawing.Point(173, 0);
+            this.notificationImage.Location = new System.Drawing.Point(155, 0);
             this.notificationImage.Name = "notificationImage";
             this.notificationImage.Size = new System.Drawing.Size(40, 40);
             this.notificationImage.TabIndex = 20;
             this.notificationImage.TabStop = false;
             this.notificationImage.Click += new System.EventHandler(this.notificationImage_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::ProjektBD.Properties.Resources.logout;
+            this.pictureBox2.Location = new System.Drawing.Point(1110, 28);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox2.TabIndex = 22;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // toolStrip1
             // 
@@ -995,112 +848,258 @@
             this.toolStripLabel3.Text = "O projekcie";
             this.toolStripLabel3.Click += new System.EventHandler(this.toolStripLabel3_Click);
             // 
-            // label21
+            // label24
             // 
-            this.label21.AutoSize = true;
-            this.label21.BackColor = System.Drawing.Color.Transparent;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label21.ForeColor = System.Drawing.Color.Brown;
-            this.label21.Location = new System.Drawing.Point(414, 25);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(352, 25);
-            this.label21.TabIndex = 3;
-            this.label21.Text = "Panel sterowania prowadzącego";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(10, 46);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(91, 13);
+            this.label24.TabIndex = 24;
+            this.label24.Text = "Zalogowany jako:";
             // 
-            // panel2
+            // label25
             // 
-            this.panel2.Controls.Add(this.pictureBox3);
-            this.panel2.Controls.Add(this.label22);
-            this.panel2.Controls.Add(this.pictureBox4);
-            this.panel2.Controls.Add(this.label23);
-            this.panel2.Controls.Add(this.pictureBox5);
-            this.panel2.Location = new System.Drawing.Point(855, 25);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(248, 44);
-            this.panel2.TabIndex = 21;
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label25.Location = new System.Drawing.Point(99, 46);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(34, 13);
+            this.label25.TabIndex = 25;
+            this.label25.Text = "login";
             // 
-            // pictureBox3
+            // customListView3
             // 
-            this.pictureBox3.Image = global::ProjektBD.Properties.Resources.help;
-            this.pictureBox3.Location = new System.Drawing.Point(27, 0);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox3.TabIndex = 22;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.customListView3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView3.FullRowSelect = true;
+            this.customListView3.GridLines = true;
+            this.customListView3.Location = new System.Drawing.Point(609, 51);
+            this.customListView3.MultiSelect = false;
+            this.customListView3.Name = "customListView3";
+            this.customListView3.Size = new System.Drawing.Size(275, 437);
+            this.customListView3.TabIndex = 29;
+            this.customListView3.UseCompatibleStateImageBehavior = false;
+            this.customListView3.View = System.Windows.Forms.View.Details;
             // 
-            // label22
+            // customListView2
             // 
-            this.label22.AutoSize = true;
-            this.label22.BackColor = System.Drawing.Color.White;
-            this.label22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label22.ForeColor = System.Drawing.Color.Red;
-            this.label22.Location = new System.Drawing.Point(134, 20);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(19, 20);
-            this.label22.TabIndex = 21;
-            this.label22.Text = "0";
-            this.label22.Visible = false;
+            this.customListView2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView2.FullRowSelect = true;
+            this.customListView2.GridLines = true;
+            this.customListView2.Location = new System.Drawing.Point(313, 51);
+            this.customListView2.MultiSelect = false;
+            this.customListView2.Name = "customListView2";
+            this.customListView2.Size = new System.Drawing.Size(275, 437);
+            this.customListView2.TabIndex = 28;
+            this.customListView2.UseCompatibleStateImageBehavior = false;
+            this.customListView2.View = System.Windows.Forms.View.Details;
             // 
-            // pictureBox4
+            // customListView1
             // 
-            this.pictureBox4.Image = global::ProjektBD.Properties.Resources.mail2;
-            this.pictureBox4.Location = new System.Drawing.Point(100, 0);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox4.TabIndex = 20;
-            this.pictureBox4.TabStop = false;
+            this.customListView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView1.FullRowSelect = true;
+            this.customListView1.GridLines = true;
+            this.customListView1.Location = new System.Drawing.Point(17, 51);
+            this.customListView1.MultiSelect = false;
+            this.customListView1.Name = "customListView1";
+            this.customListView1.Size = new System.Drawing.Size(275, 437);
+            this.customListView1.TabIndex = 27;
+            this.customListView1.UseCompatibleStateImageBehavior = false;
+            this.customListView1.View = System.Windows.Forms.View.Details;
             // 
-            // label23
+            // customListView4
             // 
-            this.label23.AutoSize = true;
-            this.label23.BackColor = System.Drawing.Color.Transparent;
-            this.label23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label23.ForeColor = System.Drawing.Color.Red;
-            this.label23.Location = new System.Drawing.Point(207, 19);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(19, 20);
-            this.label23.TabIndex = 0;
-            this.label23.Text = "0";
-            this.label23.Visible = false;
-            this.label23.ContextMenuStripChanged += new System.EventHandler(this.notificationCount_Click);
+            this.customListView4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView4.FullRowSelect = true;
+            this.customListView4.GridLines = true;
+            this.customListView4.Location = new System.Drawing.Point(9, 158);
+            this.customListView4.MultiSelect = false;
+            this.customListView4.Name = "customListView4";
+            this.customListView4.Size = new System.Drawing.Size(174, 265);
+            this.customListView4.TabIndex = 4;
+            this.customListView4.UseCompatibleStateImageBehavior = false;
+            this.customListView4.View = System.Windows.Forms.View.Details;
             // 
-            // pictureBox5
+            // customListView7
             // 
-            this.pictureBox5.Image = global::ProjektBD.Properties.Resources.znak2;
-            this.pictureBox5.Location = new System.Drawing.Point(173, 0);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox5.TabIndex = 20;
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.Click += new System.EventHandler(this.notificationImage_Click);
+            this.customListView7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView7.FullRowSelect = true;
+            this.customListView7.GridLines = true;
+            this.customListView7.Location = new System.Drawing.Point(773, 52);
+            this.customListView7.MultiSelect = false;
+            this.customListView7.Name = "customListView7";
+            this.customListView7.Size = new System.Drawing.Size(307, 317);
+            this.customListView7.TabIndex = 17;
+            this.customListView7.UseCompatibleStateImageBehavior = false;
+            this.customListView7.View = System.Windows.Forms.View.Details;
             // 
-            // pictureBox6
+            // customListView6
             // 
-            this.pictureBox6.Image = global::ProjektBD.Properties.Resources.logout;
-            this.pictureBox6.Location = new System.Drawing.Point(1109, 25);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox6.TabIndex = 22;
-            this.pictureBox6.TabStop = false;
-            this.pictureBox6.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.customListView6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView6.FullRowSelect = true;
+            this.customListView6.GridLines = true;
+            this.customListView6.Location = new System.Drawing.Point(411, 52);
+            this.customListView6.MultiSelect = false;
+            this.customListView6.Name = "customListView6";
+            this.customListView6.Size = new System.Drawing.Size(307, 317);
+            this.customListView6.TabIndex = 16;
+            this.customListView6.UseCompatibleStateImageBehavior = false;
+            this.customListView6.View = System.Windows.Forms.View.Details;
+            // 
+            // customListView5
+            // 
+            this.customListView5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView5.FullRowSelect = true;
+            this.customListView5.GridLines = true;
+            this.customListView5.Location = new System.Drawing.Point(44, 52);
+            this.customListView5.MultiSelect = false;
+            this.customListView5.Name = "customListView5";
+            this.customListView5.Size = new System.Drawing.Size(307, 317);
+            this.customListView5.TabIndex = 15;
+            this.customListView5.UseCompatibleStateImageBehavior = false;
+            this.customListView5.View = System.Windows.Forms.View.Details;
+            // 
+            // customListView10
+            // 
+            this.customListView10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView10.FullRowSelect = true;
+            this.customListView10.GridLines = true;
+            this.customListView10.Location = new System.Drawing.Point(640, 52);
+            this.customListView10.MultiSelect = false;
+            this.customListView10.Name = "customListView10";
+            this.customListView10.Size = new System.Drawing.Size(275, 393);
+            this.customListView10.TabIndex = 16;
+            this.customListView10.UseCompatibleStateImageBehavior = false;
+            this.customListView10.View = System.Windows.Forms.View.Details;
+            // 
+            // customListView9
+            // 
+            this.customListView9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView9.FullRowSelect = true;
+            this.customListView9.GridLines = true;
+            this.customListView9.Location = new System.Drawing.Point(333, 52);
+            this.customListView9.MultiSelect = false;
+            this.customListView9.Name = "customListView9";
+            this.customListView9.Size = new System.Drawing.Size(275, 393);
+            this.customListView9.TabIndex = 15;
+            this.customListView9.UseCompatibleStateImageBehavior = false;
+            this.customListView9.View = System.Windows.Forms.View.Details;
+            // 
+            // customListView8
+            // 
+            this.customListView8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView8.FullRowSelect = true;
+            this.customListView8.GridLines = true;
+            this.customListView8.Location = new System.Drawing.Point(27, 52);
+            this.customListView8.MultiSelect = false;
+            this.customListView8.Name = "customListView8";
+            this.customListView8.Size = new System.Drawing.Size(275, 393);
+            this.customListView8.TabIndex = 14;
+            this.customListView8.UseCompatibleStateImageBehavior = false;
+            this.customListView8.View = System.Windows.Forms.View.Details;
+            // 
+            // customListView13
+            // 
+            this.customListView13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView13.FullRowSelect = true;
+            this.customListView13.GridLines = true;
+            this.customListView13.Location = new System.Drawing.Point(736, 113);
+            this.customListView13.MultiSelect = false;
+            this.customListView13.Name = "customListView13";
+            this.customListView13.Size = new System.Drawing.Size(337, 263);
+            this.customListView13.TabIndex = 16;
+            this.customListView13.UseCompatibleStateImageBehavior = false;
+            this.customListView13.View = System.Windows.Forms.View.Details;
+            // 
+            // customListView12
+            // 
+            this.customListView12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView12.FullRowSelect = true;
+            this.customListView12.GridLines = true;
+            this.customListView12.Location = new System.Drawing.Point(390, 53);
+            this.customListView12.MultiSelect = false;
+            this.customListView12.Name = "customListView12";
+            this.customListView12.Size = new System.Drawing.Size(286, 394);
+            this.customListView12.TabIndex = 15;
+            this.customListView12.UseCompatibleStateImageBehavior = false;
+            this.customListView12.View = System.Windows.Forms.View.Details;
+            // 
+            // customListView11
+            // 
+            this.customListView11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView11.FullRowSelect = true;
+            this.customListView11.GridLines = true;
+            this.customListView11.Location = new System.Drawing.Point(47, 53);
+            this.customListView11.MultiSelect = false;
+            this.customListView11.Name = "customListView11";
+            this.customListView11.Size = new System.Drawing.Size(286, 394);
+            this.customListView11.TabIndex = 14;
+            this.customListView11.UseCompatibleStateImageBehavior = false;
+            this.customListView11.View = System.Windows.Forms.View.Details;
+            // 
+            // customListView16
+            // 
+            this.customListView16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView16.FullRowSelect = true;
+            this.customListView16.GridLines = true;
+            this.customListView16.Location = new System.Drawing.Point(640, 52);
+            this.customListView16.MultiSelect = false;
+            this.customListView16.Name = "customListView16";
+            this.customListView16.Size = new System.Drawing.Size(275, 393);
+            this.customListView16.TabIndex = 27;
+            this.customListView16.UseCompatibleStateImageBehavior = false;
+            this.customListView16.View = System.Windows.Forms.View.Details;
+            // 
+            // customListView15
+            // 
+            this.customListView15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView15.FullRowSelect = true;
+            this.customListView15.GridLines = true;
+            this.customListView15.Location = new System.Drawing.Point(333, 52);
+            this.customListView15.MultiSelect = false;
+            this.customListView15.Name = "customListView15";
+            this.customListView15.Size = new System.Drawing.Size(275, 393);
+            this.customListView15.TabIndex = 26;
+            this.customListView15.UseCompatibleStateImageBehavior = false;
+            this.customListView15.View = System.Windows.Forms.View.Details;
+            // 
+            // customListView14
+            // 
+            this.customListView14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView14.FullRowSelect = true;
+            this.customListView14.GridLines = true;
+            this.customListView14.Location = new System.Drawing.Point(27, 51);
+            this.customListView14.MultiSelect = false;
+            this.customListView14.Name = "customListView14";
+            this.customListView14.Size = new System.Drawing.Size(275, 395);
+            this.customListView14.TabIndex = 25;
+            this.customListView14.UseCompatibleStateImageBehavior = false;
+            this.customListView14.View = System.Windows.Forms.View.Details;
+            // 
+            // customListView17
+            // 
+            this.customListView17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.customListView17.FullRowSelect = true;
+            this.customListView17.GridLines = true;
+            this.customListView17.Location = new System.Drawing.Point(205, 80);
+            this.customListView17.MultiSelect = false;
+            this.customListView17.Name = "customListView17";
+            this.customListView17.Size = new System.Drawing.Size(309, 282);
+            this.customListView17.TabIndex = 3;
+            this.customListView17.UseCompatibleStateImageBehavior = false;
+            this.customListView17.View = System.Windows.Forms.View.Details;
             // 
             // ProwadzacyMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1165, 605);
+            this.ClientSize = new System.Drawing.Size(1165, 635);
+            this.Controls.Add(this.label25);
+            this.Controls.Add(this.label24);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.label21);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1131,18 +1130,12 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.messageImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1155,9 +1148,6 @@
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ListView listView6;
-        private System.Windows.Forms.ListView listView5;
-        private System.Windows.Forms.ListView listView4;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label15;
@@ -1166,18 +1156,12 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TabPage tabPage8;
-        private System.Windows.Forms.ListView listView8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ListView listView7;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TabPage tabPage9;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ListView listView2;
-        private System.Windows.Forms.ListView listView9;
-        private System.Windows.Forms.ListView listView10;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label13;
@@ -1195,26 +1179,18 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ListView listView15;
-        private System.Windows.Forms.ListView listView14;
-        private System.Windows.Forms.ListView listView13;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.ListView listView3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.ListView listView11;
-        private System.Windows.Forms.ListView listView12;
-        private System.Windows.Forms.ListView listView16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.ListView listView17;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label messageCount;
@@ -1233,13 +1209,24 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox6;
+        private Custom_Controls.customListView customListView3;
+        private Custom_Controls.customListView customListView2;
+        private Custom_Controls.customListView customListView1;
+        private Custom_Controls.customListView customListView4;
+        private Custom_Controls.customListView customListView10;
+        private Custom_Controls.customListView customListView9;
+        private Custom_Controls.customListView customListView8;
+        private Custom_Controls.customListView customListView13;
+        private Custom_Controls.customListView customListView12;
+        private Custom_Controls.customListView customListView11;
+        private Custom_Controls.customListView customListView16;
+        private Custom_Controls.customListView customListView15;
+        private Custom_Controls.customListView customListView14;
+        private Custom_Controls.customListView customListView7;
+        private Custom_Controls.customListView customListView6;
+        private Custom_Controls.customListView customListView5;
+        private Custom_Controls.customListView customListView17;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
     }
 }

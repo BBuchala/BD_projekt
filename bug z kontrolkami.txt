@@ -1,0 +1,1 @@
+Tools > Options > Windows Forms Designer > General -> AutoToolboxPopulate: True

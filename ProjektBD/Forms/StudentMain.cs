@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using ProjektBD.Controllers;
@@ -23,7 +22,7 @@ namespace ProjektBD.Forms
         /// <summary>
         /// Login zalogowanego użytkownika, można używać do wyszukiwania.
         /// </summary>
-        private string userLogin;
+        private string studentLogin;
 
         private bool close = false;
 
@@ -40,7 +39,8 @@ namespace ProjektBD.Forms
         public StudentMain(string inputLogin)
         {
             InitializeComponent();
-            userLogin = inputLogin;
+
+            studentLogin = inputLogin;
             formController = new StudentController(inputLogin);
         }
 
@@ -51,7 +51,7 @@ namespace ProjektBD.Forms
 
         private void StudentMain_Load(object sender, EventArgs e)
         {
-            label8.Text = userLogin;
+            label8.Text = studentLogin;
 
             new ToolTip().SetToolTip(pictureBox2, "Wyloguj");
 
@@ -124,7 +124,7 @@ namespace ProjektBD.Forms
                 string subjectName = e.Item.Text;
 
                 List<ProjektDTO> myProjectsList = formController.getMyProjects(subjectName);
-                List<OcenaDTO> mySubjectGradesList = formController.getGradesFromSubject(subjectName);
+                List<OcenaDTO> mySubjectGradesList = formController.getGradesFromSubject(studentLogin, subjectName);
 
                 customListView5.fill<ProjektDTO>(myProjectsList);
                 customListView8.fill<OcenaDTO>(mySubjectGradesList);
@@ -153,7 +153,7 @@ namespace ProjektBD.Forms
                 string selectedSubjectName = customListView2.SelectedItems[0].Text;
 
                 List<ProjektDTO> myProjectsList = formController.getMyProjects(selectedSubjectName);            // do wywalenia?
-                List<OcenaDTO> mySubjectGradesList = formController.getGradesFromSubject(selectedSubjectName);
+                List<OcenaDTO> mySubjectGradesList = formController.getGradesFromSubject(studentLogin, selectedSubjectName);
 
                 customListView5.fill<ProjektDTO>(myProjectsList);
                 customListView8.fill<OcenaDTO>(mySubjectGradesList);
@@ -263,7 +263,7 @@ namespace ProjektBD.Forms
             {
                 button3.Enabled = false;
 
-                List<OcenaDTO> mySubjectGradesList = formController.getGradesFromSubject( customListView2.SelectedItems[0].Text );
+                List<OcenaDTO> mySubjectGradesList = formController.getGradesFromSubject(studentLogin, customListView2.SelectedItems[0].Text);
 
                 customListView8.fill<OcenaDTO>(mySubjectGradesList);
 
@@ -330,7 +330,7 @@ namespace ProjektBD.Forms
         //----------------------------------------------------------------
         #endregion
 
-        #region Buttony i zarządzanie kontem
+        #region Buttony
         //----------------------------------------------------------------
 
         // Zapisanie na przedmiot
@@ -359,7 +359,7 @@ namespace ProjektBD.Forms
         {
             string subjectName = customListView2.SelectedItems[0].Text;
 
-            formController.RemoveFromSubject(subjectName);
+            formController.RemoveFromSubject(studentLogin, subjectName);
 
             customListView2.fill<PrzedmiotDTO>( formController.getMySubjects() );           // refresh
             customListView5.Clear();
@@ -393,7 +393,7 @@ namespace ProjektBD.Forms
             string subjectName = customListView2.SelectedItems[0].Text;
             string projectName = customListView5.SelectedItems[0].Text;
 
-            formController.RemoveFromProject(projectName);
+            formController.RemoveFromProject(studentLogin, projectName);
 
             customListView5.fill<ProjektDTO>( formController.getMyProjects(subjectName) );        // refresh
             customListView8.Clear();
@@ -436,7 +436,7 @@ namespace ProjektBD.Forms
         // Zarządzanie kontem
         private void toolStripLabel1_Click(object sender, EventArgs e)
         {
-            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem(userLogin);
+            Zarządzanie_Kontem newForm = new Zarządzanie_Kontem(studentLogin);
             newForm.ShowDialog();
 
             if (newForm.close == true)

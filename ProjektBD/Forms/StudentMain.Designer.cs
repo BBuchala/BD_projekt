@@ -69,6 +69,8 @@
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.messageImage = new System.Windows.Forms.PictureBox();
+            this.messageCount = new System.Windows.Forms.Label();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -77,6 +79,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.messageImage)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -450,7 +453,7 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Location = new System.Drawing.Point(13, 88);
+            this.tabControl1.Location = new System.Drawing.Point(13, 83);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1141, 540);
@@ -479,7 +482,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ProjektBD.Properties.Resources.help;
-            this.pictureBox1.Location = new System.Drawing.Point(1046, 31);
+            this.pictureBox1.Location = new System.Drawing.Point(963, 28);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(40, 40);
             this.pictureBox1.TabIndex = 24;
@@ -489,7 +492,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::ProjektBD.Properties.Resources.logout;
-            this.pictureBox2.Location = new System.Drawing.Point(1110, 31);
+            this.pictureBox2.Location = new System.Drawing.Point(1110, 28);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(40, 40);
             this.pictureBox2.TabIndex = 21;
@@ -541,11 +544,36 @@
             this.toolStripLabel3.Text = "O programie";
             this.toolStripLabel3.Click += new System.EventHandler(this.toolStripLabel3_Click);
             // 
+            // messageImage
+            // 
+            this.messageImage.Image = global::ProjektBD.Properties.Resources.mail2;
+            this.messageImage.Location = new System.Drawing.Point(1033, 28);
+            this.messageImage.Name = "messageImage";
+            this.messageImage.Size = new System.Drawing.Size(40, 40);
+            this.messageImage.TabIndex = 26;
+            this.messageImage.TabStop = false;
+            // 
+            // messageCount
+            // 
+            this.messageCount.AutoSize = true;
+            this.messageCount.BackColor = System.Drawing.Color.White;
+            this.messageCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.messageCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.messageCount.ForeColor = System.Drawing.Color.Red;
+            this.messageCount.Location = new System.Drawing.Point(1063, 48);
+            this.messageCount.Name = "messageCount";
+            this.messageCount.Size = new System.Drawing.Size(19, 20);
+            this.messageCount.TabIndex = 27;
+            this.messageCount.Text = "0";
+            this.messageCount.Visible = false;
+            // 
             // StudentMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1165, 635);
+            this.Controls.Add(this.messageCount);
+            this.Controls.Add(this.messageImage);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label8);
@@ -574,6 +602,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.messageImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -621,5 +650,7 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.PictureBox messageImage;
+        private System.Windows.Forms.Label messageCount;
     }
 }

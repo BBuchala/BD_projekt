@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ProjektBD.Utilities
 {
-    /// <summary>
-    /// Pobiera atrybuty do wyświetlenia w customListView'ie.
-    /// </summary>
     static class ExtensionMethods
     {
+        /// <summary>
+        /// Pobiera atrybuty do wyświetlenia w customListView'ie.
+        /// </summary>
         public static PropertyInfo[] GetPropertiesForListView(this Type type)
         {
             return type.GetProperties()

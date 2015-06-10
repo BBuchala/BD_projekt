@@ -43,8 +43,8 @@ namespace ProjektBD.Forms
         public ProwadzacyMain(string inputLogin)
         {
             InitializeComponent();
-            formController = new TeacherController();
             userLogin = inputLogin;
+            formController = new TeacherController(inputLogin);
         }
 
         //----------------------------------------------------------------
@@ -57,6 +57,8 @@ namespace ProjektBD.Forms
         {
             if (formController.connectToDatabase())
                 this.Close();
+
+            label25.Text = userLogin;
 
             checkForNewApplications();
 
@@ -320,6 +322,14 @@ namespace ProjektBD.Forms
         //----------------------------------------------------------------
         #endregion    
         
+        #region Obsługa customListView'ów
+        //----------------------------------------------------------------
+
+
+
+        //----------------------------------------------------------------
+        #endregion
+
         #region Buttony
         //----------------------------------------------------------------
 

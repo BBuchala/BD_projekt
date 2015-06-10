@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 using ProjektBD.Databases;
 using ProjektBD.Model;
@@ -12,9 +11,10 @@ namespace ProjektBD.Controllers
     /// <summary>
     /// Kontroler dla formularza prowadzącego
     /// </summary>
-    class TeacherController : Controller
+    class TeacherController : UserController
     {
-        #region Field & Constructor
+        #region Pola i konstruktor
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Klasa z bazodanowymi metodami prowadzącego
@@ -24,15 +24,19 @@ namespace ProjektBD.Controllers
         /// <summary>
         /// Konstruktor, zrzutowanie database na odpowiedni typ.
         /// </summary>
-        public TeacherController()
+        public TeacherController(string teacherLogin)
         {
-            database = new TeacherDatabase();
-            teacherdb = (database as TeacherDatabase);
+            //database = new TeacherDatabase(teacherLogin);
+            //teacherdb = (database as TeacherDatabase);
+            database = usrDatabase = new TeacherDatabase(teacherLogin);
+            teacherdb = (usrDatabase as TeacherDatabase);
         }
 
+        //----------------------------------------------------------------
         #endregion
 
-        #region Methods
+        #region Zgłoszenia
+        //----------------------------------------------------------------
 
         /// <summary>
         /// Pobieranie zgłoszeń na projekt dla danego prowadzącego.
@@ -55,6 +59,21 @@ namespace ProjektBD.Controllers
         }
 
         /// <summary>
+        /// Usunięcie zgłoszenia z bazy.
+        /// </summary>
+        /// <param name="applicationID">ID usuwanego zgłoszenia</param>
+        public void deleteApplication(long applicationID)
+        {
+            teacherdb.deleteApplication(applicationID);
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Dodawanie do przedmiotu/projektu
+        //----------------------------------------------------------------
+
+        /// <summary>
         /// Dodawanie studenta do przedmiotu (pozytywne rozpatrzenie).
         /// </summary>
         /// <param name="applicationID">Akceptowane zgłoszenie.</param>
@@ -72,14 +91,7 @@ namespace ProjektBD.Controllers
             teacherdb.addStudentToProject(applicationID);
         }
 
-        /// <summary>
-        /// Usunięcie zgłoszenia z bazy.
-        /// </summary>
-        /// <param name="applicationID">ID usuwanego zgłoszenia</param>
-        public void deleteApplication(long applicationID)
-        {
-            teacherdb.deleteApplication(applicationID);
-        }
+        //----------------------------------------------------------------
         #endregion
     }
 }
