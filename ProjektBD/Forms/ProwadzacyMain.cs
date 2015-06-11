@@ -37,6 +37,18 @@ namespace ProjektBD.Forms
         private TeacherNotifications notifications;
 
         /// <summary>
+        /// Słownik przechowujący zmapowane wartości ID ocen i ich indeksów w kontrolce CustomListView
+        /// <para> Karta: Oceny -> Usuń </para>
+        /// </summary>
+        private Dictionary<int, long> gradeDictionary = new Dictionary<int, long>();          // <indeks w kontrolce, ID oceny>
+
+        /// <summary>
+        /// Słownik przechowujący zmapowane wartości ID ocen i ich indeksów w kontrolce CustomListView
+        /// <para> Karta: Oceny -> Modyfikuj </para>
+        /// </summary>
+        private Dictionary<int, long> gradeDictionary2 = new Dictionary<int, long>();          // <indeks w kontrolce, ID oceny>
+
+        /// <summary>
         /// Konstruktor.
         /// </summary>
         /// <param name="inputLogin">Nazwa zalogowanego prowadzącego.</param>
@@ -364,7 +376,10 @@ namespace ProjektBD.Forms
             {
                 string subjectName = customListView1.SelectedItems[0].Text;
 
+                List<ProjektDTO> projectsList = formController.getProjects(subjectName);
                 List<StudentDTO> studentsList = formController.getStudentsFromSubject(subjectName);
+
+                customListView2.fill<ProjektDTO>(projectsList);
                 customListView3.fill<StudentDTO>(studentsList);
             }
         }
@@ -397,7 +412,306 @@ namespace ProjektBD.Forms
         #region listView5 (Moje przedmioty i projekty -> Lista przedmiotów)
         //----------------------------------------------------------------
 
+        private void customListView5_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (customListView5.SelectedItems.Count > 0)
+            {
+                string subjectName = e.Item.Text;
 
+                List<ProjektDTO> projectsList = formController.getProjects(subjectName);
+                List<StudentDTO> studentsFromSubjectList = formController.getStudentsFromSubject(subjectName);
+
+                customListView6.fill<ProjektDTO>(projectsList);
+                customListView7.fill<StudentDTO>(studentsFromSubjectList);
+
+                button4.Enabled = true;
+                button5.Enabled = true;
+            }
+            else
+            {
+                customListView6.Clear();
+                customListView7.Clear();
+
+                button4.Enabled = false;
+                button5.Enabled = false;
+                button9.Enabled = false;
+                button11.Enabled = false;
+                button12.Enabled = false;
+            }
+        }
+
+        private void customListView5_Enter(object sender, EventArgs e)
+        {
+            button9.Enabled = false;
+            button11.Enabled = false;
+
+            if (customListView5.SelectedItems.Count > 0)
+            {
+                string selectedSubjectName = customListView5.SelectedItems[0].Text;
+
+                List<ProjektDTO> projectsList = formController.getProjects(selectedSubjectName);
+                List<StudentDTO> studentsFromSubjectList = formController.getStudentsFromSubject(selectedSubjectName);
+
+                customListView6.fill<ProjektDTO>(projectsList);
+                customListView7.fill<StudentDTO>(studentsFromSubjectList);
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region listview6 (Moje przedmioty i projekty -> Lista projektów)
+        //----------------------------------------------------------------
+        
+        private void customListView6_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (customListView6.SelectedItems.Count > 0)
+            {
+                List<StudentDTO> studentsList = formController.getStudentsFromProject(e.Item.Text);
+                customListView7.fill<StudentDTO>(studentsList);
+
+                button9.Enabled = true;
+                button11.Enabled = true;
+            }
+            else
+            {
+                List<StudentDTO> studentsList = formController.getStudentsFromSubject(customListView5.SelectedItems[0].Text);
+                customListView7.fill<StudentDTO>(studentsList);
+
+                button9.Enabled = false;
+                button11.Enabled = false;
+                button12.Enabled = false;
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region listview7 (Moje przedmioty i projekty -> Lista studentów)
+        //----------------------------------------------------------------
+
+        private void customListView7_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (customListView7.SelectedItems.Count > 0)
+                button12.Enabled = true;
+            else
+                button12.Enabled = false;
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region listview8 (Oceny -> Dodaj -> Wybierz przedmiot)
+        //----------------------------------------------------------------
+
+        private void customListView8_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (customListView8.SelectedItems.Count > 0)
+            {
+                string subjectName = e.Item.Text;
+
+                List<StudentDTO> studentsList = formController.getStudentsFromSubject(subjectName);
+
+                customListView9.fill<StudentDTO>(studentsList);
+            }
+            else
+            {
+                customListView9.Clear();
+                customListView10.Clear();
+
+                button6.BackColor = Color.LightGray;
+                button6.Enabled = false;
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region listview9 (Oceny -> Dodaj -> Wybierz studenta)
+        //----------------------------------------------------------------
+
+        private void customListView9_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (customListView9.SelectedItems.Count > 0)
+            {
+                string studentIndexNumber = customListView9.SelectedItems[0].Text;
+
+                List<ForeignProjektDTO> projectsList = formController.getStudentProjects(studentIndexNumber, customListView8.SelectedItems[0].Text);
+                customListView10.fill<ForeignProjektDTO>(projectsList);
+
+                if (comboBox1.SelectedItem != null)
+                {
+                    button6.BackColor = Color.Lime;
+                    button6.Enabled = true;
+                }
+            }
+            else
+            {
+                customListView10.Clear();
+
+                button6.BackColor = Color.LightGray;
+                button6.Enabled = false;
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region listview11 (Oceny -> Usuń -> Wybierz przedmiot)
+        //----------------------------------------------------------------
+        
+        private void customListView11_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (customListView11.SelectedItems.Count > 0)
+            {
+                string subjectName = e.Item.Text;
+
+                List<StudentDTO> studentsList = formController.getStudentsFromSubject(subjectName);
+
+                customListView12.fill<StudentDTO>(studentsList);
+            }
+            else
+            {
+                customListView12.Clear();
+                customListView13.Clear();
+
+                button7.BackColor = Color.LightGray;
+                button7.Enabled = false;
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region listview12 (Oceny -> Usuń -> Wybierz studenta)
+        //----------------------------------------------------------------
+
+        private void customListView12_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (customListView12.SelectedItems.Count > 0)
+            {
+                string studentLogin = customListView12.SelectedItems[0].SubItems[1].Text;       // Może bugować po zmianie klasy StudentDTO
+                string subjectName = customListView11.SelectedItems[0].Text;
+
+                List<OcenaDTO> gradesList = formController.getGradesFromSubject(studentLogin, subjectName);
+                customListView13.fill<OcenaDTO>(gradesList);
+
+                gradeDictionary.Clear();
+                for (int i = 0; i < gradesList.Count; i++)
+                    gradeDictionary.Add(i, gradesList[i].ocenaID);
+            }
+            else
+            {
+                customListView13.Clear();
+
+                button7.BackColor = Color.LightGray;
+                button7.Enabled = false;
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region listview13 (Oceny -> Usuń -> Wybierz ocenę do usunięcia)
+        //----------------------------------------------------------------
+
+        private void customListView13_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (customListView13.SelectedItems.Count > 0)
+            {
+                int index = customListView13.SelectedItems[0].Index;
+                customListView13.gradeID = gradeDictionary[index];
+
+                button7.BackColor = Color.Red;
+                button7.Enabled = true;
+            }
+            else
+            {
+                button7.BackColor = Color.LightGray;
+                button7.Enabled = false;
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region listview14 (Oceny -> Modyfikuj -> Wybierz przedmiot)
+        //----------------------------------------------------------------
+
+        private void customListView14_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (customListView14.SelectedItems.Count > 0)
+            {
+                string subjectName = e.Item.Text;
+
+                List<StudentDTO> studentsList = formController.getStudentsFromSubject(subjectName);
+
+                customListView15.fill<StudentDTO>(studentsList);
+            }
+            else
+            {
+                customListView15.Clear();
+                customListView16.Clear();
+
+                button1.BackColor = Color.LightGray;
+                button1.Enabled = false;
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region listview15 (Oceny -> Modyfikuj -> Wybierz studenta)
+        //----------------------------------------------------------------
+
+        private void customListView15_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (customListView15.SelectedItems.Count > 0)
+            {
+                string studentLogin = customListView15.SelectedItems[0].SubItems[1].Text;       // Może bugować po zmianie klasy StudentDTO
+                string subjectName = customListView14.SelectedItems[0].Text;
+
+                List<OcenaDTO> gradesList = formController.getGradesFromSubject(studentLogin, subjectName);
+                customListView16.fill<OcenaDTO>(gradesList);
+
+                gradeDictionary2.Clear();
+                for (int i = 0; i < gradesList.Count; i++)
+                    gradeDictionary2.Add(i, gradesList[i].ocenaID);
+            }
+            else
+            {
+                customListView16.Clear();
+
+                button1.BackColor = Color.LightGray;
+                button1.Enabled = false;
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region listview16 (Oceny -> Usuń -> Wybierz ocenę do zamiany)
+        //----------------------------------------------------------------
+        
+        private void customListView16_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (customListView16.SelectedItems.Count > 0)
+            {
+                int index = customListView16.SelectedItems[0].Index;
+                customListView16.gradeID = gradeDictionary2[index];
+
+                if (comboBox2.SelectedItem != null)
+                {
+                    button1.BackColor = Color.Gold;
+                    button1.Enabled = true;
+                }
+            }
+            else
+            {
+                button1.BackColor = Color.LightGray;
+                button1.Enabled = false;
+            }
+        }
 
         //----------------------------------------------------------------
         #endregion
@@ -405,8 +719,26 @@ namespace ProjektBD.Forms
         //----------------------------------------------------------------
         #endregion
 
-        #region Buttony
+        #region Comboboxy i buttony
         //----------------------------------------------------------------
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (customListView9.SelectedItems.Count > 0)
+            {
+                button6.BackColor = Color.Lime;
+                button6.Enabled = true;
+            }
+        }
+
+        private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (customListView16.SelectedItems.Count > 0)
+            {
+                button1.BackColor = Color.Gold;
+                button1.Enabled = true;
+            }
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {

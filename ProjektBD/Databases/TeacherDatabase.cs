@@ -155,18 +155,59 @@ namespace ProjektBD.Databases
         /// </summary>
         public List<PrzedmiotProwadzącegoDTO> getMySubjects()
         {
-            var query = from prow in context.Prowadzący
-                            join subj in context.Przedmioty on prow.UżytkownikID equals subj.ProwadzącyID
-                            join ob in context.PrzedmiotyObieralne on prow.UżytkownikID equals ob.ProwadzącyID into obier
+            // Buguje się przy informatyce, nie mam pojęcia dlaczego
+            //var query = from prow in context.Prowadzący
+            //                join subj in context.Przedmioty on prow.UżytkownikID equals subj.ProwadzącyID
+            //                join ob in context.PrzedmiotyObieralne on prow.UżytkownikID equals ob.ProwadzącyID into obier
 
-                        from obierki in obier.DefaultIfEmpty()
-                        where prow.UżytkownikID == userID
-                        select new PrzedmiotProwadzącegoDTO
-                        {
-                            nazwa = subj.nazwa,
-                            liczbaStudentów = subj.liczbaStudentów,
-                            maxLiczbaStudentów = obierki.maxLiczbaStudentów
-                        };
+            //            from obierki in obier.DefaultIfEmpty()
+            //            where prow.UżytkownikID == userID
+            //            select new PrzedmiotProwadzącegoDTO
+            //            {
+            //                nazwa = subj.nazwa,
+            //                liczbaStudentów = subj.liczbaStudentów,
+            //                maxLiczbaStudentów = obierki.maxLiczbaStudentów
+            //            };
+
+            var query = context.Database.SqlQuery<PrzedmiotProwadzącegoDTO>(@"
+                                    SELECT p.nazwa, p.liczbaStudentów, ob.maxLiczbaStudentów
+                                    FROM Przedmiot p
+	                                    JOIN Prowadzący prow ON prow.UżytkownikID = p.ProwadzącyID
+	                                    LEFT JOIN PrzedmiotObieralny ob ON ob.PrzedmiotID = p.PrzedmiotID
+                                    WHERE prow.UżytkownikID = " + userID);
+
+            return query.ToList();
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Projekty
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Pobiera z bazy projekty studenta z podanego przedmiotu
+        /// </summary>
+        public List<ForeignProjektDTO> getStudentProjects(int studentIndexNumber, string subjectName)
+        {
+            // Nazwijcie mnie geniuszem... albo debilem... ale ***** DZIAŁA!!!
+            var query = context.Database.SqlQuery<ForeignProjektDTO>(@"
+                            SELECT p.nazwa, liczba AS liczbaStudentów, p.maxLiczbaStudentów
+                            FROM Projekt p
+                                JOIN Przedmiot subj ON subj.PrzedmiotID = p.PrzedmiotID
+                                JOIN Projekty_studenci ps ON ps.ProjektID = p.ProjektID
+                                JOIN Student stud ON stud.UżytkownikID = ps.StudentID
+                                LEFT JOIN
+                                (
+		                            SELECT p.nazwa, COUNT(ps.ProjektID) AS liczba
+		                            FROM Projekt p
+			                            JOIN Przedmiot subj ON subj.PrzedmiotID = p.PrzedmiotID
+			                            JOIN Projekty_studenci ps ON ps.ProjektID = p.ProjektID
+		                            GROUP BY p.nazwa
+                                ) AS countJoin ON p.nazwa = countJoin.nazwa
+    
+                            WHERE subj.nazwa = '" + subjectName + @"' AND
+	                            stud.nrIndeksu = " + studentIndexNumber);
 
             return query.ToList();
         }

@@ -98,9 +98,28 @@ namespace ProjektBD.Controllers
         #region Przedmioty
         //----------------------------------------------------------------
 
+        /// <summary>
+        /// Pobiera przedmioty prowadzącego z bazy
+        /// </summary>
+        /// <returns></returns>
         public List<PrzedmiotProwadzącegoDTO> getMySubjects()
         {
             return teacherdb.getMySubjects();
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Projekty
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Pobiera z bazy projekty studenta z podanego przedmiotu
+        /// </summary>
+        public List<ForeignProjektDTO> getStudentProjects(string studentIndexNumber, string subjectName)
+        {
+            int indexNumber = Int32.Parse(studentIndexNumber);
+            return teacherdb.getStudentProjects(indexNumber, subjectName);
         }
 
         //----------------------------------------------------------------

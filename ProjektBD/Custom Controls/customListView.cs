@@ -138,7 +138,7 @@ namespace ProjektBD.Custom_Controls
                     cms.Items.Add("Wyślij wiadomość");
                     break;
                 }
-                else if ( column.Text.Equals("prowadzący") || this.dataType == listViewType.Subjects )
+                else if (this.dataType == listViewType.Subjects)
                 {
                     cms.Items.Add("Pokaż szczegóły");
                     cms.Items.Add("Pokaż profil prowadzącego");

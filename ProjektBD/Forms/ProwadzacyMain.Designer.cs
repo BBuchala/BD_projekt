@@ -216,6 +216,7 @@
             this.customListView9.TabIndex = 15;
             this.customListView9.UseCompatibleStateImageBehavior = false;
             this.customListView9.View = System.Windows.Forms.View.Details;
+            this.customListView9.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView9_ItemSelectionChanged);
             // 
             // customListView8
             // 
@@ -229,6 +230,7 @@
             this.customListView8.TabIndex = 14;
             this.customListView8.UseCompatibleStateImageBehavior = false;
             this.customListView8.View = System.Windows.Forms.View.Details;
+            this.customListView8.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView8_ItemSelectionChanged);
             // 
             // comboBox1
             // 
@@ -245,16 +247,17 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(158, 21);
             this.comboBox1.TabIndex = 13;
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
             // label27
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label27.Location = new System.Drawing.Point(715, 20);
+            this.label27.Location = new System.Drawing.Point(681, 20);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(126, 18);
+            this.label27.Size = new System.Drawing.Size(195, 18);
             this.label27.TabIndex = 9;
-            this.label27.Text = "Wybierz projekt";
+            this.label27.Text = "Wybierz projekt studenta";
             // 
             // textBox5
             // 
@@ -276,7 +279,8 @@
             // 
             // button6
             // 
-            this.button6.BackColor = System.Drawing.Color.Lime;
+            this.button6.BackColor = System.Drawing.Color.LightGray;
+            this.button6.Enabled = false;
             this.button6.ForeColor = System.Drawing.SystemColors.ControlText;
             this.button6.Location = new System.Drawing.Point(939, 425);
             this.button6.Name = "button6";
@@ -344,6 +348,7 @@
             this.customListView13.TabIndex = 16;
             this.customListView13.UseCompatibleStateImageBehavior = false;
             this.customListView13.View = System.Windows.Forms.View.Details;
+            this.customListView13.SelectedIndexChanged += new System.EventHandler(this.customListView13_SelectedIndexChanged);
             // 
             // customListView12
             // 
@@ -357,6 +362,7 @@
             this.customListView12.TabIndex = 15;
             this.customListView12.UseCompatibleStateImageBehavior = false;
             this.customListView12.View = System.Windows.Forms.View.Details;
+            this.customListView12.SelectedIndexChanged += new System.EventHandler(this.customListView12_SelectedIndexChanged);
             // 
             // customListView11
             // 
@@ -370,6 +376,7 @@
             this.customListView11.TabIndex = 14;
             this.customListView11.UseCompatibleStateImageBehavior = false;
             this.customListView11.View = System.Windows.Forms.View.Details;
+            this.customListView11.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView11_ItemSelectionChanged);
             // 
             // label9
             // 
@@ -383,7 +390,8 @@
             // 
             // button7
             // 
-            this.button7.BackColor = System.Drawing.Color.Red;
+            this.button7.BackColor = System.Drawing.Color.LightGray;
+            this.button7.Enabled = false;
             this.button7.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.button7.Location = new System.Drawing.Point(839, 391);
             this.button7.Name = "button7";
@@ -445,6 +453,7 @@
             this.customListView16.TabIndex = 27;
             this.customListView16.UseCompatibleStateImageBehavior = false;
             this.customListView16.View = System.Windows.Forms.View.Details;
+            this.customListView16.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView16_ItemSelectionChanged);
             // 
             // customListView15
             // 
@@ -458,19 +467,21 @@
             this.customListView15.TabIndex = 26;
             this.customListView15.UseCompatibleStateImageBehavior = false;
             this.customListView15.View = System.Windows.Forms.View.Details;
+            this.customListView15.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView15_ItemSelectionChanged);
             // 
             // customListView14
             // 
             this.customListView14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.customListView14.FullRowSelect = true;
             this.customListView14.GridLines = true;
-            this.customListView14.Location = new System.Drawing.Point(27, 51);
+            this.customListView14.Location = new System.Drawing.Point(27, 52);
             this.customListView14.MultiSelect = false;
             this.customListView14.Name = "customListView14";
-            this.customListView14.Size = new System.Drawing.Size(275, 395);
+            this.customListView14.Size = new System.Drawing.Size(275, 394);
             this.customListView14.TabIndex = 25;
             this.customListView14.UseCompatibleStateImageBehavior = false;
             this.customListView14.View = System.Windows.Forms.View.Details;
+            this.customListView14.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView14_ItemSelectionChanged);
             // 
             // comboBox2
             // 
@@ -487,6 +498,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(158, 21);
             this.comboBox2.TabIndex = 24;
+            this.comboBox2.SelectionChangeCommitted += new System.EventHandler(this.comboBox2_SelectionChangeCommitted);
             // 
             // label12
             // 
@@ -518,7 +530,8 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.Gold;
+            this.button1.BackColor = System.Drawing.Color.LightGray;
+            this.button1.Enabled = false;
             this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.button1.Location = new System.Drawing.Point(939, 425);
             this.button1.Name = "button1";
@@ -592,6 +605,7 @@
             this.customListView7.TabIndex = 17;
             this.customListView7.UseCompatibleStateImageBehavior = false;
             this.customListView7.View = System.Windows.Forms.View.Details;
+            this.customListView7.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView7_ItemSelectionChanged);
             // 
             // customListView6
             // 
@@ -605,6 +619,7 @@
             this.customListView6.TabIndex = 16;
             this.customListView6.UseCompatibleStateImageBehavior = false;
             this.customListView6.View = System.Windows.Forms.View.Details;
+            this.customListView6.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView6_ItemSelectionChanged);
             // 
             // customListView5
             // 
@@ -618,9 +633,12 @@
             this.customListView5.TabIndex = 15;
             this.customListView5.UseCompatibleStateImageBehavior = false;
             this.customListView5.View = System.Windows.Forms.View.Details;
+            this.customListView5.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView5_ItemSelectionChanged);
+            this.customListView5.Enter += new System.EventHandler(this.customListView5_Enter);
             // 
             // button9
             // 
+            this.button9.Enabled = false;
             this.button9.Location = new System.Drawing.Point(478, 417);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(168, 36);
@@ -661,6 +679,7 @@
             // 
             // button12
             // 
+            this.button12.Enabled = false;
             this.button12.Location = new System.Drawing.Point(842, 375);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(168, 36);
@@ -670,6 +689,7 @@
             // 
             // button11
             // 
+            this.button11.Enabled = false;
             this.button11.Location = new System.Drawing.Point(478, 459);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(168, 36);
@@ -689,6 +709,7 @@
             // 
             // button5
             // 
+            this.button5.Enabled = false;
             this.button5.Location = new System.Drawing.Point(109, 459);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(168, 36);
@@ -698,6 +719,7 @@
             // 
             // button4
             // 
+            this.button4.Enabled = false;
             this.button4.Location = new System.Drawing.Point(109, 417);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(168, 36);

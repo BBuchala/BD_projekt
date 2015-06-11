@@ -55,7 +55,7 @@ namespace ProjektBD.Model
     {
         public string nazwa { get; set; }
         public int liczbaStudentów { get; set; }
-        public int maxLiczbaStudentów { get; set; }
+        public int? maxLiczbaStudentów { get; set; }
     }
 
     class ProjektDTO
