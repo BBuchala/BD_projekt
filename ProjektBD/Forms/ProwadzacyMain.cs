@@ -792,7 +792,7 @@ namespace ProjektBD.Forms
         /// </summary>
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            //HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Teacher);
+            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Teacher);
         }
 
         /// <summary>
@@ -834,6 +834,7 @@ namespace ProjektBD.Forms
         /// </summary>
         private void ProwadzacyMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+
             if (e.CloseReason == CloseReason.WindowsShutDown)
                 return;
 
@@ -848,6 +849,8 @@ namespace ProjektBD.Forms
         /// </summary>
         private void ProwadzacyMain_FormClosed(object sender, FormClosedEventArgs e)
         {
+            contextMenuStrip1.Dispose();
+
             formController.disposeContext();
         }
 
