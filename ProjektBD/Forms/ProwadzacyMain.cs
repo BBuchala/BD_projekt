@@ -1079,7 +1079,7 @@ namespace ProjektBD.Forms
             if (customListView17.SelectedItems.Count > 0)
             {
                 string subjectName = customListView17.SelectedItems[0].Text;
-                string koniec = formController.getSubjectInfo(subjectName) + "\r\n" + "\r\n" + formController.getZestawienieOcen(subjectName) + "\r\n" + "\r\n" + formController.getZestawienieStudenciProjekty(subjectName);
+                string koniec = formController.getSubjectInfo(subjectName) + "\r\n" + "\r\n" + formController.getZestawienieOcen(subjectName) + "\r\n" + "\r\n" + formController.getZestawienieStudenciProjekty(subjectName) + "\r\n" + "\r\n"+ formController.getNdst(subjectName);
 
                 File.WriteAllText(@"D:\BD - projekt\Raport.txt", koniec);
             }

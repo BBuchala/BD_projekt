@@ -81,6 +81,7 @@ namespace ProjektBD.Model
        
       
     }
+  
 
 
     class UżytkownikDTO

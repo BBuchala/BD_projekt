@@ -226,6 +226,20 @@ namespace ProjektBD.Controllers
 
             return calosc;
         }
+
+        public string getNdst(string subjectName)
+        {
+            string tmp = "OSOBY Z OCENAMI NIEDOSTATECZNYMI + ICH DANE: \r\n";
+            List<StudentDTO> newoceny = teacherdb.getNiedostateczne(subjectName);
+
+            foreach (StudentDTO current in newoceny)
+            {
+                tmp = tmp + current.login + " - " + current.email + ", ";
+            }
+            return tmp;
+
+        }
+
         #endregion
 
         #region Usuwanie

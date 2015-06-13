@@ -205,6 +205,24 @@ namespace ProjektBD.Databases
 
             return projectQuery.ToList();
         }
+
+        public List<StudentDTO> getNiedostateczne(string subjectName)
+        {
+            var query = context.Database.SqlQuery<StudentDTO>(@"
+                            SELECT u.login, u.email
+                            FROM Student s
+	                            JOIN Użytkownik u ON u.UżytkownikID = s.UżytkownikID 
+                                
+	                            JOIN Przedmioty_studenci ps ON ps.StudentID = s.UżytkownikID
+                                JOIN Przedmiot subj ON subj.PrzedmiotID = ps.PrzedmiotID
+                                JOIN Ocena o ON o.PrzedmiotID = subj.PrzedmiotID AND o.StudentID = ps.StudentID
+                              
+                           WHERE subj.nazwa = '" + subjectName + @"' AND o.wartość = 2  
+                            GROUP BY u.login, u.email");
+                            
+
+            return query.ToList();
+        }
     
         #endregion
 
