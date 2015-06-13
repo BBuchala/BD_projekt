@@ -32,5 +32,10 @@ namespace ProjektBD.Forms.CommonForms
             else
                 label11.Text = "Nie podano";
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

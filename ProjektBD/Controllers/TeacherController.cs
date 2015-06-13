@@ -135,7 +135,7 @@ namespace ProjektBD.Controllers
         //----------------------------------------------------------------
         #endregion
 
-<<<<<<< HEAD
+        #region Raport
         public string getSubjectInfo(string subjectName)
         {
             PrzedmiotRaportDetailsDTO newobject = teacherdb.getSubjectInfo(subjectName);
@@ -226,7 +226,8 @@ namespace ProjektBD.Controllers
 
             return calosc;
         }
-=======
+        #endregion
+
         #region Usuwanie
         //----------------------------------------------------------------
 
@@ -325,7 +326,7 @@ namespace ProjektBD.Controllers
 
         //----------------------------------------------------------------
         #endregion
->>>>>>> origin/master
+
     }
 
 

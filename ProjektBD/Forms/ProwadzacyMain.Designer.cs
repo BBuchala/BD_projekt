@@ -912,10 +912,9 @@
             this.customListView2.UseCompatibleStateImageBehavior = false;
             this.customListView2.View = System.Windows.Forms.View.Details;
             this.customListView2.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView2_ItemSelectionChanged);
-<<<<<<< HEAD
+
             this.customListView2.SelectedIndexChanged += new System.EventHandler(this.customListView2_SelectedIndexChanged);
-=======
->>>>>>> origin/master
+
             // 
             // customListView1
             // 
@@ -1125,10 +1124,9 @@
             this.customListView17.TabIndex = 3;
             this.customListView17.UseCompatibleStateImageBehavior = false;
             this.customListView17.View = System.Windows.Forms.View.Details;
-<<<<<<< HEAD
+
             this.customListView17.SelectedIndexChanged += new System.EventHandler(this.customListView17_SelectedIndexChanged);
-=======
->>>>>>> origin/master
+
             // 
             // ProwadzacyMain
             // 

@@ -363,8 +363,8 @@ namespace ProjektBD.Forms
         #endregion
 
         //----------------------------------------------------------------
-        #endregion    
-        
+        #endregion
+
         #region Obsługa customListView'ów
         //----------------------------------------------------------------
 
@@ -484,7 +484,7 @@ namespace ProjektBD.Forms
 
         #region listview6 (Moje przedmioty i projekty -> Lista projektów)
         //----------------------------------------------------------------
-        
+
         private void customListView6_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             if (customListView6.SelectedItems.Count > 0)
@@ -581,7 +581,7 @@ namespace ProjektBD.Forms
 
         #region listview11 (Oceny -> Usuń -> Wybierz przedmiot)
         //----------------------------------------------------------------
-        
+
         private void customListView11_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             if (customListView11.SelectedItems.Count > 0)
@@ -714,7 +714,7 @@ namespace ProjektBD.Forms
 
         #region listview16 (Oceny -> Usuń -> Wybierz ocenę do zamiany)
         //----------------------------------------------------------------
-        
+
         private void customListView16_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             if (customListView16.SelectedItems.Count > 0)
@@ -1056,16 +1056,7 @@ namespace ProjektBD.Forms
             formController.disposeContext();
         }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
-            if (customListView17.SelectedItems.Count > 0)
-            {
-                string subjectName = customListView17.SelectedItems[0].Text;
-                string koniec = formController.getSubjectInfo(subjectName) + "\r\n" + "\r\n" + formController.getZestawienieOcen(subjectName) + "\r\n" + "\r\n" + formController.getZestawienieStudenciProjekty(subjectName);
-                
-                File.WriteAllText(@"D:\BD - projekt\Raport.txt", koniec);
-            }
-        }
+
 
         private void customListView17_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1077,21 +1068,35 @@ namespace ProjektBD.Forms
 
         }
 
-      
+
 
         //----------------------------------------------------------------
         #endregion
-    }
 
-    /// <summary>
-    /// Struktura zawierająca informacje o zgłoszeniach.
-    /// </summary>
-    struct TeacherNotifications
-    {
-        public List<ZgłoszenieNaPrzedmiotDTO> subjectApplicationList;
-        public int subjectApplicationCount;
+        #region Raport
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (customListView17.SelectedItems.Count > 0)
+            {
+                string subjectName = customListView17.SelectedItems[0].Text;
+                string koniec = formController.getSubjectInfo(subjectName) + "\r\n" + "\r\n" + formController.getZestawienieOcen(subjectName) + "\r\n" + "\r\n" + formController.getZestawienieStudenciProjekty(subjectName);
 
-        public List<ZgłoszenieNaProjektDTO> projectApplicationList;
-        public int projectApplicationCount;
+                File.WriteAllText(@"D:\BD - projekt\Raport.txt", koniec);
+            }
+        }
+        #endregion
+
+
+        /// <summary>
+        /// Struktura zawierająca informacje o zgłoszeniach.
+        /// </summary>
+        struct TeacherNotifications
+        {
+            public List<ZgłoszenieNaPrzedmiotDTO> subjectApplicationList;
+            public int subjectApplicationCount;
+
+            public List<ZgłoszenieNaProjektDTO> projectApplicationList;
+            public int projectApplicationCount;
+        }
     }
 }

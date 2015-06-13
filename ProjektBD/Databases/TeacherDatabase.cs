@@ -157,7 +157,7 @@ namespace ProjektBD.Databases
                         {
                             nazwa = subj.nazwa,
                             prowadzący = subj.Prowadzący.login,           
-                            liczbaStudentów = subj.liczbaStudentów,
+                            liczbaStudentów = subj.Studenci.Count,
                             maxLiczbaStudentów = allSubjects.maxLiczbaStudentów,
                             liczbaProjektów = subj.Projekty.Count
                         };
