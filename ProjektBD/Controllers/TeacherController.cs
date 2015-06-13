@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
+using ProjektBD.Custom_Controls;
 using ProjektBD.Databases;
+using ProjektBD.Forms;
 using ProjektBD.Model;
 
 namespace ProjektBD.Controllers
@@ -119,11 +123,72 @@ namespace ProjektBD.Controllers
         public List<ForeignProjektDTO> getStudentProjects(string studentIndexNumber, string subjectName)
         {
             int indexNumber = Int32.Parse(studentIndexNumber);
+
             return teacherdb.getStudentProjects(indexNumber, subjectName);
         }
 
         //----------------------------------------------------------------
         #endregion
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Usuwanie
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Usuwa z bazy przedmiot o podanej nazwie
+        /// </summary>
+        public void removeSubject(string subjectName)
+        {
+            teacherdb.removeSubject(subjectName);
+        }
+
+        /// <summary>
+        /// Usuwa z bazy projekt o podanej nazwie
+        /// </summary>
+        public void removeProject(string projectName)
+        {
+            teacherdb.removeProject(projectName);
+        }
+
+        /// <summary>
+        /// Usuwa z bazy studenta o podanym numerze indeksu
+        /// </summary>
+        public void removeStudent(string subjectName, string projectName, string studentIndexNumber)
+        {
+            int indexNumber = Int32.Parse(studentIndexNumber);
+
+            teacherdb.removeStudent(subjectName, projectName, indexNumber);
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Metody pomocnicze
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Pobiera z kontenera wszystkie kontrolki podanego typu.
+        /// </summary>
+        /// <typeparam name="T">Typ kontrolek, które chcemy pobrać</typeparam>
+        /// <param name="container">Kontener, z którego pobieramy kontrolki</param>
+        /// <returns>Lista szukanych kontrolek</returns>
+        public List<T> GetAllControlsRecursive<T>(Control container) where T : Control
+        {
+            var controlsList = new List<T>();
+
+            foreach (Control item in container.Controls)
+            {
+                var control = (item as T);                      // Sprawdza, czy pobrana kontrolka jest listView'em
+
+                if (control != null)
+                    controlsList.Add(control);                  // Jeśli tak, dodaje ją do wynikowej listy
+                else
+                    controlsList.AddRange( GetAllControlsRecursive<T>(item) );      // Jeśli nie, traktuje jako kolejny kontener i wchodzi w głąb rekursji
+            }
+            return controlsList;
+        }
 
         //----------------------------------------------------------------
         #endregion

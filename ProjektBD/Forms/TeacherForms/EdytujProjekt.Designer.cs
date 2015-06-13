@@ -1,6 +1,6 @@
 ﻿namespace ProjektBD.Forms.TeacherForms
 {
-    partial class EdytujPrzedmioty
+    partial class EdytujProjekt
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EdytujPrzedmioty));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EdytujProjekt));
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -53,21 +53,20 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(112, 9);
+            this.label4.Location = new System.Drawing.Point(122, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(127, 20);
+            this.label4.Size = new System.Drawing.Size(105, 20);
             this.label4.TabIndex = 17;
-            this.label4.Text = "Edytuj przedmiot";
+            this.label4.Text = "Edytuj projekt";
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.BackColor = System.Drawing.Color.Gold;
             this.button1.Location = new System.Drawing.Point(106, 294);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(138, 42);
             this.button1.TabIndex = 16;
-            this.button1.Text = "Zapisz";
+            this.button1.Text = "Edytuj projekt";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -117,7 +116,7 @@
             this.label1.TabIndex = 11;
             this.label1.Text = "Nazwa:";
             // 
-            // EdytujPrzedmioty
+            // EdytujProjekt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -131,11 +130,11 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "EdytujPrzedmioty";
+            this.Name = "EdytujProjekt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "EdytujPrzedmioty";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EdytujPrzedmioty_FormClosed);
-            this.Load += new System.EventHandler(this.EdytujPrzedmioty_Load);
+            this.Text = "Edytuj Projekt";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EdytujProjekt_FormClosed);
+            this.Load += new System.EventHandler(this.EdytujProjekt_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,6 +150,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-
     }
 }

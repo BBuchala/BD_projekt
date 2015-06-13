@@ -1,6 +1,6 @@
 ﻿namespace ProjektBD.Forms.TeacherForms
 {
-    partial class DodajEdytujProjekt
+    partial class DodajProjekt
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DodajEdytujProjekt));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DodajProjekt));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -48,7 +48,6 @@
             this.label1.Size = new System.Drawing.Size(58, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nazwa:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -78,6 +77,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(307, 20);
             this.textBox1.TabIndex = 4;
+            this.textBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyUp);
             // 
             // textBox3
             // 
@@ -85,26 +85,29 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(55, 20);
             this.textBox3.TabIndex = 6;
+            this.textBox3.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyUp);
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.Lime;
+            this.button1.BackColor = System.Drawing.Color.LightGray;
+            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(106, 294);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(138, 42);
             this.button1.TabIndex = 8;
-            this.button1.Text = "Dodaj / Edytuj";
+            this.button1.Text = "Dodaj projekt";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(96, 9);
+            this.label4.Location = new System.Drawing.Point(124, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(157, 20);
+            this.label4.Size = new System.Drawing.Size(103, 20);
             this.label4.TabIndex = 9;
-            this.label4.Text = "Dodaj / edytuj projekt";
+            this.label4.Text = "Dodaj projekt";
             // 
             // textBox2
             // 
@@ -116,7 +119,7 @@
             this.textBox2.Size = new System.Drawing.Size(307, 115);
             this.textBox2.TabIndex = 10;
             // 
-            // DodajEdytujProjekt
+            // DodajProjekt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -130,9 +133,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "DodajEdytujProjekt";
+            this.Name = "DodajProjekt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Dodaj/Edytuj Projekt";
+            this.Text = "Dodaj Projekt";
             this.ResumeLayout(false);
             this.PerformLayout();
 

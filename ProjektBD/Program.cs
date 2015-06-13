@@ -20,7 +20,7 @@ namespace ProjektBD
             Application.SetCompatibleTextRenderingDefault(false);
 
             Application.Run(new LoginForm());
-            //Application.Run(new ProwadzacyMain("ASzydło"));
+            //Application.Run(new ProwadzacyMain("BLanuszny"));
             //Application.Run(new StudentProfileForm());
         }
     }

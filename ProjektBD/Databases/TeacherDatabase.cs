@@ -190,7 +190,6 @@ namespace ProjektBD.Databases
         /// </summary>
         public List<ForeignProjektDTO> getStudentProjects(int studentIndexNumber, string subjectName)
         {
-            // Nazwijcie mnie geniuszem... albo debilem... ale ***** DZIAŁA!!!
             var query = context.Database.SqlQuery<ForeignProjektDTO>(@"
                             SELECT p.nazwa, liczba AS liczbaStudentów, p.maxLiczbaStudentów
                             FROM Projekt p
@@ -214,6 +213,95 @@ namespace ProjektBD.Databases
 
         //----------------------------------------------------------------
         #endregion
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Usuwanie
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Usuwa z bazy przedmiot o podanej nazwie
+        /// </summary>
+        public void removeSubject(string subjectName)
+        {
+            var subject = context.Przedmioty
+                .Where( p => p.nazwa.Equals(subjectName) )
+                .Single();
+
+            context.Przedmioty.Remove(subject);
+            context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Usuwa z bazy projekt o podanej nazwie
+        /// </summary>
+        public void removeProject(string projectName)
+        {
+            var project = context.Projekty
+                .Where( p => p.nazwa.Equals(projectName) )
+                .Single();
+
+            var grades = context.Oceny
+                .Include("Projekt")
+                .Where( o => o.ProjektID == project.ProjektID )
+                .ToList();
+
+            context.Oceny.RemoveRange(grades);
+
+            context.Projekty.Remove(project);
+            context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Usuwa z bazy studenta o podanym numerze indeksu
+        /// </summary>
+        public void removeStudent(string subjectName, string projectName, int studentIndexNumber)
+        {
+            Student student = context.Studenci
+                .Where( s => s.nrIndeksu == studentIndexNumber )
+                .Include("Projekty")
+                .Single();
+
+            Przedmiot subject = context.Przedmioty
+                .Where( s => s.nazwa.Equals(subjectName) )
+                .Include("Studenci")
+                .Single();
+
+            Projekt project = context.Projekty
+                .Where(p => p.nazwa.Equals(projectName))
+                .Include("Studenci")
+                .SingleOrDefault();
+
+            dynamic gradesList;
+
+            // Usuwanie z projektu
+            if (project != null)
+            {
+                gradesList = context.Oceny
+                    .Where( o => o.ProjektID == project.ProjektID );
+
+                project.Studenci.Remove(student);
+            }
+
+            // Usuwanie z przedmiotu i wszystkich projektów w jego ramach, na które był zapisany
+            else
+            {
+                gradesList = context.Oceny                                  // Oceny z przedmiotu (i zarazem z projektów)
+                    .Where( o => o.PrzedmiotID == subject.PrzedmiotID );
+
+                var projectsList = context.Projekty                         // Projekty, na które był zapisany
+                    .Where( p => p.PrzedmiotID == subject.PrzedmiotID );
+
+                foreach (Projekt proj in projectsList)
+                    student.Projekty.Remove(proj);                          // Usuwanie studenta z projektów
+
+                subject.Studenci.Remove(student);                           // Usuwanie studenta z przedmiotu
+            }
+
+            context.Oceny.RemoveRange(gradesList);                          // Usuwanie ocen z projektu/przedmiotu
+            context.SaveChanges();
+        }
 
         //----------------------------------------------------------------
         #endregion
