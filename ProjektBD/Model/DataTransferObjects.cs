@@ -64,6 +64,8 @@ namespace ProjektBD.Model
         public int maxLiczbaStudentów { get; set; }
     }
 
+  
+    
     class ForeignProjektDTO
     {
         public string nazwa { get; set; }
@@ -76,7 +78,10 @@ namespace ProjektBD.Model
         public int nrIndeksu { get; set; }
         public string login { get; set; }
         public string email { get; set; }
+       
+      
     }
+
 
     class UżytkownikDTO
     {
@@ -116,6 +121,14 @@ namespace ProjektBD.Model
         public int? maxLiczbaStudentów { get; set; }
         public string prowadzący { get; set; }
         public string opis { get; set; }
+    }
+    public class PrzedmiotRaportDetailsDTO
+    {
+        public string nazwa { get; set; }
+        public int liczbaStudentów { get; set; }
+        public int? maxLiczbaStudentów { get; set; }
+        public string prowadzący { get; set; }
+        public int liczbaProjektów { get; set; }
     }
 
     public class ProjektDetailsDTO

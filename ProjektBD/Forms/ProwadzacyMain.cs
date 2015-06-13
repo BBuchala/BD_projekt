@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 using ProjektBD.Utilities;
 using ProjektBD.Controllers;
@@ -850,6 +851,29 @@ namespace ProjektBD.Forms
         {
             formController.disposeContext();
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (customListView17.SelectedItems.Count > 0)
+            {
+                string subjectName = customListView17.SelectedItems[0].Text;
+                string koniec = formController.getSubjectInfo(subjectName) + "\r\n" + "\r\n" + formController.getZestawienieOcen(subjectName) + "\r\n" + "\r\n" + formController.getZestawienieStudenciProjekty(subjectName);
+                
+                File.WriteAllText(@"D:\BD - projekt\Raport.txt", koniec);
+            }
+        }
+
+        private void customListView17_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void customListView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+      
 
         //----------------------------------------------------------------
         #endregion

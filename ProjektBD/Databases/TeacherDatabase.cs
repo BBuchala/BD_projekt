@@ -144,6 +144,70 @@ namespace ProjektBD.Databases
         //----------------------------------------------------------------
         #endregion
 
+        #region Raport
+
+        public PrzedmiotRaportDetailsDTO getSubjectInfo(string subjectName)
+        {
+            var query = from subj in context.Przedmioty
+                        join ob in context.PrzedmiotyObieralne on subj.PrzedmiotID equals ob.PrzedmiotID into obier
+
+                        from allSubjects in obier.DefaultIfEmpty()         
+                        where subj.nazwa.Equals(subjectName)
+                        select new PrzedmiotRaportDetailsDTO
+                        {
+                            nazwa = subj.nazwa,
+                            prowadzący = subj.Prowadzący.login,           
+                            liczbaStudentów = subj.liczbaStudentów,
+                            maxLiczbaStudentów = allSubjects.maxLiczbaStudentów,
+                            liczbaProjektów = subj.Projekty.Count
+                        };
+
+            return query.Single();
+        }
+
+        public List<StudentDTO> getZestawienieOcen(string subjectName, string przedział1, string przedział2)
+        {
+            var query = context.Database.SqlQuery<StudentDTO>(@"
+                            SELECT u.login
+                            FROM Student s
+	                            JOIN Użytkownik u ON u.UżytkownikID = s.UżytkownikID 
+                                
+	                            JOIN Przedmioty_studenci ps ON ps.StudentID = s.UżytkownikID
+                                JOIN Przedmiot subj ON subj.PrzedmiotID = ps.PrzedmiotID
+                                JOIN Ocena o ON o.PrzedmiotID = subj.PrzedmiotID AND o.StudentID = ps.StudentID
+                              
+                           WHERE subj.nazwa = '" + subjectName + @"'  
+                            GROUP BY u.login 
+                           HAVING AVG(o.wartość) >=" + przedział1 + @" AND AVG(o.wartość) < "+przedział2);
+
+            return query.ToList();
+
+        }
+        public List<StudentDTO> getStudenciZProjektow(string projectName)
+        {
+            var studentQuery = context.Database.SqlQuery<StudentDTO>(@"
+                            SELECT u.login
+                            FROM Student s
+	                            JOIN Użytkownik u ON u.UżytkownikID = s.UżytkownikID
+	                            JOIN Projekty_studenci ps ON ps.StudentID = s.UżytkownikID
+	                            JOIN Projekt proj ON proj.ProjektID = ps.ProjektID
+                            WHERE proj.nazwa = '" + projectName + "'");
+
+            return studentQuery.ToList();
+        }
+
+        public List<ProjektDTO> getProjekty(string subjectName)
+        {
+            var projectQuery = from proj in context.Projekty
+                               join subj in context.Przedmioty on proj.PrzedmiotID equals subj.PrzedmiotID
+                               where subj.nazwa.Equals(subjectName)
+                               select new ProjektDTO { nazwa = proj.nazwa, maxLiczbaStudentów = proj.maxLiczbaStudentów };
+
+            return projectQuery.ToList();
+        }
+    
+        #endregion
+
         #region Pobieranie
         //----------------------------------------------------------------
 
