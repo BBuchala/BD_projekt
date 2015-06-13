@@ -219,7 +219,7 @@ namespace ProjektBD.Forms
         {
             if (customListView5.SelectedItems.Count > 0)
             {
-                List<OcenaZProjektuDTO> myProjectGradesList = formController.getGradesFromProject(e.Item.Text);
+                List<OcenaZProjektuDTO> myProjectGradesList = formController.getGradesFromProject(studentLogin, e.Item.Text);
 
                 customListView8.fill<OcenaZProjektuDTO>(myProjectGradesList);
 

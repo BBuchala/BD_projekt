@@ -254,6 +254,19 @@ namespace ProjektBD.Databases
         }
 
         /// <summary>
+        /// Usuwa z bazy ocenę o podanym ID
+        /// </summary>
+        public void removeGrade(long gradeID)
+        {
+            Ocena grade = context.Oceny
+                .Where( o => o.OcenaID == gradeID )
+                .Single();
+
+            context.Oceny.Remove(grade);
+            context.SaveChanges();
+        }
+
+        /// <summary>
         /// Usuwa z bazy studenta o podanym numerze indeksu
         /// </summary>
         public void removeStudent(string subjectName, string projectName, int studentIndexNumber)
@@ -300,6 +313,85 @@ namespace ProjektBD.Databases
             }
 
             context.Oceny.RemoveRange(gradesList);                          // Usuwanie ocen z projektu/przedmiotu
+            context.SaveChanges();
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Dodawanie
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Dodaje studentowi ocenę z podanego przedmiotu
+        /// </summary>
+        public void addSubjectGrade(string studentLogin, OcenaDetailsDTO grade)
+        {
+            Student stud = context.Studenci
+                .Where( s => s.login.Equals(studentLogin) )
+                .Single();
+
+            Przedmiot subj = context.Przedmioty
+                .Where( p => p.nazwa.Equals(grade.nazwaPrzedmiotu) )
+                .Single();
+
+            Ocena o = new Ocena
+            {
+                wartość = grade.wartość,
+                komentarz = grade.komentarz,
+                dataWpisania = DateTime.Now,
+                Przedmiot = subj
+            };
+
+            stud.Oceny.Add(o);
+            context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Dodaje studentowi ocenę z podanego projektu
+        /// </summary>
+        public void addProjectGrade(string studentLogin, OcenaDetailsDTO grade)
+        {
+            Student stud = context.Studenci
+                .Where(s => s.login.Equals(studentLogin))
+                .Single();
+
+            Projekt proj = context.Projekty
+                .Where( p => p.nazwa.Equals(grade.nazwaProjektu) )
+                .Include("Przedmiot")
+                .Single();
+
+            Ocena o = new Ocena
+            {
+                wartość = grade.wartość,
+                komentarz = grade.komentarz,
+                dataWpisania = DateTime.Now,
+                ProjektID = proj.ProjektID,
+                PrzedmiotID = proj.Przedmiot.PrzedmiotID
+            };
+
+            stud.Oceny.Add(o);
+            context.SaveChanges();
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Modyfikowanie
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Modyfikuje podaną ocenę
+        /// </summary>
+        public void modifyGrade(long gradeID, double newValue, string newDesc)
+        {
+            Ocena grade = context.Oceny
+                .Where( o => o.OcenaID == gradeID )
+                .Single();
+
+            grade.wartość = newValue;
+            grade.komentarz = newDesc;
+
             context.SaveChanges();
         }
 

@@ -153,6 +153,14 @@ namespace ProjektBD.Controllers
         }
 
         /// <summary>
+        /// Usuwa z bazy ocenę o podanym ID
+        /// </summary>
+        public void removeGrade(long gradeID)
+        {
+            teacherdb.removeGrade(gradeID);
+        }
+
+        /// <summary>
         /// Usuwa z bazy studenta o podanym numerze indeksu
         /// </summary>
         public void removeStudent(string subjectName, string projectName, string studentIndexNumber)
@@ -160,6 +168,37 @@ namespace ProjektBD.Controllers
             int indexNumber = Int32.Parse(studentIndexNumber);
 
             teacherdb.removeStudent(subjectName, projectName, indexNumber);
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Dodawanie
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Dodaje studentowi ocenę z podanego przedmiotu lub projektu
+        /// </summary>
+        public void addGrade(string studentLogin, OcenaDetailsDTO grade)
+        {
+            if (grade.nazwaProjektu != null)
+                teacherdb.addProjectGrade(studentLogin, grade);
+            else
+                teacherdb.addSubjectGrade(studentLogin, grade);
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Modyfikowanie
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Modyfikuje podaną ocenę
+        /// </summary>
+        public void modifyGrade(long gradeID, double newValue, string newDesc)
+        {
+            teacherdb.modifyGrade(gradeID, newValue, newDesc);
         }
 
         //----------------------------------------------------------------

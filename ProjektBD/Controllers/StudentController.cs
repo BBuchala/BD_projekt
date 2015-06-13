@@ -62,20 +62,6 @@ namespace ProjektBD.Controllers
         //----------------------------------------------------------------
         #endregion
 
-        #region Oceny
-        //----------------------------------------------------------------
-
-        /// <summary>
-        /// Pobiera oceny z podanego projektu
-        /// </summary>
-        public List<OcenaZProjektuDTO> getGradesFromProject(string projectName)
-        {
-            return studDatabase.getGradesFromProject(projectName);
-        }
-
-        //----------------------------------------------------------------
-        #endregion
-
         //----------------------------------------------------------------
         #endregion
 

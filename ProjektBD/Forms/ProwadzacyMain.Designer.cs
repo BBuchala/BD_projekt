@@ -247,6 +247,7 @@
             this.button6.TabIndex = 6;
             this.button6.Text = "Dodaj";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // label7
             // 
@@ -316,6 +317,7 @@
             this.button7.TabIndex = 9;
             this.button7.Text = "Usuń";
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // label10
             // 
@@ -414,6 +416,7 @@
             this.button1.TabIndex = 17;
             this.button1.Text = "Modyfikuj";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label14
             // 

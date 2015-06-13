@@ -90,6 +90,14 @@ namespace ProjektBD.Controllers
             return usrDatabase.getGradesFromSubject(studentLogin, subjectName);
         }
 
+        /// <summary>
+        /// Pobiera oceny studenta z podanego projektu
+        /// </summary>
+        public List<OcenaZProjektuDTO> getGradesFromProject(string studentLogin, string projectName)
+        {
+            return usrDatabase.getGradesFromProject(studentLogin, projectName);
+        }
+
         //----------------------------------------------------------------
         #endregion
 

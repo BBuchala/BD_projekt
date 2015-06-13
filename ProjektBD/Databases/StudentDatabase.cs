@@ -99,32 +99,6 @@ namespace ProjektBD.Databases
         //----------------------------------------------------------------
         #endregion
 
-        #region Oceny
-        //----------------------------------------------------------------
-
-        /// <summary>
-        /// Pobiera oceny studenta z podanego projektu
-        /// </summary>
-        public List<OcenaZProjektuDTO> getGradesFromProject(string projectName)
-        {
-            var gradeQuery = from o in context.Oceny
-                                join proj in context.Projekty on o.ProjektID equals proj.ProjektID
-                                join user in context.Studenci on o.StudentID equals user.UżytkownikID
-                             where user.UżytkownikID == userID &&
-                                 proj.nazwa.Equals(projectName)
-                             select new OcenaZProjektuDTO
-                             {
-                                 wartość = o.wartość,
-                                 dataWpisania = o.dataWpisania,
-                                 ocenaID = o.OcenaID
-                             }; 
-
-            return gradeQuery.ToList();
-        }
-
-        //----------------------------------------------------------------
-        #endregion
-
         //----------------------------------------------------------------
         #endregion
 

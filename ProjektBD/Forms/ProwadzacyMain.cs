@@ -252,7 +252,16 @@ namespace ProjektBD.Forms
         {
             ToolStripMenuItem clickedItem = (ToolStripMenuItem)sender;
 
-            string[] tags = clickedItem.Tag.ToString().Split(' ');
+            //string[] tags = clickedItem.Tag.ToString().Split(' ');
+            string selectedText = clickedItem.Text;
+            string[] tags = new string[2];
+
+            selectedText = selectedText.Remove(0, 8);                       // usunięcie "Student "
+            tags[0] = selectedText.Split(' ')[0];
+
+            selectedText = selectedText.Remove(0, tags[0].Length + 1);      // usunięcie loginu studenta
+            selectedText = selectedText.Remove(0, 13);                      // usunięcie "na projekt "
+            tags[1] = selectedText;
 
             foreach (ZgłoszenieNaPrzedmiotDTO application in notifications.subjectApplicationList)
             {
@@ -752,6 +761,9 @@ namespace ProjektBD.Forms
             }
         }
 
+        #region Przedmioty
+        //----------------------------------------------------------------
+
         //Dodaj przedmiot
         private void button2_Click(object sender, EventArgs e)
         {
@@ -789,6 +801,12 @@ namespace ProjektBD.Forms
                 refillAllListViews();
             }
         }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Projekty
+        //----------------------------------------------------------------
 
         // Dodaj projekt
         private void button8_Click(object sender, EventArgs e)
@@ -830,6 +848,12 @@ namespace ProjektBD.Forms
             }
         }
 
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Użytkownicy
+        //----------------------------------------------------------------
+
         // Usuń studenta
         private void button12_Click(object sender, EventArgs e)
         {
@@ -862,6 +886,60 @@ namespace ProjektBD.Forms
 
                 customListView4.fill<UżytkownikDTO>(usersList);
             }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        // Dodaj ocenę
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string studentLogin = customListView9.SelectedItems[0].SubItems[1].Text;
+            string subjectName = customListView8.SelectedItems[0].Text;
+            string projectName = null;
+
+            if (customListView10.SelectedItems.Count > 0)
+                projectName = customListView10.SelectedItems[0].Text;
+
+            OcenaDetailsDTO grade = new OcenaDetailsDTO
+            {
+                wartość = Double.Parse(comboBox1.Text),
+                komentarz = textBox5.Text,
+                nazwaProjektu = projectName,
+                nazwaPrzedmiotu = subjectName,
+            };
+
+            formController.addGrade(studentLogin, grade);
+            MsgBoxUtils.displayInformationMsgBox("Operacja ukończona pomyślnie", "Ocena została dodana pomyślnie");
+        }
+
+        // Usuń ocenę
+        private void button7_Click(object sender, EventArgs e)
+        {
+            int index = customListView13.SelectedItems[0].Index;
+            long gradeID = gradeDictionary[index];
+
+            DialogResult result = MsgBoxUtils.displayQuestionMsgBox("Potwierdź decyzję", "Czy na pewno chcesz usunąć wybraną ocenę?", this);
+
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                formController.removeGrade(gradeID);
+
+                MsgBoxUtils.displayInformationMsgBox("Operacja ukończona pomyślnie", "Ocena została usunięta pomyślnie");
+            }
+        }
+
+        // Modyfikuj ocenę
+        private void button1_Click(object sender, EventArgs e)
+        {
+            double newValue = Double.Parse(comboBox2.Text);
+            string newDesc = textBox3.Text;
+
+            int index = customListView16.SelectedItems[0].Index;
+            long gradeID = gradeDictionary2[index];
+
+            formController.modifyGrade(gradeID, newValue, newDesc);
+            MsgBoxUtils.displayInformationMsgBox("Operacja ukończona pomyślnie", "Ocena została zmodyfikowana pomyślnie");
         }
 
         //----------------------------------------------------------------
