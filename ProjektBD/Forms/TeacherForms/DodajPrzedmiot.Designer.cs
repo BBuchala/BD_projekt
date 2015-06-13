@@ -75,13 +75,15 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.BackColor = System.Drawing.Color.Lime;
+            this.button2.BackColor = System.Drawing.Color.LightGray;
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(106, 329);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(138, 42);
             this.button2.TabIndex = 21;
             this.button2.Text = "Dodaj";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // textBox1
             // 
@@ -98,6 +100,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(307, 20);
             this.textBox4.TabIndex = 19;
+            this.textBox4.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox4_KeyUp);
             // 
             // label1
             // 

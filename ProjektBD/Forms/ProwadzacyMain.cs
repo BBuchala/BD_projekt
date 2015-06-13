@@ -14,6 +14,7 @@ using ProjektBD.Utilities;
 using ProjektBD.Controllers;
 using ProjektBD.Model;
 using ProjektBD.Forms.TeacherForms;
+using ProjektBD.Custom_Controls;
 
 namespace ProjektBD.Forms
 {
@@ -252,7 +253,16 @@ namespace ProjektBD.Forms
         {
             ToolStripMenuItem clickedItem = (ToolStripMenuItem)sender;
 
-            string[] tags = clickedItem.Tag.ToString().Split(' ');
+            //string[] tags = clickedItem.Tag.ToString().Split(' ');
+            string selectedText = clickedItem.Text;
+            string[] tags = new string[2];
+
+            selectedText = selectedText.Remove(0, 8);                       // usunięcie "Student "
+            tags[0] = selectedText.Split(' ')[0];
+
+            selectedText = selectedText.Remove(0, tags[0].Length + 1);      // usunięcie loginu studenta
+            selectedText = selectedText.Remove(0, 13);                      // usunięcie "na projekt "
+            tags[1] = selectedText;
 
             foreach (ZgłoszenieNaPrzedmiotDTO application in notifications.subjectApplicationList)
             {
@@ -329,7 +339,16 @@ namespace ProjektBD.Forms
         {
             ToolStripMenuItem clickedItem = (ToolStripMenuItem)sender;
 
-            string[] tags = clickedItem.Tag.ToString().Split(' ');
+            //string[] tags = clickedItem.Tag.ToString().Split(' ');
+            string selectedText = clickedItem.Text;
+            string[] tags = new string[2];
+
+            selectedText = selectedText.Remove(0, 8);                       // usunięcie "Student "
+            tags[0] = selectedText.Split(' ')[0];
+
+            selectedText = selectedText.Remove(0, tags[0].Length + 1);      // usunięcie loginu studenta
+            selectedText = selectedText.Remove(0, 11);                      // usunięcie "na projekt "
+            tags[1] = selectedText;
 
             foreach (ZgłoszenieNaProjektDTO application in notifications.projectApplicationList)
             {
@@ -427,6 +446,7 @@ namespace ProjektBD.Forms
 
                 button4.Enabled = true;
                 button5.Enabled = true;
+                button8.Enabled = true;
             }
             else
             {
@@ -435,6 +455,7 @@ namespace ProjektBD.Forms
 
                 button4.Enabled = false;
                 button5.Enabled = false;
+                button8.Enabled = false;
                 button9.Enabled = false;
                 button11.Enabled = false;
                 button12.Enabled = false;
@@ -741,32 +762,118 @@ namespace ProjektBD.Forms
             }
         }
 
+        #region Przedmioty
+        //----------------------------------------------------------------
+
+        //Dodaj przedmiot
         private void button2_Click(object sender, EventArgs e)
         {
-            DodajPrzedmiot newForm = new DodajPrzedmiot();
+            DodajPrzedmiot newForm = new DodajPrzedmiot(userLogin);
             newForm.ShowDialog();
             newForm.Dispose();
+
+            if (newForm.newSubjectAdded)                // Gdy dodano nowy przedmiot
+                refillAllListViews();
         }
 
+        // Edytuj przedmiot
         private void button4_Click(object sender, EventArgs e)
         {
-            EdytujPrzedmioty newForm = new EdytujPrzedmioty();
+            string subjectName = customListView5.SelectedItems[0].Text;
+
+            EdytujPrzedmioty newForm = new EdytujPrzedmioty(subjectName);
             newForm.ShowDialog();
             newForm.Dispose();
+
+            if (newForm.subjectEdited)                  // Gdy edytowano dane przedmiotu
+                refillAllListViews();
         }
 
+        // Usuń przedmiot
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string subjectName = customListView5.SelectedItems[0].Text;
+
+            DialogResult result = MsgBoxUtils.displayQuestionMsgBox("Potwierdź decyzję", "Czy na pewno chcesz usunąć przedmiot " + subjectName + " z bazy?", this);
+
+            if (result == DialogResult.Yes)
+            {
+                formController.removeSubject(subjectName);
+                refillAllListViews();
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Projekty
+        //----------------------------------------------------------------
+
+        // Dodaj projekt
         private void button8_Click(object sender, EventArgs e)
         {
-            DodajEdytujProjekt newForm = new DodajEdytujProjekt();
+            string subjectName = customListView5.SelectedItems[0].Text;
+
+            DodajProjekt newForm = new DodajProjekt(subjectName);
             newForm.ShowDialog();
             newForm.Dispose();
+
+            if (newForm.newProjectAdded)                  // Gdy dodano nowy projekt
+                refillAllListViews();
         }
 
+        // Edytuj projekt
         private void button9_Click(object sender, EventArgs e)
         {
-            DodajEdytujProjekt newForm = new DodajEdytujProjekt();
+            string projectName = customListView6.SelectedItems[0].Text;
+
+            EdytujProjekt newForm = new EdytujProjekt(projectName);
             newForm.ShowDialog();
             newForm.Dispose();
+
+            if (newForm.projectEdited)                  // Gdy edytowano dane projektu
+                refillAllListViews();
+        }
+
+        // Usuń projekt
+        private void button11_Click(object sender, EventArgs e)
+        {
+            string projectName = customListView6.SelectedItems[0].Text;
+
+            DialogResult result = MsgBoxUtils.displayQuestionMsgBox("Potwierdź decyzję", "Czy na pewno chcesz usunąć projekt " + projectName + " z bazy?", this);
+
+            if (result == DialogResult.Yes)
+            {
+                formController.removeProject(projectName);
+                refillAllListViews();
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Użytkownicy
+        //----------------------------------------------------------------
+
+        // Usuń studenta
+        private void button12_Click(object sender, EventArgs e)
+        {
+            string subjectName = customListView5.SelectedItems[0].Text;
+            string projectName = "";
+
+            if (customListView6.SelectedItems.Count > 0)
+                projectName = customListView6.SelectedItems[0].Text;
+
+            string studentIndexNumber = customListView7.SelectedItems[0].Text;
+
+            DialogResult result = MsgBoxUtils.displayQuestionMsgBox("Potwierdź decyzję", "Czy na pewno chcesz usunąć studenta o nr indeksu: "
+                + studentIndexNumber + " z bazy?", this);
+
+            if (result == DialogResult.Yes)
+            {
+                formController.removeStudent(subjectName, projectName, studentIndexNumber);
+                refillAllListViews();
+            }
         }
 
         // Wyszukiwanie użytkownika
@@ -785,6 +892,100 @@ namespace ProjektBD.Forms
         //----------------------------------------------------------------
         #endregion
 
+        // Dodaj ocenę
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string studentLogin = customListView9.SelectedItems[0].SubItems[1].Text;
+            string subjectName = customListView8.SelectedItems[0].Text;
+            string projectName = null;
+
+            if (customListView10.SelectedItems.Count > 0)
+                projectName = customListView10.SelectedItems[0].Text;
+
+            OcenaDetailsDTO grade = new OcenaDetailsDTO
+            {
+                wartość = Double.Parse(comboBox1.Text),
+                komentarz = textBox5.Text,
+                nazwaProjektu = projectName,
+                nazwaPrzedmiotu = subjectName,
+            };
+
+            formController.addGrade(studentLogin, grade);
+            MsgBoxUtils.displayInformationMsgBox("Operacja ukończona pomyślnie", "Ocena została dodana pomyślnie");
+        }
+
+        // Usuń ocenę
+        private void button7_Click(object sender, EventArgs e)
+        {
+            int index = customListView13.SelectedItems[0].Index;
+            long gradeID = gradeDictionary[index];
+
+            DialogResult result = MsgBoxUtils.displayQuestionMsgBox("Potwierdź decyzję", "Czy na pewno chcesz usunąć wybraną ocenę?", this);
+
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                formController.removeGrade(gradeID);
+
+                MsgBoxUtils.displayInformationMsgBox("Operacja ukończona pomyślnie", "Ocena została usunięta pomyślnie");
+            }
+        }
+
+        // Modyfikuj ocenę
+        private void button1_Click(object sender, EventArgs e)
+        {
+            double newValue = Double.Parse(comboBox2.Text);
+            string newDesc = textBox3.Text;
+
+            int index = customListView16.SelectedItems[0].Index;
+            long gradeID = gradeDictionary2[index];
+
+            formController.modifyGrade(gradeID, newValue, newDesc);
+            MsgBoxUtils.displayInformationMsgBox("Operacja ukończona pomyślnie", "Ocena została zmodyfikowana pomyślnie");
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Metody pomocnicze
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Czyści wszystkie listView'y, wypełnia na nowo listy przedmiotów i resetuje ustawienia przycisków na formularzu
+        /// </summary>
+        private void refillAllListViews()
+        {
+            // Wyczyszczenie wszystkich listView'ów
+            foreach (var listView in formController.GetAllControlsRecursive<customListView>(this))
+                listView.Clear();
+
+            List<PrzedmiotDTO> subjectsList = formController.getSubjects();
+            List<PrzedmiotProwadzącegoDTO> mySubjectsList = formController.getMySubjects();
+
+            // Wypełnienie list przedmiotów
+            customListView1.fill<PrzedmiotDTO>(subjectsList);
+            customListView5.fill<PrzedmiotProwadzącegoDTO>(mySubjectsList);
+            customListView8.fill<PrzedmiotProwadzącegoDTO>(mySubjectsList);
+            customListView11.fill<PrzedmiotProwadzącegoDTO>(mySubjectsList);
+            customListView14.fill<PrzedmiotProwadzącegoDTO>(mySubjectsList);
+            customListView17.fill<PrzedmiotProwadzącegoDTO>(mySubjectsList);
+
+            button1.Enabled = false;
+            button4.Enabled = false;
+            button5.Enabled = false;
+            button6.Enabled = false;
+            button7.Enabled = false;
+            button8.Enabled = false;
+            button9.Enabled = false;
+            button11.Enabled = false;
+            button12.Enabled = false;
+            button1.BackColor = Color.LightGray;
+            button6.BackColor = Color.LightGray;
+            button7.BackColor = Color.LightGray;
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
         #region Help i zarządzanie kontem
         //----------------------------------------------------------------
 
@@ -793,7 +994,7 @@ namespace ProjektBD.Forms
         /// </summary>
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            //HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Teacher);
+            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Teacher);
         }
 
         /// <summary>
@@ -835,6 +1036,7 @@ namespace ProjektBD.Forms
         /// </summary>
         private void ProwadzacyMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+
             if (e.CloseReason == CloseReason.WindowsShutDown)
                 return;
 
@@ -849,6 +1051,8 @@ namespace ProjektBD.Forms
         /// </summary>
         private void ProwadzacyMain_FormClosed(object sender, FormClosedEventArgs e)
         {
+            contextMenuStrip1.Dispose();
+
             formController.disposeContext();
         }
 

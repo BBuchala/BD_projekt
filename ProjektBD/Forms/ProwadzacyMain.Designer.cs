@@ -247,6 +247,7 @@
             this.button6.TabIndex = 6;
             this.button6.Text = "Dodaj";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // label7
             // 
@@ -316,6 +317,7 @@
             this.button7.TabIndex = 9;
             this.button7.Text = "Usuń";
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // label10
             // 
@@ -414,6 +416,7 @@
             this.button1.TabIndex = 17;
             this.button1.Text = "Modyfikuj";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label14
             // 
@@ -518,6 +521,7 @@
             this.button12.TabIndex = 10;
             this.button12.Text = "Usuń studenta";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button11
             // 
@@ -528,9 +532,11 @@
             this.button11.TabIndex = 8;
             this.button11.Text = "Usuń projekt";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button8
             // 
+            this.button8.Enabled = false;
             this.button8.Location = new System.Drawing.Point(478, 375);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(168, 36);
@@ -548,6 +554,7 @@
             this.button5.TabIndex = 5;
             this.button5.Text = "Usuń przedmiot";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -905,7 +912,10 @@
             this.customListView2.UseCompatibleStateImageBehavior = false;
             this.customListView2.View = System.Windows.Forms.View.Details;
             this.customListView2.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView2_ItemSelectionChanged);
+<<<<<<< HEAD
             this.customListView2.SelectedIndexChanged += new System.EventHandler(this.customListView2_SelectedIndexChanged);
+=======
+>>>>>>> origin/master
             // 
             // customListView1
             // 
@@ -1115,7 +1125,10 @@
             this.customListView17.TabIndex = 3;
             this.customListView17.UseCompatibleStateImageBehavior = false;
             this.customListView17.View = System.Windows.Forms.View.Details;
+<<<<<<< HEAD
             this.customListView17.SelectedIndexChanged += new System.EventHandler(this.customListView17_SelectedIndexChanged);
+=======
+>>>>>>> origin/master
             // 
             // ProwadzacyMain
             // 
