@@ -178,7 +178,7 @@ namespace ProjektBD.Databases
                               
                            WHERE subj.nazwa = '" + subjectName + @"'  
                             GROUP BY u.login 
-                           HAVING AVG(o.wartość) >=" + przedział1 + @" AND AVG(o.wartość) < "+przedział2);
+                           HAVING AVG(o.wartość) >=" + przedział1 + @" AND AVG(o.wartość) <= "+przedział2);
 
             return query.ToList();
 

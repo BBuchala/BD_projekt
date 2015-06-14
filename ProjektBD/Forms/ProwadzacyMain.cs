@@ -744,6 +744,9 @@ namespace ProjektBD.Forms
         #region Comboboxy i buttony
         //----------------------------------------------------------------
 
+        #region Comboboxy
+        //----------------------------------------------------------------
+
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (customListView9.SelectedItems.Count > 0)
@@ -761,6 +764,9 @@ namespace ProjektBD.Forms
                 button1.Enabled = true;
             }
         }
+
+        //----------------------------------------------------------------
+        #endregion
 
         #region Przedmioty
         //----------------------------------------------------------------
@@ -912,6 +918,8 @@ namespace ProjektBD.Forms
 
             formController.addGrade(studentLogin, grade);
             MsgBoxUtils.displayInformationMsgBox("Operacja ukończona pomyślnie", "Ocena została dodana pomyślnie");
+
+            refillGradeListViews();
         }
 
         // Usuń ocenę
@@ -927,6 +935,8 @@ namespace ProjektBD.Forms
                 formController.removeGrade(gradeID);
 
                 MsgBoxUtils.displayInformationMsgBox("Operacja ukończona pomyślnie", "Ocena została usunięta pomyślnie");
+
+                refillGradeListViews();
             }
         }
 
@@ -941,6 +951,8 @@ namespace ProjektBD.Forms
 
             formController.modifyGrade(gradeID, newValue, newDesc);
             MsgBoxUtils.displayInformationMsgBox("Operacja ukończona pomyślnie", "Ocena została zmodyfikowana pomyślnie");
+
+            refillGradeListViews();
         }
 
         //----------------------------------------------------------------
@@ -980,6 +992,49 @@ namespace ProjektBD.Forms
             button12.Enabled = false;
             button1.BackColor = Color.LightGray;
             button6.BackColor = Color.LightGray;
+            button7.BackColor = Color.LightGray;
+        }
+
+        /// <summary>
+        /// Odświeża wszystkie listView'y z ocenami i resetuje ustawienia przycisków modyfikowania i usuwania ocen
+        /// </summary>
+        private void refillGradeListViews()
+        {
+            string subjectName = "", studentLogin = "";
+            List<OcenaDTO> gradesList;
+
+            customListView13.Clear();
+            customListView16.Clear();
+
+            if (customListView12.SelectedItems.Count > 0)
+            {
+                subjectName = customListView11.SelectedItems[0].Text;
+                studentLogin = customListView12.SelectedItems[0].SubItems[1].Text;
+
+                gradesList = formController.getGradesFromSubject(studentLogin, subjectName);
+                customListView13.fill<OcenaDTO>(gradesList);
+
+                gradeDictionary.Clear();
+                for (int i = 0; i < gradesList.Count; i++)
+                    gradeDictionary.Add(i, gradesList[i].ocenaID);
+            }
+
+            if (customListView15.SelectedItems.Count > 0)
+            {
+                subjectName = customListView14.SelectedItems[0].Text;
+                studentLogin = customListView15.SelectedItems[0].SubItems[1].Text;
+
+                gradesList = formController.getGradesFromSubject(studentLogin, subjectName);
+                customListView16.fill<OcenaDTO>(gradesList);
+
+                gradeDictionary2.Clear();
+                for (int i = 0; i < gradesList.Count; i++)
+                    gradeDictionary2.Add(i, gradesList[i].ocenaID);
+            }
+
+            button1.Enabled = false;
+            button7.Enabled = false;
+            button1.BackColor = Color.LightGray;
             button7.BackColor = Color.LightGray;
         }
 
@@ -1079,13 +1134,16 @@ namespace ProjektBD.Forms
             if (customListView17.SelectedItems.Count > 0)
             {
                 string subjectName = customListView17.SelectedItems[0].Text;
-                string koniec = formController.getSubjectInfo(subjectName) + "\r\n" + "\r\n" + formController.getZestawienieOcen(subjectName) + "\r\n" + "\r\n" + formController.getZestawienieStudenciProjekty(subjectName) + "\r\n" + "\r\n"+ formController.getNdst(subjectName);
 
-                File.WriteAllText(@"D:\BD - projekt\Raport.txt", koniec);
+                string koniec = formController.getSubjectInfo(subjectName) + "\r\n" + "\r\n" +
+                    formController.getZestawienieOcen(subjectName) + "\r\n" + "\r\n" +
+                    formController.getZestawienieStudenciProjekty(subjectName) + "\r\n" + "\r\n"+
+                    formController.getNdst(subjectName);
+
+                File.WriteAllText("Raport.txt", koniec);
             }
         }
         #endregion
-
 
         /// <summary>
         /// Struktura zawierająca informacje o zgłoszeniach.
