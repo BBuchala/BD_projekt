@@ -898,6 +898,9 @@ namespace ProjektBD.Forms
         //----------------------------------------------------------------
         #endregion
 
+        #region Oceny
+        //----------------------------------------------------------------
+
         // Dodaj ocenę
         private void button6_Click(object sender, EventArgs e)
         {
@@ -954,6 +957,9 @@ namespace ProjektBD.Forms
 
             refillGradeListViews();
         }
+
+        //----------------------------------------------------------------
+        #endregion
 
         //----------------------------------------------------------------
         #endregion

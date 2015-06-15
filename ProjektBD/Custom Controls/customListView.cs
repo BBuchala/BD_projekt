@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using ProjektBD.DAL;
 using ProjektBD.Databases;
+using ProjektBD.Forms;
 using ProjektBD.Forms.CommonForms;
 using ProjektBD.Model;
 using ProjektBD.Utilities;
@@ -33,6 +34,11 @@ namespace ProjektBD.Custom_Controls
         /// </summary>
         public long gradeID;
 
+        /// <summary>
+        /// ID rozmowy, dla której pobierane są szczegóły
+        /// </summary>
+        public int conversationID;
+
         private enum listViewType
         {
             StudentsWithIndexNumber,
@@ -40,7 +46,8 @@ namespace ProjektBD.Custom_Controls
             TeachersWithLogin,
             Subjects,
             Projects,
-            Grades
+            Grades,
+            Contacts
         };
 
         public customListView()
@@ -130,24 +137,36 @@ namespace ProjektBD.Custom_Controls
         {
             ContextMenuStrip cms = new ContextMenuStrip();
 
-            foreach (ColumnHeader column in this.Columns)
+            if (this.dataType == listViewType.Subjects)
             {
-                if (column.Text.Equals("login"))
-                {
-                    cms.Items.Add("Pokaż profil");
-                    cms.Items.Add("Wyślij wiadomość");
-                    break;
-                }
-                else if (this.dataType == listViewType.Subjects)
-                {
-                    cms.Items.Add("Pokaż szczegóły");
-                    cms.Items.Add("Pokaż profil prowadzącego");
-                    cms.Items.Add("Wyślij wiadomość do prowadzącego");
-                    break;
-                }
+                cms.Items.Add("Pokaż szczegóły");
+                cms.Items.Add("Pokaż profil prowadzącego");
+                cms.Items.Add("Wyślij wiadomość do prowadzącego");
             }
 
-            if (cms.Items.Count < 2)
+            else if (this.dataType == listViewType.Contacts)
+                cms.Items.Add("Pokaż szczegóły rozmowy");
+
+            else
+            {
+                foreach (ColumnHeader column in this.Columns)
+                {
+                    if (column.Text.Equals("login"))
+                    {
+                        cms.Items.Add("Pokaż profil");
+
+                        // Blokuje możliwość wysłania wiadomości, gdy komunikator jest już otwarty
+                        var openedGGForms = Application.OpenForms.OfType<Komunikator>().ToList();
+
+                        if (openedGGForms.Count == 0)
+                            cms.Items.Add("Wyślij wiadomość");
+
+                        break;
+                    }
+                }
+            }
+            
+            if (cms.Items.Count == 0)
                 cms.Items.Add("Pokaż szczegóły");
 
             // Przy otwieraniu menusa na PPM sprawdza, czy jest zaznaczony jakikolwiek item. Jeśli nie, anuluje event
@@ -193,6 +212,10 @@ namespace ProjektBD.Custom_Controls
                 case "OcenaDTO": 
                 case "OcenaZProjektuDTO":
                     dataType = listViewType.Grades;
+                    return;
+
+                case "KontaktyDTO":
+                    dataType = listViewType.Contacts;
                     return;
             }
         }
@@ -274,6 +297,11 @@ namespace ProjektBD.Custom_Controls
                             break;
                     }
                     break;
+
+                case "Pokaż szczegóły rozmowy":
+                    dataForForm = db.getConversationDetails(conversationID);
+                    newForm = new ConversationDetails(dataForForm);
+                    break;
             }
 
             newForm.ShowDialog();
@@ -323,7 +351,9 @@ namespace ProjektBD.Custom_Controls
             if (this.SelectedItems.Count > 0)
             {
                 this.previouslySelectedItemColor = this.SelectedItems[0].BackColor;
-                this.SelectedItems[0].BackColor = Color.AntiqueWhite;
+
+                foreach (ListViewItem item in this.SelectedItems)
+                    item.BackColor = Color.AntiqueWhite;
             }
         }
 
@@ -333,7 +363,10 @@ namespace ProjektBD.Custom_Controls
         private void loadItemState(object sender, EventArgs e)
         {
             if (this.SelectedItems.Count > 0)
-                this.SelectedItems[0].BackColor = this.previouslySelectedItemColor;
+            {
+                foreach (ListViewItem item in this.SelectedItems)
+                    item.BackColor = this.previouslySelectedItemColor;
+            }
         }
 
         //----------------------------------------------------------------

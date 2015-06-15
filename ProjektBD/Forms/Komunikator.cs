@@ -8,118 +8,101 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using ProjektBD.Controllers;
+using ProjektBD.Custom_Controls;
+using ProjektBD.Forms.CommonForms;
+using ProjektBD.Model;
+using ProjektBD.Utilities;
+
 namespace ProjektBD.Forms
 {
     public partial class Komunikator : Form
     {
-        string tymczasowaWiadomosc;
-     
-        public Komunikator()
+        /// <summary>
+        /// Login zalogowanego użytkownika
+        /// </summary>
+        private string userLogin;
+
+        /// <summary>
+        /// Kontroler do zarządzania i komunikowania się z bazą danych.
+        /// </summary>
+        private MessageController formController;
+
+        /// <summary>
+        /// Słownik przechowujący zmapowane wartości ID rozmów i ich indeksów w kontrolce CustomListView
+        /// </summary>
+        private Dictionary<int, int> contactsDictionary = new Dictionary<int, int>(); 
+
+        public Komunikator(string login)
         {
             InitializeComponent();
+
+            this.userLogin = login;
+            formController = new MessageController(userLogin);
         }
 
+        private void Komunikator_Load(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                MessageControl ms = new MessageControl();
+
+                ms.Location = new Point(0, i * ms.Size.Height);
+                panel1.Controls.Add(ms);
+            }
+
+            refreshContactsList();
+        }
+
+        // Dodaj kontakt
         private void button2_Click(object sender, EventArgs e)
         {
-            ProjektBD.Model.Student nowyKontakt = new ProjektBD.Model.Student();
-            dodajKontakt(nowyKontakt);
+            AddContact form = new AddContact(formController, userLogin);
+            form.ShowDialog();
+            form.Dispose();
+
+            if (form.isContactAdded)
+                refreshContactsList();
         }
 
+        // Usuń kontakt
         private void button3_Click(object sender, EventArgs e)
         {
-            int kontaktID = 0;
-            usunKontakt(kontaktID);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ProjektBD.Model.Wiadomość wysylanaWiadomosc = new ProjektBD.Model.Wiadomość();
-
-            wysylanaWiadomosc.nadawca = "user";
-            wysylanaWiadomosc.treść = tymczasowaWiadomosc;
-            wysylanaWiadomosc.dataWysłania = DateTime.Now;
-            wysylanaWiadomosc.przeczytana = false;
-
-            wysylanieWiadomosci(wysylanaWiadomosc);
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            tymczasowaWiadomosc = textBox1.Text;
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            // Wyswietl wszystkie wiadomosci z danym rozmowca.
-            ProjektBD.Model.Wiadomość pobranaWiadomosc;
-
-            int iloscWiadomosci = 0;
-
-            // Wyswietlanie
-            /*
-            for (int i = 0; i < iloscWiadomosci; ++ i)
+            if (customListView1.SelectedItems.Count > 0)
             {
-                pobranaWiadomosc = pobierzWiadomosc(i);
-                Console.WriteLine(pobranaWiadomosc.dataWysłania + " - " +
-                                  pobranaWiadomosc.nadawca + " : " +
-                                  pobranaWiadomosc.treść);
-            }*/
+                int index = customListView1.SelectedItems[0].Index;
+                int conversationID = contactsDictionary[index];
+
+                DialogResult result = MsgBoxUtils.displayQuestionMsgBox("Potwierdź decyzję", "Czy na pewno chcesz usunąć wybrany kontakt?", this);
+
+                if (result == DialogResult.Yes)
+                {
+                    formController.deleteConversation(conversationID);
+                    refreshContactsList();
+                }
+            }
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {/*
-            ProjektBD.Model.Użytkownik pobranyKontakt;
+        /// <summary>
+        /// Odświeża listę kontaktów.
+        /// </summary>
+        private void refreshContactsList()
+        {
+            List<KontaktyDTO> contactsList = formController.getContacts();
+            customListView1.fill<KontaktyDTO>(contactsList);
 
-            int iloscKontaktow = 0;
+            contactsDictionary.Clear();
+            for (int i = 0; i < contactsList.Count; i++)
+                contactsDictionary.Add(i, contactsList[i].RozmowaID);
+        }
 
-            // Wyswietlanie
-            for (int i = 0; i < iloscKontaktow; ++ i)
+        private void customListView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (customListView1.SelectedItems.Count > 0)
             {
-                pobranyKontakt = pobierzKontakt(i);
-                Console.WriteLine(i + ". " + pobranyKontakt.login);
-            }*/
-        }
-
-        /**
-          *  Obsluga wiadomosci.
-          **/
-        private void wysylanieWiadomosci(ProjektBD.Model.Wiadomość wiadomoscDoWyslania)
-        {
-            // ToDo
-            // Zapisanie wiadomosci do bazy
-            Console.WriteLine("Wysylanie wiadomosci od uzytkownika do adresata: " + wiadomoscDoWyslania.treść);
-        }
-
-        private ProjektBD.Model.Wiadomość pobierzWiadomosc(int wiadomoscID)
-        {
-            // ToDo
-            // Pobranie wiadomosci z bazy
-            ProjektBD.Model.Wiadomość pobranaWiadomosc = new ProjektBD.Model.Wiadomość();
-            return pobranaWiadomosc;
-        }
-
-
-        /**
-         *  Obsluga listy kontaktow.
-         **/
-        private ProjektBD.Model.Użytkownik pobierzKontakt(int kontaktID)
-        {
-            // ToDo
-            // Pobranie kontaktu z bazy
-            ProjektBD.Model.Użytkownik pobranyKontakt = new ProjektBD.Model.Student();
-            return pobranyKontakt;
-        }
-
-        private void dodajKontakt(ProjektBD.Model.Użytkownik nowyKontakt)
-        {
-            // ToDo
-            // Dodanie kontaktu do bazy
-        }
-
-        private void usunKontakt(int kontaktID)
-        {
-            // ToDo
-            // Usuniecie kontaktu z bazy
+                int index = customListView1.SelectedItems[0].Index;
+                customListView1.conversationID = contactsDictionary[index];
+            }
         }
     }
 }

@@ -64,7 +64,6 @@ namespace ProjektBD.Model
         public int maxLiczbaStudentów { get; set; }
     }
 
-  
     
     class ForeignProjektDTO
     {
@@ -78,12 +77,8 @@ namespace ProjektBD.Model
         public int nrIndeksu { get; set; }
         public string login { get; set; }
         public string email { get; set; }
-       
-      
     }
   
-
-
     class UżytkownikDTO
     {
         public string login { get; set; }
@@ -148,6 +143,30 @@ namespace ProjektBD.Model
         public double wartość { get; set; }
         public DateTime? dataWpisania { get; set; }
         public string komentarz { get; set; }
+    }
+
+    public class ConversationDetailsDTO
+    {
+        public string rozmówcy { get; set; }
+        public DateTime dataRozpoczęcia { get; set; }
+        public int ilośćWiadomości { get; set; }
+    }
+
+    //----------------------------------------------------------------
+    #endregion
+
+    #region Wiadomości
+    //----------------------------------------------------------------
+
+    class KontaktyDTO
+    {
+        public long ID { get; set; }
+
+        [SkipInListView]
+        public int RozmowaID { get; set; }
+
+        public string rozmówcy { get; set; }
+        //public string miejsceZamieszkania { get; set; }
     }
 
     //----------------------------------------------------------------

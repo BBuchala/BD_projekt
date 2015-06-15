@@ -146,5 +146,40 @@ namespace ProjektBD.Databases
 
             return query.Single();
         }
+
+        /// <summary>
+        /// Pobiera z bazy informacje o rozmowie
+        /// </summary>
+        public ConversationDetailsDTO getConversationDetails(int conversationID)
+        {
+            // Informacje o rozmowie - data rozpoczęcia i ilość wiadomości
+            var conversationQuery = context.Database.SqlQuery<ConversationDetailsDTO>
+                (@"
+                        SELECT r.dataRozpoczęcia, COUNT(msg.WiadomośćID) AS ilośćWiadomości
+                        FROM Rozmowa r
+	                        LEFT JOIN Wiadomość msg ON r.RozmowaID = msg.RozmowaID
+                        WHERE r.RozmowaID = " + conversationID + @"
+                        GROUP BY r.dataRozpoczęcia"
+                ).Single();
+
+            // Użytkownicy biorący udział w rozmowie
+            var conversationMembers = context.Database.SqlQuery<string>
+                (@"
+                        SELECT u.login
+                        FROM Prowadzone_rozmowy pr
+	                        JOIN Użytkownik u on pr.UżytkownikID = u.UżytkownikID
+                        WHERE pr.RozmowaID = " + conversationID
+                ).ToList();
+
+            // Dodawanie rozmówców
+            foreach (string member in conversationMembers)
+                conversationQuery.rozmówcy += member + ", ";
+
+            // Usunięcie przecinka na końcu listy rozmówców
+            string tmp = conversationQuery.rozmówcy;
+            conversationQuery.rozmówcy = tmp.Remove(tmp.Length - 2, 2);
+
+            return conversationQuery;
+        }
     }
 }

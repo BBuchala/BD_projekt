@@ -185,6 +185,7 @@ dsfsdf;askdjfa;osidfj;aosidfj;aosijdf;oaisjd;foaijsd;foiajs;dfoiajsqdsdsdsssssss
             var rozmowy = new List<Rozmowa>
             {
                 new Rozmowa { dataRozpoczęcia = DateTime.Parse("2015-01-18") },
+                new Rozmowa { dataRozpoczęcia = DateTime.Now },
                 new Rozmowa { dataRozpoczęcia = DateTime.Now }
             };
             rozmowy.ForEach(r => context.Rozmowy.Add(r));
@@ -197,8 +198,15 @@ dsfsdf;askdjfa;osidfj;aosidfj;aosijdf;oaisjd;foaijsd;foiajs;dfoiajsqdsdsdsssssss
             List<Projekt> projectsList = context.Projekty.ToList();
             List<Przedmiot> subjectsList = context.Przedmioty.ToList();
 
-            studentsList[0].Rozmowy.Add( rozmowy[0] );
-            studentsList[1].Rozmowy.Add( rozmowy[1] );
+            studentsList[0].Rozmowy.Add(rozmowy[0]);
+            studentsList[1].Rozmowy.Add(rozmowy[0]);
+            studentsList[2].Rozmowy.Add(rozmowy[0]);
+
+            studentsList[1].Rozmowy.Add(rozmowy[1]);
+            studentsList[3].Rozmowy.Add(rozmowy[1]);
+
+            studentsList[1].Rozmowy.Add(rozmowy[2]);
+            studentsList[2].Rozmowy.Add(rozmowy[2]);
 
             Student Forczu = context.Studenci.Where( s => s.login.Equals("Forczu") ).First();
             Forczu.Przedmioty.Add(subjectsList[0]);

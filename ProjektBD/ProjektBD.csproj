@@ -55,6 +55,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -65,6 +66,12 @@
     <Compile Include="Custom Controls\godlyDataGrid.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Custom Controls\MessageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Custom Controls\MessageControl.Designer.cs">
+      <DependentUpon>MessageControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\ProjektBDContext.cs" />
     <Compile Include="DAL\ProjektBDInitializer.cs" />
     <Compile Include="Databases\AccountDatabase.cs" />
@@ -72,6 +79,7 @@
     <Compile Include="Databases\customListViewDatabase.cs" />
     <Compile Include="Databases\DatabaseBase.cs" />
     <Compile Include="Databases\ManageDatabase.cs" />
+    <Compile Include="Databases\MessageDatabase.cs" />
     <Compile Include="Databases\RegistrationDatabase.cs" />
     <Compile Include="Databases\StudentDatabase.cs" />
     <Compile Include="Databases\TeacherDatabase.cs" />
@@ -83,6 +91,18 @@
     </Compile>
     <Compile Include="Forms\AdministratorMain.Designer.cs">
       <DependentUpon>AdministratorMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CommonForms\AddContact.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CommonForms\AddContact.Designer.cs">
+      <DependentUpon>AddContact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CommonForms\ConversationDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CommonForms\ConversationDetails.Designer.cs">
+      <DependentUpon>ConversationDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CommonForms\GradeDetails.cs">
       <SubType>Form</SubType>
@@ -239,8 +259,17 @@
     <Compile Include="Model\Zgłoszenie.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Custom Controls\MessageControl.resx">
+      <DependentUpon>MessageControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdministratorMain.resx">
       <DependentUpon>AdministratorMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CommonForms\AddContact.resx">
+      <DependentUpon>AddContact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CommonForms\ConversationDetails.resx">
+      <DependentUpon>ConversationDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CommonForms\GradeDetails.resx">
       <DependentUpon>GradeDetails.cs</DependentUpon>

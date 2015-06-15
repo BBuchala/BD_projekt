@@ -28,7 +28,7 @@ namespace ProjektBD.Forms.CommonForms
             label7.Text = gradeDetails.wartość.ToString();
 
             if (gradeDetails.dataWpisania.HasValue)
-                label9.Text = gradeDetails.dataWpisania.Value.ToLongDateString();
+                label9.Text = gradeDetails.dataWpisania.Value.ToString();
             else
                 label9.Text = "brak";
 
