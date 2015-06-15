@@ -118,6 +118,7 @@ namespace ProjektBD.Model
         public string prowadzący { get; set; }
         public string opis { get; set; }
     }
+
     public class PrzedmiotRaportDetailsDTO
     {
         public string nazwa { get; set; }

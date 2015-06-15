@@ -36,8 +36,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.customListView1 = new ProjektBD.Custom_Controls.customListView();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.customListView1 = new ProjektBD.Custom_Controls.customListView();
             this.SuspendLayout();
             // 
             // button1
@@ -48,6 +48,7 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "Wyślij";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -109,6 +110,16 @@
             this.panel1.Size = new System.Drawing.Size(629, 395);
             this.panel1.TabIndex = 11;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(306, 463);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.richTextBox1.Size = new System.Drawing.Size(629, 60);
+            this.richTextBox1.TabIndex = 12;
+            this.richTextBox1.Text = "";
+            this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
+            // 
             // customListView1
             // 
             this.customListView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
@@ -122,15 +133,6 @@
             this.customListView1.UseCompatibleStateImageBehavior = false;
             this.customListView1.View = System.Windows.Forms.View.Details;
             this.customListView1.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView1_ItemSelectionChanged);
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(306, 463);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBox1.Size = new System.Drawing.Size(629, 60);
-            this.richTextBox1.TabIndex = 12;
-            this.richTextBox1.Text = "";
             // 
             // Komunikator
             // 
@@ -152,6 +154,7 @@
             this.Name = "Komunikator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Komunikator";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Komunikator_FormClosed);
             this.Load += new System.EventHandler(this.Komunikator_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

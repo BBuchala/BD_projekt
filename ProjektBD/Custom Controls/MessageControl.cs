@@ -12,9 +12,13 @@ namespace ProjektBD.Custom_Controls
 {
     public partial class MessageControl : UserControl
     {
-        public MessageControl()
+        public MessageControl(string nadawca, DateTime dataWysłania, string treść)
         {
             InitializeComponent();
+
+            label2.Text = nadawca;
+            label4.Text = dataWysłania.ToString();
+            label5.Text = treść;
         }
     }
 }

@@ -94,5 +94,37 @@ namespace ProjektBD.Databases
             context.Rozmowy.Remove(conversation);
             context.SaveChanges();
         }
+
+        /// <summary>
+        /// Pobiera z bazy wiadomości z podanej rozmowy
+        /// </summary>
+        public List<Wiadomość> getMessages(int conversationID)
+        {
+            return context.Wiadomości
+                .Where( w => w.RozmowaID == conversationID )
+                .ToList();
+        }
+
+        /// <summary>
+        /// Wysyła wiadomość o podanej treści.
+        /// </summary>
+        /// <param name="userLogin"> Login użytkownika wysyłającego wiadomość </param>
+        /// <param name="sendDate"> Data wysłania wiadomości </param>
+        /// <param name="msgContents"> Treść wiadomości </param>
+        /// <param name="conversationID"> ID rozmowy </param>
+        public void sendMessage(string userLogin, DateTime sendDate, string msgContents, int conversationID)
+        {
+            Wiadomość msg = new Wiadomość
+            {
+                nadawca = userLogin,
+                dataWysłania = sendDate,
+                treść = msgContents,
+                przeczytana = false,
+                RozmowaID = conversationID
+            };
+
+            context.Wiadomości.Add(msg);
+            context.SaveChanges();
+        }
     }
 }

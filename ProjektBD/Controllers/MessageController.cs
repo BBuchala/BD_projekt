@@ -76,5 +76,25 @@ namespace ProjektBD.Controllers
         {
             msgDatabase.deleteConversation(conversationID);
         }
+
+        /// <summary>
+        /// Pobiera z bazy wiadomości z podanej rozmowy
+        /// </summary>
+        public List<Wiadomość> getMessages(int conversationID)
+        {
+            return msgDatabase.getMessages(conversationID);
+        }
+
+        /// <summary>
+        /// Wysyła wiadomość o podanej treści.
+        /// </summary>
+        /// <param name="userLogin"> Login użytkownika wysyłającego wiadomość </param>
+        /// <param name="sendDate"> Data wysłania wiadomości </param>
+        /// <param name="msgContents"> Treść wiadomości </param>
+        /// <param name="conversationID"> ID rozmowy </param>
+        public void sendMessage(string userLogin, DateTime sendDate, string msgContents, int conversationID)
+        {
+            msgDatabase.sendMessage(userLogin, sendDate, msgContents, conversationID);
+        }
     }
 }

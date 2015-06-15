@@ -18,6 +18,9 @@ namespace ProjektBD.Forms
 {
     public partial class Komunikator : Form
     {
+        #region Pola i konstruktor
+        //----------------------------------------------------------------
+
         /// <summary>
         /// Login zalogowanego użytkownika
         /// </summary>
@@ -41,18 +44,22 @@ namespace ProjektBD.Forms
             formController = new MessageController(userLogin);
         }
 
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Ładowanie formularza
+        //----------------------------------------------------------------
+
         private void Komunikator_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < 10; i++)
-            {
-                MessageControl ms = new MessageControl();
-
-                ms.Location = new Point(0, i * ms.Size.Height);
-                panel1.Controls.Add(ms);
-            }
-
             refreshContactsList();
         }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Obsługa kontaktów
+        //----------------------------------------------------------------
 
         // Dodaj kontakt
         private void button2_Click(object sender, EventArgs e)
@@ -62,7 +69,9 @@ namespace ProjektBD.Forms
             form.Dispose();
 
             if (form.isContactAdded)
+            {
                 refreshContactsList();
+            }
         }
 
         // Usuń kontakt
@@ -91,18 +100,128 @@ namespace ProjektBD.Forms
             List<KontaktyDTO> contactsList = formController.getContacts();
             customListView1.fill<KontaktyDTO>(contactsList);
 
+            panel1.Controls.Clear();
             contactsDictionary.Clear();
+
             for (int i = 0; i < contactsList.Count; i++)
                 contactsDictionary.Add(i, contactsList[i].RozmowaID);
         }
 
-        private void customListView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Wysyłanie wiadomości
+        //----------------------------------------------------------------
+
+        // Wyślij wiadomość
+        private void button1_Click(object sender, EventArgs e)
         {
-            if (customListView1.SelectedItems.Count > 0)
+            sendMessage();
+        }
+
+        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Enter bez Shift'a, gdy wiadomość ma chociaż 1 znak
+            if (richTextBox1.TextLength > 0 && e.KeyValue == 13 && e.Shift == false)
             {
-                int index = customListView1.SelectedItems[0].Index;
-                customListView1.conversationID = contactsDictionary[index];
+                sendMessage();
+                e.SuppressKeyPress = true;
             }
         }
+
+        /// <summary>
+        /// Wysyła wiadomość wpisaną w polu richTextBox
+        /// </summary>
+        private void sendMessage()
+        {
+            if (customListView1.SelectedItems.Count > 0 && richTextBox1.TextLength > 0)
+            {
+                int selectedContactIndex = customListView1.SelectedItems[0].Index;
+                int conversationID = contactsDictionary[selectedContactIndex];
+                string msgContents = richTextBox1.Text;
+                DateTime sendDate = DateTime.Now;
+
+                formController.sendMessage(userLogin, sendDate, msgContents, conversationID);
+
+                drawMessageOnScreen( new MessageControl(userLogin, sendDate, msgContents) );                
+            }
+        }
+
+        /// <summary>
+        /// Rysuje podaną wiadomość na dole panelu, po czym przesuwa scrollbar na sam dół, by była ona widoczna
+        /// </summary>
+        private void drawMessageOnScreen(MessageControl msg)
+        {
+            int controlPositionY = 0;
+
+            foreach (Control c in panel1.Controls)
+                controlPositionY += c.Height;
+
+            // Z bliżej nieokreślonych przyczyn jeśli scroll nie jest na samej górze, coś mu się dzieje z lokalnymi współrzędnymi,
+            // dlatego trzeba wziąć poprawkę na jego pozycję
+            msg.Location = new Point(0, panel1.AutoScrollPosition.Y + controlPositionY);
+
+            richTextBox1.Clear();
+            panel1.Controls.Add(msg);
+
+            /// Odświeżenie pozycji scrollbar'a
+            if (panel1.VerticalScroll.Visible)
+            {
+                int visibleAreaY = panel1.ClientSize.Height;                // Wysokość widzialnego okna w panelu
+                int activeAreaY = panel1.DisplayRectangle.Height;           // Wysokość aktywnego okna w panelu
+
+                panel1.VerticalScroll.Value = activeAreaY - visibleAreaY;
+                panel1.PerformLayout();                                     // Odświeża pozycję scrollbar'a
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Wybór rozmowy
+        //----------------------------------------------------------------
+
+        private void customListView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            panel1.Controls.Clear();
+
+            if (customListView1.SelectedItems.Count > 0)
+            {
+                int currentHeight = 0;
+                int index = customListView1.SelectedItems[0].Index;
+                int conversationID = contactsDictionary[index];
+
+                customListView1.conversationID = conversationID;
+                List<Wiadomość> msgList = formController.getMessages(conversationID);
+                
+                // Dodawanie wiadomości do panelu
+                foreach (Wiadomość msg in msgList)
+                {
+                    MessageControl ms = new MessageControl(msg.nadawca, msg.dataWysłania, msg.treść);
+
+                    if (msg.nadawca != userLogin)
+                        ms.BackColor = Color.AntiqueWhite;
+
+                    ms.Location = new Point(0, currentHeight);
+                    panel1.Controls.Add(ms);
+
+                    currentHeight += ms.Size.Height;                // Do currentHeight sumuje w sobie wysokości wszystkich wiadomości,
+                }                                                   // dzięki czemu te kilkulinijkowe nie zbugują wyświetlania
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Zamykanie formularza
+        //----------------------------------------------------------------
+
+        private void Komunikator_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            formController.disposeContext();
+        }
+
+        //----------------------------------------------------------------
+        #endregion
     }
 }

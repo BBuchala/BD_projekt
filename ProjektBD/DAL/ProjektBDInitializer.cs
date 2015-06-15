@@ -238,7 +238,9 @@ dsfsdf;askdjfa;osidfj;aosidfj;aosijdf;oaisjd;foaijsd;foiajs;dfoiajsqdsdsdsssssss
             var wiadomości = new List<Wiadomość>
             {
                 new Wiadomość { dataWysłania = DateTime.Parse("2015-01-18 13:41:25"), nadawca = "Kirei",
-                    treść = "Yorokobe", RozmowaID = 1 }
+                    treść = "Yorokobe", RozmowaID = 1 },
+                new Wiadomość { dataWysłania = DateTime.Now, nadawca = "Forczu",
+                treść = "Ale te bazy chujowe", RozmowaID = 1 }
             };
             wiadomości.ForEach(w => context.Wiadomości.Add(w));
             context.SaveChanges();

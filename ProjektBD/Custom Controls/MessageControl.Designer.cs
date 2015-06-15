@@ -59,7 +59,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(415, 5);
+            this.label3.Location = new System.Drawing.Point(386, 5);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(100, 15);
             this.label3.TabIndex = 2;
@@ -69,16 +69,17 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(512, 5);
+            this.label4.Location = new System.Drawing.Point(483, 5);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 15);
+            this.label4.Size = new System.Drawing.Size(108, 15);
             this.label4.TabIndex = 3;
-            this.label4.Text = "xx-xx-xxxx xx:xx";
+            this.label4.Text = "xx-xx-xxxx xx:xx:xx";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(5, 29);
+            this.label5.MaximumSize = new System.Drawing.Size(589, 0);
             this.label5.MinimumSize = new System.Drawing.Size(0, 30);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(92, 30);
@@ -90,7 +91,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.BackColor = System.Drawing.Color.Honeydew;
             this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -98,7 +99,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "MessageControl";
-            this.Size = new System.Drawing.Size(608, 59);
+            this.Size = new System.Drawing.Size(594, 59);
             this.ResumeLayout(false);
             this.PerformLayout();
 
