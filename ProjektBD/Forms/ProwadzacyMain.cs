@@ -207,6 +207,7 @@ namespace ProjektBD.Forms
             {
                 case DialogResult.Yes:
                     formController.addStudentToSubject(app.IDZgłoszenia);
+                    refillAllListViews();
                     break;
 
                 case DialogResult.No:
@@ -1086,6 +1087,7 @@ namespace ProjektBD.Forms
         private void timer1_Tick(object sender, EventArgs e)
         {
             checkForNewMessages();
+            checkForNewApplications();
         }
 
         /// <summary>

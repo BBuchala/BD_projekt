@@ -116,7 +116,7 @@ namespace ProjektBD.DAL
 
                 new Student {                                   // ID = 9
                     login = "Korda",
-                    hasło = Encryption.HashPassword("pedał", salt5),
+                    hasło = Encryption.HashPassword("doxygen", salt5),
                     sól = salt5,
                     email = "Korda@student.projektBD.pl",
                     nrIndeksu = 219795,
@@ -127,9 +127,9 @@ namespace ProjektBD.DAL
 
             var przedmioty = new List<Przedmiot>
             {
-                new Przedmiot { nazwa = "Informatyka", liczbaStudentów = 31, ProwadzącyID = 2 },
-                new Przedmiot { nazwa = "Fizyka", liczbaStudentów = 31, ProwadzącyID = 3 },
-                new Przedmiot { nazwa = "TUC", liczbaStudentów = 69, ProwadzącyID = 4,
+                new Przedmiot { nazwa = "Informatyka", liczbaStudentów = 3, ProwadzącyID = 2 },
+                new Przedmiot { nazwa = "Fizyka", liczbaStudentów = 0, ProwadzącyID = 3 },
+                new Przedmiot { nazwa = "TUC", liczbaStudentów = 1, ProwadzącyID = 4,
                                 opis = @"asdasdasdasdasdasddsadasdsdsdasdasdahlsafiuhasldfiuhasldfiuhasfasdf
 sdfsdlfkjsd;flksjd;falksdj;flaskjdf;alskdfj;aslkdjf;aslkdjf;alskdjfh;weroiqwej;roqijwe;roiqjw
 dsfsdf;askdjfa;osidfj;aosidfj;aosijdf;oaisjd;foaijsd;foiajs;dfoiajsqdsdsdssssssssaqweqweqwkjnlkjnlzxicuz"}
@@ -140,7 +140,7 @@ dsfsdf;askdjfa;osidfj;aosidfj;aosijdf;oaisjd;foaijsd;foiajs;dfoiajsqdsdsdsssssss
             PrzedmiotObieralny przedmObier = new PrzedmiotObieralny
             {
                 nazwa = "Fizycznie inspirowane algorytmy informatyczne",
-                liczbaStudentów = 7,
+                liczbaStudentów = 2,
                 maxLiczbaStudentów = 15,
                 ProwadzącyID = 2,
                 opis = @"
@@ -159,7 +159,7 @@ dsfsdf;askdjfa;osidfj;aosidfj;aosijdf;oaisjd;foaijsd;foiajs;dfoiajsqdsdsdsssssss
             var projekty = new List<Projekt>
             {
                 new Projekt { PrzedmiotID  = 1, nazwa = "Danmaku", opis = "Forczu robi", maxLiczbaStudentów = 4 },
-                new Projekt { PrzedmiotID  = 1, nazwa = "Bazy", maxLiczbaStudentów = 5, opis = "Jebać Bachową" },
+                new Projekt { PrzedmiotID  = 1, nazwa = "Bazy", maxLiczbaStudentów = 5, opis = "Danych" },
                 new Projekt { PrzedmiotID  = 1, nazwa = "Algorytmy grafowe", maxLiczbaStudentów = 1 },
                 new Projekt { PrzedmiotID  = 2, nazwa = "???", maxLiczbaStudentów = 10 },
                 new Projekt { PrzedmiotID  = 3, nazwa = "Lutowanie kabelków", maxLiczbaStudentów = 180 },
@@ -240,7 +240,7 @@ dsfsdf;askdjfa;osidfj;aosidfj;aosijdf;oaisjd;foaijsd;foiajs;dfoiajsqdsdsdsssssss
                 new Wiadomość { dataWysłania = DateTime.Parse("2015-01-18 13:41:25"), nadawca = "Kirei",
                     treść = "Yorokobe", RozmowaID = 1 },
                 new Wiadomość { dataWysłania = DateTime.Now, nadawca = "Forczu",
-                treść = "Ale te bazy chujowe", RozmowaID = 1 }
+                treść = "Ale te bazy fajne", RozmowaID = 1 }
             };
             wiadomości.ForEach(w => context.Wiadomości.Add(w));
             context.SaveChanges();

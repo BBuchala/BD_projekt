@@ -14,10 +14,10 @@ namespace ProjektBD.DAL
     class ProjektBDContext : DbContext
     {
         public ProjektBDContext()                   // Connection String. Określa nazwę serwera, bazę, do której się podpinamy i passy do podłączenia
-        //    : base(@"Data Source=89.70.47.247;Initial Catalog=ProjektBD;User ID=Jan Sebastian;Password=Bach")
+            : base(@"Data Source=89.70.47.247;Initial Catalog=ProjektBD;User ID=Jan Sebastian;Password=Bach")
 
         // : base(@"Data Source=PC; Initial Catalog=ProjektBD; Integrated Security=True")     // Od strony hosta łączy się inaczej, don't bother
-         : base("ProjektBD")                      // Stary, lokalny CS, na wypadek gdyby ligocki serwer spał
+        // : base("ProjektBD")                      // Stary, lokalny CS, na wypadek gdyby ligocki serwer spał
         //    : base(@"Data Source=PC; Initial Catalog=ProjektBD; User ID=Jan Sebastian;Password=Bach;Connection Timeout=3") 
 
         {

@@ -17,6 +17,8 @@ using ProjektBD.Utilities;
 using ProjektBD.Controllers;
 using System.Data.Entity.Core;
 using ProjektBD.Forms.HelpForms;
+using System.Data.SqlClient;
+using System.Data.Entity.Infrastructure;
 
 namespace ProjektBD
 {
@@ -134,6 +136,14 @@ namespace ProjektBD
                 catch (EntityException)
                 {
                     MsgBoxUtils.displayConnectionErrorMsgBox();
+                }
+                catch (DbUpdateException)
+                {
+                    EmergencyMode.notifyAboutEmergencyMode();
+
+                    var openedForms = Application.OpenForms;
+                    foreach (Form f in openedForms)
+                        f.Dispose();
                 }
 
                 password.Text = "";

@@ -169,21 +169,6 @@ namespace ProjektBD.Model
         public string rozmówcy { get; set; }
     }
 
-    class WiadomośćDTO
-    {
-        public string nadawca { get; set; }
-        public DateTime dataWysłania { get; set; }
-        public string treść { get; set; }
-    }
-
-    class ForeignWiadomośćDTO
-    {
-        public int rozmowaID { get; set; }
-        public string nadawca { get; set; }
-        public DateTime dataWysłania { get; set; }
-        public string treść { get; set; }
-    }
-
     //----------------------------------------------------------------
     #endregion
 

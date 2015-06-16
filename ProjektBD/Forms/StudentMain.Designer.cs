@@ -73,6 +73,7 @@
             this.messageImage = new System.Windows.Forms.PictureBox();
             this.messageCount = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button4 = new System.Windows.Forms.Button();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -331,6 +332,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.button4);
             this.tabPage2.Controls.Add(this.customListView8);
             this.tabPage2.Controls.Add(this.customListView5);
             this.tabPage2.Controls.Add(this.customListView2);
@@ -433,9 +435,9 @@
             // button6
             // 
             this.button6.Enabled = false;
-            this.button6.Location = new System.Drawing.Point(104, 452);
+            this.button6.Location = new System.Drawing.Point(44, 452);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(168, 36);
+            this.button6.Size = new System.Drawing.Size(150, 36);
             this.button6.TabIndex = 18;
             this.button6.Text = "Wypisz się z przedmiotu";
             this.button6.UseVisualStyleBackColor = true;
@@ -568,6 +570,16 @@
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(201, 452);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(150, 36);
+            this.button4.TabIndex = 30;
+            this.button4.Text = "Odśwież";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // StudentMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -654,5 +666,6 @@
         private System.Windows.Forms.PictureBox messageImage;
         private System.Windows.Forms.Label messageCount;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button button4;
     }
 }

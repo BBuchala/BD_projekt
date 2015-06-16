@@ -113,15 +113,21 @@ namespace ProjektBD.Databases
         /// <param name="appl">Zgłoszenie, na podstawie którego zostaje przyęty.</param>
         public void addStudentToSubject(long applicationID)
         {
-           
             Zgłoszenie appl = context.Zgłoszenia.Where(z => z.ZgłoszenieID == applicationID).Single();
 
             // Na wszelki wypadek lepiej zmieńmy to na student.Add(przedmiot)
             // W teorii zmiany dokonane przez ExecuteSqlCommand nie powinny być widoczne dla kontekstu,
             // więc nie wiadomo, czy kiedyś się to nie wykrzaczy
-            var command = @"INSERT INTO Przedmioty_studenci VALUES (@param, @param2)";
+            //var command = @"INSERT INTO Przedmioty_studenci VALUES (@param, @param2)";
 
-            var teacherQuery = context.Database.ExecuteSqlCommand(command, new SqlParameter("param", appl.PrzedmiotID), new SqlParameter("param2",appl.StudentID));
+            //var teacherQuery = context.Database.ExecuteSqlCommand(command, new SqlParameter("param", appl.PrzedmiotID), new SqlParameter("param2",appl.StudentID));
+            Przedmiot subj = context.Przedmioty.Single(p => p.PrzedmiotID == appl.PrzedmiotID);
+            subj.liczbaStudentów++;
+
+            Student stud = context.Studenci.Single( s => s.UżytkownikID == appl.StudentID );
+            stud.Przedmioty.Add(subj);
+
+            context.SaveChanges();
 
             deleteApplication(applicationID);
         }
@@ -134,9 +140,15 @@ namespace ProjektBD.Databases
         {
             Zgłoszenie appl = context.Zgłoszenia.Where(z => z.ZgłoszenieID == applicationID).Single();
 
-            var command = @"INSERT INTO Projekty_studenci VALUES (@param, @param2)";
+            //var command = @"INSERT INTO Projekty_studenci VALUES (@param, @param2)";
 
-            var teacherQuery = context.Database.ExecuteSqlCommand(command, new SqlParameter("param", appl.ProjektID), new SqlParameter("param2", appl.StudentID));
+            //var teacherQuery = context.Database.ExecuteSqlCommand(command, new SqlParameter("param", appl.ProjektID), new SqlParameter("param2", appl.StudentID));
+            Projekt proj = context.Projekty.Single( p => p.ProjektID == appl.ProjektID );
+
+            Student stud = context.Studenci.Single(s => s.UżytkownikID == appl.StudentID);
+            stud.Projekty.Add(proj);
+
+            context.SaveChanges();
 
             deleteApplication(applicationID);
         }
@@ -392,6 +404,7 @@ namespace ProjektBD.Databases
                     student.Projekty.Remove(proj);                          // Usuwanie studenta z projektów
 
                 subject.Studenci.Remove(student);                           // Usuwanie studenta z przedmiotu
+                subject.liczbaStudentów--;
             }
 
             context.Oceny.RemoveRange(gradesList);                          // Usuwanie ocen z projektu/przedmiotu

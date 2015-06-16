@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using ProjektBD.Controllers;
 using ProjektBD.Custom_Controls;
 using ProjektBD.Forms.CommonForms;
@@ -142,9 +142,20 @@ namespace ProjektBD.Forms
                 string msgContents = richTextBox1.Text;
                 DateTime sendDate = DateTime.Now;
 
-                formController.sendMessage(userLogin, sendDate, msgContents, conversationID);
+                try
+                {
+                    formController.sendMessage(userLogin, sendDate, msgContents, conversationID);
 
-                drawMessageOnScreen( new MessageControl(userLogin, sendDate, msgContents) );                
+                    drawMessageOnScreen( new MessageControl(userLogin, sendDate, msgContents) );
+                }
+                catch (DbUpdateException)
+                {
+                    EmergencyMode.notifyAboutEmergencyMode();
+
+                    var openedForms = Application.OpenForms;
+                    foreach (Form f in openedForms)
+                        f.Dispose();
+                }
             }
         }
 

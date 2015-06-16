@@ -32,7 +32,6 @@ namespace ProjektBD.Controllers
                 if (contactsList[i - 1].RozmowaID == contactsList[i].RozmowaID)
                 {
                     contactsList[i - 1].rozmówcy += ", " + contactsList[i].rozmówcy;
-                    //contactsList[i - 1].miejsceZamieszkania += ", " + contactsList[i].miejsceZamieszkania;
 
                     contactsList.RemoveAt(i);
                 }

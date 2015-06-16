@@ -362,6 +362,19 @@ namespace ProjektBD.Forms
             }
         }
 
+        // Odświeżenie listy przedmiotów
+        private void button4_Click(object sender, EventArgs e)
+        {
+            List<PrzedmiotDTO> mySubjectsList = formController.getMySubjects();
+
+            customListView2.fill<PrzedmiotDTO>(mySubjectsList);
+
+            customListView5.Clear();
+            customListView8.Clear();
+            button3.Enabled = false;
+            button6.Enabled = false;
+        }
+
         //----------------------------------------------------------------
         #endregion
 

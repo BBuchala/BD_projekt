@@ -16,6 +16,7 @@ using ProjektBD;
 using ProjektBD.Utilities;
 using ProjektBD.Controllers;
 using System.Data.Entity.Core;
+using System.Data.Entity.Infrastructure;
 
 namespace ProjektBD.Forms
 {
@@ -49,12 +50,23 @@ namespace ProjektBD.Forms
         {
             if (checkBox1.Checked == true)
             {
-                formcontroller.deleteUser();
+                try
+                {
+                    formcontroller.deleteUser();
 
-                MsgBoxUtils.displayInformationMsgBox("Complete", "Usunięto użytkownika z bazy");
+                    MsgBoxUtils.displayInformationMsgBox("Complete", "Usunięto użytkownika z bazy");
 
-                close = true;
-                this.Close();
+                    close = true;
+                    this.Close();
+                }
+                catch (DbUpdateException)
+                {
+                    EmergencyMode.notifyAboutEmergencyMode();
+
+                    var openedForms = Application.OpenForms;
+                    foreach (Form f in openedForms)
+                        f.Dispose();
+                }
             }
             else
                 MsgBoxUtils.displayInformationMsgBox("Error", "Należy potwierdzić wybór");
@@ -62,71 +74,93 @@ namespace ProjektBD.Forms
 
         private void button6_Click(object sender, EventArgs e)
         {
-            string  czyPoprawne1 =  formcontroller.validateInput1();
-
-            switch (czyPoprawne1)
+            try
             {
-                case "Zla dlugosc":
-                    MsgBoxUtils.displayInformationMsgBox("Error", "Zła długość pół. Pola musza zajmować conajmniej 3 znaki");
+                string czyPoprawne1 = formcontroller.validateInput1();
 
-                    email.Text = null;
-                    textBox2.Text = null;
-                    return;
+                switch (czyPoprawne1)
+                {
+                    case "Zla dlugosc":
+                        MsgBoxUtils.displayInformationMsgBox("Error", "Zła długość pół. Pola musza zajmować conajmniej 3 znaki");
 
-                case "Zla forma email":
-                    MsgBoxUtils.displayInformationMsgBox("Error", "Zły adres email.");
+                        email.Text = null;
+                        textBox2.Text = null;
+                        return;
 
-                    email.Text = null;
-                    textBox2.Text = null;
-                    return;
+                    case "Zla forma email":
+                        MsgBoxUtils.displayInformationMsgBox("Error", "Zły adres email.");
 
-                case "ok":
-                    MsgBoxUtils.displayInformationMsgBox("Complete", "Dane zostały poprawnie zmienione");
+                        email.Text = null;
+                        textBox2.Text = null;
+                        return;
 
-                    email.Text = null;
-                    textBox2.Text = null;
-                    break;
+                    case "ok":
+                        MsgBoxUtils.displayInformationMsgBox("Complete", "Dane zostały poprawnie zmienione");
+
+                        email.Text = null;
+                        textBox2.Text = null;
+                        break;
+                }
+            }
+            catch (DbUpdateException)
+            {
+                EmergencyMode.notifyAboutEmergencyMode();
+
+                var openedForms = Application.OpenForms;
+                foreach (Form f in openedForms)
+                    f.Dispose();
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string czyPoprawne2 = formcontroller.validateInput2();
-
-            switch (czyPoprawne2)
+            try
             {
-                case "Zla dlugosc":
-                    MsgBoxUtils.displayInformationMsgBox("Error", "Zła długość pół. Pola musza zajmować conajmniej 3 znaki");
+                string czyPoprawne2 = formcontroller.validateInput2();
 
-                    textBox3.Text = null;
-                    textBox4.Text = null;
-                    textBox5.Text = null;
-                    return;
+                switch (czyPoprawne2)
+                {
+                    case "Zla dlugosc":
+                        MsgBoxUtils.displayInformationMsgBox("Error", "Zła długość pół. Pola musza zajmować conajmniej 3 znaki");
 
-                case "Rozne hasla":
-                    MsgBoxUtils.displayInformationMsgBox("Error", "Nowe hasło nie jest takie samo.");
+                        textBox3.Text = null;
+                        textBox4.Text = null;
+                        textBox5.Text = null;
+                        return;
 
-                    textBox3.Text = null;
-                    textBox4.Text = null;
-                    textBox5.Text = null;
-                    return;
+                    case "Rozne hasla":
+                        MsgBoxUtils.displayInformationMsgBox("Error", "Nowe hasło nie jest takie samo.");
 
-                case "Zle stare haslo":
-                    MsgBoxUtils.displayInformationMsgBox("Error", "Stare hasło jest niepoprawne.");
+                        textBox3.Text = null;
+                        textBox4.Text = null;
+                        textBox5.Text = null;
+                        return;
 
-                    textBox3.Text = null;
-                    textBox4.Text = null;
-                    textBox5.Text = null;
-                    return;
+                    case "Zle stare haslo":
+                        MsgBoxUtils.displayInformationMsgBox("Error", "Stare hasło jest niepoprawne.");
 
-                case "ok":
-                    MsgBoxUtils.displayInformationMsgBox("Complete", "Dane zostały poprawnie zmienione");
+                        textBox3.Text = null;
+                        textBox4.Text = null;
+                        textBox5.Text = null;
+                        return;
 
-                    textBox3.Text = null;
-                    textBox4.Text = null;
-                    textBox5.Text = null;
-                 
-                    break;
+                    case "ok":
+                        MsgBoxUtils.displayInformationMsgBox("Complete", "Dane zostały poprawnie zmienione");
+
+                        textBox3.Text = null;
+                        textBox4.Text = null;
+                        textBox5.Text = null;
+
+                        break;
+                }
+            }
+            catch (DbUpdateException)
+            {
+                EmergencyMode.notifyAboutEmergencyMode();
+
+                var openedForms = Application.OpenForms;
+                foreach (Form f in openedForms)
+                    f.Dispose();
             }
         }
 
