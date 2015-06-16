@@ -125,5 +125,19 @@ namespace ProjektBD.Controllers
 
         //----------------------------------------------------------------
         #endregion
+
+        #region Wiadomości
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Pobiera z bazy ilość nieprzeczytanych wiadomości użytkownika
+        /// </summary>
+        public int getNewMessagesCount()
+        {
+            return usrDatabase.getNewMessagesCount();
+        }
+
+        //----------------------------------------------------------------
+        #endregion
     }
 }

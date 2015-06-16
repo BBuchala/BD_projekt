@@ -18,6 +18,25 @@ namespace ProjektBD.Databases
     /// </summary>
     class AdminDatabase : DatabaseBase
     {
+        #region Pola i konstruktor
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// ID administratora
+        /// </summary>
+        private int userID;
+
+        public AdminDatabase(string adminLogin)
+        {
+            userID = context.Administratorzy
+                .Where( p => p.login.Equals(adminLogin) )
+                .Select( p => p.UżytkownikID )
+                .Single();
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
         #region Dodawanie prowadzących
         //----------------------------------------------------------------
 
@@ -192,6 +211,33 @@ namespace ProjektBD.Databases
 
             teacher.Zakład = institute;
             context.SaveChanges();
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Wiadomości
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Pobiera z bazy ilość nieprzeczytanych wiadomości użytkownika
+        /// </summary>
+        public int getNewMessagesCount()
+        {
+            string userLogin = context.Użytkownicy
+                .Where(u => u.UżytkownikID == userID)
+                .Select(s => s.login)
+                .Single();
+
+            var query = context.Database.SqlQuery<int>(@"
+                            SELECT COUNT(msg.WiadomośćID) AS ilość
+                            FROM Wiadomość msg
+	                            JOIN Prowadzone_rozmowy pr ON msg.RozmowaID = pr.RozmowaID
+                            WHERE pr.UżytkownikID = " + userID + @" AND
+	                            msg.nadawca != '" + userLogin + @"' AND
+	                            msg.przeczytana = 0");
+
+            return query.Single();
         }
 
         //----------------------------------------------------------------

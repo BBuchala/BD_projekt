@@ -39,14 +39,11 @@ namespace ProjektBD.Forms
         /// </summary>
         private string userLogin;
 
-        /// <summary>
-        /// Konstruktor
-        /// </summary>
-        /// <param name="inputLogin">Login zalogowanego admina.</param>
         public AdministratorMain(string inputLogin)
         {
             InitializeComponent();
-            formController = new AdminController();
+
+            formController = new AdminController(inputLogin);
             userLogin = inputLogin;        
         }
 
@@ -354,12 +351,63 @@ namespace ProjektBD.Forms
 
         private void messageImage_Click(object sender, EventArgs e)
         {
-
+            openCommunicator();
         }
 
         private void messageCount_Click(object sender, EventArgs e)
         {
+            openCommunicator();
+        }
 
+        /// <summary>
+        /// Metoda otwierająca komunikator lub uaktywniająca go, gdy został już wcześniej otworzony
+        /// </summary>
+        private void openCommunicator()
+        {
+            var openedGGForms = Application.OpenForms.OfType<Komunikator>().ToList();
+
+            // Blokuje możliwość otwarcia drugiego komunikatora
+            if (openedGGForms.Count == 0)
+            {
+                Komunikator form = new Komunikator(userLogin);
+                form.Show();
+            }
+            else
+            {
+                if (openedGGForms[0].WindowState == FormWindowState.Minimized)
+                    openedGGForms[0].WindowState = FormWindowState.Normal;
+                else
+                    openedGGForms[0].Activate();
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            checkForNewMessages();
+        }
+
+        /// <summary>
+        /// Szuka nowych wiadomości zaadresowanych do użytkownika
+        /// </summary>
+        private void checkForNewMessages()
+        {
+            int newMessagesCount = formController.getNewMessagesCount();
+
+            if (newMessagesCount > 0)
+            {
+                messageImage.Image = ProjektBD.Properties.Resources.mail;
+                messageCount.Visible = true;
+
+                if (newMessagesCount <= 100)
+                    messageCount.Text = newMessagesCount.ToString();
+                else
+                    messageCount.Text = "99+";
+            }
+            else
+            {
+                messageImage.Image = ProjektBD.Properties.Resources.mail2;
+                messageCount.Visible = false;
+            }
         }
 
         //----------------------------------------------------------------
@@ -394,9 +442,12 @@ namespace ProjektBD.Forms
             newForm.Dispose();
         }
 
+        /// <summary>
+        /// Wyświetlanie pomocy
+        /// </summary>
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-
+            HelpFormStrategy.chooseHelpFormStrategy(HelpFormTypes.Admin);
         }
 
         //----------------------------------------------------------------

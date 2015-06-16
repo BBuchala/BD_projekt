@@ -115,6 +115,7 @@
             this.customListView15 = new ProjektBD.Custom_Controls.customListView();
             this.customListView14 = new ProjektBD.Custom_Controls.customListView();
             this.customListView17 = new ProjektBD.Custom_Controls.customListView();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabPage2.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage7.SuspendLayout();
@@ -730,6 +731,7 @@
             this.messageCount.TabIndex = 21;
             this.messageCount.Text = "0";
             this.messageCount.Visible = false;
+            this.messageCount.Click += new System.EventHandler(this.messageCount_Click);
             // 
             // notificationCount
             // 
@@ -800,6 +802,7 @@
             this.messageImage.Size = new System.Drawing.Size(40, 40);
             this.messageImage.TabIndex = 20;
             this.messageImage.TabStop = false;
+            this.messageImage.Click += new System.EventHandler(this.messageImage_Click);
             // 
             // notificationImage
             // 
@@ -912,9 +915,7 @@
             this.customListView2.UseCompatibleStateImageBehavior = false;
             this.customListView2.View = System.Windows.Forms.View.Details;
             this.customListView2.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.customListView2_ItemSelectionChanged);
-
             this.customListView2.SelectedIndexChanged += new System.EventHandler(this.customListView2_SelectedIndexChanged);
-
             // 
             // customListView1
             // 
@@ -1124,9 +1125,13 @@
             this.customListView17.TabIndex = 3;
             this.customListView17.UseCompatibleStateImageBehavior = false;
             this.customListView17.View = System.Windows.Forms.View.Details;
-
             this.customListView17.SelectedIndexChanged += new System.EventHandler(this.customListView17_SelectedIndexChanged);
-
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // ProwadzacyMain
             // 
@@ -1268,5 +1273,6 @@
         private Custom_Controls.customListView customListView17;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Timer timer1;
     }
 }

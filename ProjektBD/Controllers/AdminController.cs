@@ -20,12 +20,16 @@ namespace ProjektBD.Controllers
         #region Pola i konstruktor
         //----------------------------------------------------------------
 
+        private string adminLogin;
+
         AdminDatabase admDatabase;
 
-        public AdminController()
+        public AdminController(string adminLogin)
         {
-            database = new AdminDatabase();
+            database = new AdminDatabase(adminLogin);
             admDatabase = (database as AdminDatabase);
+
+            this.adminLogin = adminLogin;
         }
 
         #endregion
@@ -120,6 +124,7 @@ namespace ProjektBD.Controllers
             return admDatabase.doesContextHaveChanges();
         }
 
+        //----------------------------------------------------------------
         #endregion
 
         #region Przypisywanie do zakładu
@@ -155,6 +160,20 @@ namespace ProjektBD.Controllers
 
             admDatabase.assignToInstitute(instituteName, teacherLogin);
             return "Przypisanie przebiegło pomyślnie";
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
+        #region Wiadomości
+        //----------------------------------------------------------------
+
+        /// <summary>
+        /// Pobiera z bazy ilość nieprzeczytanych wiadomości użytkownika
+        /// </summary>
+        public int getNewMessagesCount()
+        {
+            return admDatabase.getNewMessagesCount();
         }
 
         //----------------------------------------------------------------

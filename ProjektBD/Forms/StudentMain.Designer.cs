@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentMain));
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -71,6 +72,7 @@
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.messageImage = new System.Windows.Forms.PictureBox();
             this.messageCount = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -543,6 +545,7 @@
             this.messageImage.Size = new System.Drawing.Size(40, 40);
             this.messageImage.TabIndex = 26;
             this.messageImage.TabStop = false;
+            this.messageImage.Click += new System.EventHandler(this.messageImage_Click);
             // 
             // messageCount
             // 
@@ -557,6 +560,13 @@
             this.messageCount.TabIndex = 27;
             this.messageCount.Text = "0";
             this.messageCount.Visible = false;
+            this.messageCount.Click += new System.EventHandler(this.messageCount_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // StudentMain
             // 
@@ -643,5 +653,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private System.Windows.Forms.PictureBox messageImage;
         private System.Windows.Forms.Label messageCount;
+        private System.Windows.Forms.Timer timer1;
     }
 }
