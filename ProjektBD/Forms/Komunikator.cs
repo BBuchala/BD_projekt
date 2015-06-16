@@ -53,6 +53,7 @@ namespace ProjektBD.Forms
         private void Komunikator_Load(object sender, EventArgs e)
         {
             refreshContactsList();
+            checkForNewMessages();
         }
 
         //----------------------------------------------------------------
@@ -178,6 +179,57 @@ namespace ProjektBD.Forms
         //----------------------------------------------------------------
         #endregion
 
+        #region Odbieranie i odświeżanie wiadomości
+        //----------------------------------------------------------------
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            checkForNewMessages();
+        }
+
+        /// <summary>
+        /// Sprawdza, czy w bazie znajdują się nowe, nieprzeczytane wiadomości i informuje o tym,
+        /// pogrubiając stosowne kontakty na liście lub odświeżając okno rozmowy
+        /// </summary>
+        private void checkForNewMessages()
+        {
+            // Lista rozmów, w których istnieją nowe wiadomości
+            List<int> conversationsList = formController.findConversationsWithNewMessages(userLogin);
+
+            if (conversationsList.Count > 0)
+            {
+                int index;
+
+                // Dla każdej rozmowy z nowymi wiadomościami aktualizujemy powiadomienie na liście kontaktów lub rysujemy nową wiadomość
+                foreach (int convID in conversationsList)
+                {
+                    index = contactsDictionary.FirstOrDefault( k => k.Value == convID).Key;
+
+                    // Jeśli wiadomość pochodzi z aktualnej rozmowy
+                    if ( customListView1.SelectedItems.Count > 0 && index == customListView1.SelectedItems[0].Index )
+                    {
+                        List<Wiadomość> messageList = formController.getNewMessages(convID, userLogin);
+
+                        foreach (Wiadomość msg in messageList)
+                        {
+                            MessageControl ms = new MessageControl(msg.nadawca, msg.dataWysłania, msg.treść);
+                            ms.BackColor = Color.AntiqueWhite;
+                            drawMessageOnScreen(ms);
+
+                            msg.przeczytana = true;
+                            formController.saveContext();
+                        }
+                    }
+                    // Jeśli nie = rysuje powiadomienie (pogrubiony kontakt)
+                    else
+                        customListView1.Items[index].Font = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
+                }
+            }
+        }
+
+        //----------------------------------------------------------------
+        #endregion
+
         #region Wybór rozmowy
         //----------------------------------------------------------------
 
@@ -187,27 +239,44 @@ namespace ProjektBD.Forms
 
             if (customListView1.SelectedItems.Count > 0)
             {
-                int currentHeight = 0;
                 int index = customListView1.SelectedItems[0].Index;
                 int conversationID = contactsDictionary[index];
 
                 customListView1.conversationID = conversationID;
-                List<Wiadomość> msgList = formController.getMessages(conversationID);
-                
-                // Dodawanie wiadomości do panelu
-                foreach (Wiadomość msg in msgList)
+
+                addMessagesToPanel(conversationID);
+
+                // Oznaczenie rozmowy jako przeczytanej
+                if (customListView1.SelectedItems[0].Font.Bold == true)
                 {
-                    MessageControl ms = new MessageControl(msg.nadawca, msg.dataWysłania, msg.treść);
+                    customListView1.SelectedItems[0].Font = new Font("Microsoft Sans Serif", 9);
 
-                    if (msg.nadawca != userLogin)
-                        ms.BackColor = Color.AntiqueWhite;
-
-                    ms.Location = new Point(0, currentHeight);
-                    panel1.Controls.Add(ms);
-
-                    currentHeight += ms.Size.Height;                // Do currentHeight sumuje w sobie wysokości wszystkich wiadomości,
-                }                                                   // dzięki czemu te kilkulinijkowe nie zbugują wyświetlania
+                    formController.setConversationAsReaded(conversationID, userLogin);
+                }
             }
+        }
+
+        /// <summary>
+        /// Dodaje do panelu wiadomości z rozmowy podanej przez parametr
+        /// </summary>
+        private void addMessagesToPanel(int conversationID)
+        {
+            int currentHeight = 0;
+            List<Wiadomość> msgList = formController.getMessages(conversationID);
+
+            // Dodawanie wiadomości do panelu
+            foreach (Wiadomość msg in msgList)
+            {
+                MessageControl ms = new MessageControl(msg.nadawca, msg.dataWysłania, msg.treść);
+
+                if (msg.nadawca != userLogin)
+                    ms.BackColor = Color.AntiqueWhite;
+
+                ms.Location = new Point(0, currentHeight);
+                panel1.Controls.Add(ms);
+
+                currentHeight += ms.Size.Height;                // Do currentHeight sumuje w sobie wysokości wszystkich wiadomości,
+            }                                                   // dzięki czemu te kilkulinijkowe nie zbugują wyświetlania
         }
 
         //----------------------------------------------------------------

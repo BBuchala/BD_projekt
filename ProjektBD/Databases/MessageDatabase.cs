@@ -106,6 +106,18 @@ namespace ProjektBD.Databases
         }
 
         /// <summary>
+        /// Pobiera z bazy nieprzeczytane wiadomości z podanej rozmowy
+        /// </summary>
+        public List<Wiadomość> getNewMessages(int conversationID, string userLogin)
+        {
+            return context.Wiadomości
+                .Where(w => w.RozmowaID == conversationID &&
+                    w.nadawca != userLogin &&
+                    w.przeczytana == false)
+                .ToList();
+        }
+
+        /// <summary>
         /// Wysyła wiadomość o podanej treści.
         /// </summary>
         /// <param name="userLogin"> Login użytkownika wysyłającego wiadomość </param>
@@ -124,6 +136,50 @@ namespace ProjektBD.Databases
             };
 
             context.Wiadomości.Add(msg);
+            context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Szuka rozmów z nowymi, nieprzeczytanymi przez użytkownika wiadomościami
+        /// </summary>
+        /// <returns> ID rozmów, w których znajdują się nieprzeczytane wiadomości </returns>
+        public List<int> findConversationsWithNewMessages(string userLogin)
+        {
+            var query = context.Database.SqlQuery<int>(@"
+                        SELECT DISTINCT msg.RozmowaID
+                        FROM Wiadomość msg
+	                        JOIN Prowadzone_rozmowy pr ON msg.RozmowaID = pr.RozmowaID
+                        WHERE pr.UżytkownikID = " + userID + @" AND
+	                        msg.nadawca != '" + userLogin + @"' AND
+	                        msg.przeczytana = 0");
+
+            return query.ToList();
+        }
+
+        /// <summary>
+        /// Zaznacza wybraną konwersację jako przeczytaną
+        /// </summary>
+        public void setConversationAsReaded(int conversationID, string userLogin)
+        {
+            // Pobranie ID nieprzeczytanych wiadomości
+            var query = context.Database.SqlQuery<int>(@"
+                        SELECT msg.WiadomośćID
+                        FROM Wiadomość msg
+	                        JOIN Prowadzone_rozmowy pr ON msg.RozmowaID = pr.RozmowaID
+                        WHERE pr.UżytkownikID = " + userID + @" AND
+                            pr.RozmowaID = " + conversationID + @" AND
+	                        msg.nadawca != '" + userLogin + @"' AND
+	                        msg.przeczytana = 0");
+
+            List<int> msgIDList = query.ToList();
+
+            List<Wiadomość> msgList = new List<Wiadomość>(msgIDList.Count);             // Właściwa lista wiadomości
+
+            // Pobranie prawdziwych, śledzonych przez kontekst wiadomości na podstawie ich pobranych wcześniej ID
+            foreach (int msgID in msgIDList)
+                msgList.Add( context.Wiadomości.Single(w => w.WiadomośćID == msgID) );
+
+            msgList.ForEach( m => m.przeczytana = true );
             context.SaveChanges();
         }
     }

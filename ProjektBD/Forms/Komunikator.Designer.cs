@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Komunikator));
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -37,6 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.customListView1 = new ProjektBD.Custom_Controls.customListView();
             this.SuspendLayout();
             // 
@@ -120,6 +122,12 @@
             this.richTextBox1.Text = "";
             this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // customListView1
             // 
             this.customListView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
@@ -172,5 +180,6 @@
         private Custom_Controls.customListView customListView1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

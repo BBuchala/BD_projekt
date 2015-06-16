@@ -167,7 +167,21 @@ namespace ProjektBD.Model
         public int RozmowaID { get; set; }
 
         public string rozmówcy { get; set; }
-        //public string miejsceZamieszkania { get; set; }
+    }
+
+    class WiadomośćDTO
+    {
+        public string nadawca { get; set; }
+        public DateTime dataWysłania { get; set; }
+        public string treść { get; set; }
+    }
+
+    class ForeignWiadomośćDTO
+    {
+        public int rozmowaID { get; set; }
+        public string nadawca { get; set; }
+        public DateTime dataWysłania { get; set; }
+        public string treść { get; set; }
     }
 
     //----------------------------------------------------------------

@@ -86,6 +86,14 @@ namespace ProjektBD.Controllers
         }
 
         /// <summary>
+        /// Pobiera z bazy nieprzeczytane wiadomości z podanej rozmowy
+        /// </summary>
+        public List<Wiadomość> getNewMessages(int conversationID, string userLogin)
+        {
+            return msgDatabase.getNewMessages(conversationID, userLogin);
+        }
+
+        /// <summary>
         /// Wysyła wiadomość o podanej treści.
         /// </summary>
         /// <param name="userLogin"> Login użytkownika wysyłającego wiadomość </param>
@@ -95,6 +103,23 @@ namespace ProjektBD.Controllers
         public void sendMessage(string userLogin, DateTime sendDate, string msgContents, int conversationID)
         {
             msgDatabase.sendMessage(userLogin, sendDate, msgContents, conversationID);
+        }
+
+        /// <summary>
+        /// Szuka nowych, nieprzeczytanych przez użytkownika wiadomości
+        /// </summary>
+        public List<int> findConversationsWithNewMessages(string userLogin)
+        {
+            return msgDatabase.findConversationsWithNewMessages(userLogin);
+        }
+
+        /// <summary>
+        /// Zaznacza wybraną konwersację jako przeczytaną
+        /// </summary>
+        public void setConversationAsReaded(int conversationID, string userLogin)
+        {
+            msgDatabase.setConversationAsReaded(conversationID, userLogin);
+
         }
     }
 }
