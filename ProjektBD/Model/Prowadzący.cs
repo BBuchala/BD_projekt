@@ -15,7 +15,6 @@ namespace ProjektBD.Model
         public Prowadzący()
         {
             Przedmioty = new HashSet<Przedmiot>();
-            Raporty = new HashSet<Raport>();
             Zgłoszenia = new HashSet<Zgłoszenie>();
         }
 
@@ -26,9 +25,6 @@ namespace ProjektBD.Model
 
         [Browsable(false)]
         public virtual ICollection<Przedmiot> Przedmioty { get; set; }
-
-        [Browsable(false)]
-        public virtual ICollection<Raport> Raporty { get; set; }
 
         [Browsable(false)]
         public virtual ICollection<Zgłoszenie> Zgłoszenia { get; set; }

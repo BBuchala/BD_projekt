@@ -35,7 +35,6 @@ namespace ProjektBD.DAL
         public DbSet<Projekt>               Projekty            { get; set; }
         public DbSet<Przedmiot>             Przedmioty          { get; set; }
         public DbSet<PrzedmiotObieralny>    PrzedmiotyObieralne { get; set; }
-        public DbSet<Raport>                Raporty             { get; set; }
         public DbSet<Zgłoszenie>            Zgłoszenia          { get; set; }
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -250,7 +250,6 @@
     <Compile Include="Model\Prowadzący.cs" />
     <Compile Include="Model\Przedmiot.cs" />
     <Compile Include="Model\PrzedmiotObieralny.cs" />
-    <Compile Include="Model\Raport.cs" />
     <Compile Include="Model\Rozmowa.cs" />
     <Compile Include="Model\Student.cs" />
     <Compile Include="Model\Użytkownik.cs" />

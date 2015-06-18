@@ -16,7 +16,6 @@ namespace ProjektBD.Model
             Studenci = new HashSet<Student>();          // By dało się dodać nowego studenta do przedmiotu
             Oceny = new HashSet<Ocena>();
             Projekty = new HashSet<Projekt>();
-            Raporty = new HashSet<Raport>();
             Zgłoszenia = new HashSet<Zgłoszenie>();
         }
 
@@ -45,9 +44,6 @@ namespace ProjektBD.Model
 
         [Browsable(false)]
         public virtual ICollection<Projekt> Projekty { get; set; }
-
-        [Browsable(false)]
-        public virtual ICollection<Raport> Raporty { get; set; }
 
         [Browsable(false)]
         public virtual ICollection<Zgłoszenie> Zgłoszenia { get; set; }
