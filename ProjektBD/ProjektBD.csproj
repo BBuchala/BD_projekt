@@ -134,11 +134,11 @@
     <Compile Include="Forms\CommonForms\TeacherProfileForm.Designer.cs">
       <DependentUpon>TeacherProfileForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\HelpForms\ProwadzącyHelp.cs">
+    <Compile Include="Forms\HelpForms\ProwadzacyHelp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\HelpForms\ProwadzącyHelp.Designer.cs">
-      <DependentUpon>ProwadzącyHelp.cs</DependentUpon>
+    <Compile Include="Forms\HelpForms\ProwadzacyHelp.Designer.cs">
+      <DependentUpon>ProwadzacyHelp.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\TeacherForms\DodajPrzedmiot.cs">
       <SubType>Form</SubType>
@@ -230,11 +230,11 @@
     <Compile Include="Forms\StudentMain.Designer.cs">
       <DependentUpon>StudentMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ZarządzanieKontem.cs">
+    <Compile Include="Forms\ZarzadzanieKontem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ZarządzanieKontem.Designer.cs">
-      <DependentUpon>ZarządzanieKontem.cs</DependentUpon>
+    <Compile Include="Forms\ZarzadzanieKontem.Designer.cs">
+      <DependentUpon>ZarzadzanieKontem.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\DataTransferObjects.cs" />
     <Compile Include="Utilities\EmergencyMode.cs" />
@@ -247,15 +247,15 @@
     <Compile Include="Model\Administrator.cs" />
     <Compile Include="Model\Ocena.cs" />
     <Compile Include="Model\Projekt.cs" />
-    <Compile Include="Model\Prowadzący.cs" />
+    <Compile Include="Model\Prowadzacy.cs" />
     <Compile Include="Model\Przedmiot.cs" />
     <Compile Include="Model\PrzedmiotObieralny.cs" />
     <Compile Include="Model\Rozmowa.cs" />
     <Compile Include="Model\Student.cs" />
-    <Compile Include="Model\Użytkownik.cs" />
-    <Compile Include="Model\Wiadomość.cs" />
-    <Compile Include="Model\Zakład.cs" />
-    <Compile Include="Model\Zgłoszenie.cs" />
+    <Compile Include="Model\Uzytkownik.cs" />
+    <Compile Include="Model\Wiadomosc.cs" />
+    <Compile Include="Model\Zaklad.cs" />
+    <Compile Include="Model\Zgloszenie.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Custom Controls\MessageControl.resx">
@@ -285,8 +285,8 @@
     <EmbeddedResource Include="Forms\CommonForms\TeacherProfileForm.resx">
       <DependentUpon>TeacherProfileForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\HelpForms\ProwadzącyHelp.resx">
-      <DependentUpon>ProwadzącyHelp.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\HelpForms\ProwadzacyHelp.resx">
+      <DependentUpon>ProwadzacyHelp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeacherForms\DodajProjekt.resx">
       <DependentUpon>DodajProjekt.cs</DependentUpon>
@@ -333,8 +333,8 @@
     <EmbeddedResource Include="Forms\StudentMain.resx">
       <DependentUpon>StudentMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ZarządzanieKontem.resx">
-      <DependentUpon>ZarządzanieKontem.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ZarzadzanieKontem.resx">
+      <DependentUpon>ZarzadzanieKontem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
