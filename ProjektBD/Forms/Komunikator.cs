@@ -123,9 +123,11 @@ namespace ProjektBD.Forms
         private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
         {
             // Enter bez Shift'a, gdy wiadomość ma chociaż 1 znak
-            if (richTextBox1.TextLength > 0 && e.KeyValue == 13 && e.Shift == false)
+            if (e.KeyValue == 13 && e.Shift == false)
             {
-                sendMessage();
+                if (richTextBox1.TextLength > 0)
+                    sendMessage();
+
                 e.SuppressKeyPress = true;
             }
         }

@@ -1,0 +1,3 @@
+- p³ytka z plikiem readme (co to za projekt, co jest wymagane do uruchomienia go - programy, sprzêt) i instalatorem, 2 diagramami
+
+p³ytka tu lub 408
